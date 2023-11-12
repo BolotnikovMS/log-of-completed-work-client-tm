@@ -1,0 +1,19 @@
+.districts {
+  &__titles + * {
+    margin-top: 10px;
+  }
+
+  &__form + * {
+    margin-top: 10px;
+  }
+
+  &__control + * {
+    margin-top: 18px;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}

@@ -1,0 +1,18 @@
+.nav {
+  & > ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+    & a {
+      transition: all 0.3s ease-in;
+    }
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .nav>ul a:hover {
+    color: #979797;
+  }
+}

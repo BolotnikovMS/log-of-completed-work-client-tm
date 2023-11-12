@@ -1,0 +1,55 @@
+body {
+  font-size: clamp(14px, 2.5vw, 25px);
+  color: #000;
+  background-color: #dfdfdf;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0 30px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: clamp(18px, 3vw, 30px);
+  font-weight: bold;
+}
+
+.title-1 {
+  font-size: clamp(16px, 2.5vw, 26px);
+  font-weight: bold;
+}
+
+.line {
+  margin: 7px;
+  border: 1px solid rgba(96, 96, 96, 0.5);
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  transition: all 0.5s ease-out;
+}
+
+label {
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .link:hover {
+    color:rgb(152, 145, 145);
+    border-bottom: 1px solid black;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+}
