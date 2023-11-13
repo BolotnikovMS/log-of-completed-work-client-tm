@@ -1,23 +1,24 @@
-import './text-input.scss'
+import './custom-input.scss'
 
 import { Input, ValidationMessage } from '../..'
 
-import { IPropsTextInput } from './textInput.interface'
+import { IPropsCustomInput } from './customInput.interface'
 import React from 'react'
 import cx from 'classnames'
 
-export const TextInput: React.FC<IPropsTextInput> = ({
+export const CustomInput: React.FC<IPropsCustomInput> = ({
   register,
   validation = {},
   error,
   name,
   label,
   className,
+  classLabel,
   ...attributes
 }) => {   
   return (
     <>
-      <label htmlFor={name}>
+      <label htmlFor={name} className={cx('label', classLabel)}>
         {label}
       </label>
       <Input
