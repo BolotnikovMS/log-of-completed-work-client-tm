@@ -32,12 +32,17 @@ body {
   transition: all 0.5s ease-out;
 }
 
-label {
+.label {
   font-size: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 5px;
+}
+
+.form__content {
+  & + * {
+    margin-top: 20px;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
