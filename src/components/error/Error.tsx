@@ -1,15 +1,16 @@
 import './error.scss'
 
+import { AxiosError } from 'axios';
 import React from 'react'
 
 interface IPropsError {
-  message: string
+  error: AxiosError<unknown>
 }
 
-export const Error: React.FC<IPropsError> = ({ message }) => {
+export const Error: React.FC<IPropsError> = ({ error }) => {
   return (
     <div className='errors'>
-      <div className='error__message'>{message} :(</div>
+      <div className='error__message'>{error?.message} :(</div>
     </div>
   )
 }
