@@ -15,6 +15,9 @@ export const NavBar: React.FC = () => {
           <Link to='/districts'>Районы и ГП</Link>
         </li>
         <li>
+          <Link to='/substations'>ПС</Link>
+        </li>
+        <li>
           <Link to='/users'>Пользователи</Link>
         </li>
         <li>
