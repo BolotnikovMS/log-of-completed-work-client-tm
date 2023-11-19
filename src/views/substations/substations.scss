@@ -1,4 +1,4 @@
-.districts {
+.substations {
   &__titles + * {
     margin-top: 10px;
   }
@@ -19,11 +19,5 @@
     & + * {
       margin-top: 20px;
     }
-  }
-
-  &__btns {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 }
