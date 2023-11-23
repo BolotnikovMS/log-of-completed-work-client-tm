@@ -1,13 +1,15 @@
 import './badge.scss'
 
 import React from 'react'
+import cx from 'classnames'
 
 interface IPropsBadge {
-  text: string
+  text: string | number
+  className?: string
 }
 
-export const Badge: React.FC<IPropsBadge> = ({ text }) => {
+export const Badge: React.FC<IPropsBadge> = ({ text, className }) => {
   return (
-    <span className="badge">{text}</span>
+    <span className={cx('badge', className)}>{text}</span>
   )
 }
