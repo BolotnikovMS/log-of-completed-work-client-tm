@@ -1,0 +1,29 @@
+.voltage {
+  &__titles + * {
+    margin-top: 10px;
+  }
+
+  &__form + * {
+    margin-top: 10px;
+  }
+
+  &__control + * {
+    margin-top: 18px;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    & + * {
+      margin-top: 20px;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
