@@ -7,6 +7,8 @@ import { Layout } from '..'
 import React from 'react'
 import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
 import { SubstationsPage } from '../../views/substations/SubstationsPage'
+import { VoltageClassesCards } from '../../views/voltageClasses/components'
+import { VoltageClassesPage } from '../../views/voltageClasses/VoltageClassesPage'
 
 export const Router: React.FC = () => {
   return (
@@ -45,6 +47,18 @@ export const Router: React.FC = () => {
               children={
                 <>
                   <SubstationsCards />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/voltage-classes'
+          element={
+            <VoltageClassesPage 
+              title='Классы напряжения'
+              children={
+                <>
+                  <VoltageClassesCards />
                 </>
               }
             />
