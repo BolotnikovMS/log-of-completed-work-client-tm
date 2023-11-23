@@ -18,6 +18,9 @@ export const NavBar: React.FC = () => {
           <Link to='/substations'>ПС</Link>
         </li>
         <li>
+          <Link to='/voltage-classes'>Классы U</Link>
+        </li>
+        <li>
           <Link to='/users'>Пользователи</Link>
         </li>
         <li>
