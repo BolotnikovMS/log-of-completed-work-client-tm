@@ -34,4 +34,8 @@
   &__control {
     z-index: 1;
   }
+
+  &.inActive {
+    background-color: rgba(165, 163, 165, 0.8);
+  }
 }
