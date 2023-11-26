@@ -33,6 +33,12 @@
 
   &__control {
     z-index: 1;
+
+    &-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
 
   &.inActive {
