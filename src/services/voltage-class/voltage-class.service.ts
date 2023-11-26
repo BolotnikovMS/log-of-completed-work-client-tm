@@ -1,5 +1,6 @@
+import { TResponseVoltageClass, TVoltageClass } from './voltage-class.type'
+
 import { IQueryParams } from '../../interfaces'
-import { TResponseVoltageClass } from './voltage-class.type'
 import axios from 'axios'
 import { url } from '../../constants'
 
@@ -10,5 +11,11 @@ export const VoltageClassService = {
     })
 
     return response.data
-  }
+  },
+
+  async create(data: TVoltageClass) {
+    return axios.post<TVoltageClass>(`${url}/voltage-classes`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
+  },
 }
