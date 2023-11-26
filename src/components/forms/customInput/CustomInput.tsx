@@ -21,15 +21,17 @@ export const CustomInput: React.FC<IPropsCustomInput> = ({
       <label htmlFor={name} className={cx('label', classLabel)}>
         {label}
       </label>
-      <Input
-        {...register(name, validation)}
-        id={name}
-        type='text'
-        className={cx('form__input', className, error && 'form__input-error')}
-        aria-invalid={Boolean(error)}
-        {...attributes}
-      />
-      {error && <ValidationMessage children={error} />}
+      <div className="input__group">
+        <Input
+          {...register(name, validation)}
+          id={name}
+          type='text'
+          className={cx('form__input', className, error && 'form__input-error')}
+          aria-invalid={Boolean(error)}
+          {...attributes}
+        />
+        {error && <ValidationMessage children={error} />}
+      </div>
     </>
   )
 }
