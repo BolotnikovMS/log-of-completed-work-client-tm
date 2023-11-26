@@ -1,5 +1,6 @@
 import { DistrictControl, DistrictForm, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { Route, Routes } from 'react-router-dom'
+import { TypeKpForm, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassForm, VoltageClassesCards } from '../../views/voltageClasses/components'
 
 import { DistrictsPage } from '../../views/district/DistrictsPage'
@@ -8,6 +9,7 @@ import { Layout } from '..'
 import React from 'react'
 import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
 import { SubstationsPage } from '../../views/substations/SubstationsPage'
+import { TypesKpPage } from '../../views/typesKp/TypesKpPage'
 import { VoltageClassesPage } from '../../views/voltageClasses/VoltageClassesPage'
 
 export const Router: React.FC = () => {
@@ -60,6 +62,19 @@ export const Router: React.FC = () => {
                 <>
                   <VoltageClassForm />
                   <VoltageClassesCards />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/types-kp'
+          element={
+            <TypesKpPage 
+              title='Типы КП'
+              children={
+                <>
+                  <TypeKpForm />
+                  <TypesKpCards />
                 </>
               }
             />
