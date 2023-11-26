@@ -18,4 +18,8 @@ export const VoltageClassService = {
       headers: {'Content-Type': 'application/json'}
     })
   },
+
+  async deleteVoltageClass(id: number) {
+    return axios.delete<{id: number}>(`${url}/voltage-classes/${id}`)
+  }
 }
