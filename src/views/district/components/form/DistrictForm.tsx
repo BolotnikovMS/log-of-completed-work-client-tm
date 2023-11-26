@@ -43,7 +43,7 @@ export const DistrictForm: React.FC = () => {
                 validation={{
                   required: {value: true, message: 'Поле является обязательным!'},
                   minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                  maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+                  maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'},
                 }}
                 placeholder='Введите название...'
               />
