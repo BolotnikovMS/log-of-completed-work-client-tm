@@ -1,7 +1,8 @@
 import React from 'react'
 
 export interface IPropsSmallCard {
-  children?: React.ReactNode
+  childrenContent?: React.ReactNode
+  childrenControl?: React.ReactNode
   className?: string
   cardText: string
   path?: string
