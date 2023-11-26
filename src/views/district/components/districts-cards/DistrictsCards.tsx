@@ -1,4 +1,5 @@
 import { Button, Error, InfoMessage, Loader, SmallCard } from '../../../../components'
+import { Pencil, Trash2 } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { DistrictService } from '../../../../services/district/district.service'
@@ -32,8 +33,12 @@ export const DistrictsCards: React.FC = () => {
                 path={`/districts/${district.id}/substations`}
                 childrenControl={
                   <>
-                    <Button>Edit</Button>              
-                    <Button classBtn='btn-bg_red' onClick={() => deleteDistrict.mutate(district.id)}>Delete</Button>              
+                    <Button>
+                      <Pencil />
+                    </Button>              
+                    <Button classBtn='btn-bg_red' onClick={() => deleteDistrict.mutate(district.id)}>
+                      <Trash2 />
+                    </Button>              
                   </>
                 }
               />

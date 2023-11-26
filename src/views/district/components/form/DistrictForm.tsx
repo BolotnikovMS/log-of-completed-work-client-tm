@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { DistrictService } from '../../../../services/district/district.service'
 import { IDistrictFields } from './districtForm.interface'
+import { Plus } from 'lucide-react'
 import React from 'react'
 import { TDistrictData } from '../../../../services/district/district.type'
 import { isAxiosError } from 'axios'
@@ -64,7 +65,9 @@ export const DistrictForm: React.FC = () => {
             </FormGroup>
           </div>
           <div className="form__btns">
-            <Button disabled={!isValid} classBtn='btn-bg_green'>Добавить</Button>
+            <Button disabled={!isValid} classBtn='btn-bg_green'>
+              <Plus />
+            </Button>
           </div>
         </form>
       </div>

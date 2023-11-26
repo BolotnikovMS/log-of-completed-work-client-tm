@@ -1,4 +1,5 @@
 import { Button, Error, Loader, SmallCard } from '../../../../components'
+import { Pencil, Trash2 } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import React from 'react'
@@ -31,8 +32,12 @@ export const VoltageClassesCards: React.FC = () => {
                 cardText={voltageClass.name}
                 childrenControl={
                   <>
-                    <Button>Edit</Button>              
-                    <Button classBtn='btn-bg_red' onClick={() => deleteVoltageClass.mutate(voltageClass.id)}>Delete</Button>              
+                    <Button>
+                      <Pencil />
+                    </Button>              
+                    <Button classBtn='btn-bg_red' onClick={() => deleteVoltageClass.mutate(voltageClass.id)}>
+                      <Trash2 />
+                    </Button>              
                   </>
                 }
               />
