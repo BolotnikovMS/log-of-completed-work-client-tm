@@ -14,8 +14,8 @@ export const VoltageClassesPage: React.FC<IPropsVoltageClassesPage> = ({ title, 
         <div className="voltage__titles">
           <h2 className="title">{title}</h2>
         </div>
+        {children}
       </div>
-      {children}
     </div>
   )
 }
