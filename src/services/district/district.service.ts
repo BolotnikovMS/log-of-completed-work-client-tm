@@ -1,4 +1,4 @@
-import { IQueryParams, ISubstation } from '../../interfaces'
+import { IDistrict, IQueryParams, ISubstation } from '../../interfaces'
 import { TDistrictData, TRespDistricts } from './district.type'
 
 import axios from 'axios'
@@ -23,5 +23,9 @@ export const DistrictService = {
     const response = await axios.get<ISubstation[]>(`${url}/districts/${id}/substations`)
 
     return response.data
+  },
+
+  async deleteDistrict(id: number) {
+    return axios.delete<IDistrict>(`${url}/districts/${id}`)
   }
 }
