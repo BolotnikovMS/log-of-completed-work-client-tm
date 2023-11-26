@@ -39,9 +39,27 @@ body {
   gap: 5px;
 }
 
-.form__content {
-  & + * {
-    margin-top: 20px;
+.no_margin {
+  margin: unset !important;
+  margin-top: unset !important;
+}
+
+.form {
+  &-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  &__content {
+    & + * {
+      margin-top: 20px;
+    }
+  }
+
+  &__btns {
+    display: flex;
+    align-items: center;
   }
 }
 
