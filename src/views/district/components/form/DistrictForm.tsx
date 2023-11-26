@@ -62,14 +62,6 @@ export const DistrictForm: React.FC = () => {
                 placeholder='Введите сокращенное название...'
               />
             </FormGroup>
-            <FormGroup className='form__group-row'>
-              <CustomInput
-                label='Используется?'
-                name='active'
-                register={register}
-                type='checkbox'
-              />
-            </FormGroup>
           </div>
           <div className="form__btns">
             <Button disabled={!isValid} classBtn='btn-bg_green'>Добавить</Button>

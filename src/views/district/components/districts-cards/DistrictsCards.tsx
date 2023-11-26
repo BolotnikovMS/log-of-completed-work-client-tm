@@ -1,4 +1,4 @@
-import { Badge, Button, Error, InfoMessage, Loader, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, Loader, SmallCard } from '../../../../components'
 
 import React from 'react'
 import { isAxiosError } from 'axios'
@@ -17,13 +17,8 @@ export const DistrictsCards: React.FC = () => {
               <SmallCard
                 key={district.id}
                 cardText={district.name}
-                className={district.active ? '' : 'inActive'}
                 path={`/districts/${district.id}/substations`}
-              >
-                {
-                  !district.active && <Badge text='Не исп.' className={district.active ? '' : 'badge-color_red'} />
-                }
-              </SmallCard>
+              />
             ))
           ))}
         </div>
