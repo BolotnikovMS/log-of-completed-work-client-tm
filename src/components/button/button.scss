@@ -18,6 +18,11 @@
     background-color: #64a2ff;
   }
 
+  &-bg_red {
+    border: 1px solid  #f73c3c;
+    background-color: #f73c3c;
+  }
+
   &:active {
     transform: scale(0.97);
   }
