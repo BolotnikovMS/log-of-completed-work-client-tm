@@ -24,6 +24,9 @@ export const NavBar: React.FC = () => {
           <Link to='/types-kp'>Типы КП</Link>
         </li>
         <li>
+          <Link to='/head-controllers'>Контроллеры</Link>
+        </li>
+        <li>
           <Link to='/users'>Пользователи</Link>
         </li>
         <li>

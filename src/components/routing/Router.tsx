@@ -1,9 +1,11 @@
 import { DistrictControl, DistrictForm, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
+import { HeadControllerForm, HeadControllersCards } from '../../views/headControllers/components'
 import { Route, Routes } from 'react-router-dom'
 import { TypeKpForm, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassForm, VoltageClassesCards } from '../../views/voltageClasses/components'
 
 import { DistrictsPage } from '../../views/district/DistrictsPage'
+import { HeadControllersPage } from '../../views/headControllers/HeadControllersPage'
 import { HomePage } from '../../views/home/HomePage'
 import { Layout } from '..'
 import React from 'react'
@@ -75,6 +77,19 @@ export const Router: React.FC = () => {
                 <>
                   <TypeKpForm />
                   <TypesKpCards />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/head-controllers'
+          element={
+            <HeadControllersPage 
+              title='Головные контроллеры'
+              children={
+                <>
+                  <HeadControllerForm />
+                  <HeadControllersCards />
                 </>
               }
             />
