@@ -1,4 +1,4 @@
-import { DistrictService } from '../services/district/district.service'
+import { DistrictService } from '../../services/district/district.service'
 import { useQuery } from '@tanstack/react-query'
 
 export const useDistrictSubstations = (id: string | undefined) => {

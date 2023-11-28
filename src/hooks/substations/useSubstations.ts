@@ -1,4 +1,4 @@
-import { SubstationService } from '../services/substations/substation.service'
+import { SubstationService } from '../../services/substations/substation.service'
 import { useQuery } from '@tanstack/react-query'
 
 export const useSubstations = () => {

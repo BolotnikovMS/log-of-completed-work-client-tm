@@ -1,4 +1,4 @@
-import { TypeKpService } from '../services/types-kp/type-kp.service'
+import { TypeKpService } from '../../services/types-kp/type-kp.service'
 import { useInfiniteQuery } from '@tanstack/react-query'
 
 export const useInfiniteTypesKp = ({ limit }: { limit: number }) => {
