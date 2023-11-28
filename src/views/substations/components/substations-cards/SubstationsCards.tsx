@@ -2,7 +2,7 @@ import { Error, InfoMessage, Loader, SmallCard } from '../../../../components'
 
 import React from 'react'
 import { isAxiosError } from 'axios'
-import { useSubstations } from '../../../../hooks/useSubstations'
+import { useSubstations } from '../../../../hooks/substations/useSubstations'
 
 export const SubstationsCards: React.FC = () => {
   const { substations, error, isError, isLoading } = useSubstations()
