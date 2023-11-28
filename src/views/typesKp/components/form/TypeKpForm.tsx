@@ -16,9 +16,6 @@ export const TypeKpForm: React.FC = () => {
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: (data: TTypeKpData) => TypeKpService.create(data),
-    onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['typesKp']})
-    },
     onSettled: async () => {
       await queryClient.invalidateQueries({queryKey: ['typesKp']})
     },
@@ -59,8 +56,7 @@ export const TypeKpForm: React.FC = () => {
             </div>     
           </form>
         )
-    }
-
+      }
     </div>
   )
 }
