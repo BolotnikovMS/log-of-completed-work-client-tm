@@ -14,7 +14,7 @@ export const DistrictSubstationCards: React.FC = () => {
       {isLoading && <Loader />}
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {!!substations?.length && (
-        <div className="districts__cards">
+        <div className="cards">
           {
             substations.map(substation => <SmallCard key={substation.id} cardText={substation.name} path={'#'} />)
           }
