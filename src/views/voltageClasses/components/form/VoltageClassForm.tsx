@@ -30,7 +30,7 @@ export const VoltageClassForm: React.FC = () => {
   }
   
   return (
-    <div className="voltage__form">
+    <div className="work-log__form">
       {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
       <form className="form form-row" onSubmit={handleSubmit(submit)}>
         <div className="form__content">

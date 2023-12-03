@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { HeadControllerService } from '../../../../services/head-controller/head-controller.service'
-import { IHeadControllerFields } from './HeadControllerForm.interface'
+import { IHeadControllerFields } from './headControllerForm.interface'
 import { Plus } from 'lucide-react'
 import React from 'react'
 import { THeadControllerData } from '../../../../services/head-controller/head-controller.type'
@@ -27,7 +27,7 @@ export const HeadControllerForm: React.FC = () => {
   }
   
   return (
-    <div className="headController__form">
+    <div className="work-log__form">
       {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
       {isPending ? 
         (<Loader />)

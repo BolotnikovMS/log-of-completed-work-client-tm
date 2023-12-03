@@ -31,7 +31,7 @@ export const DistrictForm: React.FC = () => {
 
   return (
     <>
-      <div className="districts__form">
+      <div className="work-log__form">
         {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
         <form className="form" onSubmit={handleSubmit(submit)}>
           <div className="form__content">

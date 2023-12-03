@@ -2,7 +2,7 @@ import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../compo
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { ITypeKpFields } from './TypeKpForm.interface'
+import { ITypeKpFields } from './typeKpForm.interface'
 import { Plus } from 'lucide-react'
 import React from 'react'
 import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
@@ -27,7 +27,7 @@ export const TypeKpForm: React.FC = () => {
   }
 
   return (
-    <div className="typeKp__form">
+    <div className="work-log__form">
       {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
       {isPending ? 
         (<Loader />)
