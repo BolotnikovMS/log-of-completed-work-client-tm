@@ -1,4 +1,4 @@
-import { Button, Error, Loader, SmallCard } from '../../../../components'
+import { Button, Error, LoadMore, Loader, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useDeleteHeadController, useInfiniteHeadControllers } from '../../../../hooks'
 
@@ -20,7 +20,7 @@ export const HeadControllersCards: React.FC = () => {
     <>
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {!!data?.pages.length && (
-        <div className="headController__cards">
+        <div className="cards">
           {data.pages.map(headControllers => (
             headControllers.data.map(headController => (
               <SmallCard
@@ -42,18 +42,7 @@ export const HeadControllersCards: React.FC = () => {
         </div>
       )}
       {isFetching && <Loader />}
-      {hasNextPage && (
-        <div className="headController__btns">
-          <Button classBtn='btn-bg_blue' type='button' onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-            {isFetchingNextPage || isFetching ? 
-              'Загрузка...' : 
-              hasNextPage ?
-              'Показать еще' :
-              'Больше нет данных'
-            }
-          </Button>
-        </div>
-      )}
+      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
   )
 }

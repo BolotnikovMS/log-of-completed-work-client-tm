@@ -1,4 +1,4 @@
-import { Button, Error, InfoMessage, Loader, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, LoadMore, Loader, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
@@ -24,7 +24,7 @@ export const DistrictsCards: React.FC = () => {
     <>
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {!!data?.pages.length && (
-        <div className="districts__cards">
+        <div className="cards">
           {data.pages.map(districts => (
             districts.data.map(district => (
               <SmallCard
@@ -48,18 +48,7 @@ export const DistrictsCards: React.FC = () => {
       )}
       {isFetching && <Loader />}
       {(!data?.pages?.length && !isFetching && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
-      {hasNextPage && (
-        <div className="districts__btns">
-          <Button classBtn='btn-bg_blue' type='button' onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-            {isFetchingNextPage || isFetching ? 
-              'Загрузка...' : 
-              hasNextPage ?
-              'Показать еще' :
-              'Больше нет данных'
-            }
-          </Button>
-        </div>
-      )}
+      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
   )
 }

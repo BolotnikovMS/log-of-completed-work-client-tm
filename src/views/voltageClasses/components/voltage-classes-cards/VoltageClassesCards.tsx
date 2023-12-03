@@ -1,4 +1,4 @@
-import { Button, Error, Loader, SmallCard } from '../../../../components'
+import { Button, Error, LoadMore, Loader, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
@@ -24,7 +24,7 @@ export const VoltageClassesCards: React.FC = () => {
     <>
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {!!data?.pages.length && (
-        <div className="voltage__cards">
+        <div className="cards">
           {data.pages.map(voltageClasses => (
             voltageClasses.data.map(voltageClass => (
               <SmallCard
@@ -46,18 +46,7 @@ export const VoltageClassesCards: React.FC = () => {
         </div>
       )}
       {isFetching && <Loader />}
-      {hasNextPage && (
-        <div className="voltage__btns">
-          <Button classBtn='btn-bg_blue' type='button' onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
-            {isFetchingNextPage || isFetching ? 
-              'Загрузка...' : 
-              hasNextPage ?
-              'Показать еще' :
-              'Больше нет данных'
-            }
-          </Button>
-        </div>
-      )}
+      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
   )
 }
