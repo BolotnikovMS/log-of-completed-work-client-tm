@@ -1,27 +1,22 @@
 import { DistrictControl, DistrictForm, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { HeadControllerForm, HeadControllersCards } from '../../views/headControllers/components'
+import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
 import { TypeKpForm, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassForm, VoltageClassesCards } from '../../views/voltageClasses/components'
 
-import { DistrictsPage } from '../../views/district/DistrictsPage'
-import { HeadControllersPage } from '../../views/headControllers/HeadControllersPage'
 import { HomePage } from '../../views/home/HomePage'
-import { Layout } from '..'
 import React from 'react'
 import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
-import { SubstationsPage } from '../../views/substations/SubstationsPage'
-import { TypesKpPage } from '../../views/typesKp/TypesKpPage'
-import { VoltageClassesPage } from '../../views/voltageClasses/VoltageClassesPage'
 
 export const Router: React.FC = () => {
   return (
     <Routes>
       <Route path='/' element={<Layout />}>
         <Route index element={<HomePage />} />
-        <Route path='/districts' 
+        <Route path='/districts'
           element={
-            <DistrictsPage 
+            <Page
               title='Районы и ГП'
               children={
                 <>
@@ -29,12 +24,13 @@ export const Router: React.FC = () => {
                   <DistrictControl />
                   <DistrictsCards />
                 </>
-              } 
-          />}
+              }
+            />
+          }
         />
         <Route path='/districts/:id/substations' 
           element={
-            <DistrictsPage 
+            <Page 
               title='Подстанций'
               children={
                 <>
@@ -46,7 +42,7 @@ export const Router: React.FC = () => {
         />
         <Route path='/substations'
           element={
-            <SubstationsPage
+            <Page
               title='Подстанций'
               children={
                 <>
@@ -58,7 +54,7 @@ export const Router: React.FC = () => {
         />
         <Route path='/voltage-classes'
           element={
-            <VoltageClassesPage 
+            <Page 
               title='Классы напряжения'
               children={
                 <>
@@ -71,7 +67,7 @@ export const Router: React.FC = () => {
         />
         <Route path='/types-kp'
           element={
-            <TypesKpPage 
+            <Page 
               title='Типы КП'
               children={
                 <>
@@ -84,7 +80,7 @@ export const Router: React.FC = () => {
         />
         <Route path='/head-controllers'
           element={
-            <HeadControllersPage 
+            <Page 
               title='Головные контроллеры'
               children={
                 <>

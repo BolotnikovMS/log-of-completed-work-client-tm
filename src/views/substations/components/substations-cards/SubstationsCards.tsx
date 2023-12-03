@@ -11,7 +11,7 @@ export const SubstationsCards: React.FC = () => {
     <>
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {!!substations?.length && (
-        <div className="substations__cards">
+        <div className="cards">
           {
             substations.map(substation => <SmallCard key={substation.id} cardText={substation.name} path={'#'} />)
           }
