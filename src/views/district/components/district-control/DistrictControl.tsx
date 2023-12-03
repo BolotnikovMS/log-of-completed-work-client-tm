@@ -2,6 +2,6 @@ import React from 'react'
 
 export const DistrictControl = () => {
   return (
-    <div className="districts__control">DistrictControl</div>
+    <div className="work-log__control">DistrictControl</div>
   )
 }
