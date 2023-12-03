@@ -1,4 +1,4 @@
-import { Button, CustomInput, Error, FormGroup } from '../../../../components'
+import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
@@ -14,7 +14,7 @@ export const DistrictForm: React.FC = () => {
     mode: 'onBlur'
   })  
   const queryClient = useQueryClient()
-  const { mutateAsync, isError: isErrorMutate, error: errorMutate } = useMutation({
+  const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: (data: TDistrictData) => DistrictService.create(data),
     onSuccess: async () => {
       await queryClient.cancelQueries({queryKey: ['districts']})
@@ -33,43 +33,47 @@ export const DistrictForm: React.FC = () => {
     <>
       <div className="work-log__form">
         {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
-        <form className="form" onSubmit={handleSubmit(submit)}>
-          <div className="form__content">
-            <FormGroup>
-              <CustomInput
-                label='Название Района или ГП'
-                name='name'
-                register={register}
-                error={errors.name?.message}
-                validation={{
-                  required: {value: true, message: 'Поле является обязательным!'},
-                  minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                  maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'},
-                }}
-                placeholder='Введите название...'
-              />
-            </FormGroup>
-            <FormGroup>
-              <CustomInput
-                label='Сокращенное название'
-                name='shortName'
-                register={register}
-                error={errors.shortName?.message}
-                validation={{
-                  required: {value: true, message: 'Поле является обязательным!'},
-                  minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                  maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
-                }}
-                placeholder='Введите сокращенное название...'
-              />
-            </FormGroup>
-          </div>
-          <div className="form__btns">
-            <Button disabled={!isValid} classBtn='btn-bg_green'>
-              <Plus />
-            </Button>
-          </div>
-        </form>
+        {isPending ? 
+          (<Loader />)
+        : (
+          <form className="form" onSubmit={handleSubmit(submit)}>
+            <div className="form__content">
+              <FormGroup>
+                <CustomInput
+                  label='Название Района или ГП'
+                  name='name'
+                  register={register}
+                  error={errors.name?.message}
+                  validation={{
+                    required: {value: true, message: 'Поле является обязательным!'},
+                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+                    maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'},
+                  }}
+                  placeholder='Введите название...'
+                />
+              </FormGroup>
+              <FormGroup>
+                <CustomInput
+                  label='Сокращенное название'
+                  name='shortName'
+                  register={register}
+                  error={errors.shortName?.message}
+                  validation={{
+                    required: {value: true, message: 'Поле является обязательным!'},
+                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+                    maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+                  }}
+                  placeholder='Введите сокращенное название...'
+                />
+              </FormGroup>
+            </div>
+            <div className="form__btns">
+              <Button disabled={!isValid} classBtn='btn-bg_green'>
+                <Plus />
+              </Button>
+            </div>
+          </form>
+        )}
       </div>
     </>
   )

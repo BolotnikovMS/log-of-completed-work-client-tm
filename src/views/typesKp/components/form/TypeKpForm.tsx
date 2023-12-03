@@ -32,31 +32,30 @@ export const TypeKpForm: React.FC = () => {
       {isPending ? 
         (<Loader />)
       : (
-          <form className="form form-row" onSubmit={handleSubmit(submit)}>
-            <div className="form__content">
-              <FormGroup className='form__group-row'>
-                <CustomInput
-                  label='Название КП'
-                  name='name'
-                  register={register}
-                  error={errors.name?.message}
-                  validation={{
-                    required: {value: true, message: 'Поле является обязательным!'},
-                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                    maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
-                  }}
-                  placeholder='Введите название КП...'
-                />
-              </FormGroup>
-            </div>   
-            <div className="form__btns no_margin">
-              <Button disabled={!isValid} classBtn='btn-bg_green'>
-                <Plus />
-              </Button>
-            </div>     
-          </form>
-        )
-      }
+        <form className="form form-row" onSubmit={handleSubmit(submit)}>
+          <div className="form__content">
+            <FormGroup className='form__group-row'>
+              <CustomInput
+                label='Название КП'
+                name='name'
+                register={register}
+                error={errors.name?.message}
+                validation={{
+                  required: {value: true, message: 'Поле является обязательным!'},
+                  minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+                  maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
+                }}
+                placeholder='Введите название КП...'
+              />
+            </FormGroup>
+          </div>   
+          <div className="form__btns no_margin">
+            <Button disabled={!isValid} classBtn='btn-bg_green'>
+              <Plus />
+            </Button>
+          </div>     
+        </form>
+      )}
     </div>
   )
 }
