@@ -9,7 +9,7 @@ export const HeadControllersCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteHeadControllers({ limit: 10 })
   const { deleteHeadController } = useDeleteHeadController()
   const handleDelete = (id:number) => {
-    const answer = confirm('Are you sure?')
+    const answer = confirm('Подтвердите удаление записи.')
 
     if (!answer) return null
 

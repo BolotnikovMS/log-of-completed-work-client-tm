@@ -9,7 +9,7 @@ export const TypesKpCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteTypesKp({ limit: 10 })
   const { deleteTypeKp } = useDeleteTypeKp()
   const handleDelete = (id: number) => {
-    const answer = confirm('Are you sure?')
+    const answer = confirm('Подтвердите удаление записи.')
 
     if (!answer) return null
 

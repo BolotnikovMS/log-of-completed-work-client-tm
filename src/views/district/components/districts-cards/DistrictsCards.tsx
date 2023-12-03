@@ -1,24 +1,20 @@
 import { Button, Error, InfoMessage, LoadMore, Loader, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useDeleteDistrict, useInfiniteDistricts } from '../../../../hooks'
 
-import { DistrictService } from '../../../../services/district/district.service'
 import React from 'react'
 import { isAxiosError } from 'axios'
-import { useInfiniteDistricts } from '../../../../hooks'
 
 export const DistrictsCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
-  const queryClient = useQueryClient()
-  const deleteDistrict = useMutation({
-    mutationFn: (id: number) => DistrictService.deleteDistrict(id),
-    onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['districts']})
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['districts']})
-    }
-  })
+  const { deleteDistrict } = useDeleteDistrict()
+  const handleDelete = (id: number) => {
+    const answer = confirm('Подтвердите удаление записи.')
+    
+    if (!answer) return null
+
+    return deleteDistrict.mutate(id)
+  }
 
   return (
     <>
@@ -36,7 +32,7 @@ export const DistrictsCards: React.FC = () => {
                     <Button>
                       <Pencil />
                     </Button>              
-                    <Button classBtn='btn-bg_red' onClick={() => deleteDistrict.mutate(district.id)}>
+                    <Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
                       <Trash2 />
                     </Button>              
                   </>

@@ -1,24 +1,20 @@
 import { Button, Error, LoadMore, Loader, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useDeleteVoltageClass, useInfiniteVoltageClasses } from '../../../../hooks'
 
 import React from 'react'
-import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
 import { isAxiosError } from 'axios'
-import { useInfiniteVoltageClasses } from '../../../../hooks'
 
 export const VoltageClassesCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 10 })
-  const queryClient = useQueryClient()
-  const deleteVoltageClass = useMutation({
-    mutationFn: (id: number) => VoltageClassService.deleteVoltageClass(id),
-    onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['voltageClasses']})
-    },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['voltageClasses']})
-    }
-  })
+  const { deleteVoltageClass } = useDeleteVoltageClass()
+  const handleDelete = (id:number) => {
+    const answer = confirm('Подтвердите удаление записи.')
+
+    if (!answer) return null
+
+    return deleteVoltageClass.mutate(id)
+  }
   
   return (
     <>
@@ -35,7 +31,7 @@ export const VoltageClassesCards: React.FC = () => {
                     <Button>
                       <Pencil />
                     </Button>              
-                    <Button classBtn='btn-bg_red' onClick={() => deleteVoltageClass.mutate(voltageClass.id)}>
+                    <Button classBtn='btn-bg_red' onClick={() => handleDelete(voltageClass.id)}>
                       <Trash2 />
                     </Button>              
                   </>
