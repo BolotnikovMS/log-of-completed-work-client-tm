@@ -15,6 +15,10 @@ export const HeadControllersCards: React.FC = () => {
 
     return deleteHeadController.mutate(id)
   }
+  const handelEdit = (id:number) => {
+    console.log(id);
+    return
+  }
 
   return (
     <>
@@ -28,7 +32,7 @@ export const HeadControllersCards: React.FC = () => {
                 cardText={headController.name}
                 childrenControl={
                   <>
-                    <Button>
+                    <Button onClick={() => handelEdit(headController.id)}>
                       <Pencil />
                     </Button>              
                     <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
