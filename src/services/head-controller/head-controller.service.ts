@@ -19,6 +19,11 @@ export const HeadControllerService = {
     })
   },
 
+  async update(id: number, data: THeadControllerData) {
+    console.log('id: ', id);
+    console.log('data: ', data)
+  },
+
   async deleteHeadController(id: number) {
     return axios.delete<{id: number}>(`${url}/head-controllers/${id}`)
   }
