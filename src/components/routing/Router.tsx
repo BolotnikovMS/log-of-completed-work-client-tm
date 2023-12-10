@@ -1,4 +1,4 @@
-import { DistrictControl, DistrictForm, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
+import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { HeadControllerForm, HeadControllersCards } from '../../views/headControllers/components'
 import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
@@ -20,7 +20,6 @@ export const Router: React.FC = () => {
               title='Районы и ГП'
               children={
                 <>
-                  <DistrictForm />
                   <DistrictControl />
                   <DistrictsCards />
                 </>
