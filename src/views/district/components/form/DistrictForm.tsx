@@ -1,20 +1,12 @@
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { DistrictService } from '../../../../services/district/district.service'
-import { IDistrict } from '../../../../interfaces'
-import { IDistrictFields } from './districtForm.interface'
 import React from 'react'
 import { TDistrictData } from '../../../../services/district/district.type'
 import { isAxiosError } from 'axios'
-
-interface IPropsDistrictForm {
-  district?: IDistrict | null
-  isEdited?: boolean | null
-  setIsModal: (val: boolean) => void
-  setIsEdited?: (val: boolean) => void
-}
 
 export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited , setIsModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
