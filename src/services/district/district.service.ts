@@ -25,6 +25,12 @@ export const DistrictService = {
     return response.data
   },
 
+  async updateDistrict({id, data}: {id: number, data: TDistrictData}) {
+    return await axios.patch(`${url}/districts/${id}`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
+  },
+
   async deleteDistrict(id: number) {
     return axios.delete<IDistrict>(`${url}/districts/${id}`)
   }
