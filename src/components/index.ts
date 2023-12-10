@@ -9,6 +9,7 @@ import { Input } from './input/Input'
 import { Layout } from './layout/Layout'
 import { LoadMore } from './loadMore/LoadMore'
 import { Loader } from './loader/Loader'
+import { Modal } from './modal/Modal'
 import { NavBar } from './navBar/NavBar'
 import { Page } from './page/Page'
 import { Router } from './routing/Router'
@@ -16,4 +17,4 @@ import { SmallCard } from './cards/small-card/SmallCard'
 import { Textarea } from './forms/textarea/Textarea'
 import { ValidationMessage } from './forms/errorMessage/ValidationMessage'
 
-export { Layout, Header, Loader, NavBar, Router, SmallCard, Badge, Error, InfoMessage, Button, FormGroup, ValidationMessage, Textarea, Input, CustomInput, Page, LoadMore }
+export { Layout, Header, Loader, NavBar, Router, SmallCard, Badge, Error, InfoMessage, Button, FormGroup, ValidationMessage, Textarea, Input, CustomInput, Page, LoadMore, Modal }
