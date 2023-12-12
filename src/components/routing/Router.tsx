@@ -2,8 +2,8 @@ import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../
 import { HeadControllerForm, HeadControllersCards } from '../../views/headControllers/components'
 import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
-import { TypeKpForm, TypesKpCards } from '../../views/typesKp/components'
-import { VoltageClassForm, VoltageClassesCards } from '../../views/voltageClasses/components'
+import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
+import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
 import { HomePage } from '../../views/home/HomePage'
 import React from 'react'
@@ -57,7 +57,7 @@ export const Router: React.FC = () => {
               title='Классы напряжения'
               children={
                 <>
-                  <VoltageClassForm />
+                  <VoltageControl />
                   <VoltageClassesCards />
                 </>
               }
@@ -70,7 +70,7 @@ export const Router: React.FC = () => {
               title='Типы КП'
               children={
                 <>
-                  <TypeKpForm />
+                  <TypeKpControl />
                   <TypesKpCards />
                 </>
               }
