@@ -1,21 +1,20 @@
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { IVoltageClassFields } from './voltageClassForm.interface'
-import { Plus } from 'lucide-react'
 import React from 'react'
 import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
 import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
 import { isAxiosError } from 'axios'
 
-export const VoltageClassForm: React.FC = () => {
+export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, setIsModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur'
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-    mutationFn: (data: TVoltageClass) => VoltageClassService.create(data),
+    mutationFn: isEdited ? (data: TVoltageClass) => VoltageClassService.updateVoltageClass({id: voltageClass!.id, data}) : (data: TVoltageClass) => VoltageClassService.create(data),
     onSuccess: async () => {
       await queryClient.cancelQueries({queryKey: ['voltageClasses']})
     },
@@ -25,8 +24,14 @@ export const VoltageClassForm: React.FC = () => {
   })
 
   const submit: SubmitHandler<IVoltageClassFields> = (data) => {
+    if (voltageClass !== undefined && voltageClass !== null && setIsEdited) {
+      mutateAsync(data)
+      setIsEdited(false)
+      setIsModal(false)
+    }
     mutateAsync(data)
     reset()
+    setIsModal(false)
   }
   
   return (
@@ -35,9 +40,9 @@ export const VoltageClassForm: React.FC = () => {
       {isPending ? 
         (<Loader />)
       : (
-        <form className="form form-row" onSubmit={handleSubmit(submit)}>
-          <div className="form__content">
-            <FormGroup className='form__group-row'>
+        <form className="form form-col" onSubmit={handleSubmit(submit)}>
+          <div className="form__content form__content-col">
+            <FormGroup >
               <CustomInput
                 label='Класс напряжения'
                 name='name'
@@ -53,12 +58,13 @@ export const VoltageClassForm: React.FC = () => {
                   }
                 }}
                 placeholder='Введите класс напряжения...'
+                defaultValue={voltageClass?.name}
               />
             </FormGroup>
           </div>
-          <div className="form__btns no_margin">
+          <div className="form__btns">
             <Button disabled={!isValid} classBtn='btn-bg_green'>
-              <Plus />
+              {isEdited ? 'Сохранить' : 'Добавить'}
             </Button>
           </div>
         </form>
