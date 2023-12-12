@@ -13,7 +13,7 @@ export const DistrictControl: React.FC = () => {
       <Button classBtn='btn-bg_green' onClick={() => setIsModal(true)}>
         <Plus />
       </Button>
-      <Modal 
+      <Modal
         visible={isModal} 
         title='Форма добавления нового района или ГП' 
         content={<DistrictForm setIsModal={setIsModal} />} 
