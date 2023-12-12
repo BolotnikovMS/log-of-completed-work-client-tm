@@ -19,6 +19,12 @@ export const VoltageClassService = {
     })
   },
 
+  async updateVoltageClass({id, data}: {id: number, data: TVoltageClass}) {
+    return await axios.patch(`${url}/voltage-classes/${id}`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
+  },
+
   async deleteVoltageClass(id: number) {
     return axios.delete<{id: number}>(`${url}/voltage-classes/${id}`)
   }

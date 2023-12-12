@@ -19,6 +19,12 @@ export const TypeKpService = {
     })
   },
 
+  async updateTypeKp({id, data}: {id: number, data: TTypeKpData}) {
+    return await axios.patch(`${url}/types-kp/${id}`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
+  },
+
   async deleteTypeKp(id: number) {
     return axios.delete<{id: number}>(`${url}/types-kp/${id}`)
   }
