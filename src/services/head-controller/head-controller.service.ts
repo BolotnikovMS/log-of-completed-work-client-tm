@@ -19,9 +19,10 @@ export const HeadControllerService = {
     })
   },
 
-  async update(id: number, data: THeadControllerData) {
-    console.log('id: ', id);
-    console.log('data: ', data)
+  async updateHeadController({id, data}: {id: number, data: THeadControllerData}) {
+    return await axios.patch(`${url}/head-controllers/${id}`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
   },
 
   async deleteHeadController(id: number) {
