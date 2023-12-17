@@ -1,5 +1,5 @@
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
-import { HeadControllerForm, HeadControllersCards } from '../../views/headControllers/components'
+import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
@@ -83,7 +83,7 @@ export const Router: React.FC = () => {
               title='Головные контроллеры'
               children={
                 <>
-                  <HeadControllerForm />
+                  <HeadControllerControl />
                   <HeadControllersCards />
                 </>
               }
