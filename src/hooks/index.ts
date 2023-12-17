@@ -8,6 +8,7 @@ import { useInfiniteDistricts } from './distrcts/useInfiniteDistricts'
 import { useInfiniteHeadControllers } from './head-controllers/useInfiniteHeadControllers'
 import { useInfiniteTypesKp } from './types-kp/useInfiniteTypesKp'
 import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageClasses'
+import { useModal } from './modal/useModal'
 import { useTypesKp } from './types-kp/useTypesKp'
 
-export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass }
+export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useModal }
