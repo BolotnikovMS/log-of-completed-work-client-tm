@@ -32,6 +32,10 @@ export const menuItemData = [
         title: 'Типы каналов',
         url: '/channel-types',
       },
+      {
+        title: 'GSM операторы',
+        url: '/gsm-operators',
+      },
     ]
   },
   {

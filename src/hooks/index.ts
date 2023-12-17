@@ -1,16 +1,18 @@
+import { useDeleteChannelType } from './channel-types/useDeleteChannelType'
 import { useDeleteDistrict } from './distrcts/useDeleteDistrict'
+import { useDeleteGsmOperator } from './gsm-operators/useDeleteGsmOperator'
 import { useDeleteHeadController } from './head-controllers/useDeleteHeadController'
 import { useDeleteTypeKp } from './types-kp/useDeleteTypeKp'
 import { useDeleteVoltageClass } from './voltage-classes/useDeleteVoltageClass'
 import { useDistrictSubstations } from './distrcts/useDistrictSubstations'
 import { useDistricts } from './distrcts/useDistricts'
+import { useGsmOperators } from './gsm-operators/useGsmOperators'
+import { useInfiniteChannelTypes } from './channel-types/useInfiniteChannelTypes'
 import { useInfiniteDistricts } from './distrcts/useInfiniteDistricts'
 import { useInfiniteHeadControllers } from './head-controllers/useInfiniteHeadControllers'
 import { useInfiniteTypesKp } from './types-kp/useInfiniteTypesKp'
 import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageClasses'
 import { useModal } from './modal/useModal'
 import { useTypesKp } from './types-kp/useTypesKp'
-import { useInfiniteChannelTypes } from './channel-types/useInfiniteChannelTypes'
-import { useDeleteChannelType } from './channel-types/useDeleteChannelType'
 
-export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useInfiniteChannelTypes, useDeleteChannelType, useModal }
+export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useInfiniteChannelTypes, useDeleteChannelType, useGsmOperators, useDeleteGsmOperator, useModal }

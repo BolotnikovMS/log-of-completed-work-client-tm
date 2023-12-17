@@ -1,4 +1,6 @@
+import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
+import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/components'
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
@@ -8,7 +10,6 @@ import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/
 import { HomePage } from '../../views/home/HomePage'
 import React from 'react'
 import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
-import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 
 export const Router: React.FC = () => {
   return (
@@ -99,6 +100,19 @@ export const Router: React.FC = () => {
                 <>
                   <ChannelTypeControl />
                   <ChannelTypeCards />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/gsm-operators'
+          element={
+            <Page
+              title='GSM операторы'
+              children={
+                <>
+                  <GsmOperatorControl />
+                  <GsmOperatorsCards />
                 </>
               }
             />
