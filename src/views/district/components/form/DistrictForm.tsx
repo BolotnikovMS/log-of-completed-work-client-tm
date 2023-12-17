@@ -8,10 +8,10 @@ import React from 'react'
 import { TDistrictData } from '../../../../services/district/district.type'
 import { isAxiosError } from 'axios'
 
-export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited , setIsModal, setIsEdited }) => {
+export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
     mode: 'onBlur'
-  })  
+  })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TDistrictData) => DistrictService.updateDistrict({id: district!.id, data}) : (data: TDistrictData) => DistrictService.create(data),
@@ -27,12 +27,12 @@ export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited 
     if (district !== undefined && district !== null && setIsEdited) {
       mutateAsync(data)
       setIsEdited(false)
-      setIsModal(false)
+      toggleModal()
     }
     
     mutateAsync(data)
     reset()
-    setIsModal(false)
+    toggleModal()
   }
   
   return (

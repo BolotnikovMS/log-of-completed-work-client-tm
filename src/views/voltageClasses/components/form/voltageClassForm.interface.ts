@@ -7,6 +7,6 @@ export interface IVoltageClassFields {
 export interface IPropsVoltageClassForm {
   voltageClass?: IVoltageClass | null
   isEdited?: boolean | null
-  setIsModal: (val: boolean) => void
+  toggleModal: () => void
   setIsEdited?: (val: boolean) => void
 }

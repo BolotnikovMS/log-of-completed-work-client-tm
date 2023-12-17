@@ -1,12 +1,17 @@
-import { Button, Error, LoadMore, Loader, SmallCard } from '../../../../components'
+import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import { useDeleteHeadController, useInfiniteHeadControllers } from '../../../../hooks'
+import React, { useState } from 'react'
+import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '../../../../hooks'
 
-import React from 'react'
+import { HeadControllerForm } from '..'
+import { IHeadController } from '../../../../interfaces'
 import { isAxiosError } from 'axios'
 
 export const HeadControllersCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteHeadControllers({ limit: 10 })
+  const { isModal, toggleModal } = useModal()
+  const [isEdited, setIsEdited] = useState<boolean>(false)
+  const [headController, setHeadController] = useState<IHeadController | null>(null)
   const { deleteHeadController } = useDeleteHeadController()
   const handleDelete = (id:number) => {
     const answer = confirm('Подтвердите удаление записи.')
@@ -14,10 +19,6 @@ export const HeadControllersCards: React.FC = () => {
     if (!answer) return null
 
     return deleteHeadController.mutate(id)
-  }
-  const handelEdit = (id:number) => {
-    console.log(id);
-    return
   }
 
   return (
@@ -32,12 +33,12 @@ export const HeadControllersCards: React.FC = () => {
                 cardText={headController.name}
                 childrenControl={
                   <>
-                    <Button onClick={() => handelEdit(headController.id)}>
+                    <Button onClick={() => {toggleModal(), setHeadController(headController), setIsEdited(!isEdited)}}>
                       <Pencil />
-                    </Button>              
+                    </Button>
                     <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
                       <Trash2 />
-                    </Button>              
+                    </Button>
                   </>
                 }
               />
@@ -47,6 +48,7 @@ export const HeadControllersCards: React.FC = () => {
       )}
       {isFetching && <Loader />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<HeadControllerForm headController={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>
   )
 }

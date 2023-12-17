@@ -8,7 +8,7 @@ import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.
 import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
 import { isAxiosError } from 'axios'
 
-export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, setIsModal, setIsEdited }) => {
+export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur'
   })
@@ -27,11 +27,11 @@ export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClas
     if (voltageClass !== undefined && voltageClass !== null && setIsEdited) {
       mutateAsync(data)
       setIsEdited(false)
-      setIsModal(false)
+      toggleModal()
     }
     mutateAsync(data)
     reset()
-    setIsModal(false)
+    toggleModal()
   }
   
   return (

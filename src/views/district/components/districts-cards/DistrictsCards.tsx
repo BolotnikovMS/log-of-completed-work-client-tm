@@ -1,7 +1,7 @@
 import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import React, { useState } from 'react'
-import { useDeleteDistrict, useInfiniteDistricts } from '../../../../hooks'
+import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
 
 import { DistrictForm } from '..'
 import { IDistrict } from '../../../../interfaces'
@@ -9,7 +9,7 @@ import { isAxiosError } from 'axios'
 
 export const DistrictsCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
-  const [isModal, setIsModal] = useState<boolean>(false)
+  const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [district, setDistrict] = useState<IDistrict | null>(null)
   const { deleteDistrict } = useDeleteDistrict()
@@ -20,7 +20,6 @@ export const DistrictsCards: React.FC = () => {
 
     return deleteDistrict.mutate(id)
   }
-  const onCloseModal = () => setIsModal(false)
 
   return (
     <>
@@ -36,12 +35,12 @@ export const DistrictsCards: React.FC = () => {
                   path={`/districts/${district.id}/substations`}
                   childrenControl={
                     <>
-                      <Button onClick={() => {setIsModal(true), setDistrict(district), setIsEdited(!isEdited)}}>
+                      <Button onClick={() => {toggleModal(), setDistrict(district), setIsEdited(!isEdited)}}>
                         <Pencil />
-                      </Button>              
+                      </Button>
                       <Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
                         <Trash2 />
-                      </Button>              
+                      </Button>
                     </>
                   }
                 />
@@ -52,7 +51,7 @@ export const DistrictsCards: React.FC = () => {
       }
       {(!data?.pages?.length && !isFetching && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
-      <Modal visible={isModal} title='Редактирование записи' onClose={() => {onCloseModal(), setIsEdited(false)}} content={<DistrictForm district={district} isEdited={isEdited} setIsModal={setIsModal} setIsEdited={setIsEdited} />}/>
+      <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<DistrictForm district={district} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>
   )
 }

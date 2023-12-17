@@ -7,6 +7,6 @@ export interface ITypeKpFields {
 export interface IPropsTypeKpForm {
   typeKp?: ITypeKp | null
   isEdited?: boolean | null
-  setIsModal: (val: boolean) => void
+  toggleModal: () => void
   setIsEdited?: (val: boolean) => void
 }

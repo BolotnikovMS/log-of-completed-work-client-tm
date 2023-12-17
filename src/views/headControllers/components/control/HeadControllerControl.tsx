@@ -1,13 +1,13 @@
 import { Button, Modal } from '../../../../components'
 
+import { HeadControllerForm } from '..'
 import { Plus } from 'lucide-react'
 import React from 'react'
-import { VoltageClassForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const VoltageControl: React.FC = () => {
+export const HeadControllerControl: React.FC = () => {
   const { isModal, toggleModal } = useModal()
-
+  
   return (
     <div className="work-log__control">
       <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
@@ -15,8 +15,8 @@ export const VoltageControl: React.FC = () => {
       </Button>
       <Modal
         visible={isModal} 
-        title='Форма добавления нового класса напряжения' 
-        content={<VoltageClassForm toggleModal={toggleModal} />} 
+        title='Форма добавления нового контроллера' 
+        content={<HeadControllerForm toggleModal={toggleModal} />}
         onToggle={toggleModal} 
       />
     </div>

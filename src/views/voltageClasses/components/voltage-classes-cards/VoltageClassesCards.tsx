@@ -1,7 +1,7 @@
 import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import React, { useState } from 'react'
-import { useDeleteVoltageClass, useInfiniteVoltageClasses } from '../../../../hooks'
+import { useDeleteVoltageClass, useInfiniteVoltageClasses, useModal } from '../../../../hooks'
 
 import { IVoltageClass } from '../../../../interfaces'
 import { VoltageClassForm } from '..'
@@ -9,7 +9,7 @@ import { isAxiosError } from 'axios'
 
 export const VoltageClassesCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 10 })
-  const [isModal, setIsModal] = useState<boolean>(false)
+  const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [voltageClass, setVoltageClass] = useState<IVoltageClass | null>(null)
   const { deleteVoltageClass } = useDeleteVoltageClass()
@@ -20,7 +20,6 @@ export const VoltageClassesCards: React.FC = () => {
 
     return deleteVoltageClass.mutate(id)
   }
-  const onCloseModal = () => setIsModal(false)
   
   return (
     <>
@@ -35,12 +34,12 @@ export const VoltageClassesCards: React.FC = () => {
                   cardText={voltageClass.name}
                   childrenControl={
                     <>
-                      <Button onClick={() => {setIsModal(true), setVoltageClass(voltageClass), setIsEdited(!isEdited)}}>
+                      <Button onClick={() => {toggleModal(), setVoltageClass(voltageClass), setIsEdited(!isEdited)}}>
                         <Pencil />
-                      </Button>              
+                      </Button>
                       <Button classBtn='btn-bg_red' onClick={() => handleDelete(voltageClass.id)}>
                         <Trash2 />
-                      </Button>              
+                      </Button>
                     </>
                   }
                 />
@@ -51,7 +50,7 @@ export const VoltageClassesCards: React.FC = () => {
       }
       {isFetching && <Loader />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
-      <Modal visible={isModal} title='Редактирование записи' onClose={() => {onCloseModal(), setIsEdited(false)}} content={<VoltageClassForm voltageClass={voltageClass} isEdited={isEdited} setIsModal={setIsModal} setIsEdited={setIsEdited} />}/>
+      <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<VoltageClassForm voltageClass={voltageClass} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />}/>
     </>
   )
 }

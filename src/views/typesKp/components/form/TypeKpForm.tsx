@@ -8,7 +8,7 @@ import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
 import { TypeKpService } from '../../../../services/types-kp/type-kp.service'
 import { isAxiosError } from 'axios'
 
-export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, setIsModal, setIsEdited }) => {
+export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
     mode: 'onBlur'
   })
@@ -24,12 +24,12 @@ export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, setIs
     if (typeKp !== undefined && typeKp !== null && setIsEdited) {
       mutateAsync(data)
       setIsEdited(false)
-      setIsModal(false)
+      toggleModal()
     }
 
     mutateAsync(data)
     reset()
-    setIsModal(false)
+    toggleModal()
   }
 
   return (
