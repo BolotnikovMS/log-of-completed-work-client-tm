@@ -1,5 +1,6 @@
 import { Badge } from './badge/Badge'
 import { Button } from './button/Button'
+import { ControlPanel } from './controlPanel/ControlPanel'
 import { CustomInput } from './forms/customInput/CustomInput'
 import { Error } from './error/Error'
 import { FormGroup } from './forms/formGroup/FormGroup'
@@ -17,4 +18,4 @@ import { SmallCard } from './cards/small-card/SmallCard'
 import { Textarea } from './forms/textarea/Textarea'
 import { ValidationMessage } from './forms/errorMessage/ValidationMessage'
 
-export { Layout, Header, Loader, NavBar, Router, SmallCard, Badge, Error, InfoMessage, Button, FormGroup, ValidationMessage, Textarea, Input, CustomInput, Page, LoadMore, Modal }
+export { Layout, Header, Loader, NavBar, Router, SmallCard, Badge, Error, InfoMessage, Button, FormGroup, ValidationMessage, Textarea, Input, CustomInput, Page, LoadMore, Modal, ControlPanel }
