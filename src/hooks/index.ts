@@ -10,5 +10,7 @@ import { useInfiniteTypesKp } from './types-kp/useInfiniteTypesKp'
 import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageClasses'
 import { useModal } from './modal/useModal'
 import { useTypesKp } from './types-kp/useTypesKp'
+import { useInfiniteChannelTypes } from './channel-types/useInfiniteChannelTypes'
+import { useDeleteChannelType } from './channel-types/useDeleteChannelType'
 
-export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useModal }
+export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useInfiniteChannelTypes, useDeleteChannelType, useModal }

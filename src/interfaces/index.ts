@@ -5,5 +5,6 @@ import { IQueryParams } from './qparams.interface'
 import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
+import { IChannelType } from './channel-type.interface'
 
-export type { IDistrict, ISubstation, IQueryParams, IMeta, IVoltageClass, ITypeKp, IHeadController }
+export type { IDistrict, ISubstation, IQueryParams, IMeta, IVoltageClass, ITypeKp, IHeadController, IChannelType }

@@ -8,6 +8,7 @@ import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/
 import { HomePage } from '../../views/home/HomePage'
 import React from 'react'
 import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
+import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 
 export const Router: React.FC = () => {
   return (
@@ -85,6 +86,19 @@ export const Router: React.FC = () => {
                 <>
                   <HeadControllerControl />
                   <HeadControllersCards />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/channel-types'
+          element={
+            <Page
+              title='Типы каналов'
+              children={
+                <>
+                  <ChannelTypeControl />
+                  <ChannelTypeCards />
                 </>
               }
             />
