@@ -1,9 +1,9 @@
-import { ReactElement } from 'react'
+import { ReactNode } from 'react'
 
 export interface IPropsModal {
   visible: boolean
   title: string
-  content: ReactElement | string
-  footer?: ReactElement | string
+  content: ReactNode | string
+  footer?: ReactNode | string
   onClose: () => void
 }
