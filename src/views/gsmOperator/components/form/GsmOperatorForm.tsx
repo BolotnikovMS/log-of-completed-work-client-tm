@@ -16,11 +16,8 @@ export const GsmOperatorForm: React.FC<IPropsGsmOperatorForm> = ({ gsmOperator, 
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TGsmOperatorData) => GsmOperatorService.updateGsmOperator({id: gsmOperator!.id, data}) : (data: TGsmOperatorData) => GsmOperatorService.create(data),
     onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['gsmOperators']})
-    },
-    onSettled: async () => {
       await queryClient.invalidateQueries({queryKey: ['gsmOperators']})
-    }
+    },
   })
 
   const submit: SubmitHandler<IGsmOperatorFields> = (data) => {
