@@ -4,12 +4,12 @@ import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/c
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { Layout, Page } from '..'
 import { Route, Routes } from 'react-router-dom'
+import { SubstationControl, SubstationsCards } from '../../views/substations/components'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
 import { HomePage } from '../../views/home/HomePage'
 import React from 'react'
-import { SubstationsCards } from '../../views/substations/components/substations-cards/SubstationsCards'
 
 export const Router: React.FC = () => {
   return (
@@ -47,6 +47,7 @@ export const Router: React.FC = () => {
               title='Подстанций'
               children={
                 <>
+                  <SubstationControl />
                   <SubstationsCards />
                 </>
               }
