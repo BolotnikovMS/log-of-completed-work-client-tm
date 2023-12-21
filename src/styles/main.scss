@@ -71,6 +71,10 @@ body {
     }
   }
 
+  &__custom-select {
+    border-radius: 10px;
+  }
+
   &__btns {
     display: flex;
     align-items: center;
