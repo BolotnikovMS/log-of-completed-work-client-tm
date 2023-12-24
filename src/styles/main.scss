@@ -72,7 +72,48 @@ body {
   }
 
   &__custom-select {
-    border-radius: 10px;
+    &__value-container {
+      font-size: 20px !important;
+    }
+
+    &__control {
+      border: 1px solid #b1b1b1 !important;
+      border-radius: 10px !important;
+    }
+
+    &__input-container {
+      cursor: text !important;
+    }
+
+    &__indicator {
+      cursor: pointer;
+      color: black !important;
+
+      &:hover {
+        color: #636363 !important;
+      }
+    }
+
+    &__menu {
+      font-size: 20px !important;
+      border: 1px solid #b1b1b1 !important;
+      border-radius: 7px !important;
+      animation: scaleIn 0.35s ease-in-out;
+    }
+
+    &__option {
+      cursor: pointer !important;
+
+      &--is-selected {
+        background-color: #cccccc !important;
+        border-radius: 7px !important;
+      }
+
+      &--is-focused {
+        background-color: #ebebeb !important;
+        border-radius: 7px !important;
+      }
+    }
   }
 
   &__btns {
