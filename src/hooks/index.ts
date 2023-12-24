@@ -1,3 +1,4 @@
+import { useChannelTypes } from './channel-types/useChannelTypes'
 import { useDeleteChannelType } from './channel-types/useDeleteChannelType'
 import { useDeleteDistrict } from './distrcts/useDeleteDistrict'
 import { useDeleteGsmOperator } from './gsm-operators/useDeleteGsmOperator'
@@ -19,4 +20,4 @@ import { useModal } from './modal/useModal'
 import { useTypesKp } from './types-kp/useTypesKp'
 import { useVoltageClasses } from './voltage-classes/useVoltageClasses'
 
-export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useInfiniteChannelTypes, useDeleteChannelType, useGsmOperators, useDeleteGsmOperator, useInfiniteSubstations, useDeleteSubstation, useModal }
+export { useDistricts, useDistrictSubstations, useInfiniteDistricts, useInfiniteVoltageClasses, useVoltageClasses, useInfiniteTypesKp, useTypesKp, useDeleteTypeKp, useInfiniteHeadControllers, useHeadControllers, useDeleteHeadController, useDeleteDistrict, useDeleteVoltageClass, useInfiniteChannelTypes, useChannelTypes, useDeleteChannelType, useGsmOperators, useDeleteGsmOperator, useInfiniteSubstations, useDeleteSubstation, useModal }
