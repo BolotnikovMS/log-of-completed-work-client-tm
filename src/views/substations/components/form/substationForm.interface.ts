@@ -1,19 +1,19 @@
 import { ISubstation } from '../../../../interfaces'
 
 export interface ISubstationFields {
-  active?: boolean
-  district: number
-  voltageClass: number
-  typeKp: number
-  headController: number
-  mainChannel: number
-  backupChannel?: number
-  additionalChannel?: number
-  gsm: number
+  active: boolean
+  districtId: number
+  voltageClassesId: number
+  typeKpId: number
+  headControllerId: number
+  mainChannelId: number
+  backupChannelId: number | null
+  additionalChannelId: number | null
+  gsmId: number
   name: string
-  rdu?: boolean
-  mainChannelIp?: string
-  backupChannelIp?: string
+  rdu: boolean
+  mainChannelIp: string | null
+  backupChannelIp: string | null
 }
 
 export interface IPropsSubstationForm {
