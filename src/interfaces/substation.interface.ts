@@ -13,6 +13,6 @@ export interface ISubstation {
   backupChannelId: number | null
   additionalChannelId: number | null
   gsmId: number | null
-  mainChannelIp: string
-  backupChannelIp?: string
+  mainChannelIp: string | null
+  backupChannelIp?: string | null
 }
