@@ -1,6 +1,6 @@
 import { IQueryParams, ISubstation } from '../../interfaces'
+import { TRespSubstations, TSubstationData } from './substation.type'
 
-import { TRespSubstations } from './substation.type'
 import axios from 'axios'
 import { url } from '../../constants'
 
@@ -11,6 +11,18 @@ export const SubstationService = {
     })
 
     return response.data
+  },
+
+  async create(data: TSubstationData) {
+    return axios.post<TSubstationData>(`${url}/substations`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
+  },
+
+  async update({id, data}: {id: number, data: TSubstationData}) {
+    return await axios.patch(`${url}/substations/${id}`, data, {
+      headers: {'Content-Type': 'application/json'}
+    })
   },
 
   async deleteSubstation(id: number) {
