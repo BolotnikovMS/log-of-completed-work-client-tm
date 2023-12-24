@@ -8,7 +8,7 @@ interface IUseDistricts {
 
 export const useDistricts = ({ page, limit }: IUseDistricts) => {
   const { data: districts, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['districts'],
+    queryKey: ['districts', 'all'],
     queryFn: () => DistrictService.getDistricts({page, limit}),
     staleTime: 1000 * 10,
   })

@@ -8,7 +8,7 @@ interface IUseTypesKp {
 
 export const useTypesKp = ({ page, limit }: IUseTypesKp) => {
   const { data: typesKp, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['typesKp'],
+    queryKey: ['typesKp', 'all'],
     queryFn: () => TypeKpService.getTypesKp({page, limit}),
     staleTime: 1000 * 10,
   })

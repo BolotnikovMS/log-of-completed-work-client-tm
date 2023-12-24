@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useHeadControllers = () => {
   const { data: headControllers, error, isError, isLoading } = useQuery({
-    queryKey: ['headControllers'],
+    queryKey: ['headControllers', 'all'],
     queryFn: () => HeadControllerService.getHeadControllers({}),
     staleTime: 1000 * 10,
   })

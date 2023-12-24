@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useVoltageClasses = () => {
   const { data: voltageClasses, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['voltageClasses'],
+    queryKey: ['voltageClasses', 'all'],
     queryFn: () => VoltageClassService.getVoltageClasses({}),
     staleTime: 1000 * 10,
   })

@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useSubstations = () => {
   const { data, error, isError, isLoading } = useQuery({
-    queryKey: ['substations'],
+    queryKey: ['substations', 'all'],
     queryFn: () => SubstationService.getSubstations({}),
     staleTime: 1000 * 10,
   })
