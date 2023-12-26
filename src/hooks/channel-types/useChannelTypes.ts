@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useChannelTypes = () => {
   const { data, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['channelTypes'],
+    queryKey: ['channelTypes', 'all'],
     queryFn: () => ChannelTypeService.getChannelTypes({}),
     staleTime: 1000 * 10,
   })
