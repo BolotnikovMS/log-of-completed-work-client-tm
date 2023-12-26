@@ -105,6 +105,7 @@ body {
       cursor: pointer !important;
 
       &--is-selected {
+        color: #000 !important;
         background-color: #cccccc !important;
         border-radius: 7px !important;
       }
