@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 
 export const useInfiniteTypesKp = ({ limit }: { limit: number }) => {
   const { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['typesKp'],
+    queryKey: ['typesKp', 'infinity'],
     queryFn: ({ pageParam = 1 }) => TypeKpService.getTypesKp({page: pageParam, limit}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

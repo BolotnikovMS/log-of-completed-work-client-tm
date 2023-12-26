@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 export const useGsmOperators = () => {
   const { data, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['gsmOperators'],
+    queryKey: ['gsmOperators', 'all'],
     queryFn: () => GsmOperatorService.getGsmOperators(),
     staleTime: 1000 * 10,
   })

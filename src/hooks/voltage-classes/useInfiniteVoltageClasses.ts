@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 
 export const useInfiniteVoltageClasses = ({ limit }: { limit: number }) => {
   const { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['voltageClasses'],
+    queryKey: ['voltageClasses', 'infinity'],
     queryFn: ({ pageParam = 1 }) => VoltageClassService.getVoltageClasses({page: pageParam, limit}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

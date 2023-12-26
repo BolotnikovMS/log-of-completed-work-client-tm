@@ -11,7 +11,7 @@ export const useInfiniteSubstations = ({ limit }: { limit: number }) => {
     isFetching,
     isFetchingNextPage,
     } = useInfiniteQuery({
-    queryKey: ['substations'],
+    queryKey: ['substations', 'infinity'],
     queryFn: ({ pageParam = 1 }) => SubstationService.getSubstations({page: pageParam, limit}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

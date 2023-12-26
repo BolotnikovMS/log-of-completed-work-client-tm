@@ -3,7 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 
 export const useInfiniteHeadControllers = ({ limit }: { limit: number }) => {
   const { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage } = useInfiniteQuery({
-    queryKey: ['headControllers'],
+    queryKey: ['headControllers', 'infinity'],
     queryFn: ({ pageParam = 1 }) => HeadControllerService.getHeadControllers({page: pageParam, limit}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {

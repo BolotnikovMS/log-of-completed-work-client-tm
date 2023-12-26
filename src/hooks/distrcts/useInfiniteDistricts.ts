@@ -11,7 +11,7 @@ export const useInfiniteDistricts = ({ limit }: { limit: number }) => {
     isFetching,
     isFetchingNextPage,
     } = useInfiniteQuery({
-    queryKey: ['districts'],
+    queryKey: ['districts', 'infinity'],
     queryFn: ({ pageParam = 1 }) => DistrictService.getDistricts({page: pageParam, limit}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
