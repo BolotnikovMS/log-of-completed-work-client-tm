@@ -9,7 +9,7 @@ export interface ISubstationFields {
   mainChannelId: number
   backupChannelId: number | null
   additionalChannelId: number | null
-  gsmId: number
+  gsmId: number | null
   name: string
   rdu: boolean
   mainChannelIp: string | null
