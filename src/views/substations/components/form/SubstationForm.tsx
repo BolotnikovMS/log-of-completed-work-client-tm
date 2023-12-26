@@ -12,7 +12,22 @@ import { isAxiosError } from 'axios'
 
 export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ISubstationFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      districtId: substation?.districtId,
+      voltageClassesId: substation?.voltageClassesId,
+      active: substation?.active,
+      rdu: substation?.rdu,
+      additionalChannelId: substation?.additionalChannelId,
+      backupChannelId: substation?.backupChannelId,
+      backupChannelIp: substation?.backupChannelIp,
+      gsmId: substation?.gsmId,
+      headControllerId: substation?.headControllerId,
+      mainChannelId: substation?.mainChannelId,
+      mainChannelIp: substation?.mainChannelIp,
+      name: substation?.name,
+      typeKpId: substation?.typeKpId,
+    }
   })
   const { field: {value: districtValue, onChange: districtOnChange, ...restDistrictField} } = useController({ name: 'districtId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
   const { field: {value: voltageClassValue, onChange: voltageClassOnChange, ...restVoltageClass} } = useController({name: 'voltageClassesId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
@@ -64,7 +79,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={districts?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={districtValue ? districts?.data.find(d => d.id === districtValue) : null}
+                  value={districtValue || substation ? districts?.data.find(d => d.id === districtValue || d.id === substation?.districtId) : null}
                   onChange={option => districtOnChange(option ? option.id : option)}
                   isLoading={isLoadingDistricts}
                   isDisabled={isErrorDistricts}
@@ -80,7 +95,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={typesKp?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={typeKpValue ? typesKp?.data.find(d => d.id === typeKpValue) : null}
+                  value={typeKpValue ? typesKp?.data.find(t => t.id === typeKpValue) : null}
                   onChange={option => typeKpOnChange(option ? option.id : option)}
                   isLoading={isLoadingTypesKp}
                   isDisabled={isErrorTypesKp}
@@ -96,7 +111,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={headControllers?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={headControllerValue ? headControllers?.data.find(d => d.id === headControllerValue) : null}
+                  value={headControllerValue ? headControllers?.data.find(h => h.id === headControllerValue) : null}
                   onChange={option => headControllerOnChange(option ? option.id : option)}
                   isLoading={isLoadingHeadControllers}
                   isDisabled={isErrorHeadControllers}
@@ -112,7 +127,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                     options={channelTypes?.data}
                     getOptionValue={option => option.id.toString()}
                     getOptionLabel={option => option.name}
-                    value={mainChannelTypeValue ? channelTypes?.data.find(d => d.id === mainChannelTypeValue) : null}
+                    value={mainChannelTypeValue ? channelTypes?.data.find(mC => mC.id === mainChannelTypeValue) : null}
                     onChange={option => mainChannelTypeOnChange(option ? option.id : option)}
                     isLoading={isLoadingChannelTypes}
                     isDisabled={isErrorChannelTypes}
@@ -128,7 +143,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={channelTypes?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={backupChannelTypeValue ? channelTypes?.data.find(d => d.id === backupChannelTypeValue) : null}
+                  value={backupChannelTypeValue ? channelTypes?.data.find(bC => bC.id === backupChannelTypeValue) : null}
                   onChange={option => backupChannelTypeOnChange(option ? option.id : option)}
                   isLoading={isLoadingChannelTypes}
                   isDisabled={isErrorChannelTypes}
@@ -144,7 +159,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={channelTypes?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={additionalChannelTypeValue ? channelTypes?.data.find(d => d.id === additionalChannelTypeValue) : null}
+                  value={additionalChannelTypeValue ? channelTypes?.data.find(aC => aC.id === additionalChannelTypeValue) : null}
                   onChange={option => additionalChannelTypeOnChange(option ? option.id : option)}
                   isLoading={isLoadingChannelTypes}
                   isDisabled={isErrorChannelTypes}
@@ -160,7 +175,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={gsmOperators}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={gsmOperatorValue ? gsmOperators?.find(d => d.id === gsmOperatorValue) : null}
+                  value={gsmOperatorValue ? gsmOperators?.find(g => g.id === gsmOperatorValue) : null}
                   onChange={option => gsmOperatorOnChange(option ? option.id : option)}
                   isLoading={isLoadingGsmOperators}
                   isDisabled={isErrorGsmOperators}
@@ -181,7 +196,6 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                     maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
                   }}
                   placeholder='Введите название ПС...'
-                  defaultValue={substation?.name}
                 />
               </FormGroup>
               <FormGroup>
@@ -191,7 +205,7 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   options={voltageClasses?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={voltageClassValue ? voltageClasses?.data.find(d => d.id === voltageClassValue) : null}
+                  value={voltageClassValue ? voltageClasses?.data.find(v => v.id === voltageClassValue) : null}
                   onChange={option => voltageClassOnChange(option ? option.id : option)}
                   isLoading={isLoadingVoltageClasses}
                   isDisabled={isErrorVoltageClasses}
@@ -207,7 +221,6 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   register={register}
                   error={errors.mainChannelIp?.message}
                   placeholder='Введите ip основного канала...'
-                  defaultValue={substation?.mainChannelIp}
                 />
               </FormGroup>
               <FormGroup>
@@ -217,7 +230,6 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
                   register={register}
                   error={errors.backupChannelIp?.message}
                   placeholder='Введите ip резервного канала...'
-                  defaultValue={substation?.backupChannelIp}
                 />
               </FormGroup>
               <FormGroup className='form__group-row'>
