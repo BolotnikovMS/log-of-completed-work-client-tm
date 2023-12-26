@@ -10,7 +10,10 @@ import { isAxiosError } from 'axios'
 
 export const HeadControllerForm: React.FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: headController?.name
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -52,7 +55,6 @@ export const HeadControllerForm: React.FC<IPropsHeaderControllerForm> = ({ headC
                   maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
                 }}
                 placeholder='Введите название контроллера...'
-                defaultValue={headController?.name}
               />
             </FormGroup>
           </div>

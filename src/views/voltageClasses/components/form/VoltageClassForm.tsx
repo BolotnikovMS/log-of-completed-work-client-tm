@@ -10,7 +10,10 @@ import { isAxiosError } from 'axios'
 
 export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: voltageClass?.name
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -58,7 +61,6 @@ export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClas
                   }
                 }}
                 placeholder='Введите класс напряжения...'
-                defaultValue={voltageClass?.name}
               />
             </FormGroup>
           </div>

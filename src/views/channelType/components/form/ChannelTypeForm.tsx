@@ -10,7 +10,10 @@ import { isAxiosError } from 'axios'
 
 export const ChannelTypeForm: React.FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChannelTypeFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: channelType?.name
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -56,7 +59,6 @@ export const ChannelTypeForm: React.FC<IPropsChannelTypeForm> = ({ channelType, 
                   maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
                 }}
                 placeholder='Введите наименование...'
-                defaultValue={channelType?.name}
               />
             </FormGroup>
           </div>

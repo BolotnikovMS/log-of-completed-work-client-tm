@@ -1,5 +1,5 @@
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
-import { IPropsTypeKpForm, ITypeKpFields } from './typeKpForm.interface'
+import { IPropsTypeKpForm, ITypeKpFields } from './TypeKpForm.interface'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
@@ -10,7 +10,10 @@ import { isAxiosError } from 'axios'
 
 export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: typeKp?.name
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -52,7 +55,6 @@ export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggl
                   maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
                 }}
                 placeholder='Введите название КП...'
-                defaultValue={typeKp?.name}
               />
             </FormGroup>
           </div>   

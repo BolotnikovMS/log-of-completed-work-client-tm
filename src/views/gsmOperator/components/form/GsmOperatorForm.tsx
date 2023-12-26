@@ -10,7 +10,10 @@ import { isAxiosError } from 'axios'
 
 export const GsmOperatorForm: React.FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: gsmOperator?.name
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -53,7 +56,6 @@ export const GsmOperatorForm: React.FC<IPropsGsmOperatorForm> = ({ gsmOperator, 
                     maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
                   }}
                   placeholder='Введите наименование...'
-                  defaultValue={gsmOperator?.name}
                 />
               </FormGroup>
             </div>

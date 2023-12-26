@@ -10,7 +10,11 @@ import { isAxiosError } from 'axios'
 
 export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
-    mode: 'onBlur'
+    mode: 'onBlur',
+    defaultValues: {
+      name: district?.name,
+      shortName: district?.shortName
+    }
   })
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -56,7 +60,6 @@ export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited,
                     maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'},
                   }}
                   placeholder='Введите название...'
-                  defaultValue={district?.name}
                 />
               </FormGroup>
               <FormGroup>
@@ -71,7 +74,6 @@ export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited,
                     maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
                   }}
                   placeholder='Введите сокращенное название...'
-                  defaultValue={district?.shortName}
                 />
               </FormGroup>
             </div>
