@@ -1,9 +1,10 @@
-import React from 'react'
+import { type ReactNode } from 'react'
 
 export interface IPropsSmallCard {
-  childrenContent?: React.ReactNode
-  childrenControl?: React.ReactNode
-  className?: string
-  cardText: string
-  path?: string
+	childrenContent?: ReactNode
+	childrenFooter?: ReactNode
+	childrenControl?: ReactNode
+	className?: string
+	cardText: string
+	path?: string
 }
