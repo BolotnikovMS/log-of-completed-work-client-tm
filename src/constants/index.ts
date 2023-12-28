@@ -36,6 +36,10 @@ export const menuItemData = [
         title: 'GSM операторы',
         url: '/gsm-operators',
       },
+			{
+        title: 'Выполненные работы',
+        url: '/completed-works',
+      },
     ]
   },
   {
