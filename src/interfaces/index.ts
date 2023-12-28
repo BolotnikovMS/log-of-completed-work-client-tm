@@ -1,4 +1,5 @@
 import { IChannelType } from './channel-type.interface'
+import { ICompletedWork } from './completed-work.interface'
 import { IDistrict } from './district.interface'
 import { IGsmOperator } from './gsm-operator.interface'
 import { IHeadController } from './head-controller.interface'
@@ -8,4 +9,4 @@ import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IDistrict, ISubstation, IQueryParams, IMeta, IVoltageClass, ITypeKp, IHeadController, IChannelType, IGsmOperator }
+export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISubstation, ITypeKp, IVoltageClass }
