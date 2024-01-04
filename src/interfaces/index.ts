@@ -7,6 +7,8 @@ import { IMeta } from './meta.interface'
 import { IQueryParams } from './qparams.interface'
 import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
+import { IUser } from './user'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISubstation, ITypeKp, IVoltageClass }
+export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISubstation, ITypeKp, IUser, IVoltageClass }
+
