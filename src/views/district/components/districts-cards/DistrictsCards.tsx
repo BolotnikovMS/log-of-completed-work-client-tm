@@ -1,11 +1,11 @@
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
 import React, { useState } from 'react'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
 
+import { isAxiosError } from 'axios'
 import { DistrictForm } from '..'
 import { IDistrict } from '../../../../interfaces'
-import { isAxiosError } from 'axios'
 
 export const DistrictsCards: React.FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
