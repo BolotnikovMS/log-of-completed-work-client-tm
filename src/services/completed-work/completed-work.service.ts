@@ -1,8 +1,8 @@
 import { ICompletedWork, IQueryParams } from '../../interfaces'
+import { TCompletedWorkData, TRespCompletedWork } from './completed-work.type'
 
 import axios from 'axios'
 import { url } from '../../constants'
-import { TRespCompletedWork } from './completed-work.type'
 
 export const CompletedWorkService = {
 	async getAll({ limit, page }: IQueryParams) {
@@ -11,6 +11,12 @@ export const CompletedWorkService = {
 		})
 
 		return response.data
+	},
+
+	async create(data: TCompletedWorkData) {
+		return axios.post<TCompletedWorkData>(`${url}/completed-works`, data, {
+			headers: {'Content-Type': 'application/json'}
+		})
 	},
 
 	async delete(id: number) {
