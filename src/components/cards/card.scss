@@ -68,6 +68,12 @@
     }
   }
 
+	&__text {
+		&-bold {
+			font-weight: bold;
+		}
+	}
+
   &.inActive {
     background-color: rgba(165, 163, 165, 0.8);
   }

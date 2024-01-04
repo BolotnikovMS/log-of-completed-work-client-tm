@@ -1,4 +1,4 @@
-import './small-card.scss'
+import './../card.scss'
 
 import cx from 'classnames'
 import React from 'react'
