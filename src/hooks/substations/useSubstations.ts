@@ -1,14 +1,12 @@
-import { SubstationService } from '../../services/substations/substation.service'
 import { useQuery } from '@tanstack/react-query'
+import { SubstationService } from '../../services/substations/substation.service'
 
 export const useSubstations = () => {
-  const { data, error, isError, isLoading } = useQuery({
+  const { data: substations, error, isError, isLoading } = useQuery({
     queryKey: ['substations', 'all'],
     queryFn: () => SubstationService.getSubstations({}),
     staleTime: 1000 * 10,
   })
-  const total = data?.meta.total
-  const substations = data?.data
 
-  return { substations, total, error, isError, isLoading }
+  return { substations, error, isError, isLoading }
 }
