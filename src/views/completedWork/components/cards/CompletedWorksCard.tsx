@@ -1,7 +1,7 @@
 import { isAxiosError } from 'axios'
 import { Pencil, Trash2 } from 'lucide-react'
 import { type FC } from 'react'
-import { Button, Error, InfoMessage, LoadMore, Loader, SmallCard } from '../../../../components'
+import { Button, Card, Error, InfoMessage, LoadMore, Loader } from '../../../../components'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
 
@@ -25,21 +25,22 @@ export const CompletedWorksCard: FC = () => {
           <div className="cards">
             {data.pages.map(completedWorks => (
               completedWorks.data.map(completedWork => (
-                <SmallCard
-                  key={completedWork.id}
-                  cardText={completedWork.description}
-									childrenFooter={completedWork.note}
-                  childrenControl={
-                    <>
-                      <Button>
-                        <Pencil />
-                      </Button>
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
-                        <Trash2 />
-                      </Button>
-                    </>
-                  }
-                />
+								<Card
+									key={completedWork.id}
+									childrenHeader={<p className='card__text card__text-bold'>{completedWork.substation.fullNameSubstation}</p>}
+									childrenBody={<p>{completedWork.description}</p>}
+									childrenFooter={<p>{completedWork.work_producer.shortUserName}</p>}
+									childrenControl={
+										<>
+											<Button>
+												<Pencil />
+											</Button>
+											<Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
+												<Trash2 />
+											</Button>
+										</>
+									}
+								/>
               ))
             ))}
           </div>
