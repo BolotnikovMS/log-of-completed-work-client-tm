@@ -1,9 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { isAxiosError } from 'axios'
+import ru from 'date-fns/locale/ru'
 import { type FC } from 'react'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
-import { Button, CustomInput, Error, FormGroup, Loader, Textarea } from '../../../../components'
+import { Button, Error, FormGroup, Loader, Textarea } from '../../../../components'
 import { useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
@@ -24,21 +27,24 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 	const queryClient = useQueryClient()
 	const { field: {value: substationValue, onChange: substationOnChange, ...restSubstationField} } = useController({ name: 'substationId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { field: {value: userValue, onChange: userOnChange, ...restUserField} } = useController({ name: 'workProducerId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
+	const { field: {value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion} } = useController({ name: 'dateCompletion', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations()
 	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers()
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
 		mutationFn: (data: TCompletedWorkData) => CompletedWorkService.create(data),
 		onSettled: async () => {
 			await queryClient.invalidateQueries({queryKey: ['completedWork', 'infinity']})
-		}
+		},
+		// onError: (error) => {
+		// 	alert(error.response.data[0].message)
+		// }
 	})
 
 	const submit: SubmitHandler<ICompletedWorkFields> = data => {
-		console.log(data)
-		// mutateAsync(data)
-		// reset()
-		// toggleModal()
+		mutateAsync(data)
 	}
+
+	// console.log(errorMutate?.response.data[0].message)
 
 	return (
 		<>
@@ -109,15 +115,13 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 								/>
 							</FormGroup>
 							<FormGroup>
-								<CustomInput
-									label='Введите дату выполнения работ'
-									name='dateCompletion'
-									register={register}
-									type='date'
-									validation={{
-										required: {value: true, message: 'Поле является обязательным!'},
-										// pattern: /^\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$/,
-									}}
+								<DatePicker
+									className='form__input'
+									dateFormat='dd.MM.yyyy'
+									locale={ru}
+									selected={dateCompletionValue || completedWork?.dateCompletion}
+									onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
+									{...restDateCompletion}
 								/>
 							</FormGroup>
 						</div>

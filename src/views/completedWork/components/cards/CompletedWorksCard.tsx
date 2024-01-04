@@ -29,7 +29,7 @@ export const CompletedWorksCard: FC = () => {
 									key={completedWork.id}
 									childrenHeader={<p className='card__text card__text-bold'>{completedWork.substation.fullNameSubstation}</p>}
 									childrenBody={<p>{completedWork.description}</p>}
-									childrenFooter={<p>{completedWork.work_producer.shortUserName}</p>}
+									childrenFooter={<p>Дата работ: {completedWork.dateCompletion.toLocaleString()}. Выполнил: {completedWork.work_producer.shortUserName} </p>}
 									childrenControl={
 										<>
 											<Button>
