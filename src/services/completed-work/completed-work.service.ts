@@ -19,6 +19,12 @@ export const CompletedWorkService = {
 		})
 	},
 
+	async update({id, data}: {id: number, data: TCompletedWorkData}) {
+		return await axios.patch(`${url}/completed-works/${id}`, data, {
+			headers: {'Content-Type': 'application/json'}
+		})
+	},
+
 	async delete(id: number) {
 		return axios.delete<ICompletedWork>(`${url}/completed-works/${id}`)
 	}
