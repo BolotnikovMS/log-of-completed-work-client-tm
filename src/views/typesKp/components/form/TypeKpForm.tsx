@@ -1,14 +1,15 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { type FC } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IPropsTypeKpForm, ITypeKpFields } from './TypeKpForm.interface'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import React from 'react'
-import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
+import { AxiosError, isAxiosError } from 'axios'
+import { toast } from 'react-toastify'
 import { TypeKpService } from '../../../../services/types-kp/type-kp.service'
-import { isAxiosError } from 'axios'
+import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
 
-export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
+export const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -18,27 +19,37 @@ export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggl
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TTypeKpData) => TypeKpService.updateTypeKp({id: typeKp!.id, data}) : (data: TTypeKpData) => TypeKpService.create(data),
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['typesKp']})
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({queryKey: ['typesKp', 'infinity']})
+
+			if (typeKp !== undefined && typeKp !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
     },
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<ITypeKpFields> = (data) => {
-    if (typeKp !== undefined && typeKp !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-
+  const submit: SubmitHandler<ITypeKpFields> = data => {
     mutateAsync(data)
-    reset()
-    toggleModal()
   }
 
   return (
     <div className="work-log__form">
-      {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
-      {isPending ? 
+      {(isErrorMutate) && <Error error={errorMutate} />}
+      {isPending ?
         (<Loader />)
       : (
         <form className="form form-col" onSubmit={handleSubmit(submit)}>
@@ -57,12 +68,12 @@ export const TypeKpForm: React.FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggl
                 placeholder='Введите название КП...'
               />
             </FormGroup>
-          </div>   
+          </div>
           <div className="form__btns">
             <Button disabled={!isValid} classBtn='btn-bg_green'>
               {isEdited ? 'Сохранить' : 'Добавить'}
             </Button>
-          </div>     
+          </div>
         </form>
       )}
     </div>

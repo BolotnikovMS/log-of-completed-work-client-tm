@@ -1,14 +1,15 @@
-import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
-import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface';
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface'
 
+import { AxiosError, isAxiosError } from 'axios'
+import { type FC } from 'react'
+import { toast } from 'react-toastify'
 import { ChannelTypeService } from '../../../../services/channel-type/channel-type.service'
-import React from 'react'
 import { TChannelTypeData } from '../../../../services/channel-type/channel-type.type'
-import { isAxiosError } from 'axios'
 
-export const ChannelTypeForm: React.FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
+export const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChannelTypeFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -19,29 +20,36 @@ export const ChannelTypeForm: React.FC<IPropsChannelTypeForm> = ({ channelType, 
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TChannelTypeData) => ChannelTypeService.updateChannelType({id: channelType!.id, data}) : (data: TChannelTypeData) => ChannelTypeService.create(data),
     onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['channelTypes']})
-    },
-    onSettled: async () => {
       await queryClient.invalidateQueries({queryKey: ['channelTypes']})
-    }
+
+			if (channelType !== undefined && channelType !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
+    },
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<IChannelTypeFields> = (data) => {
-    if (channelType !== undefined && channelType !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-    
+  const submit: SubmitHandler<IChannelTypeFields> = data => {
     mutateAsync(data)
-    reset()
-    toggleModal()
   }
 
   return (
     <>
       <div className="work-log__form">
-      {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+      {(isErrorMutate) && <Error error={errorMutate} />}
       {isPending ? 
         (<Loader />)
       : (

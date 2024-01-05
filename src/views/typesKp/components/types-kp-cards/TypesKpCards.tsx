@@ -1,13 +1,12 @@
-import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
+import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks'
 
-import { ITypeKp } from '../../../../interfaces'
 import { TypeKpForm } from '..'
-import { isAxiosError } from 'axios'
+import { ITypeKp } from '../../../../interfaces'
 
-export const TypesKpCards: React.FC = () => {
+export const TypesKpCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteTypesKp({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -23,7 +22,7 @@ export const TypesKpCards: React.FC = () => {
 
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
+      {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) :
         (!!data?.pages.length && (
           <div className="work-log__cards">

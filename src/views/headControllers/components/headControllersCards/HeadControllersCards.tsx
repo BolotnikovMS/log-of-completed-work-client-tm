@@ -1,13 +1,12 @@
-import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
+import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '../../../../hooks'
 
 import { HeadControllerForm } from '..'
 import { IHeadController } from '../../../../interfaces'
-import { isAxiosError } from 'axios'
 
-export const HeadControllersCards: React.FC = () => {
+export const HeadControllersCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteHeadControllers({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -23,7 +22,7 @@ export const HeadControllersCards: React.FC = () => {
 
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
+      {(isError) && <Error error={error}/>}
       {!!data?.pages.length && (
         <div className="cards">
           {data.pages.map(headControllers => (

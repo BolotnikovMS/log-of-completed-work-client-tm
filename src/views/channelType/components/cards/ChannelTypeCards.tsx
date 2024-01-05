@@ -1,13 +1,12 @@
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteChannelType, useInfiniteChannelTypes, useModal } from '../../../../hooks'
 
 import { ChannelTypeForm } from '..'
 import { IChannelType } from '../../../../interfaces'
-import { isAxiosError } from 'axios'
 
-export const ChannelTypeCards: React.FC = () => {
+export const ChannelTypeCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannelTypes({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -23,7 +22,7 @@ export const ChannelTypeCards: React.FC = () => {
 
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
+      {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
         (!!data?.pages.length && (
           <div className="cards">

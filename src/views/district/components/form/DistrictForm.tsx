@@ -1,14 +1,15 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { type FC } from 'react'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { AxiosError, isAxiosError } from 'axios'
+import { toast } from 'react-toastify'
 import { DistrictService } from '../../../../services/district/district.service'
-import React from 'react'
 import { TDistrictData } from '../../../../services/district/district.type'
-import { isAxiosError } from 'axios'
 
-export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
+export const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -20,29 +21,36 @@ export const DistrictForm: React.FC<IPropsDistrictForm> = ({ district, isEdited,
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TDistrictData) => DistrictService.updateDistrict({id: district!.id, data}) : (data: TDistrictData) => DistrictService.create(data),
     onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['districts']})
+      await queryClient.invalidateQueries({queryKey: ['districts', 'infinity']})
+
+			if (district !== undefined && district !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
     },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['districts']})
-    }
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<IDistrictFields> = (data) => {
-    if (district !== undefined && district !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-    
+  const submit: SubmitHandler<IDistrictFields> = data => {
     mutateAsync(data)
-    reset()
-    toggleModal()
   }
   
   return (
     <>
       <div className="work-log__form">
-        {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+        {(isErrorMutate) && <Error error={errorMutate} />}
         {isPending ? 
           (<Loader />)
         : (

@@ -1,14 +1,15 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import React from 'react'
-import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
+import { AxiosError, isAxiosError } from 'axios'
+import { type FC } from 'react'
+import { toast } from 'react-toastify'
 import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
-import { isAxiosError } from 'axios'
+import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
 
-export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
+export const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -19,27 +20,35 @@ export const VoltageClassForm: React.FC<IPropsVoltageClassForm> = ({ voltageClas
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TVoltageClass) => VoltageClassService.updateVoltageClass({id: voltageClass!.id, data}) : (data: TVoltageClass) => VoltageClassService.create(data),
     onSuccess: async () => {
-      await queryClient.cancelQueries({queryKey: ['voltageClasses']})
+      await queryClient.invalidateQueries({queryKey: ['voltageClasses', 'infinity']})
+
+			if (voltageClass !== undefined && voltageClass !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
     },
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['voltageClasses']})
-    }
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<IVoltageClassFields> = (data) => {
-    if (voltageClass !== undefined && voltageClass !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
+  const submit: SubmitHandler<IVoltageClassFields> = data => {
     mutateAsync(data)
-    reset()
-    toggleModal()
   }
   
   return (
     <div className="work-log__form">
-      {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+      {(isErrorMutate) && <Error error={errorMutate} />}
       {isPending ? 
         (<Loader />)
       : (

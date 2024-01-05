@@ -1,14 +1,15 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { AxiosError, isAxiosError } from 'axios'
+import { type FC } from 'react'
+import { toast } from 'react-toastify'
 import { HeadControllerService } from '../../../../services/head-controller/head-controller.service'
-import React from 'react'
 import { THeadControllerData } from '../../../../services/head-controller/head-controller.type'
-import { isAxiosError } from 'axios'
 
-export const HeadControllerForm: React.FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
+export const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -18,26 +19,36 @@ export const HeadControllerForm: React.FC<IPropsHeaderControllerForm> = ({ headC
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: THeadControllerData) => HeadControllerService.updateHeadController({id: headController!.id, data}) : (data: THeadControllerData) => HeadControllerService.create(data),
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['headControllers']})
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({queryKey: ['headControllers', 'infinity']})
+
+			if (headController !== undefined && headController !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
     },
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<IHeadControllerFields> = (data) => {
-    if (headController !== undefined && headController !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-
+  const submit: SubmitHandler<IHeadControllerFields> = data => {
     mutateAsync(data)
-    reset()
-    toggleModal()
   }
   
   return (
     <div className="work-log__form">
-      {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+      {(isErrorMutate) && <Error error={errorMutate} />}
       {isPending ? 
         (<Loader />)
       : (

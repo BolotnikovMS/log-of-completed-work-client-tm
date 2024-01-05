@@ -6,8 +6,8 @@ export interface IDistrictFields {
 }
 
 export interface IPropsDistrictForm {
-  district?: IDistrict | null
-  isEdited?: boolean | null
+  district: IDistrict | null
+  isEdited: boolean | null
   toggleModal: () => void
-  setIsEdited?: (val: boolean) => void
+  setIsEdited: (val: boolean) => void
 }

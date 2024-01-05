@@ -1,13 +1,12 @@
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
 import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
 
-import { isAxiosError } from 'axios'
 import { DistrictForm } from '..'
 import { IDistrict } from '../../../../interfaces'
 
-export const DistrictsCards: React.FC = () => {
+export const DistrictsCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -23,7 +22,7 @@ export const DistrictsCards: React.FC = () => {
 
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
+      {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
         (!!data?.pages.length && (
           <div className="cards">

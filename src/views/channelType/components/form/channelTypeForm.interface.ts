@@ -5,8 +5,8 @@ export interface IChannelTypeFields {
 }
 
 export interface IPropsChannelTypeForm {
-  channelType?: IChannelType | null
-  isEdited?: boolean | null
+  channelType: IChannelType | null
+  isEdited: boolean | null
   toggleModal: () => void
-  setIsEdited?: (val: boolean) => void
+  setIsEdited: (val: boolean) => void
 }

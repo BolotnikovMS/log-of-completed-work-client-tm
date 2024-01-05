@@ -1,13 +1,12 @@
-import { Button, Error, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
+import { Button, Error, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
 
 import { GsmOperatorForm } from '..'
 import { IGsmOperator } from '../../../../interfaces'
-import { isAxiosError } from 'axios'
 
-export const GsmOperatorsCards: React.FC = () => {
+export const GsmOperatorsCards: FC = () => {
   const { data, error, isError, isFetching } = useGsmOperators()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -23,7 +22,7 @@ export const GsmOperatorsCards: React.FC = () => {
 
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
+      {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
         (!!data?.length && (
           <div className="cards">

@@ -5,8 +5,8 @@ export interface IGsmOperatorFields {
 }
 
 export interface IPropsGsmOperatorForm {
-  gsmOperator?: IGsmOperator | null
-  isEdited?: boolean | null
+  gsmOperator: IGsmOperator | null
+  isEdited: boolean | null
   toggleModal: () => void
-  setIsEdited?: (val: boolean) => void
+  setIsEdited: (val: boolean) => void
 }

@@ -1,14 +1,15 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
-import { SubmitHandler, useForm } from 'react-hook-form'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { AxiosError, isAxiosError } from 'axios'
+import { type FC } from 'react'
+import { toast } from 'react-toastify'
 import { GsmOperatorService } from '../../../../services/gsm-operator/gsm-operator.service'
-import React from 'react'
 import { TGsmOperatorData } from '../../../../services/gsm-operator/gsm-operator.type'
-import { isAxiosError } from 'axios'
 
-export const GsmOperatorForm: React.FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
+export const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -20,25 +21,33 @@ export const GsmOperatorForm: React.FC<IPropsGsmOperatorForm> = ({ gsmOperator, 
     mutationFn: isEdited ? (data: TGsmOperatorData) => GsmOperatorService.updateGsmOperator({id: gsmOperator!.id, data}) : (data: TGsmOperatorData) => GsmOperatorService.create(data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['gsmOperators']})
+
+			if (gsmOperator !== undefined && gsmOperator !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
     },
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
 
-  const submit: SubmitHandler<IGsmOperatorFields> = (data) => {
-    if (gsmOperator !== undefined && gsmOperator !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-    
-    mutateAsync(data)
-    reset()
-    toggleModal()
-  }
-  
+  const submit: SubmitHandler<IGsmOperatorFields> = data => mutateAsync(data)
+
   return (
     <>
       <div className="work-log__form">
-        {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+        {(isErrorMutate) && <Error error={errorMutate} />}
         {isPending ? 
           (<Loader />)
         : (
