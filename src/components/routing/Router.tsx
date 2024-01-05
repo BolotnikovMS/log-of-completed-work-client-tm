@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout, Page } from '..'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
-import { CompletedWorkControl, CompletedWorksCard } from '../../views/completedWork/components'
+import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/components'
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
@@ -127,7 +127,7 @@ export const Router: React.FC = () => {
 							children={
 								<>
 									<CompletedWorkControl />
-									<CompletedWorksCard />
+									<CompletedWorksCards />
 								</>
 							}
 						/>

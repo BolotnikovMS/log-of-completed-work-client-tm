@@ -1,9 +1,9 @@
 import './textarea.scss'
 
-import { IPropsTextarea } from './textarea.interface'
+import cx from 'classnames'
 import React from 'react'
 import { ValidationMessage } from '../..'
-import cx from 'classnames'
+import { IPropsTextarea } from './textarea.interface'
 
 export const Textarea: React.FC<IPropsTextarea> = ({
   register,
@@ -22,7 +22,7 @@ export const Textarea: React.FC<IPropsTextarea> = ({
       <textarea 
         {...register(name, validation)}
         id={name}
-        className={cx('form__textarea', className, error && 'form__textarea-error' )}
+        className={cx('form__input form__textarea', className, error && 'form__textarea-error' )}
         aria-invalid={Boolean(error)}
         {...attributes}
       ></textarea>
