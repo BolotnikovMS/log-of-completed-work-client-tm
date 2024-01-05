@@ -73,7 +73,7 @@ body {
 
   &__custom-select {
     &__value-container {
-      font-size: 20px !important;
+      font-size: clamp(17px, 2vw, 21px) !important;
     }
 
     &__control {
@@ -115,7 +115,16 @@ body {
         border-radius: 7px !important;
       }
     }
+
   }
+	
+	.react-datepicker__view-calendar-icon input {
+		padding: 6px 10px 5px 40px;
+	}
+
+	.react-datepicker__input-container .react-datepicker__calendar-icon{
+		padding: 0.4rem;
+	}
 
   &__btns {
     display: flex;
