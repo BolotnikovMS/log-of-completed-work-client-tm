@@ -1,14 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { toast } from 'react-toastify'
 import { HeadControllerService } from '../../services/head-controller/head-controller.service'
 
 export const useDeleteHeadController = () => {
   const queryClient = useQueryClient()
   const deleteHeadController = useMutation({
     mutationFn: (id: number) => HeadControllerService.deleteHeadController(id),
-    onSettled: async () => {
+    onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['headControllers']})
-    }
+			toast.success('Запись успешно удалена!')
+    },
+		onError: (error) => {
+			toast.error(`Произошла ошибка: '${error.message}'`)
+		}
   })
   
   return { deleteHeadController }
