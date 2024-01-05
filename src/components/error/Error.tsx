@@ -1,10 +1,10 @@
 import './error.scss'
 
-import { AxiosError } from 'axios';
+import { AxiosError } from 'axios'
 import React from 'react'
 
 interface IPropsError {
-  error: AxiosError<unknown>
+  error: Error | AxiosError<unknown> | null
 }
 
 export const Error: React.FC<IPropsError> = ({ error }) => {
