@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { isAxiosError } from 'axios'
+import { AxiosError, isAxiosError } from 'axios'
 import ru from 'date-fns/locale/ru'
 import { type FC } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
+import { toast } from 'react-toastify'
 import { Button, Error, FormGroup, Loader, Textarea } from '../../../../components'
 import { useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
@@ -17,11 +18,11 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ICompletedWorkFields>({
 		mode: 'onBlur',
 		defaultValues: {
-			substationId: completedWork?.substationId,
-			workProducerId: completedWork?.workProducerId,
+			substationId: completedWork?.substation.id,
+			workProducerId: completedWork?.work_producer.id,
 			description: completedWork?.description,
 			note: completedWork?.note,
-			dateCompletion: completedWork?.dateCompletion
+			dateCompletion: completedWork ? new Date(completedWork?.dateCompletion) : undefined
 		}
 	})
 	const queryClient = useQueryClient()
@@ -31,25 +32,36 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations()
 	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers()
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-		mutationFn: (data: TCompletedWorkData) => CompletedWorkService.create(data),
-		onSettled: async () => {
+		mutationFn: isEdited ? (data: TCompletedWorkData) => CompletedWorkService.update({id: completedWork!.id, data}) : (data: TCompletedWorkData) => CompletedWorkService.create(data),
+		onSuccess: async () => {
 			await queryClient.invalidateQueries({queryKey: ['completedWork', 'infinity']})
+
+			if (completedWork !== undefined && completedWork !== null) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
 		},
-		// onError: (error) => {
-		// 	alert(error.response.data[0].message)
-		// }
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
 	})
 
-	const submit: SubmitHandler<ICompletedWorkFields> = data => {
-		mutateAsync(data)
-	}
-
-	// console.log(errorMutate?.response.data[0].message)
+	const submit: SubmitHandler<ICompletedWorkFields> = data => mutateAsync(data)
 
 	return (
 		<>
 			<div className="work-log__form">
-				{(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+				{(isErrorMutate) && <Error error={errorMutate} />}
 				{isPending ?
 					(<Loader />)
         : (
@@ -61,8 +73,8 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 									classNamePrefix='form__custom-select'
 									options={substations?.data}
 									getOptionValue={option => option.id.toString()}
-									getOptionLabel={option => option.name}
-									value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue || d.id === completedWork?.substationId) : null}
+									getOptionLabel={option => option.fullNameSubstation}
+									value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue || d.id === completedWork?.substation.id) : null}
 									onChange={option => substationOnChange(option ? option.id : option)}
 									isLoading={isLoadingSubstations}
 									isDisabled={isErrorSubstations}
@@ -78,7 +90,7 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 									options={users?.data}
 									getOptionValue={option => option.id.toString()}
 									getOptionLabel={option => option.fullName}
-									value={userValue || completedWork ? users?.data.find(d => d.id === userValue || d.id === completedWork?.substationId) : null}
+									value={userValue || completedWork ? users?.data.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
 									onChange={option => userOnChange(option ? option.id : option)}
 									isLoading={isLoadingUsers}
 									isDisabled={isErrorUsers}
@@ -118,9 +130,11 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 								<DatePicker
 									className='form__input'
 									dateFormat='dd.MM.yyyy'
+									showIcon
 									locale={ru}
-									selected={dateCompletionValue || completedWork?.dateCompletion}
+									selected={dateCompletionValue}
 									onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
+									placeholderText='Укажите дату работ'
 									{...restDateCompletion}
 								/>
 							</FormGroup>
