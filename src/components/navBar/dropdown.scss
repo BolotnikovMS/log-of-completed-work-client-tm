@@ -17,9 +17,9 @@
     display: block;
   }
 
-  & > .menu__item + .menu__item {
-    margin-top: 5px;
-  }
+	& > .menu__item > a {
+		display: block;
+	}
 
   & .menu__item {
     padding: 2px 0;
