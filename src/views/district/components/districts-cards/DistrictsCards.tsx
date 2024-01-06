@@ -6,7 +6,7 @@ import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../h
 import { DistrictForm } from '..'
 import { IDistrict } from '../../../../interfaces'
 
-export const DistrictsCards: FC = () => {
+const DistrictsCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -54,3 +54,5 @@ export const DistrictsCards: FC = () => {
     </>
   )
 }
+
+export default DistrictsCards

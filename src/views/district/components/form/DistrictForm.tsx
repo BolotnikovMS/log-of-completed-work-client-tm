@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { DistrictService } from '../../../../services/district/district.service'
 import { TDistrictData } from '../../../../services/district/district.type'
 
-export const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
+const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -23,7 +23,7 @@ export const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIs
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['districts', 'infinity']})
 
-			if (district !== undefined && district !== null) {
+			if (district !== undefined && district !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -96,3 +96,5 @@ export const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIs
     </>
   )
 }
+
+export default DistrictForm

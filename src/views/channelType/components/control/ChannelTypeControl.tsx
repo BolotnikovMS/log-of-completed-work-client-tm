@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
-import { ChannelTypeForm } from '..'
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { type FC } from 'react'
+import { ChannelTypeForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const ChannelTypeControl: React.FC = () => {
+const ChannelTypeControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -22,3 +22,5 @@ export const ChannelTypeControl: React.FC = () => {
     </div>
   )
 }
+
+export default ChannelTypeControl

@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { TypeKpService } from '../../../../services/types-kp/type-kp.service'
 import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
 
-export const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
+const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -22,7 +22,7 @@ export const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['typesKp', 'infinity']})
 
-			if (typeKp !== undefined && typeKp !== null) {
+			if (typeKp !== undefined && typeKp !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -79,3 +79,5 @@ export const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal
     </div>
   )
 }
+
+export default TypeKpForm

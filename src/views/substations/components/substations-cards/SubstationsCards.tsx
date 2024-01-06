@@ -1,13 +1,13 @@
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { Pencil, Trash2 } from 'lucide-react'
-import React, { useState } from 'react'
+import { useState, type FC } from 'react'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 
-import { ISubstation } from '../../../../interfaces'
-import { SubstationForm } from '../form/SubstationForm'
 import { isAxiosError } from 'axios'
+import { SubstationForm } from '..'
+import { ISubstation } from '../../../../interfaces'
 
-export const SubstationsCards: React.FC = () => {
+const SubstationsCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -54,3 +54,5 @@ export const SubstationsCards: React.FC = () => {
     </>
   )
 }
+
+export default SubstationsCards

@@ -1,6 +1,8 @@
-import { DistrictControl } from './district-control/DistrictControl'
-import { DistrictForm } from './form/DistrictForm'
-import { DistrictSubstationCards } from './district-substations/DistrictSubstationCards'
-import { DistrictsCards } from './districts-cards/DistrictsCards'
+import { lazy } from 'react'
 
-export { DistrictForm, DistrictControl, DistrictsCards, DistrictSubstationCards }
+const DistrictControl = lazy(() => import('./district-control/DistrictControl'))
+const DistrictsCards = lazy(() => import('./districts-cards/DistrictsCards'))
+const DistrictForm = lazy(() => import('./form/DistrictForm'))
+const DistrictSubstationCards = lazy(() => import('./district-substations/DistrictSubstationCards'))
+
+export { DistrictControl, DistrictForm, DistrictSubstationCards, DistrictsCards }

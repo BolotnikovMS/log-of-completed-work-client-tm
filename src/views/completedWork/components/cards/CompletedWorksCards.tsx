@@ -7,7 +7,7 @@ import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
 import { ICompletedWork } from '../../../../interfaces'
 
-export const CompletedWorksCards: FC = () => {
+const CompletedWorksCards: FC = () => {
 	const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15 })
 	const { isModal, toggleModal } = useModal()
 	const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -56,3 +56,5 @@ export const CompletedWorksCards: FC = () => {
 		</>
 	)
 }
+
+export default CompletedWorksCards

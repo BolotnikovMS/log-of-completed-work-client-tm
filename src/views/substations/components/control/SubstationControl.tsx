@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
 import { Plus } from 'lucide-react'
-import React from 'react'
-import { SubstationForm } from '../form/SubstationForm'
+import { type FC } from 'react'
+import { SubstationForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const SubstationControl: React.FC = () => {
+const SubstationControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -22,3 +22,5 @@ export const SubstationControl: React.FC = () => {
     </div>
   )
 }
+
+export default SubstationControl

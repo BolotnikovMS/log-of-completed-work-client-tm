@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
-import { DistrictForm } from '..'
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { type FC } from 'react'
+import { DistrictForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const DistrictControl: React.FC = () => {
+const DistrictControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -22,3 +22,5 @@ export const DistrictControl: React.FC = () => {
     </div>
   )
 }
+
+export default DistrictControl

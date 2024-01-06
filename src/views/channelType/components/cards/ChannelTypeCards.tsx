@@ -6,7 +6,7 @@ import { useDeleteChannelType, useInfiniteChannelTypes, useModal } from '../../.
 import { ChannelTypeForm } from '..'
 import { IChannelType } from '../../../../interfaces'
 
-export const ChannelTypeCards: FC = () => {
+const ChannelTypeCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannelTypes({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -53,3 +53,5 @@ export const ChannelTypeCards: FC = () => {
     </>
   )
 }
+
+export default ChannelTypeCards

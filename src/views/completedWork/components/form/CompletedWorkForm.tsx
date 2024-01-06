@@ -14,7 +14,7 @@ import { CompletedWorkService } from '../../../../services/completed-work/comple
 import { TCompletedWorkData } from '../../../../services/completed-work/completed-work.type'
 import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.interface'
 
-export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdited, setIsEdited, toggleModal }) => {
+const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdited, setIsEdited, toggleModal }) => {
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ICompletedWorkFields>({
 		mode: 'onBlur',
 		defaultValues: {
@@ -36,7 +36,7 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({queryKey: ['completedWork', 'infinity']})
 
-			if (completedWork !== undefined && completedWork !== null) {
+			if (completedWork !== undefined && completedWork !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -150,3 +150,5 @@ export const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, 
 		</>
 	)
 }
+
+export default CompletedWorkForm

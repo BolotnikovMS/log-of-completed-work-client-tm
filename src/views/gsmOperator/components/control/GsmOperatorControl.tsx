@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
-import { GsmOperatorForm } from '..'
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { type FC } from 'react'
+import { GsmOperatorForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const GsmOperatorControl: React.FC = () => {
+const GsmOperatorControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -21,5 +21,6 @@ export const GsmOperatorControl: React.FC = () => {
       />
     </div>
   )
-
 }
+
+export default GsmOperatorControl

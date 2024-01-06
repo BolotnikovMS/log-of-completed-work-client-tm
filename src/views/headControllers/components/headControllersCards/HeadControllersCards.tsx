@@ -6,7 +6,7 @@ import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '.
 import { HeadControllerForm } from '..'
 import { IHeadController } from '../../../../interfaces'
 
-export const HeadControllersCards: FC = () => {
+const HeadControllersCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteHeadControllers({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -51,3 +51,5 @@ export const HeadControllersCards: FC = () => {
     </>
   )
 }
+
+export default HeadControllersCards

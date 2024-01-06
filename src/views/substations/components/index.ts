@@ -1,4 +1,8 @@
-import { SubstationControl } from './control/SubstationControl'
-import { SubstationsCards } from './substations-cards/SubstationsCards'
+import { lazy } from 'react'
 
-export { SubstationsCards, SubstationControl }
+const SubstationControl = lazy(() => import('./control/SubstationControl'))
+const SubstationsCards = lazy(() => import('./substations-cards/SubstationsCards'))
+const SubstationForm = lazy(() => import('./form/SubstationForm'))
+
+export { SubstationControl, SubstationForm, SubstationsCards }
+

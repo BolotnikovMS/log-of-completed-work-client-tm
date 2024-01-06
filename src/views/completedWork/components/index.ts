@@ -1,6 +1,8 @@
-import { CompletedWorksCards } from './cards/CompletedWorksCards'
-import { CompletedWorkControl } from './control/CompletedWorkControl'
-import { CompletedWorkForm } from './form/CompletedWorkForm'
+import { lazy } from 'react'
+
+const CompletedWorkControl = lazy(() => import('./control/CompletedWorkControl'))
+const CompletedWorksCards = lazy(() => import('./cards/CompletedWorksCards'))
+const CompletedWorkForm = lazy(() => import('./form/CompletedWorkForm'))
 
 export { CompletedWorkControl, CompletedWorkForm, CompletedWorksCards }
 

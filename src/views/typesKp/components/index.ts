@@ -1,5 +1,7 @@
-import { TypeKpControl } from './control/TypeKpControl'
-import { TypeKpForm } from './form/TypeKpForm'
-import { TypesKpCards } from './types-kp-cards/TypesKpCards'
+import { lazy } from 'react'
 
-export { TypesKpCards, TypeKpForm, TypeKpControl }
+const TypeKpControl = lazy(() => import('./control/TypeKpControl'))
+const TypeKpForm = lazy(() => import('./form/TypeKpForm'))
+const TypesKpCards = lazy(() => import('./types-kp-cards/TypesKpCards'))
+
+export { TypeKpControl, TypeKpForm, TypesKpCards }

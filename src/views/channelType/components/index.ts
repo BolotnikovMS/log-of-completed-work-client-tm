@@ -1,5 +1,7 @@
-import { ChannelTypeForm } from './form/ChannelTypeForm'
-import { ChannelTypeControl } from './control/ChannelTypeControl'
-import { ChannelTypeCards } from './cards/ChannelTypeCards'
+import { lazy } from 'react'
 
-export { ChannelTypeForm, ChannelTypeControl, ChannelTypeCards }
+const ChannelTypeControl = lazy(() => import('./control/ChannelTypeControl'))
+const ChannelTypeForm = lazy(() => import('./form/ChannelTypeForm'))
+const ChannelTypeCards = lazy(() => import('./cards/ChannelTypeCards'))
+
+export { ChannelTypeCards, ChannelTypeControl, ChannelTypeForm }

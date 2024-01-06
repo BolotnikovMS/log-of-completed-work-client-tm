@@ -4,7 +4,7 @@ import { CompletedWorkForm } from '..'
 import { Button, Modal } from '../../../../components'
 import { useModal } from '../../../../hooks'
 
-export const CompletedWorkControl: FC = () => {
+const CompletedWorkControl: FC = () => {
 	const { isModal, toggleModal } = useModal()
 
 	return (
@@ -21,3 +21,5 @@ export const CompletedWorkControl: FC = () => {
 		</div>
 	)
 }
+
+export default CompletedWorkControl

@@ -1,5 +1,7 @@
-import { GsmOperatorControl } from './control/GsmOperatorControl'
-import { GsmOperatorForm } from './form/GsmOperatorForm'
-import { GsmOperatorsCards } from './cards/GsmOperatorsCards'
+import { lazy } from 'react'
 
-export { GsmOperatorsCards, GsmOperatorControl, GsmOperatorForm }
+const GsmOperatorControl = lazy(() => import('./control/GsmOperatorControl'))
+const GsmOperatorForm = lazy(() => import('./form/GsmOperatorForm'))
+const GsmOperatorsCards = lazy(() => import('./cards/GsmOperatorsCards'))
+
+export { GsmOperatorControl, GsmOperatorForm, GsmOperatorsCards }

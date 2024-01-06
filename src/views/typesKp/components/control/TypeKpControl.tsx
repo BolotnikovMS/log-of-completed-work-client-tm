@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { type FC } from 'react'
 import { TypeKpForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const TypeKpControl: React.FC = () => {
+const TypeKpControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -22,3 +22,5 @@ export const TypeKpControl: React.FC = () => {
     </div>
   )
 }
+
+export default TypeKpControl

@@ -1,11 +1,11 @@
 import { Error, InfoMessage, Loader, SmallCard } from '../../../../components'
 
-import React from 'react'
 import { isAxiosError } from 'axios'
-import { useDistrictSubstations } from '../../../../hooks'
+import { type FC } from 'react'
 import { useParams } from 'react-router-dom'
+import { useDistrictSubstations } from '../../../../hooks'
 
-export const DistrictSubstationCards: React.FC = () => {
+const DistrictSubstationCards: FC = () => {
   const { id } = useParams()
   const { substations, error, isError, isLoading } = useDistrictSubstations(id)
   
@@ -24,3 +24,5 @@ export const DistrictSubstationCards: React.FC = () => {
     </>
   )
 }
+
+export default DistrictSubstationCards

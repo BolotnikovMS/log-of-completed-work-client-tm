@@ -1,11 +1,11 @@
 import { Button, Modal } from '../../../../components'
 
 import { Plus } from 'lucide-react'
-import React from 'react'
+import { type FC } from 'react'
 import { VoltageClassForm } from '..'
 import { useModal } from '../../../../hooks'
 
-export const VoltageControl: React.FC = () => {
+const VoltageControl: FC = () => {
   const { isModal, toggleModal } = useModal()
 
   return (
@@ -22,3 +22,5 @@ export const VoltageControl: React.FC = () => {
     </div>
   )
 }
+
+export default VoltageControl

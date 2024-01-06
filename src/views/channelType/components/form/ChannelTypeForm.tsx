@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { ChannelTypeService } from '../../../../services/channel-type/channel-type.service'
 import { TChannelTypeData } from '../../../../services/channel-type/channel-type.type'
 
-export const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
+const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChannelTypeFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -22,7 +22,7 @@ export const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdit
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['channelTypes']})
 
-			if (channelType !== undefined && channelType !== null) {
+			if (channelType !== undefined && channelType !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -81,3 +81,5 @@ export const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdit
     </>
   )
 }
+
+export default ChannelTypeForm

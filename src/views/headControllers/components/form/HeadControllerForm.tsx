@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { HeadControllerService } from '../../../../services/head-controller/head-controller.service'
 import { THeadControllerData } from '../../../../services/head-controller/head-controller.type'
 
-export const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
+const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -22,7 +22,7 @@ export const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headControl
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['headControllers', 'infinity']})
 
-			if (headController !== undefined && headController !== null) {
+			if (headController !== undefined && headController !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -79,3 +79,5 @@ export const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headControl
     </div>
   )
 }
+
+export default HeadControllerForm

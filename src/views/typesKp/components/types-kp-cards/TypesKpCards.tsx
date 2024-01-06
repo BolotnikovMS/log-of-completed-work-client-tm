@@ -6,7 +6,7 @@ import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks
 import { TypeKpForm } from '..'
 import { ITypeKp } from '../../../../interfaces'
 
-export const TypesKpCards: FC = () => {
+const TypesKpCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteTypesKp({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -54,3 +54,5 @@ export const TypesKpCards: FC = () => {
     </>
   )
 }
+
+export default TypesKpCards

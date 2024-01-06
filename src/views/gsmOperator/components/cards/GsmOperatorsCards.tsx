@@ -6,7 +6,7 @@ import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hoo
 import { GsmOperatorForm } from '..'
 import { IGsmOperator } from '../../../../interfaces'
 
-export const GsmOperatorsCards: FC = () => {
+const GsmOperatorsCards: FC = () => {
   const { data, error, isError, isFetching } = useGsmOperators()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -49,3 +49,5 @@ export const GsmOperatorsCards: FC = () => {
     </>
   )
 }
+
+export default GsmOperatorsCards

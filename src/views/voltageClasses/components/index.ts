@@ -1,5 +1,7 @@
-import { VoltageClassForm } from './form/VoltageClassForm'
-import { VoltageClassesCards } from './voltage-classes-cards/VoltageClassesCards'
-import { VoltageControl } from './control/VoltageControl'
+import { lazy } from 'react'
 
-export { VoltageClassesCards, VoltageClassForm, VoltageControl  }
+const VoltageControl = lazy(() => import('./control/VoltageControl'))
+const VoltageClassForm = lazy(() => import('./form/VoltageClassForm'))
+const VoltageClassesCards = lazy(() => import('./voltage-classes-cards/VoltageClassesCards'))
+
+export { VoltageClassForm, VoltageClassesCards, VoltageControl }

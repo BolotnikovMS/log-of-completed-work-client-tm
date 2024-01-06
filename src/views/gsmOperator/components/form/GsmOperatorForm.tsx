@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { GsmOperatorService } from '../../../../services/gsm-operator/gsm-operator.service'
 import { TGsmOperatorData } from '../../../../services/gsm-operator/gsm-operator.type'
 
-export const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
+const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -22,7 +22,7 @@ export const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdit
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['gsmOperators']})
 
-			if (gsmOperator !== undefined && gsmOperator !== null) {
+			if (gsmOperator !== undefined && gsmOperator !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -79,3 +79,5 @@ export const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdit
     </>
   )
 }
+
+export default GsmOperatorForm

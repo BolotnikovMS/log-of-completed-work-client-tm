@@ -1,16 +1,16 @@
-import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
-import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
-import { SubmitHandler, useController, useForm } from 'react-hook-form'
-import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { SubmitHandler, useController, useForm } from 'react-hook-form'
+import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
+import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
+import { isAxiosError } from 'axios'
+import { type FC } from 'react'
 import AsyncSelect from 'react-select'
-import React from 'react'
 import { SubstationService } from '../../../../services/substations/substation.service'
 import { TSubstationData } from '../../../../services/substations/substation.type'
-import { isAxiosError } from 'axios'
 
-export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
+const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ISubstationFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -260,3 +260,5 @@ export const SubstationForm: React.FC<IPropsSubstationForm> = ({ substation, isE
     </>
   )
 }
+
+export default SubstationForm

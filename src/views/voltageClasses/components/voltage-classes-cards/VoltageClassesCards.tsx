@@ -6,7 +6,7 @@ import { useDeleteVoltageClass, useInfiniteVoltageClasses, useModal } from '../.
 import { VoltageClassForm } from '..'
 import { IVoltageClass } from '../../../../interfaces'
 
-export const VoltageClassesCards: FC = () => {
+const VoltageClassesCards: FC = () => {
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -52,3 +52,5 @@ export const VoltageClassesCards: FC = () => {
     </>
   )
 }
+
+export default VoltageClassesCards

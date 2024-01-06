@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
 import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
 
-export const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
+const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur',
     defaultValues: {
@@ -22,7 +22,7 @@ export const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isE
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['voltageClasses', 'infinity']})
 
-			if (voltageClass !== undefined && voltageClass !== null) {
+			if (voltageClass !== undefined && voltageClass !== null && setIsEdited) {
 				setIsEdited(false)
 				toast.success('Запись успешно обновлена!')
 			} else {
@@ -83,3 +83,5 @@ export const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isE
     </div>
   )
 }
+
+export default VoltageClassForm
