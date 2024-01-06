@@ -1,10 +1,10 @@
-import React, { Suspense } from 'react'
+import { Suspense, type FC } from 'react'
 
+import { Outlet } from 'react-router-dom'
 import { Header } from '../header/Header'
 import { Loader } from '../loader/Loader'
-import { Outlet } from 'react-router-dom'
 
-export const Layout: React.FC = () => {
+export const Layout: FC = () => {
   return (
     <>
       <Header />

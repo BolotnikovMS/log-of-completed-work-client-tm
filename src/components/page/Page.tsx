@@ -1,9 +1,9 @@
 import './work-log.scss'
 
+import { type FC } from 'react'
 import { IPropsPage } from './page.interface'
-import React from 'react'
 
-export const Page: React.FC<IPropsPage> = ({ title, children }) => {
+export const Page: FC<IPropsPage> = ({ title, children }) => {
   return (
     <div className="work-log">
       <div className="work-log__content">
