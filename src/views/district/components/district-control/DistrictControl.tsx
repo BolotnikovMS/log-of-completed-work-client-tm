@@ -10,7 +10,7 @@ const DistrictControl: FC = () => {
 
   return (
     <div className="work-log__control">
-      <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
+      <Button classBtn='btn-bg_green' onClick={toggleModal}>
         <Plus />
       </Button>
       <Modal
