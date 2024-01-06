@@ -1,3 +1,4 @@
+import './../customInput/custom-input.scss'
 import './textarea.scss'
 
 import cx from 'classnames'
