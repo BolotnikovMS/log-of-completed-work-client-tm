@@ -1,11 +1,11 @@
 import './textarea.scss'
 
 import cx from 'classnames'
-import React from 'react'
+import { type FC } from 'react'
 import { ValidationMessage } from '../..'
 import { IPropsTextarea } from './textarea.interface'
 
-export const Textarea: React.FC<IPropsTextarea> = ({
+const Textarea: FC<IPropsTextarea> = ({
   register,
   validation,
   error,
@@ -30,3 +30,5 @@ export const Textarea: React.FC<IPropsTextarea> = ({
     </>
   )
 }
+
+export default Textarea

@@ -1,10 +1,10 @@
 import './load-more.scss'
 
+import { type FC } from 'react'
 import { Button } from '..'
 import { IPropsLoadMore } from './loadMore.interface'
-import React from 'react'
 
-export const LoadMore: React.FC<IPropsLoadMore> = ({ hasNextPage, isFetching, isFetchingNextPage, fetchNextPage }) => {
+const LoadMore: FC<IPropsLoadMore> = ({ hasNextPage, isFetching, isFetchingNextPage, fetchNextPage }) => {
   return (
     <div className='load-more'>
       <Button classBtn='btn-bg_blue' type='button' onClick={() => fetchNextPage()} disabled={!hasNextPage || isFetchingNextPage}>
@@ -18,3 +18,5 @@ export const LoadMore: React.FC<IPropsLoadMore> = ({ hasNextPage, isFetching, is
     </div>
   )
 }
+
+export default LoadMore

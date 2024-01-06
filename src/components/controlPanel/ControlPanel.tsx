@@ -1,28 +1,30 @@
+import { type FC, type ReactNode } from 'react'
 import { Button, Modal } from '..'
-import React, { useState } from 'react'
 
 import { Plus } from 'lucide-react'
+import { useModal } from '../../hooks'
 
 interface IPropsControlPanel {
-  titleModal: string
-  formModal: React.ReactNode
+	titleModal: string
+	formModal: ReactNode
 }
 
-export const ControlPanel: React.FC<IPropsControlPanel> = ({ titleModal, formModal }) => {
-  const [isModal, setIsModal] = useState<boolean>(false)
-  const onClose = () => setIsModal(false)
+const ControlPanel: FC<IPropsControlPanel> = ({ titleModal, formModal }) => {
+	const { isModal, toggleModal } = useModal()
 
-  return (
-    <div className="work-log__control">
-      <Button classBtn='btn-bg_green' onClick={() => setIsModal(true)}>
-        <Plus />
-      </Button>
-      <Modal
-        visible={isModal}
-        title={titleModal}
-        content={formModal}
-        onClose={onClose} 
-      />
-    </div>
-  )
+	return (
+		<div className="work-log__control">
+			<Button classBtn='btn-bg_green' onClick={() => console.log(1)}>
+				<Plus />
+			</Button>
+			<Modal
+				visible={isModal}
+				title={titleModal}
+				content={formModal}
+				onToggle={toggleModal}
+			/>
+		</div>
+	)
 }
+
+export default ControlPanel

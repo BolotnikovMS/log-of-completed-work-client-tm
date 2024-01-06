@@ -2,11 +2,11 @@ import './custom-input.scss'
 
 import { Input, ValidationMessage } from '../..'
 
-import { IPropsCustomInput } from './customInput.interface'
-import React from 'react'
 import cx from 'classnames'
+import { type FC } from 'react'
+import { IPropsCustomInput } from './customInput.interface'
 
-export const CustomInput: React.FC<IPropsCustomInput> = ({
+const CustomInput: FC<IPropsCustomInput> = ({
   register,
   validation = {},
   error,
@@ -35,3 +35,5 @@ export const CustomInput: React.FC<IPropsCustomInput> = ({
     </>
   )
 }
+
+export default CustomInput
