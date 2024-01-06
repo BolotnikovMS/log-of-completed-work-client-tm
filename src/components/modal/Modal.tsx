@@ -1,10 +1,10 @@
 import './modal.scss'
 
-import { IPropsModal } from './modal.interface'
-import React from 'react'
+import { type FC } from 'react'
 import { createPortal } from 'react-dom'
+import { IPropsModal } from './modal.interface'
 
-export const Modal: React.FC<IPropsModal> = ({ visible, title, content, footer, onToggle }) => {
+export const Modal: FC<IPropsModal> = ({ visible, title, content, footer, onToggle }) => {
   if (!visible) return null
 
   return createPortal(
