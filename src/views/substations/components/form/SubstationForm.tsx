@@ -4,9 +4,10 @@ import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../compo
 import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
 import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
-import { isAxiosError } from 'axios'
+import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
 import AsyncSelect from 'react-select'
+import { toast } from 'react-toastify'
 import { SubstationService } from '../../../../services/substations/substation.service'
 import { TSubstationData } from '../../../../services/substations/substation.type'
 
@@ -46,27 +47,35 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
   const queryClient = useQueryClient()
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TSubstationData) => SubstationService.update({id: substation!.id, data}) : (data: TSubstationData) => SubstationService.create(data),
-    onSettled: async () => {
-      await queryClient.invalidateQueries({queryKey: ['substations']})
-    }
+    onSuccess: async () => {
+			await queryClient.invalidateQueries({queryKey: ['substations']})
+
+			if (substation !== undefined && substation !== null && setIsEdited) {
+				setIsEdited(false)
+				toast.success('Запись успешно обновлена!')
+			} else {
+				toast.success('Запись успешно добавлена!')
+			}
+			reset()
+			toggleModal()
+    },
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
   })
   
-  const submit: SubmitHandler<ISubstationFields> = (data) => {
-    if (substation !== undefined && substation !== null && setIsEdited) {
-      mutateAsync(data)
-      setIsEdited(false)
-      toggleModal()
-    }
-    
-    mutateAsync(data)
-    reset()
-    toggleModal()
-  }
+  const submit: SubmitHandler<ISubstationFields> = data => mutateAsync(data)
   
   return (
     <>
       <div className="work-log__form">
-        {(isErrorMutate && isAxiosError(errorMutate)) && <Error error={errorMutate} />}
+        {(isErrorMutate) && <Error error={errorMutate} />}
         {isPending ?
           (<Loader />)
         : (
