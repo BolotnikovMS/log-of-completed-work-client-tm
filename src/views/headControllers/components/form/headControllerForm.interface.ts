@@ -5,8 +5,8 @@ export interface IHeadControllerFields {
 }
 
 export interface IPropsHeaderControllerForm {
-  headController: IHeadController | null
-  isEdited: boolean | null
+  headController?: IHeadController | null
+  isEdited?: boolean | null
   toggleModal: () => void
-  setIsEdited: (val: boolean) => void
+  setIsEdited?: (val: boolean) => void
 }
