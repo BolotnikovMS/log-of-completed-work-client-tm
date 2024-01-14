@@ -13,6 +13,12 @@ export const SubstationService = {
     return response.data
   },
 
+	async getSubstation(id: string): Promise<ISubstation> {
+		const response =  await axios.get<ISubstation>(`${url}/substations/${id}`)
+
+		return response.data
+	},
+
   async create(data: TSubstationData) {
     return axios.post<TSubstationData>(`${url}/substations`, data, {
       headers: {'Content-Type': 'application/json'}
