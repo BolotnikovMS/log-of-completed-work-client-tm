@@ -32,6 +32,7 @@ const SubstationsCards: FC = () => {
                 <SmallCard
                   key={substation.id}
                   cardText={substation.name}
+									path={`/substations/${substation.id}`}
                   childrenControl={
                     <>
                       <Button onClick={() => {toggleModal(), setSubstation(substation), setIsEdited(!isEdited)}}>
