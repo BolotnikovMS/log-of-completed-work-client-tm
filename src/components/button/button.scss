@@ -10,6 +10,7 @@
   transition: all 0.2s ease-in;
 
   &-bg_green {
+		border: 1px solid #59b653;
     background-color: #59b653;
   }
 
@@ -47,7 +48,8 @@
     }
   
     &-bg_green:hover {
-      background-color: #4fa149;
+			border: 1px solid #59b653;
+      background-color: transparent;
     } 
   
     &.btn-disabled:hover {
