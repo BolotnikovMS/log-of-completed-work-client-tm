@@ -16,7 +16,7 @@ const DistrictSubstationCards: FC = () => {
       {!!substations?.length && (
         <div className="cards">
           {
-            substations.map(substation => <SmallCard key={substation.id} cardText={substation.name} path={'#'} />)
+            substations.map(substation => <SmallCard key={substation.id} cardText={substation.name} path={`/substations/${substation.id}`} />)
           }
         </div>
       )}
