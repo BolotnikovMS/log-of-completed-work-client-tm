@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
+import { Link } from 'react-router-dom'
 import { CompletedWorkForm } from '..'
 import { Button, Card, Error, InfoMessage, LoadMore, Loader, Modal } from '../../../../components'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
@@ -31,7 +32,7 @@ const CompletedWorksCards: FC = () => {
               completedWorks.data.map(completedWork => (
 								<Card
 									key={completedWork.id}
-									childrenHeader={<p className='card__text card__text-bold'>{completedWork.substation.fullNameSubstation}</p>}
+									childrenHeader={<p className='card__text card__text-bold'><Link to={`/substations/${completedWork.substation.id}`}>{completedWork.substation.fullNameSubstation}</Link></p>}
 									childrenBody={<p>{completedWork.description}</p>}
 									childrenFooter={<p>Дата работ: {format(completedWork.dateCompletion, 'dd.MM.yyyy')}. Выполнил: {completedWork.work_producer.shortUserName} </p>}
 									childrenControl={
