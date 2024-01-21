@@ -1,6 +1,6 @@
 import { ArrowLeft, BookTextIcon, Image } from 'lucide-react'
 import { type FC } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Error, Loader } from '../../../../components'
 import { useSubstation } from '../../../../hooks'
 import './info.scss'
@@ -38,7 +38,9 @@ const SubstationInfo: FC = () => {
 								</div>
 								<div className="info__btns info__btns-mt">
 									<Button classBtn='btn-bg_blue' onClick={() => navigate(-1)}><ArrowLeft />Обратно</Button>
-									<Button classBtn='btn-bg_green'><BookTextIcon />Работы</Button>
+									<Link to={`/completed-works?substation=${substation?.id}`} className='btn btn-bg_green'>
+										<BookTextIcon />Работы
+									</Link>
 								</div>
 							</div>
 						</>
