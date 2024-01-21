@@ -5,9 +5,9 @@ import axios from 'axios'
 import { url } from '../../constants'
 
 export const CompletedWorkService = {
-	async getAll({ limit, page }: IQueryParams) {
+	async getAll({ limit, page, substation }: IQueryParams) {
 		const response = await axios.get<TRespCompletedWork>(`${url}/completed-works`, {
-			params: { page, limit }
+			params: { page, limit, substation }
 		})
 
 		return response.data

@@ -8,4 +8,5 @@ export interface IQueryParams {
   order?: TOrderSort
   offset?: number
   limit?: number
+	substation?: string | null
 }

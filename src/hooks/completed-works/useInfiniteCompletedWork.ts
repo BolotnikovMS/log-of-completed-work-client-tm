@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
 
-export const useInfiniteCompletedWork = ({ limit }: { limit: number }) => {
+export const useInfiniteCompletedWork = ({ limit, substation }: { limit: number, substation?: string | null } ) => {
 	const {
 		data,
     error,
@@ -11,8 +11,8 @@ export const useInfiniteCompletedWork = ({ limit }: { limit: number }) => {
     isFetching,
     isFetchingNextPage,
 	} = useInfiniteQuery({
-		queryKey: ['completedWork', 'infinity'],
-		queryFn: ({ pageParam = 1 }) => CompletedWorkService.getAll({page: pageParam, limit}),
+		queryKey: ['completedWork', 'infinity', substation],
+		queryFn: ({ pageParam = 1 }) => CompletedWorkService.getAll({page: pageParam, limit, substation}),
 		initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1
