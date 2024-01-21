@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { CompletedWorkForm } from '..'
 import { Button, Card, Error, InfoMessage, LoadMore, Loader, Modal } from '../../../../components'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
@@ -9,7 +9,9 @@ import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useI
 import { ICompletedWork } from '../../../../interfaces'
 
 const CompletedWorksCards: FC = () => {
-	const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15 })
+	const [searchParams] = useSearchParams()
+	const substationParam = searchParams.get('substation')
+	const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15, substation: substationParam })
 	const { isModal, toggleModal } = useModal()
 	const [isEdited, setIsEdited] = useState<boolean>(false)
 	const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
@@ -51,7 +53,7 @@ const CompletedWorksCards: FC = () => {
           </div>
         ))
       }
-			{(!data?.pages?.length && !isFetching && !isError) && <InfoMessage text='Пока нет выполненных работ по ПС...' />}
+			{(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока нет выполненных работ по ПС...' />}
 			{hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
 			<Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<CompletedWorkForm completedWork={completedWork} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
 		</>
