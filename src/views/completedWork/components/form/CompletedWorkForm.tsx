@@ -66,7 +66,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 					(<Loader />)
         : (
 					<form className="form form-col" onSubmit={handleSubmit(submit)}>
-						<div className="form__content form__content-col">
+						<div className="form__content form__content-mt form__content-col">
 							<FormGroup>
 								<label htmlFor="label">Выберите ПС</label>
 								<AsyncSelect

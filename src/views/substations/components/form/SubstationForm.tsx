@@ -80,7 +80,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
           (<Loader />)
         : (
           <form className="form form-col" onSubmit={handleSubmit(submit)}>
-            <div className="form__content form__content-col">
+            <div className="form__content form__content-mt form__content-col">
               <FormGroup>
                 <label className='label'>Выберите РЭС или ГП</label>
                 <AsyncSelect

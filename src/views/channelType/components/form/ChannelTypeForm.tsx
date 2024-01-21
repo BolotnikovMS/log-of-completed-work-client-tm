@@ -54,7 +54,7 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
         (<Loader />)
       : (
         <form className="form form-col" onSubmit={handleSubmit(submit)}>
-          <div className="form__content form__content-col">
+          <div className="form__content form__content-mt form__content-col">
             <FormGroup>
               <CustomInput
                 label='Наименование канала'
