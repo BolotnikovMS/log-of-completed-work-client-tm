@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '../../../../hooks'
 
 import { HeadControllerForm } from '..'
@@ -23,29 +23,31 @@ const HeadControllersCards: FC = () => {
   return (
     <>
       {(isError) && <Error error={error}/>}
-      {!!data?.pages.length && (
-        <div className="cards">
-          {data.pages.map(headControllers => (
-            headControllers.data.map(headController => (
-              <SmallCard
-                key={headController.id}
-                cardText={headController.name}
-                childrenControl={
-                  <>
-                    <Button onClick={() => {toggleModal(), setHeadController(headController), setIsEdited(!isEdited)}}>
-                      <Pencil />
-                    </Button>
-                    <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
-                      <Trash2 />
-                    </Button>
-                  </>
-                }
-              />
-            ))
-          ))}
-        </div>
-      )}
-      {isFetching && <Loader />}
+			{isFetching ? (<Loader />) : 
+				(!!data?.pages[0].data.length && (
+					<div className="cards">
+						{data.pages.map(headControllers => (
+							headControllers.data.map(headController => (
+								<SmallCard
+									key={headController.id}
+									cardText={headController.name}
+									childrenControl={
+										<>
+											<Button onClick={() => {toggleModal(), setHeadController(headController), setIsEdited(!isEdited)}}>
+												<Pencil />
+											</Button>
+											<Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
+												<Trash2 />
+											</Button>
+										</>
+									}
+								/>
+							))
+						))}
+					</div>
+				))			
+			}
+			{(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Головных контроллеров пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<HeadControllerForm headController={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>

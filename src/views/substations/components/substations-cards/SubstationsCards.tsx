@@ -25,7 +25,7 @@ const SubstationsCards: FC = () => {
     <>
       {(isError && isAxiosError(error)) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
-        (!!data?.pages.length && (
+        (!!data?.pages[0].data.length && (
           <div className="cards">
             {data.pages.map(substations => (
               substations.data.map(substation => (
@@ -49,7 +49,7 @@ const SubstationsCards: FC = () => {
           </div>
         ))
       }
-      {(!data?.pages?.length && !isFetching && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
+      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<SubstationForm substation={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>

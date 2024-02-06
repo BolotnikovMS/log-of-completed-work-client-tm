@@ -53,7 +53,7 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
         (<Loader />)
       : (
         <form className="form form-col" onSubmit={handleSubmit(submit)}>
-          <div className="form__content form__content-col">
+          <div className="form__content form__content-mt form__content-col">
             <FormGroup >
               <CustomInput
                 label='Класс напряжения'

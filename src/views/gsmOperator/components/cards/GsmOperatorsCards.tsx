@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
 
 import { GsmOperatorForm } from '..'
@@ -45,6 +45,7 @@ const GsmOperatorsCards: FC = () => {
           </div>
         ))
       }
+			{(!data?.length && !isFetching && !isError) && <InfoMessage text='GSM операторов пока не добавлено...' />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<GsmOperatorForm gsmOperator={gsmOperator} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>
   )

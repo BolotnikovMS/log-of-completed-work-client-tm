@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { useDeleteVoltageClass, useInfiniteVoltageClasses, useModal } from '../../../../hooks'
 
 import { VoltageClassForm } from '..'
@@ -24,7 +24,7 @@ const VoltageClassesCards: FC = () => {
     <>
       {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
-        (!!data?.pages.length && (
+        (!!data?.pages[0].data.length && (
           <div className="cards">
             {data.pages.map(voltageClasses => (
               voltageClasses.data.map(voltageClass => (
@@ -47,6 +47,7 @@ const VoltageClassesCards: FC = () => {
           </div>
         ))
       }
+			{(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<VoltageClassForm voltageClass={voltageClass} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />}/>
     </>
