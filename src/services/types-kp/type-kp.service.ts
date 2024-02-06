@@ -1,8 +1,8 @@
-import { TRespTypesKp, TTypeKpData } from './type-kp.type';
+import { TRespTypesKp, TTypeKpData } from './type-kp.type'
 
-import { IQueryParams } from '../../interfaces'
 import axios from 'axios'
 import { url } from '../../constants'
+import { IQueryParams } from '../../interfaces'
 
 export const TypeKpService = {
   async getTypesKp({ limit, page }: IQueryParams) {

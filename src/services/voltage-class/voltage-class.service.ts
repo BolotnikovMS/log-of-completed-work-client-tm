@@ -1,8 +1,8 @@
 import { TResponseVoltageClass, TVoltageClass } from './voltage-class.type'
 
-import { IQueryParams } from '../../interfaces'
 import axios from 'axios'
 import { url } from '../../constants'
+import { IQueryParams } from '../../interfaces'
 
 export const VoltageClassService = {
   async getVoltageClasses({ limit, page }: IQueryParams) {
