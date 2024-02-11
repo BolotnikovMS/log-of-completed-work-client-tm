@@ -28,7 +28,7 @@ const CompletedWorksCards: FC = () => {
 		<>
       {(isError) && <Error error={error}/>}
       {isFetching ? (<Loader />) : 
-        (!!data?.pages.length && (
+        (!!data?.pages[0].data.length && (
           <div className="cards">
             {data.pages.map(completedWorks => (
               completedWorks.data.map(completedWork => (
