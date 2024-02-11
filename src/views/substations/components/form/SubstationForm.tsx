@@ -49,6 +49,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
     mutationFn: isEdited ? (data: TSubstationData) => SubstationService.update({id: substation!.id, data}) : (data: TSubstationData) => SubstationService.create(data),
     onSuccess: async () => {
 			await queryClient.invalidateQueries({queryKey: ['substations']})
+			await queryClient.invalidateQueries({queryKey: ['district-substations']})
 
 			if (substation !== undefined && substation !== null && setIsEdited) {
 				setIsEdited(false)
