@@ -36,6 +36,8 @@ export const Router: React.FC = () => {
               title='Подстанций'
               children={
                 <>
+									{/* !!Использование компонента с карточками ПС */}
+									<SubstationControl />
                   <DistrictSubstationCards />
                 </>
               }
