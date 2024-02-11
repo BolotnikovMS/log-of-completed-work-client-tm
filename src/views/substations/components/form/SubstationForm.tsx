@@ -6,16 +6,18 @@ import { IPropsSubstationForm, ISubstationFields } from './substationForm.interf
 
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
+import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
 import { SubstationService } from '../../../../services/substations/substation.service'
 import { TSubstationData } from '../../../../services/substations/substation.type'
 
 const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
+	const { id } = useParams()
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ISubstationFields>({
     mode: 'onBlur',
     defaultValues: {
-      districtId: substation?.districtId,
+      districtId: substation?.districtId || (typeof id !== "undefined" && id ? +id : undefined),
       voltageClassesId: substation?.voltageClassesId,
       active: substation?.active,
       rdu: substation?.rdu,
@@ -72,7 +74,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
   })
   
   const submit: SubmitHandler<ISubstationFields> = data => mutateAsync(data)
-  
+
   return (
     <>
       <div className="work-log__form">
@@ -89,7 +91,13 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                   options={districts?.data}
                   getOptionValue={option => option.id.toString()}
                   getOptionLabel={option => option.name}
-                  value={districtValue || substation ? districts?.data.find(d => d.id === districtValue || d.id === substation?.districtId) : null}
+                  value={
+										districtValue || substation ? 
+											districts?.data.find(d => d.id === districtValue || d.id === substation?.districtId) 
+										: 
+											// id !== undefined ? districts?.data.find(d => d.id === +id) : null
+											null
+									}
                   onChange={option => districtOnChange(option ? option.id : option)}
                   isLoading={isLoadingDistricts}
                   isDisabled={isErrorDistricts}
