@@ -3,6 +3,7 @@ import { TDistrictData, TRespDistricts } from './district.type'
 
 import axios from 'axios'
 import { url } from '../../constants'
+import { TRespSubstations } from '../substations/substation.type'
 
 export const DistrictService = {
   async getDistricts({ limit, page }: IQueryParams) {
@@ -20,7 +21,7 @@ export const DistrictService = {
   },
 
   async getSubstationsRelatedDistrict(id: string) {
-    const response = await axios.get<TRespDistricts>(`${url}/districts/${id}/substations`)
+    const response = await axios.get<TRespSubstations>(`${url}/districts/${id}/substations`)
 
     return response.data
   },
