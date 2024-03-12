@@ -2,13 +2,14 @@ import { IDistrict, IQueryParams } from '../../interfaces'
 import { TDistrictData, TRespDistricts } from './district.type'
 
 import axios from 'axios'
+import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { TRespSubstations } from '../substations/substation.type'
 
 export const DistrictService = {
   async getDistricts({ limit, page }: IQueryParams) {
-    const response = await axios.get<TRespDistricts>(`${url}/districts`, {
-      params: { page, limit }
+    const response = await instance.get<TRespDistricts>(`${url}/districts`, {
+      params: { page, limit },
     })
 
     return response.data
