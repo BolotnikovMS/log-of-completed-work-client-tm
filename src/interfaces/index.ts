@@ -1,4 +1,4 @@
-import { IUser, IUserDataLogin } from './user'
+import { IUser } from './user'
 
 import { IChannelType } from './channel-type.interface'
 import { ICompletedWork } from './completed-work.interface'
@@ -11,5 +11,5 @@ import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISubstation, ITypeKp, IUser, IUserDataLogin, IVoltageClass }
+export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISubstation, ITypeKp, IUser, IVoltageClass }
 

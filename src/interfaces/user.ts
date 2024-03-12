@@ -13,8 +13,3 @@ export interface IUser {
 		name: string
 	}
 }
-
-export interface IUserDataLogin {
-	username: string
-	password: string
-}
