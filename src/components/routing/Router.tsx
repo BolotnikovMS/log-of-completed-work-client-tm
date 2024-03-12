@@ -10,6 +10,7 @@ import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
 import React from 'react'
+import { SignIn } from '../../views/auth/SignIn'
 import { HomePage } from '../../views/home/HomePage'
 
 export const Router: React.FC = () => {
@@ -141,6 +142,19 @@ export const Router: React.FC = () => {
 								<>
 									<CompletedWorkControl />
 									<CompletedWorksCards />
+								</>
+							}
+						/>
+					}
+				/>
+				<Route path='/sign-in'
+					element={
+						<Page
+							title='Вход'
+							classTitle='title-center'
+							children={
+								<>
+									<SignIn />
 								</>
 							}
 						/>
