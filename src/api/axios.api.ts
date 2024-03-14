@@ -1,9 +1,10 @@
 import axios from 'axios'
 import { url } from '../constants'
+import { getTokenFromLocalStorage } from '../helpers/localstorege.helper'
 
 export const instance = axios.create({
 	baseURL: url,
 	headers: {
-		Authorization: 'Bearer oat_Nw.TS1wNlpmSUp0M25OMDQ1RUpfcW1mendsdDdjM1ZpVHhMQkJzQXVZVTMxNTExMjAzNjQ'
+		Authorization: `Bearer ${getTokenFromLocalStorage()}`
 	}
 })
