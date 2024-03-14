@@ -15,7 +15,7 @@ interface IUserLogin {
 }
 
 export const AuthService = {
-	async login(userDate: IUserDataLogin): Promise<IUserLogin | undefined> {
+	async login(userDate: IUserDataLogin): Promise<IUserLogin> {
 		const { data } = await instance.post<IUserLogin>('/login', userDate)
 
 		return data
