@@ -1,7 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { useMutation } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 import { type FC } from 'react'
-import { useForm } from 'react-hook-form'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Button, CustomInput, FormGroup } from '../../components'
+import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
 import { IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
 
@@ -11,19 +15,29 @@ interface ISignInFields {
 }
 
 export const SignIn: FC = () => {
-	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ISignInFields>({
+	const navigate = useNavigate()
+	const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ISignInFields>({
 		mode: 'onBlur'
 	})
-  const queryClient = useQueryClient()
-	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-		mutationFn: (data: IUserDataLogin) => AuthService.login(data)
+	const { mutateAsync } = useMutation({
+		mutationFn: (data: IUserDataLogin) => AuthService.login(data),
+		onSuccess: async (data) => {
+			console.log(data);
+			setTokenToLocalStorage('user_token', data?.token)
+			toast.success('Вход выполнен!')
+			reset()
+			navigate('/')
+		},
+		onError: (err: AxiosError<string>) => {
+			toast.error(err.response?.data)
+		}
 	})
+	const submit: SubmitHandler<ISignInFields> = data => mutateAsync(data)
 
-	
 	return (
 		<>
 			<div className="work-log__form">
-				<form className="form form-col">
+				<form className="form form-col" onSubmit={handleSubmit(submit)}>
 					<div className="form__content form__content-mt form__content-col">
 						<FormGroup>
 							<CustomInput
