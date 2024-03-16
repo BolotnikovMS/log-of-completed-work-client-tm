@@ -6,13 +6,9 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Button, CustomInput, FormGroup } from '../../components'
 import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
-import { IUserDataLogin } from '../../interfaces'
+import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
 
-interface ISignInFields {
-	username: string
-	password: string
-}
 
 export const SignIn: FC = () => {
 	const navigate = useNavigate()
