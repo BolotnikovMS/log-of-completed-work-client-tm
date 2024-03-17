@@ -46,8 +46,4 @@ export const menuItemData = [
     title: 'Пользователи',
     url: '/users',
   },
-  {
-    title: 'Вход',
-    url: '/sign-in',
-  },
 ]
