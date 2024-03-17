@@ -3,7 +3,7 @@ import { IGenericResponseLogout, IUserDataLogin, IUserLogin } from '../../interf
 import { instance } from '../../api/axios.api'
 
 export const AuthService = {
-	async login(userDate: IUserDataLogin): Promise<IUserLogin | undefined> {
+	async login(userDate: IUserDataLogin): Promise<IUserLogin | null> {
 		const { data } = await instance.post<IUserLogin>('/login', userDate)
 
 		return data
