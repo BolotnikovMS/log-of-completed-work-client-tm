@@ -1,22 +1,15 @@
-import { instance } from '../../api/axios.api'
-import { IUserDataLogin } from '../../interfaces'
+import { IUserDataLogin, IUserLogin } from '../../interfaces'
 
-interface IUserLogin {
-	id: number
-	username: string
-	email: string
-	role: {
-		name: string
-	}
-	fullName: string
-	shortName: string
-	type: string
-	token: string
-}
+import { instance } from '../../api/axios.api'
 
 export const AuthService = {
-	async login(userDate: IUserDataLogin): Promise<IUserLogin> {
+	async login(userDate: IUserDataLogin): Promise<IUserLogin | undefined> {
 		const { data } = await instance.post<IUserLogin>('/login', userDate)
+
+		return data
+	},
+	async logout(): Promise<void> {
+		const { data } = await instance.get('/logout')
 
 		return data
 	}
