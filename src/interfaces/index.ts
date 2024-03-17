@@ -1,4 +1,4 @@
-import { ISignInFields, IUserLogin } from './auth.interface'
+import { IGenericResponseLogout, ISignInFields, IUserLogin } from './auth.interface'
 import { IUser, IUserDataLogin } from './user'
 
 import { IChannelType } from './channel-type.interface'
@@ -12,5 +12,5 @@ import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChannelType, ICompletedWork, IDistrict, IGsmOperator, IHeadController, IMeta, IQueryParams, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
+export type { IChannelType, ICompletedWork, IDistrict, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
 

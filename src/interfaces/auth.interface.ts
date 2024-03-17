@@ -15,3 +15,7 @@ export interface IUserLogin {
 	type: string
 	token: string
 }
+
+export interface IGenericResponseLogout {
+	message: string
+}

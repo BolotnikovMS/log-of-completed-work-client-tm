@@ -1,4 +1,4 @@
-import { IUserDataLogin, IUserLogin } from '../../interfaces'
+import { IGenericResponseLogout, IUserDataLogin, IUserLogin } from '../../interfaces'
 
 import { instance } from '../../api/axios.api'
 
@@ -8,8 +8,8 @@ export const AuthService = {
 
 		return data
 	},
-	async logout(): Promise<void> {
-		const { data } = await instance.get('/logout')
+	async logout(): Promise<IGenericResponseLogout> {
+		const { data } = await instance.get<IGenericResponseLogout>('/logout')
 
 		return data
 	}
