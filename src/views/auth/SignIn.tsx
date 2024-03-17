@@ -8,9 +8,11 @@ import { Button, CustomInput, FormGroup } from '../../components'
 import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
 import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
+import { useAuthStore } from '../../store/auth'
 
 
 export const SignIn: FC = () => {
+	const userAuthStore = useAuthStore()
 	const navigate = useNavigate()
 	const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ISignInFields>({
 		mode: 'onBlur'
@@ -18,7 +20,7 @@ export const SignIn: FC = () => {
 	const { mutateAsync } = useMutation({
 		mutationFn: (data: IUserDataLogin) => AuthService.login(data),
 		onSuccess: async (data) => {
-			console.log(data);
+			userAuthStore.setAuthUser(data)
 			setTokenToLocalStorage('user_token', data!.token)
 			toast.success('Вход выполнен!')
 			reset()

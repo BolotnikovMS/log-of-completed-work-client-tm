@@ -1,12 +1,17 @@
 import './navbar.scss'
 
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Button } from '..'
 import { menuItemData } from '../../constants'
 import { useLogout } from '../../hooks'
+import { useAuthStore } from '../../store/auth'
 import { MenuItems } from './MenuItems'
 
 export const NavBar: React.FC = () => {
+	const userAuthStore = useAuthStore()
+	const user = userAuthStore.authUser
+	console.log('user: ', user);
 	const { logout } = useLogout()
 	const logoutHandel = () => logout.mutate()
 
@@ -16,11 +21,27 @@ export const NavBar: React.FC = () => {
         {
           menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)
         }
-				<li>
-					<Button onClick={logoutHandel}>
-						Выход
-					</Button>
-				</li>
+				{
+					!user && (
+						<li className='menu__item'>
+							<Link to={'/sign-in'}>Вход</Link>
+						</li>
+					)
+				}
+				{
+					user && (
+						<>
+							<li className="menu__item">
+								Профиль
+							</li>
+							<li className='menu__item'>
+								<Button onClick={logoutHandel}>
+									Выход
+								</Button>
+							</li>
+						</>
+					)
+				}
       </ul>
     </nav>
   )
