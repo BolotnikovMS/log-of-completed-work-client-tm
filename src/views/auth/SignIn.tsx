@@ -19,13 +19,14 @@ export const SignIn: FC = () => {
 		mutationFn: (data: IUserDataLogin) => AuthService.login(data),
 		onSuccess: async (data) => {
 			console.log(data);
-			setTokenToLocalStorage('user_token', data?.token)
+			setTokenToLocalStorage('user_token', data!.token)
 			toast.success('Вход выполнен!')
 			reset()
 			navigate('/')
 		},
 		onError: (err: AxiosError<string>) => {
 			toast.error(err.response?.data)
+			reset({password: ''})
 		}
 	})
 	const submit: SubmitHandler<ISignInFields> = data => mutateAsync(data)
