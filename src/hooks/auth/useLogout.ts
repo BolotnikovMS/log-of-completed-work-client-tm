@@ -15,6 +15,7 @@ export const useLogout = () => {
 				console.log(data);
 				removeTokenFromLocalStorage('user_token')
 				queryClient.removeQueries()
+				toast.success(data.message)
 				navigate('/sign-in')
 			},
 			onError: (err: AxiosError<string>) => {
