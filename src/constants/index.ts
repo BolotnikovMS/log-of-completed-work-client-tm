@@ -50,8 +50,4 @@ export const menuItemData = [
     title: 'Вход',
     url: '/sign-in',
   },
-  {
-    title: 'Выход',
-    url: '/logout',
-  },
 ]
