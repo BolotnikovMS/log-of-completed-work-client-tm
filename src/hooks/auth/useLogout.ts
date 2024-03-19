@@ -12,8 +12,13 @@ export const useLogout = () => {
 	const navigate = useNavigate()
   const queryClient = useQueryClient()
 	const logout = useMutation({
-		mutationFn: () => AuthService.logout(),
+		mutationFn: () => {
+			userAuthStore.setRequestLoading(true)
+			
+			return AuthService.logout()
+		},
 			onSuccess: (data) => {
+				userAuthStore.setRequestLoading(false)
 				userAuthStore.setAuthUser(null)
 				removeTokenFromLocalStorage('user_token')
 				queryClient.removeQueries()
@@ -21,6 +26,7 @@ export const useLogout = () => {
 				navigate('/sign-in')
 			},
 			onError: (err: AxiosError<string>) => {
+				userAuthStore.setRequestLoading(false)
 				toast.error(err.response?.data)
 				navigate('/sign-in')
 			}
