@@ -5,7 +5,10 @@ import { getTokenFromLocalStorage } from '../helpers/localstorege.helper'
 export const instance = axios.create({
 	baseURL: url,
 	withCredentials: true,
-	headers: {
-		Authorization: `Bearer ${getTokenFromLocalStorage()}`
-	}
+})
+
+instance.interceptors.request.use((config) => {
+	config.headers.Authorization = `Bearer ${getTokenFromLocalStorage()}`
+
+	return config
 })
