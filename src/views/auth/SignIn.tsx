@@ -18,8 +18,13 @@ export const SignIn: FC = () => {
 		mode: 'onBlur'
 	})
 	const { mutateAsync } = useMutation({
-		mutationFn: (data: IUserDataLogin) => AuthService.login(data),
+		mutationFn: (data: IUserDataLogin) => {
+			userAuthStore.setRequestLoading(true)
+
+			return AuthService.login(data)
+		},
 		onSuccess: async (data) => {
+			userAuthStore.setRequestLoading(false)
 			userAuthStore.setAuthUser(data)
 			setTokenToLocalStorage('user_token', data!.token)
 			toast.success('Вход выполнен!')
@@ -27,6 +32,7 @@ export const SignIn: FC = () => {
 			navigate('/')
 		},
 		onError: (err: AxiosError<string>) => {
+			userAuthStore.setRequestLoading(false)
 			toast.error(err.response?.data)
 			reset({password: ''})
 		}
