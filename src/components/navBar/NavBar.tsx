@@ -32,7 +32,9 @@ export const NavBar: React.FC = () => {
 					user && (
 						<>
 							<li className="menu__item">
-								Профиль
+								<Link to={'/profile'}>
+									Профиль
+								</Link>
 							</li>
 							<li className='menu__item'>
 								<Button onClick={logoutHandel}>
