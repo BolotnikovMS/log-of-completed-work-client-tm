@@ -11,7 +11,6 @@ import { MenuItems } from './MenuItems'
 export const NavBar: React.FC = () => {
 	const userAuthStore = useAuthStore()
 	const user = userAuthStore.authUser
-	console.log('user: ', user);
 	const { logout } = useLogout()
 	const logoutHandel = () => logout.mutate()
 
