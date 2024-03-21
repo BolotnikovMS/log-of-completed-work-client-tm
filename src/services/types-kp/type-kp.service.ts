@@ -1,31 +1,28 @@
+import { IQueryParams, ITypeKp } from '../../interfaces'
 import { TRespTypesKp, TTypeKpData } from './type-kp.type'
 
-import axios from 'axios'
+import { type AxiosResponse } from 'axios'
+import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
-import { IQueryParams } from '../../interfaces'
 
 export const TypeKpService = {
-  async getTypesKp({ limit, page }: IQueryParams) {
-    const response = await axios.get<TRespTypesKp>(`${url}/types-kp`, {
+  async getTypesKp({ limit, page }: IQueryParams): Promise<TRespTypesKp> {
+    const { data } = await instance.get<TRespTypesKp>(`${url}/types-kp`, {
       params: { page, limit }
     })
 
-    return response.data
+    return data
   },
 
-  async create(data: TTypeKpData) {
-    return axios.post<TTypeKpData>(`${url}/types-kp`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async create(data: TTypeKpData): Promise<AxiosResponse<ITypeKp>> {
+    return instance.post<ITypeKp>(`${url}/types-kp`, data)
   },
 
-  async updateTypeKp({id, data}: {id: number, data: TTypeKpData}) {
-    return await axios.patch(`${url}/types-kp/${id}`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async updateTypeKp({id, data}: {id: number, data: TTypeKpData}): Promise<AxiosResponse<ITypeKp>> {
+    return await instance.patch<ITypeKp>(`${url}/types-kp/${id}`, data)
   },
 
-  async deleteTypeKp(id: number) {
-    return axios.delete<{id: number}>(`${url}/types-kp/${id}`)
+  async deleteTypeKp(id: number): Promise<AxiosResponse<void>> {
+    return instance.delete(`${url}/types-kp/${id}`)
   }
 }

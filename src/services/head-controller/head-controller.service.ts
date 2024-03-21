@@ -1,31 +1,28 @@
+import { IHeadController, IQueryParams } from '../../interfaces'
 import { THeadControllerData, TRespHeadController } from './head-controller.type'
 
-import { IQueryParams } from '../../interfaces'
-import axios from 'axios'
+import { type AxiosResponse } from 'axios'
+import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 
 export const HeadControllerService = {
-  async getHeadControllers({ limit, page }: IQueryParams) {
-    const response = await axios.get<TRespHeadController>(`${url}/head-controllers`, {
+  async getHeadControllers({ limit, page }: IQueryParams): Promise<TRespHeadController> {
+    const { data } = await instance.get<TRespHeadController>(`${url}/head-controllers`, {
       params: { limit, page }
     })
 
-    return response.data
+    return data
   },
 
-  async create(data: THeadControllerData) {
-    return axios.post<THeadControllerData>(`${url}/head-controllers`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async create(data: THeadControllerData): Promise<AxiosResponse<IHeadController>> {
+    return instance.post<IHeadController>(`${url}/head-controllers`, data)
   },
 
-  async updateHeadController({id, data}: {id: number, data: THeadControllerData}) {
-    return await axios.patch(`${url}/head-controllers/${id}`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async updateHeadController({id, data}: {id: number, data: THeadControllerData}): Promise<AxiosResponse<IHeadController>> {
+    return await instance.patch<IHeadController>(`${url}/head-controllers/${id}`, data)
   },
 
-  async deleteHeadController(id: number) {
-    return axios.delete<{id: number}>(`${url}/head-controllers/${id}`)
+  async deleteHeadController(id: number): Promise<AxiosResponse<void>> {
+    return instance.delete(`${url}/head-controllers/${id}`)
   }
 }

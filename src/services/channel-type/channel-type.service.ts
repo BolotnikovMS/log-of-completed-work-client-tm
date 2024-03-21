@@ -1,30 +1,28 @@
-import axios from 'axios'
-import { url } from '../../constants'
 import { IChannelType, IQueryParams } from '../../interfaces'
 import { TChannelTypeData, TRespChannelTypes } from './channel-type.type'
 
+import { type AxiosResponse } from 'axios'
+import { instance } from '../../api/axios.api'
+import { url } from '../../constants'
+
 export const ChannelTypeService = {
-  async getChannelTypes({ limit, page }: IQueryParams) {
-    const response = await axios.get<TRespChannelTypes>(`${url}/channel-types`, {
+  async getChannelTypes({ limit, page }: IQueryParams): Promise<TRespChannelTypes> {
+    const { data } = await instance.get<TRespChannelTypes>(`${url}/channel-types`, {
       params: { page, limit }
     })
 
-    return response.data
+    return data
   },
 
-  async create(data: TChannelTypeData ) {
-    return axios.post<TChannelTypeData>(`${url}/channel-types`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async create(data: TChannelTypeData ): Promise<AxiosResponse<IChannelType>> {
+    return instance.post<IChannelType>(`${url}/channel-types`, data)
   },
 
-  async updateChannelType({id, data}: {id: number, data: TChannelTypeData}) {
-    return await axios.patch(`${url}/channel-types/${id}`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async updateChannelType({id, data}: {id: number, data: TChannelTypeData}): Promise<AxiosResponse<IChannelType>> {
+    return await instance.patch<IChannelType>(`${url}/channel-types/${id}`, data)
   },
 
-  async deleteChannelType(id: number) {
-    return axios.delete<IChannelType>(`${url}/channel-types/${id}`)
+  async deleteChannelType(id: number): Promise<AxiosResponse<void>> {
+    return instance.delete(`${url}/channel-types/${id}`)
   }
 }

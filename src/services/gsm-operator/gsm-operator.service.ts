@@ -1,28 +1,25 @@
+import { type AxiosResponse } from 'axios'
+import { instance } from '../../api/axios.api'
+import { url } from '../../constants'
 import { IGsmOperator } from '../../interfaces'
 import { TGsmOperatorData } from './gsm-operator.type'
-import axios from 'axios'
-import { url } from '../../constants'
 
 export const GsmOperatorService = {
-  async getGsmOperators() {
-    const response = await axios.get<IGsmOperator[]>(`${url}/gsm-operators`)
+  async getGsmOperators(): Promise<IGsmOperator[]> {
+    const { data } = await instance.get<IGsmOperator[]>(`${url}/gsm-operators`)
 
-    return response.data
+    return data
   },
 
-  async create(data: TGsmOperatorData) {
-    return axios.post<TGsmOperatorData>(`${url}/gsm-operators`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async create(data: TGsmOperatorData): Promise<AxiosResponse<IGsmOperator>> {
+    return instance.post<IGsmOperator>(`${url}/gsm-operators`, data)
   },
 
-  async updateGsmOperator({id, data}: {id: number, data: TGsmOperatorData}) {
-    return await axios.patch(`${url}/gsm-operators/${id}`, data, {
-      headers: {'Content-Type': 'application/json'}
-    })
+  async updateGsmOperator({id, data}: {id: number, data: TGsmOperatorData}): Promise<AxiosResponse<IGsmOperator>> {
+    return await instance.patch<IGsmOperator>(`${url}/gsm-operators/${id}`, data)
   },
 
-  async deleteGsmOperator(id: number) {
-    return axios.delete<IGsmOperator>(`${url}/gsm-operators/${id}`)
+  async deleteGsmOperator(id: number): Promise<AxiosResponse<void>> {
+    return instance.delete(`${url}/gsm-operators/${id}`)
   }
 }
