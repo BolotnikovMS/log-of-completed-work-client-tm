@@ -5,6 +5,9 @@ import { getTokenFromLocalStorage } from '../helpers/localstorege.helper'
 export const instance = axios.create({
 	baseURL: url,
 	withCredentials: true,
+	headers: {
+		'Content-Type': 'application/json'
+	}
 })
 
 instance.interceptors.request.use((config) => {
