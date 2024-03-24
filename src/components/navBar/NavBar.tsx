@@ -18,7 +18,9 @@ export const NavBar: React.FC = () => {
     <nav className='nav'>
       <ul className='menus'>
         {
-          menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)
+					user && (
+					menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)
+					)
         }
 				{
 					!user && (
