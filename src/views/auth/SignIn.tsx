@@ -24,8 +24,9 @@ export const SignIn: FC = () => {
 			return AuthService.login(data)
 		},
 		onSuccess: async (data) => {
+			// console.log('data: ', data);
 			userAuthStore.setRequestLoading(false)
-			userAuthStore.setAuthUser(data)
+			userAuthStore.setAuthUser(data!.user)
 			setTokenToLocalStorage('user_token', data!.token)
 			toast.success('Вход выполнен!')
 			reset()

@@ -1,10 +1,11 @@
+import { IUser } from '../../interfaces'
+
 import { create } from 'zustand'
-import { IUserLogin } from '../../interfaces'
 
 interface IUserStore {
-	authUser: IUserLogin | null
+	authUser: IUser | null
 	requestLoading: boolean
-	setAuthUser: (user: IUserLogin | null) => void
+	setAuthUser: (user: IUser | null) => void
 	setRequestLoading: (isLoading: boolean) => void
 }
 

@@ -11,7 +11,7 @@ export const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-	config.headers.Authorization = `Bearer ${getTokenFromLocalStorage()}`
+	config.headers.Authorization = `Bearer ${getTokenFromLocalStorage()?.token}`
 
 	return config
 })
