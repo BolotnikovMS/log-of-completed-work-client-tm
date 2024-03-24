@@ -1,5 +1,5 @@
-import { DistrictService } from '../../services/district/district.service'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { DistrictService } from '../../services/district/district.service'
 
 export const useInfiniteDistricts = ({ limit }: { limit: number }) => {
   const { 
