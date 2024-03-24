@@ -11,10 +11,6 @@ export const getTokenFromLocalStorage = (): IToken | null => {
 	return token
 }
 
-// export const setTokenToLocalStorage = (key: string, token: string): void => {
-// 	localStorage.setItem(key, JSON.stringify(token))
-// }
-
 export const setTokenToLocalStorage = (key: string, token: { token: string, type: string, expiresIn: Date }): void => {
 	localStorage.setItem(key, JSON.stringify(token))
 }
