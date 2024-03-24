@@ -1,6 +1,7 @@
+import { getTokenFromLocalStorage, removeTokenFromLocalStorage } from '../helpers/localstorege.helper'
+
 import axios from 'axios'
 import { url } from '../constants'
-import { getTokenFromLocalStorage } from '../helpers/localstorege.helper'
 
 export const instance = axios.create({
 	baseURL: url,
@@ -14,4 +15,14 @@ instance.interceptors.request.use((config) => {
 	config.headers.Authorization = `Bearer ${getTokenFromLocalStorage()?.token}`
 
 	return config
+})
+
+instance.interceptors.response.use((config) => {
+	return config
+}, (error) => {
+	if (error.response.status === 401) {
+		removeTokenFromLocalStorage('user_token')
+
+		window.location.href = `${window.location.origin}/login`
+	}
 })
