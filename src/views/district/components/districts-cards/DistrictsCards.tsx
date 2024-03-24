@@ -20,10 +20,13 @@ const DistrictsCards: FC = () => {
     return deleteDistrict.mutate(id)
   }
 
+	if (isError) return <Error error={error}/>
+
+	if (isFetching) return <Loader />
+
   return (
     <>
-      {(isError) && <Error error={error}/>}
-      {isFetching ? (<Loader />) : 
+			{
         (!!data?.pages[0].data.length && (
           <div className="cards">
             {data.pages.map(districts => (
