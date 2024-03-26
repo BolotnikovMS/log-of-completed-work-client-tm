@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
-import { type FC } from 'react'
+import { useEffect, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -14,6 +14,13 @@ import { useAuthStore } from '../../store/auth'
 export const SignIn: FC = () => {
 	const userAuthStore = useAuthStore()
 	const navigate = useNavigate()
+
+	useEffect(() => {
+		if (userAuthStore.authUser) {
+			navigate('/')
+		}
+	}, [])
+
 	const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ISignInFields>({
 		mode: 'onBlur'
 	})
@@ -24,7 +31,6 @@ export const SignIn: FC = () => {
 			return AuthService.login(data)
 		},
 		onSuccess: async (data) => {
-			// console.log('data: ', data);
 			userAuthStore.setRequestLoading(false)
 			userAuthStore.setAuthUser(data!.user)
 			setTokenToLocalStorage('user_token', data!.token)
