@@ -21,6 +21,7 @@ export const useLogout = () => {
 				userAuthStore.setRequestLoading(false)
 				userAuthStore.setAuthUser(null)
 				removeTokenFromLocalStorage('user_token')
+				useAuthStore.persist.clearStorage()
 				queryClient.removeQueries()
 				toast.success(data.message)
 				navigate('/sign-in')
