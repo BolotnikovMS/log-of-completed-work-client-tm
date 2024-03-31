@@ -4,8 +4,8 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
 import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
 
-import { AxiosError, isAxiosError } from 'axios'
 import { toast } from 'react-toastify'
+import { errorHandler } from '../../../../helpers/errorHandler.helper'
 import { DistrictService } from '../../../../services/district/district.service'
 import { TDistrictData } from '../../../../services/district/district.type'
 
@@ -32,15 +32,9 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
 			reset()
 			toggleModal()
     },
-		onError: (errors) => {
-			if(isAxiosError(errors)) {
-				if (Array.isArray(errors.response?.data)) {
-					errors.response?.data.map((errData: AxiosError) => {
-						toast.error(errData.message)
-					})
-				}
-			}
-		}
+		onError: async (errors) => {
+			toast.error(errorHandler(errors))
+		},
   })
 
   const submit: SubmitHandler<IDistrictFields> = data => {
@@ -64,7 +58,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                   error={errors.name?.message}
                   validation={{
                     required: {value: true, message: 'Поле является обязательным!'},
-                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+                    minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
                     maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'},
                   }}
                   placeholder='Введите название...'
@@ -78,7 +72,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                   error={errors.shortName?.message}
                   validation={{
                     required: {value: true, message: 'Поле является обязательным!'},
-                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+                    minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
                     maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
                   }}
                   placeholder='Введите сокращенное название...'
