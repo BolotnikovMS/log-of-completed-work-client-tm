@@ -17,12 +17,12 @@ instance.interceptors.request.use((config) => {
 	return config
 })
 
-instance.interceptors.response.use((config) => {
-	return config
-}, (error) => {
+instance.interceptors.response.use((config) => config, async (error) => {
 	if (error.response.status === 401) {
 		removeTokenFromLocalStorage('user_token')
 
 		window.location.href = `${window.location.origin}/login`
 	}
+
+	throw error
 })
