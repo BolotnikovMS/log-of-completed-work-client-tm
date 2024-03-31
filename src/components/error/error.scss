@@ -1,8 +1,8 @@
 .errors {
-  padding: 40px 0;
+  padding: 18px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: clamp(15px, 2.4vw, 24px);
   color: #c24848;
 }
