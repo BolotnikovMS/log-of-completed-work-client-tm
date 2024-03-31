@@ -1,12 +1,15 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
 
 import { DistrictForm } from '..'
+import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
 import { IDistrict } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 
 const DistrictsCards: FC = () => {
+	const { authUser } = useAuthStore()
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -20,7 +23,7 @@ const DistrictsCards: FC = () => {
     return deleteDistrict.mutate(id)
   }
 
-	if (isError) return <Error error={error}/>
+	if (isError && error) return <Error error={error}/>
 
 	if (isFetching) return <Loader />
 
@@ -37,12 +40,20 @@ const DistrictsCards: FC = () => {
                   path={`/districts/${district.id}/substations`}
                   childrenControl={
                     <>
-                      <Button onClick={() => {toggleModal(), setDistrict(district), setIsEdited(!isEdited)}}>
-                        <Pencil />
-                      </Button>
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
-                        <Trash2 />
-                      </Button>
+											{
+												checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+													<Button onClick={() => {toggleModal(), setDistrict(district), setIsEdited(!isEdited)}}>
+														<Pencil />
+													</Button>
+												)
+											}
+											{
+												checkRole(authUser, [ERoles.Admin]) && (
+													<Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
+														<Trash2 />
+													</Button>
+												)
+											}
                     </>
                   }
                 />
