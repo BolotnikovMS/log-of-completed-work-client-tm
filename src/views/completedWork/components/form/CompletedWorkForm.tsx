@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError, isAxiosError } from 'axios'
 import ru from 'date-fns/locale/ru'
 import { type FC } from 'react'
 import DatePicker from 'react-datepicker'
@@ -8,6 +7,7 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
 import { Button, Error, FormGroup, Loader, Textarea } from '../../../../components'
+import { errorHandler } from '../../../../helpers/errorHandler.helper'
 import { useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
@@ -46,13 +46,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 			toggleModal()
 		},
 		onError: (errors) => {
-			if(isAxiosError(errors)) {
-				if (Array.isArray(errors.response?.data)) {
-					errors.response?.data.map((errData: AxiosError) => {
-						toast.error(errData.message)
-					})
-				}
-			}
+			toast.error(errorHandler(errors))
 		}
 	})
 
@@ -87,10 +81,10 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 								<label htmlFor="label">Исполнитель работ</label>
 								<AsyncSelect
 									classNamePrefix='form__custom-select'
-									options={users?.data}
+									options={users}
 									getOptionValue={option => option.id.toString()}
 									getOptionLabel={option => option.fullName}
-									value={userValue || completedWork ? users?.data.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
+									value={userValue || completedWork ? users?.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
 									onChange={option => userOnChange(option ? option.id : option)}
 									isLoading={isLoadingUsers}
 									isDisabled={isErrorUsers}
