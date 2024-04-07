@@ -1,13 +1,15 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 
-import { isAxiosError } from 'axios'
 import { SubstationForm } from '..'
+import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
 import { ISubstation } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 
 const SubstationsCards: FC = () => {
+	const { authUser } = useAuthStore()
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -20,35 +22,44 @@ const SubstationsCards: FC = () => {
 
     return deleteSubstation.mutate(id)
   }
+
+	if (isError && error) return <Error error={error}/>
+
+	if (isFetching) return <Loader />
   
   return (
     <>
-      {(isError && isAxiosError(error)) && <Error error={error}/>}
-      {isFetching ? (<Loader />) : 
-        (!!data?.pages[0].data.length && (
-          <div className="cards">
-            {data.pages.map(substations => (
-              substations.data.map(substation => (
-                <SmallCard
-                  key={substation.id}
-                  cardText={substation.name}
-									path={`/substations/${substation.id}`}
-                  childrenControl={
-                    <>
-                      <Button onClick={() => {toggleModal(), setSubstation(substation), setIsEdited(!isEdited)}}>
-                        <Pencil />
-                      </Button>
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
-                        <Trash2 />
-                      </Button>
-                    </>
-                  }
-                />
-              ))
-            ))}
-          </div>
-        ))
-      }
+      {!!data?.pages[0].data.length && (
+				<div className="cards">
+					{data.pages.map(substations => (
+						substations.data.map(substation => (
+							<SmallCard
+								key={substation.id}
+								cardText={substation.name}
+								path={`/substations/${substation.id}`}
+								childrenControl={
+									<>
+										{
+											checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+												<Button onClick={() => {toggleModal(), setSubstation(substation), setIsEdited(!isEdited)}}>
+													<Pencil />
+												</Button>
+											)
+										}
+										{
+											checkRole(authUser, [ERoles.Admin]) && (
+												<Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+													<Trash2 />
+												</Button>
+											)
+										}
+									</>
+								}
+							/>
+						))
+					))}
+				</div>
+			)}
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<SubstationForm substation={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>

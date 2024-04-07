@@ -4,9 +4,12 @@ import { Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../.
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
 
 import { GsmOperatorForm } from '..'
+import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
 import { IGsmOperator } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 
 const GsmOperatorsCards: FC = () => {
+	const { authUser } = useAuthStore()
   const { data, error, isError, isFetching } = useGsmOperators()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -20,31 +23,40 @@ const GsmOperatorsCards: FC = () => {
     return deleteGsmOperator.mutate(id)
   }
 
+	if (isError && error) return <Error error={error}/>
+
+	if (isFetching) return <Loader />
+
   return (
     <>
-      {(isError) && <Error error={error}/>}
-      {isFetching ? (<Loader />) : 
-        (!!data?.length && (
-          <div className="cards">
-            {data.map(gsmOperator => (
-              <SmallCard
-                key={gsmOperator.id}
-                cardText={gsmOperator.name}
-                childrenControl={
-                  <>
-                    <Button onClick={() => {toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited)}}>
-                      <Pencil />
-                    </Button>
-                    <Button classBtn='btn-bg_red' onClick={() => handleDelete(gsmOperator.id)}>
-                      <Trash2 />
-                    </Button>
-                  </>
-                }
-              />
-            ))}
-          </div>
-        ))
-      }
+      {!!data?.length && (
+				<div className="cards">
+					{data.map(gsmOperator => (
+						<SmallCard
+							key={gsmOperator.id}
+							cardText={gsmOperator.name}
+							childrenControl={
+								<>
+									{
+										checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+											<Button onClick={() => {toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited)}}>
+												<Pencil />
+											</Button>
+										)
+									}
+									{
+										checkRole(authUser, [ERoles.Admin]) && (
+											<Button classBtn='btn-bg_red' onClick={() => handleDelete(gsmOperator.id)}>
+												<Trash2 />
+											</Button>
+										)
+									}
+								</>
+							}
+						/>
+					))}
+				</div>
+			)}
 			{(!data?.length && !isFetching && !isError) && <InfoMessage text='GSM операторов пока не добавлено...' />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<GsmOperatorForm gsmOperator={gsmOperator} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
     </>

@@ -1,12 +1,15 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 import { useDeleteChannelType, useInfiniteChannelTypes, useModal } from '../../../../hooks'
 
 import { ChannelTypeForm } from '..'
+import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
 import { IChannelType } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 
 const ChannelTypeCards: FC = () => {
+	const { authUser } = useAuthStore()
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannelTypes({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -20,11 +23,14 @@ const ChannelTypeCards: FC = () => {
     return deleteChannelType.mutate(id)
   }
 
+	if (isError && error) return <Error error={error}/>
+	
+	if (isFetching) return <Loader />
+
+
   return (
     <>
-      {(isError) && <Error error={error}/>}
-      {isFetching ? (<Loader />) : 
-        (!!data?.pages[0].data.length && (
+      {!!data?.pages[0].data.length && (
           <div className="cards">
             {data.pages.map(channelTypes => (
               channelTypes.data.map(channelType => (
@@ -33,19 +39,27 @@ const ChannelTypeCards: FC = () => {
                   cardText={channelType.name}
                   childrenControl={
                     <>
-                      <Button onClick={() => {toggleModal(), setChannelType(channelType), setIsEdited(!isEdited)}}>
-                        <Pencil />
-                      </Button>
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(channelType.id)}>
-                        <Trash2 />
-                      </Button>
+											{
+												checkRole(authUser, [ERoles.Admin]) && (
+													<Button onClick={() => {toggleModal(), setChannelType(channelType), setIsEdited(!isEdited)}}>
+														<Pencil />
+													</Button>
+												)
+											}
+											{
+												checkRole(authUser, [ERoles.Admin]) && (
+													<Button classBtn='btn-bg_red' onClick={() => handleDelete(channelType.id)}>
+														<Trash2 />
+													</Button>
+												)
+											}
                     </>
                   }
                 />
               ))
             ))}
           </div>
-        ))
+        )
       }
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Пока добавленных каналов нет...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
