@@ -1,19 +1,18 @@
-import { Route, Routes } from 'react-router-dom'
-import { Layout, Page, ProtectedRoute } from '..'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/components'
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
+import { Layout, Page, ProtectedRoute } from '..'
+import { Profile, SignIn } from '../../views/auth'
+import { Route, Routes } from 'react-router-dom'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
+import { HomePage } from '../../views/home/HomePage'
 import React from 'react'
 import { useAuthStore } from '../../store/auth'
-import { Profile } from '../../views/auth'
-import { SignIn } from '../../views/auth/SignIn'
-import { HomePage } from '../../views/home/HomePage'
 
 export const Router: React.FC = () => {
 	const { authUser } = useAuthStore()

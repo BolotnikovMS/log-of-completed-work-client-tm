@@ -1,14 +1,11 @@
-import axios from 'axios'
+import { IUser } from '../../interfaces'
+import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
-import { IQueryParams } from '../../interfaces'
-import { TRespUsers } from './user.type'
 
 export const UserService = {
-	async getAll({ limit, page }: IQueryParams) {
-		const response = await axios.get<TRespUsers>(`${url}/users`, {
-			params: { page, limit }
-		})
+	async getUsers() {
+		const { data } = await instance.get<IUser[]>(`${url}/users`)
 
-		return response.data
+		return data
 	}
 }
