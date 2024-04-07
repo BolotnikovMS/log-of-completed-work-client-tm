@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers/errorHandler.helper'
 import { VoltageClassService } from '../../services/voltage-class/voltage-class.service'
 
 export const useDeleteVoltageClass = () => {
@@ -12,7 +13,7 @@ export const useDeleteVoltageClass = () => {
 			toast.success('Запись успешно удалена!')
     },
 		onError: (error) => {
-			toast.error(`Произошла ошибка: '${error.message}'`)
+			toast.error(errorHandler(error))
 		}
   })
   

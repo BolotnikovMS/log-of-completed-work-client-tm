@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import { DistrictService } from '../../services/district/district.service'
-import { errorHandler } from '../../helpers/errorHandler.helper'
 import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers/errorHandler.helper'
+import { DistrictService } from '../../services/district/district.service'
 
 export const useDeleteDistrict = () => {
   const queryClient = useQueryClient()
@@ -12,7 +12,7 @@ export const useDeleteDistrict = () => {
       await queryClient.invalidateQueries({queryKey: ['districts']})
 			toast.success('Запись успешно удалена!')
     },
-		onError: async (error) => {
+		onError: (error) => {
 			toast.error(errorHandler(error))
 		}
   })
