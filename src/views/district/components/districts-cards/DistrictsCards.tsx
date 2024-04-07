@@ -29,39 +29,37 @@ const DistrictsCards: FC = () => {
 
   return (
     <>
-			{
-        (!!data?.pages[0].data.length && (
-          <div className="cards">
-            {data.pages.map(districts => (
-              districts.data.map(district => (
-                <SmallCard
-                  key={district.id}
-                  cardText={district.name}
-                  path={`/districts/${district.id}/substations`}
-                  childrenControl={
-                    <>
-											{
-												checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-													<Button onClick={() => {toggleModal(), setDistrict(district), setIsEdited(!isEdited)}}>
-														<Pencil />
-													</Button>
-												)
-											}
-											{
-												checkRole(authUser, [ERoles.Admin]) && (
-													<Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
-														<Trash2 />
-													</Button>
-												)
-											}
-                    </>
-                  }
-                />
-              ))
-            ))}
-          </div>
-        ))
-      }
+			{!!data?.pages[0].data.length && (
+				<div className="cards">
+					{data.pages.map(districts => (
+						districts.data.map(district => (
+							<SmallCard
+								key={district.id}
+								cardText={district.name}
+								path={`/districts/${district.id}/substations`}
+								childrenControl={
+									<>
+										{
+											checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+												<Button onClick={() => {toggleModal(), setDistrict(district), setIsEdited(!isEdited)}}>
+													<Pencil />
+												</Button>
+											)
+										}
+										{
+											checkRole(authUser, [ERoles.Admin]) && (
+												<Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
+													<Trash2 />
+												</Button>
+											)
+										}
+									</>
+								}
+							/>
+						))
+					))}
+				</div>
+			)}
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<DistrictForm district={district} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
