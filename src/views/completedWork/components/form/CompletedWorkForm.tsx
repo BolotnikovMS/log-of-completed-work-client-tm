@@ -50,7 +50,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 		}
 	})
 
-	const submit: SubmitHandler<ICompletedWorkFields> = data => mutateAsync(data)
+	const submit: SubmitHandler<ICompletedWorkFields> = data => mutateAsync({...data, dateCompletion: data.dateCompletion.toLocaleDateString()})
 
 	return (
 		<>
