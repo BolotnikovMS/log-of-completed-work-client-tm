@@ -1,3 +1,5 @@
+import { IChannelType, IDistrict, IGsmOperator, IHeadController, ITypeKp, IVoltageClass } from '.'
+
 export interface ISubstation {
   id: number
   active: boolean
@@ -16,36 +18,12 @@ export interface ISubstation {
   mainChannelIp: string | null
   backupChannelIp?: string | null
 	numberCompletedWorks?: number
-	voltage_class?: {
-		id: number
-		name: string
-	}
-	district?: {
-		id: number
-		name: string
-	}
-	type_kp?: {
-		id: number
-		name: string
-	}
-	head_controller?: {
-		id: number
-		name: string
-	}
-	main_channel?: {
-		id: number
-		name: string
-	}
-	backup_channel?: {
-		id: number
-		name: string
-	}
-	additional_channel?: {
-		id: number
-		name: string
-	}
-	gsm?: {
-		id: number
-		name: string
-	}
+	voltage_class?: Pick<IVoltageClass, 'id' | 'name'>
+	district?: Pick<IDistrict, 'id' | 'name'>
+	type_kp?: Pick<ITypeKp, 'id' | 'name'>
+	head_controller?: Pick<IHeadController, 'id' | 'name'>
+	main_channel?: Pick<IChannelType, 'id' | 'name'>
+	backup_channel?: Pick<IChannelType, 'id' | 'name'>
+	additional_channel?: Pick<IChannelType, 'id' | 'name'>
+	gsm?: Pick<IGsmOperator, 'id' | 'name'>
 }

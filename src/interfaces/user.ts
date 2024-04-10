@@ -8,7 +8,7 @@ export interface IUser {
 	position: string
 	email: string
 	fullName: string
-	shortUserName: string
+	shortName: string
 	role: {
 		name: string
 	}
