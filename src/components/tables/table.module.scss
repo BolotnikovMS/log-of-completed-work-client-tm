@@ -40,6 +40,7 @@
 
 	tbody tr {
     border-bottom: 1px solid #dddddd;
+		transition: all 0.3s ease-in;
 
 		&:hover {
 			background-color: rgba(92, 173, 248, .2);
