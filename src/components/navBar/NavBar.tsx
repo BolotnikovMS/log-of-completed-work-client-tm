@@ -1,5 +1,7 @@
 import './navbar.scss'
 
+import { ERoles, checkRole } from '../../helpers/checkRole.helper'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '..'
@@ -22,6 +24,13 @@ export const NavBar: React.FC = () => {
 					menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)
 					)
         }
+				{
+					checkRole(user, [ERoles.Admin]) && (
+						<li className="menu__item">
+							<Link to={'/users'}>Пользователи</Link>
+						</li>
+					)
+				}
 				{
 					!user && (
 						<li className='menu__item'>
