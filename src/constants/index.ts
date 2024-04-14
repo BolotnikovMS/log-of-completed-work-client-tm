@@ -42,8 +42,4 @@ export const menuItemData = [
       },
     ]
   },
-  {
-    title: 'Пользователи',
-    url: '/users',
-  },
 ]
