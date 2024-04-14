@@ -1,5 +1,7 @@
+import { lazy } from 'react'
 import { Button } from './button/Button'
 import { Card } from './cards/card/Card'
+import { SmallCard } from './cards/small-card/SmallCard'
 import { Header } from './header/Header'
 import { Layout } from './layout/Layout'
 import { Loader } from './loader/Loader'
@@ -8,8 +10,6 @@ import { NavBar } from './navBar/NavBar'
 import { Page } from './page/Page'
 import { ProtectedRoute } from './protectedRoute/ProtectedRoute'
 import { Router } from './routing/Router'
-import { SmallCard } from './cards/small-card/SmallCard'
-import { lazy } from 'react'
 
 const Badge = lazy(() => import('./badge/Badge'))
 const Error = lazy(() => import('./error/Error'))
@@ -21,6 +21,7 @@ const Textarea = lazy(() => import('./forms/textarea/Textarea'))
 const ValidationMessage = lazy(() => import('./forms/errorMessage/ValidationMessage'))
 const FormGroup = lazy(() => import('./forms/formGroup/FormGroup'))
 const ControlPanel = lazy(() => import('./controlPanel/ControlPanel'))
+const Group = lazy(() => import('./group/Group'))
 
-export { Badge, Button, Card, ControlPanel, CustomInput, Error, FormGroup, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SmallCard, Textarea, ValidationMessage }
+export { Badge, Button, Card, ControlPanel, CustomInput, Error, FormGroup, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SmallCard, Textarea, ValidationMessage }
 
