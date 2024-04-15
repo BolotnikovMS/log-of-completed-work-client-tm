@@ -1,4 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
+import { Settings } from 'lucide-react'
 import { type FC } from 'react'
 import { Error, Loader } from '../../../../components'
 import { BasicTable } from '../../../../components/tables/BasicTable'
@@ -17,8 +18,8 @@ export const UsersTable: FC = () => {
 			accessorKey: 'position',
 		},
 		{
-			header: 'Блокировка УЗ',
-			accessorKey: 'active',
+			header: 'УЗ активна',
+			accessorFn: row => row.active ? '✅' : '⛔️'
 		},
 		{
 			header: 'Username',
@@ -31,6 +32,12 @@ export const UsersTable: FC = () => {
 		{
 			header: 'Роль',
 			accessorFn: row => row.role.name
+		},
+		{
+			header: '⚙️',
+			enableSorting: false,
+			accessorKey: 'setting',
+			cell: () =>  (<Settings />)
 		}
 	]
 
