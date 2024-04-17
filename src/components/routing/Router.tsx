@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout, Page, ProtectedRoute } from '..'
+import { ERoles, checkRole } from '../../helpers/checkRole.helper'
 import { Profile, SignIn } from '../../views/auth'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
@@ -173,15 +174,17 @@ export const Router: React.FC = () => {
 				/>
 				<Route path='/users'
 					element={
-						<Page
-							title='Пользователи'
-							children={
-								<>
-									<UserControl />
-									<UsersTable />
-								</>
-							}
-						/>
+						<ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
+							<Page
+								title='Пользователи'
+								children={
+									<>
+										<UserControl />
+										<UsersTable />
+									</>
+								}
+							/>
+						</ProtectedRoute>
 					}
 				/>
 				<Route path='/profile'
