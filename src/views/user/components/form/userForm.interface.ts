@@ -9,6 +9,7 @@ export interface IUserFields {
 	patronymic:string
 	position: string
 	email: string
+	password: string
 }
 
 export interface IPropsUserForm {
