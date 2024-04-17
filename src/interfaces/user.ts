@@ -9,6 +9,7 @@ export interface IUser {
 	email: string
 	fullName: string
 	shortName: string
+	roleId: number
 	role: {
 		name: string
 	}
