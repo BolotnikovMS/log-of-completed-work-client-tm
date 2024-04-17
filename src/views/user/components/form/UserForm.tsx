@@ -1,9 +1,17 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from "react"
-import { useForm } from 'react-hook-form'
-import { Button, CustomInput, Group } from '../../../../components'
+import { SubmitHandler, useController, useForm } from 'react-hook-form'
+import AsyncSelect from 'react-select'
+import { toast } from 'react-toastify'
+import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { useRoles } from '../../../../hooks'
+import { UserService } from '../../../../services/user/user.service'
+import { TUserData } from '../../../../services/user/user.type'
 import { IPropsUserForm, IUserFields } from './userForm.interface'
 
 const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal }) => {
+  const queryClient = useQueryClient()
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<IUserFields>({
 		mode: 'onBlur',
 		defaultValues: {
@@ -17,15 +25,39 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 			roleId: user?.roleId,
 		}
 	})
-	// const { field: {value: activeValue, onChange: activeOnChange, ...restActiveField} } = useController({name: 'active', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
-	// const {} = useController({name: 'username'})
+	const { field: {value: roleValue, onChange: roleChange, ...restRoles} } = useController({name: 'roleId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
+
+	const { roles, error: errorRoles, isError: isErrorRoles, isLoading: isLoadingRoles } = useRoles()
+	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
+		mutationFn: (data: TUserData) => UserService.createUser(data),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({queryKey: ['users']})
+			toast.success('УЗ пользователя успешно создана!')
+			reset()
+			toggleModal()
+		},
+		onError: (errors) => {
+			if(isAxiosError(errors)) {
+				if (Array.isArray(errors.response?.data)) {
+					errors.response?.data.map((errData: AxiosError) => {
+						toast.error(errData.message)
+					})
+				}
+			}
+		}
+	})
+	const submit: SubmitHandler<IUserFields> = data => mutateAsync(data)
+
+	if (isPending) return <Loader /> 
+
   return (
     <>
       <div className="work-log__form">
-				{/* {(isErrorMutate) && <Error error={errorMutate} />} */}
-				<form className="form form-col">
-					<div className="form__content form__content-mt form__content-col">
-						<Group className='group-str'>
+				{(isErrorMutate) && <Error error={errorMutate} />}
+				{(isErrorRoles && errorRoles) && <Error error={errorRoles} />}
+				<form className="form form-col" onSubmit={handleSubmit(submit)}>
+					<div className="form__content form__content-mt">
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Username'
 								name='username'
@@ -33,13 +65,13 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								error={errors.username?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
+									maxLength: {value: 30, message: 'Максимальная длина поля 300 символов!'}
 								}}
 								placeholder='Введите username...'
 							/>
 						</Group>
-						<Group className='group-str'>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Фамилия'
 								name='surname'
@@ -47,13 +79,13 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								error={errors.surname?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
+									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
 								}}
 								placeholder='Введите фамилию...'
 							/>
 						</Group>
-						<Group className='group-str'>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Имя'
 								name='name'
@@ -61,13 +93,13 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								error={errors.name?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
+									minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
 									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
 								}}
 								placeholder='Введите имя...'
 							/>
 						</Group>
-						<Group className='group-str'>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Отчество'
 								name='patronymic'
@@ -75,13 +107,13 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								error={errors.patronymic?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
+									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
 								}}
 								placeholder='Введите отчество...'
 							/>
 						</Group>
-						<Group className='group-str'>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Должность'
 								name='position'
@@ -89,27 +121,57 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								error={errors.position?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
+									maxLength: {value: 30, message: 'Максимальная длина поля 30 символов!'}
 								}}
 								placeholder='Введите отчество...'
 							/>
 						</Group>
-						<Group className='group-str'>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Email'
 								name='email'
+								type='email'
 								register={register}
 								error={errors.email?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
+									pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: "Email должен быть формата: xxxx@xxx.xx"}
 								}}
 								placeholder='Введите email...'
 							/>
 						</Group>
-						<Group className='group-row group-center'>
+						<Group className='group-col group-str'>
+							<CustomInput
+								label='Пароль'
+								name='password'
+								type='password'
+								register={register}
+								error={errors.password?.message}
+								validation={{
+									required: {value: true, message: 'Поле является обязательным!'},
+									minLength: {value: 6, message: 'Минимальная длина пароля 6 символов!'},
+								}}
+								placeholder='Придумайте пароль...'
+							/>
+						</Group>
+						<Group className='group-col group-str'>
+							<label className='label'>Выберите роль</label>
+							<AsyncSelect
+								classNamePrefix='form__custom-select'
+								options={roles}
+								getOptionValue={option => option.id.toString()}
+								getOptionLabel={option => option.name}
+								value={roleValue ? roles?.find(t => t.id === roleValue) : null}
+								onChange={option => roleChange(option ? option.id : option)}
+								isLoading={isLoadingRoles}
+								isDisabled={isErrorRoles}
+								isClearable
+								placeholder="Выберите роль пользователя..."
+								{...restRoles}
+							/>
+						</Group>
+						<Group className='group-center'>
 							<CustomInput
 								label='УЗ активна?'
 								name='active'
