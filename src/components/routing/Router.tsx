@@ -8,12 +8,12 @@ import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/c
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
+import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
 import React from 'react'
 import { useAuthStore } from '../../store/auth'
 import { HomePage } from '../../views/home/HomePage'
-import { UsersTable } from '../../views/user/components/table/UsersTable'
 
 export const Router: React.FC = () => {
 	const { authUser } = useAuthStore()
@@ -177,6 +177,7 @@ export const Router: React.FC = () => {
 							title='Пользователи'
 							children={
 								<>
+									<UserControl />
 									<UsersTable />
 								</>
 							}
