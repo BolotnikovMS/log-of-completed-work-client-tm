@@ -26,7 +26,7 @@ export const BasicTable: FC<IPropsBasicTable> = ({ data, columns }) => {
 	return (
 		<>
 			<div className={styles.controls}>
-				<Group>
+				<Group className='group-row'>
 					<Search />
 					<Input type='text' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' />
 				</Group>
