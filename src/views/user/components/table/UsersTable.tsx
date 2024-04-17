@@ -6,7 +6,7 @@ import { BasicTable } from '../../../../components/tables/BasicTable'
 import { useUsers } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 
-export const UsersTable: FC = () => {
+const UsersTable: FC = () => {
 	const { data, error, isError, isLoading } = useUsers()
 	const columns: ColumnDef<IUser>[] = [
 		{
@@ -49,3 +49,5 @@ export const UsersTable: FC = () => {
 		<BasicTable data={data!.data} columns={columns} />
 	)
 }
+
+export default UsersTable
