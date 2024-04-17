@@ -1,12 +1,17 @@
 .group {
+	width: 50%;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	gap: 7px;
+
+	&-str {
+		align-items: stretch;
+	}
 
 	&-row {
     flex-direction: row;
     align-items: center;
-    justify-content: center;
     gap: 15px;
   }
 
