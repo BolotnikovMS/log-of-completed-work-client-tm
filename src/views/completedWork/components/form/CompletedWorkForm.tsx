@@ -81,10 +81,10 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 								<label htmlFor="label">Исполнитель работ</label>
 								<AsyncSelect
 									classNamePrefix='form__custom-select'
-									options={users}
+									options={users?.data}
 									getOptionValue={option => option.id.toString()}
 									getOptionLabel={option => option.fullName}
-									value={userValue || completedWork ? users?.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
+									value={userValue || completedWork ? users?.data?.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
 									onChange={option => userOnChange(option ? option.id : option)}
 									isLoading={isLoadingUsers}
 									isDisabled={isErrorUsers}
