@@ -35,7 +35,7 @@ const SubstationsCards: FC = () => {
 						substations.data.map(substation => (
 							<SmallCard
 								key={substation.id}
-								cardText={substation.name}
+								cardText={substation.fullNameSubstation}
 								path={`/substations/${substation.id}`}
 								childrenControl={
 									<>

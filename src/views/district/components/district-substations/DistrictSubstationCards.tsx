@@ -32,7 +32,7 @@ const DistrictSubstationCards: FC = () => {
           {substations.map(substation => (
 						<SmallCard 
 							key={substation.id} 
-							cardText={substation.name} 
+							cardText={substation.fullNameSubstation} 
 							path={`/substations/${substation.id}`}
 							childrenControl={
 								<>
