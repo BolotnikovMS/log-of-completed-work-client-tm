@@ -1,17 +1,7 @@
 .form__input {
 	padding: 6px 8px;
 	font-size: clamp(17px, 2vw, 21px);
-	border: 1px solid #b1b1b1;
-	border-radius: 10px;
 	transition: border 0.3s ease-in;
-
-  &-error {
-    border: 1px solid rgb(216, 13, 13);
-  }
-
-	&:hover {
-		border: 1px solid #72afff;
-	}
 }
 
 .input__group {
