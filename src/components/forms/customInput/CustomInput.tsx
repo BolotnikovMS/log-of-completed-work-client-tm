@@ -26,7 +26,8 @@ const CustomInput: FC<IPropsCustomInput> = ({
           {...register(name, validation)}
           id={name}
           type='text'
-          className={cx('form__input', className, error && 'form__input-error')}
+          className={cx('form__input', className)}
+					error={Boolean(error)}
           aria-invalid={Boolean(error)}
           {...attributes}
         />

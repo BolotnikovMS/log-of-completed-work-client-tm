@@ -1,7 +1,8 @@
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable } from '@tanstack/react-table'
 import { ArrowDown01, ArrowDown10, ArrowLeft, ArrowLeftToLine, ArrowRight, ArrowRightToLine, Search } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Group, Input } from '..'
+import { Button, Group } from '..'
+import InputTest from '../input/Input'
 import { IPropsBasicTable } from './basicTable.interface'
 import styles from './table.module.scss'
 
@@ -27,8 +28,7 @@ export const BasicTable: FC<IPropsBasicTable> = ({ data, columns }) => {
 		<>
 			<div className={styles.controls}>
 				<Group className='group-row'>
-					<Search />
-					<Input type='text' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' />
+					<InputTest type='text' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Search />} />
 				</Group>
 			</div>
 			<table className={styles.table}>
