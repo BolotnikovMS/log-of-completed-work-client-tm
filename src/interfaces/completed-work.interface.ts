@@ -4,8 +4,9 @@ export interface ICompletedWork {
 	id: number
 	userId: number
 	description: string
+	shortText: string
 	note: string | null
-	dateCompletion: Date | string
+	dateCompletion: string
 	createdAt: Date
 	substation: Pick<ISubstation, 'id' | 'fullNameSubstation'>
 	work_producer: Pick<IUser, 'id' | 'shortName'>
