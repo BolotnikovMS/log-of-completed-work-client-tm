@@ -1,38 +1,28 @@
-.input-wrapper {
+.date-picker-wrapper {
+	width: 100%;
   display: flex;
   align-items: center;
   gap: 7px;
   padding: 6px 7px;
+	font-size: clamp(17px, 2.5vw, 20px);
   border: 1px solid #b1b1b1;
   border-radius: 10px;
   transition: all 0.3s ease-in;
 
-	&-w-100 {
-		width: 100%;
+	&-error {
+		border: 1px solid #d80d0d;
 	}
 
-  &-error {
-    border: 1px solid #d80d0d;
-  }
-
-  &:hover {
+	&:hover {
     border: 1px solid #5cadf8;
   }
 
   &:focus-within {
     border: 1px solid #5cadf8;
   }
-
-	&-no_border {
-    border: none;
-
-		&:hover, &:hover, &:active, &:checked, &:focus-within {
-			border: unset !important;
-		}
-  }
 }
 
-.input {
-  width: 100%;
+.date-picker-input {
+	width: 100%;
   font-size: clamp(17px, 2.5vw, 20px);
 }

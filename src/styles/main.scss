@@ -50,6 +50,10 @@ body {
   margin-top: unset !important;
 }
 
+.work-log {
+	padding: 5px 0 15px;
+}
+
 .form {
   &-col {
     display: flex;
@@ -64,6 +68,10 @@ body {
   }
 
   &__content {
+		&-w-55 {
+			width: 55%;
+		}
+
     &-col {
       width: 100%;
       display: flex;
@@ -105,6 +113,7 @@ body {
       border: 1px solid #b1b1b1 !important;
       border-radius: 7px !important;
       animation: scaleIn 0.35s ease-in-out;
+			z-index: 2 !important;
     }
 
     &__option {
@@ -124,13 +133,13 @@ body {
 
   }
 	
-	.react-datepicker__view-calendar-icon input {
-		padding: 6px 10px 5px 40px;
-	}
+	// .react-datepicker__view-calendar-icon input {
+	// 	padding: 6px 10px 5px 40px;
+	// }
 
-	.react-datepicker__input-container .react-datepicker__calendar-icon{
-		padding: 0.4rem;
-	}
+	// .react-datepicker__input-container .react-datepicker__calendar-icon {
+	// 	padding: 0.4rem;
+	// }
 
   &__btns {
     display: flex;

@@ -1,0 +1,35 @@
+.work-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 16px;
+}
+
+.work-info-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.work-info-titles {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	&-mt-18 {
+		margin-top: 18px;
+	}
+}
+
+.text {
+  font-size: clamp(14px, 3vw, 23px);
+
+	&-mt-5 {
+		margin-top: 8px;
+	}
+}
+
+.sub-text {
+	padding-left: 5px;
+	font-weight: bold;
+}
