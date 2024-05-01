@@ -19,9 +19,9 @@ const Input = lazy(() => import('./input/Input'))
 const CustomInput = lazy(() => import('./forms/customInput/CustomInput'))
 const Textarea = lazy(() => import('./forms/textarea/Textarea'))
 const ValidationMessage = lazy(() => import('./forms/errorMessage/ValidationMessage'))
-const FormGroup = lazy(() => import('./forms/formGroup/FormGroup'))
 const ControlPanel = lazy(() => import('./controlPanel/ControlPanel'))
 const Group = lazy(() => import('./group/Group'))
+const CustomDatePicker = lazy(() => import('./customDatePicker/CustomDatePicker'))
 
-export { Badge, Button, Card, ControlPanel, CustomInput, Error, FormGroup, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SmallCard, Textarea, ValidationMessage }
+export { Badge, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SmallCard, Textarea, ValidationMessage }
 

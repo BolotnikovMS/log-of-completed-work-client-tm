@@ -4,7 +4,7 @@ import { useEffect, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Button, CustomInput, FormGroup } from '../../components'
+import { Button, CustomInput, Group } from '../../components'
 import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
 import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
@@ -50,32 +50,32 @@ export const SignIn: FC = () => {
 		<>
 			<div className="work-log__form">
 				<form className="form form-col" onSubmit={handleSubmit(submit)}>
-					<div className="form__content form__content-mt form__content-col">
-						<FormGroup>
+					<div className="form__content form__content-w-55 form__content-mt">
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Логин'
 								name='username'
 								register={register}
-								error={errors.username?.message}
+								errorMessage={errors.username?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 								}}
 								placeholder='Введите username...'
 							/>
-						</FormGroup>
-						<FormGroup>
+						</Group>
+						<Group className='group-col group-str'>
 							<CustomInput
 								label='Пароль'
 								name='password'
 								type='password'
 								register={register}
-								error={errors.password?.message}
+								errorMessage={errors.password?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 								}}
 								placeholder='Введите пароль...'
 							/>
-						</FormGroup>
+						</Group>
 					</div>
 					<div className="form__btns">
 						<Button disabled={!isValid} classBtn='btn-bg_green'>

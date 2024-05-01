@@ -56,13 +56,13 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 				{(isErrorMutate) && <Error error={errorMutate} />}
 				{(isErrorRoles && errorRoles) && <Error error={errorRoles} />}
 				<form className="form form-col" onSubmit={handleSubmit(submit)}>
-					<div className="form__content form__content-mt">
+					<div className="form__content form__content-w-55 form__content-mt">
 						<Group className='group-col group-str'>
 							<CustomInput
 								label='Username'
 								name='username'
 								register={register}
-								error={errors.username?.message}
+								errorMessage={errors.username?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
@@ -76,7 +76,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								label='Фамилия'
 								name='surname'
 								register={register}
-								error={errors.surname?.message}
+								errorMessage={errors.surname?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
@@ -90,7 +90,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								label='Имя'
 								name='name'
 								register={register}
-								error={errors.name?.message}
+								errorMessage={errors.name?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
@@ -104,7 +104,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								label='Отчество'
 								name='patronymic'
 								register={register}
-								error={errors.patronymic?.message}
+								errorMessage={errors.patronymic?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
@@ -118,7 +118,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								label='Должность'
 								name='position'
 								register={register}
-								error={errors.position?.message}
+								errorMessage={errors.position?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
@@ -133,7 +133,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='email'
 								type='email'
 								register={register}
-								error={errors.email?.message}
+								errorMessage={errors.email?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: "Email должен быть формата: xxxx@xxx.xx"}
@@ -147,7 +147,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='password'
 								type='password'
 								register={register}
-								error={errors.password?.message}
+								errorMessage={errors.password?.message}
 								validation={{
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 6, message: 'Минимальная длина пароля 6 символов!'},

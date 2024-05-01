@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
 
 import { AxiosError, isAxiosError } from 'axios'
@@ -52,13 +52,13 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
           (<Loader />)
         : (
           <form className="form form-col" onSubmit={handleSubmit(submit)}>
-            <div className="form__content form__content-mt form__content-col">
-              <FormGroup>
+            <div className="form__content form__content-w-55 form__content-mt">
+              <Group className='group-col group-str'>
                 <CustomInput
                   label='Наименование GSM оператора'
                   name='name'
                   register={register}
-                  error={errors.name?.message}
+                  errorMessage={errors.name?.message}
                   validation={{
                     required: {value: true, message: 'Поле является обязательным!'},
                     minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
@@ -66,7 +66,7 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
                   }}
                   placeholder='Введите наименование...'
                 />
-              </FormGroup>
+              </Group>
             </div>
             <div className="form__btns">
               <Button disabled={!isValid} classBtn='btn-bg_green'>

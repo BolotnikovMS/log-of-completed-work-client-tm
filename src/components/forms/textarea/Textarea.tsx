@@ -1,5 +1,5 @@
 import './../customInput/custom-input.scss'
-import './textarea.scss'
+import styles from './textarea.module.scss'
 
 import cx from 'classnames'
 import { type FC } from 'react'
@@ -17,13 +17,13 @@ const Textarea: FC<IPropsTextarea> = ({
 }) => {
   return (
     <>
-      <label htmlFor={name}>
+      <label htmlFor={name} className='label'>
         {label}
       </label>
       <textarea 
         {...register(name, validation)}
         id={name}
-        className={cx('form__input form__textarea', className, error && 'form__textarea-error' )}
+        className={cx(styles.textarea, className, error && styles['textarea-error'] )}
         aria-invalid={Boolean(error)}
         {...attributes}
       ></textarea>

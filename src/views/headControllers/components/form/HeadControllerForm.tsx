@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, FormGroup, Loader } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
 
 import { AxiosError, isAxiosError } from 'axios'
@@ -53,13 +53,13 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
         (<Loader />)
       : (
         <form className="form form-col" onSubmit={handleSubmit(submit)}>
-          <div className="form__content form__content-mt form__content-col">
-            <FormGroup>
+          <div className="form__content form__content-w-55 form__content-mt">
+            <Group className='group-col group-str'>
               <CustomInput
                 label='Название контроллера'
                 name='name'
                 register={register}
-                error={errors.name?.message}
+                errorMessage={errors.name?.message}
                 validation={{
                   required: {value: true, message: 'Поле является обязательным!'},
                   minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
@@ -67,7 +67,7 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
                 }}
                 placeholder='Введите название контроллера...'
               />
-            </FormGroup>
+            </Group>
           </div>
           <div className="form__btns">
             <Button disabled={!isValid} classBtn='btn-bg_green'>

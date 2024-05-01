@@ -5,7 +5,7 @@ export interface IPropsCustomInput extends IPropsInput {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   register: any
   validation?: { [key: string]: unknown }
-  error?: string
+  errorMessage?: string
   name: string
   label: string
   classLabel?: string

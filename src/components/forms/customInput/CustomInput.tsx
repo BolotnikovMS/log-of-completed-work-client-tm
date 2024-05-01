@@ -9,30 +9,28 @@ import { IPropsCustomInput } from './customInput.interface'
 const CustomInput: FC<IPropsCustomInput> = ({
   register,
   validation = {},
-  error,
+  errorMessage,
   name,
   label,
   className,
   classLabel,
   ...attributes
-}) => {   
+}) => {
   return (
     <>
       <label htmlFor={name} className={cx('label', classLabel)}>
         {label}
       </label>
-      <div className="input__group">
-        <Input
-          {...register(name, validation)}
-          id={name}
-          type='text'
-          className={cx('form__input', className)}
-					error={Boolean(error)}
-          aria-invalid={Boolean(error)}
-          {...attributes}
-        />
-        {error && <ValidationMessage children={error} />}
-      </div>
+      <Input
+        {...register(name, validation)}
+        id={name}
+        type='text'
+        className={cx(className)}
+        error={Boolean(errorMessage)}
+        aria-invalid={Boolean(errorMessage)}
+        {...attributes}
+      />
+      {errorMessage && <ValidationMessage children={errorMessage} />}
     </>
   )
 }
