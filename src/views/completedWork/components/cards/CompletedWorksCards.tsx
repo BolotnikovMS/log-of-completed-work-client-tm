@@ -1,7 +1,8 @@
-import { Pencil, Trash2 } from 'lucide-react'
+import { Pencil, SquareGanttIcon, Trash2 } from 'lucide-react'
+import moment from 'moment'
 import { useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { CompletedWorkForm } from '..'
+import { CompletedWorkForm, CompletedWorkInfo } from '..'
 import { Button, Card, Error, InfoMessage, Loader, LoadMore, Modal } from '../../../../components'
 import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
@@ -15,6 +16,7 @@ const CompletedWorksCards: FC = () => {
 	const substationParam = searchParams.get('substation')
 	const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15, substation: substationParam })
 	const { isModal, toggleModal } = useModal()
+	const { isModal: isModalView, toggleModal: toggleModalView } = useModal()
 	const [isEdited, setIsEdited] = useState<boolean>(false)
 	const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
 	const { deleteCompletedWork } = useDeleteCompletedWork()
@@ -39,10 +41,13 @@ const CompletedWorksCards: FC = () => {
 							<Card
 								key={completedWork.id}
 								childrenHeader={<p className='card__text card__text-bold'><Link to={`/substations/${completedWork.substation.id}`}>{completedWork.substation.fullNameSubstation}</Link></p>}
-								childrenBody={<p>{completedWork.description}</p>}
-								childrenFooter={<p>Дата работ: {completedWork.dateCompletion.toString()}. Выполнил: {completedWork.work_producer.shortName} </p>}
+								childrenBody={<p>{completedWork.shortText}</p>}
+								childrenFooter={<p>Дата работ: {moment(completedWork.dateCompletion, 'MM/DD/yyyy').format('DD.MM.yyyy')}. Выполнил: {completedWork.work_producer.shortName} </p>}
 								childrenControl={
 									<>
+										<Button onClick={() => {toggleModalView(), setCompetedWork(completedWork)}}>
+											<SquareGanttIcon />
+										</Button>
 										{
 											checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
 												<Button onClick={() => {toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited)}}>
@@ -67,6 +72,11 @@ const CompletedWorksCards: FC = () => {
 			{(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока нет выполненных работ по ПС...' />}
 			{hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
 			<Modal visible={isModal} title='Редактирование записи' onToggle={() => {toggleModal(), setIsEdited(false)}} content={<CompletedWorkForm completedWork={completedWork} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}/>
+			<Modal
+				visible={isModalView}
+				title='Подробный просмотр выполненной работы'
+				onToggle={() => {toggleModalView()}} content={<CompletedWorkInfo completedWork={completedWork!}/>}
+			/>
 		</>
 	)
 }
