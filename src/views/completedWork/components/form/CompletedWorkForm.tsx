@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ru from 'date-fns/locale/ru'
+import { Calendar } from 'lucide-react'
+import moment from 'moment'
 import { type FC } from 'react'
-import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
-import { Button, Error, FormGroup, Loader, Textarea } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Loader, Textarea, ValidationMessage } from '../../../../components'
 import { errorHandler } from '../../../../helpers/errorHandler.helper'
 import { useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
@@ -29,7 +30,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 	const { field: {value: substationValue, onChange: substationOnChange, ...restSubstationField} } = useController({ name: 'substationId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { field: {value: userValue, onChange: userOnChange, ...restUserField} } = useController({ name: 'workProducerId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { field: {value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion} } = useController({ name: 'dateCompletion', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
-	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations()
+	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
 	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers()
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
 		mutationFn: isEdited ? (data: TCompletedWorkData) => CompletedWorkService.update({id: completedWork!.id, data}) : (data: TCompletedWorkData) => CompletedWorkService.create(data),
@@ -50,7 +51,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 		}
 	})
 
-	const submit: SubmitHandler<ICompletedWorkFields> = data => mutateAsync({...data, dateCompletion: data.dateCompletion.toLocaleDateString()})
+	const submit: SubmitHandler<ICompletedWorkFields> = data => mutateAsync({...data, dateCompletion: moment(data.dateCompletion).format('MM/DD/YYYY')})
 
 	return (
 		<>
@@ -60,9 +61,9 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 					(<Loader />)
         : (
 					<form className="form form-col" onSubmit={handleSubmit(submit)}>
-						<div className="form__content form__content-mt form__content-col">
-							<FormGroup>
-								<label htmlFor="label">Выберите ПС</label>
+						<div className="form__content form__content-w-55 form__content-mt">
+							<Group className='group-col group-str'>
+								<label htmlFor="label" className='label'>Выберите ПС</label>
 								<AsyncSelect
 									classNamePrefix='form__custom-select'
 									options={substations?.data}
@@ -76,9 +77,10 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									placeholder="Выберите ПС..."
 									{...restSubstationField}
 								/>
-							</FormGroup>
-							<FormGroup>
-								<label htmlFor="label">Исполнитель работ</label>
+								{errors && <ValidationMessage children={errors.substationId?.message} />}
+							</Group>
+							<Group className='group-col group-str'>
+								<label htmlFor="label" className='label'>Исполнитель работ</label>
 								<AsyncSelect
 									classNamePrefix='form__custom-select'
 									options={users?.data}
@@ -92,8 +94,9 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									placeholder="Выберите исполнителя..."
 									{...restUserField}
 								/>
-							</FormGroup>
-							<FormGroup>
+								{errors && <ValidationMessage children={errors.workProducerId?.message} />}
+							</Group>
+							<Group className='group-col group-str'>
 								<Textarea
 									label='Описание'
 									name='description'
@@ -106,8 +109,8 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									}}
 									placeholder='Введите описание...'
 								/>
-							</FormGroup>
-							<FormGroup>
+							</Group>
+							<Group className='group-col group-str'>
 								<Textarea
 									label='Примечание'
 									name='note'
@@ -119,19 +122,20 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									}}
 									placeholder='Введите примечание...'
 								/>
-							</FormGroup>
-							<FormGroup>
-								<DatePicker
-									className='form__input'
+							</Group>
+							<Group className='group-col group-str'>
+								<CustomDatePicker
+									register={register}
+									errorMessage={errors.dateCompletion?.message}
 									dateFormat='dd.MM.yyyy'
-									showIcon
 									locale={ru}
 									selected={dateCompletionValue}
 									onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
 									placeholderText='Укажите дату работ'
+									iconLeft={<Calendar />}
 									{...restDateCompletion}
 								/>
-							</FormGroup>
+							</Group>
 						</div>
 						<div className="form__btns">
 							<Button disabled={!isValid} classBtn='btn-bg_green'>
