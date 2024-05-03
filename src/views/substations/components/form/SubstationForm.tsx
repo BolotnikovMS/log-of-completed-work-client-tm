@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader, ValidationMessage } from '../../../../components'
 import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
 import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
@@ -85,74 +85,106 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             <form className="form form-col" onSubmit={handleSubmit(submit)}>
               <div className="form__content form__content-w-55 form__content-mt">
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите РЭС или ГП</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={districts?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={
-                      districtValue || substation ?
-                        districts?.data.find(d => d.id === districtValue || d.id === substation?.districtId)
-                        :
-                        // id !== undefined ? districts?.data.find(d => d.id === +id) : null
-                        null
-                    }
-                    onChange={option => districtOnChange(option ? option.id : option)}
-                    isLoading={isLoadingDistricts}
-                    isDisabled={isErrorDistricts}
-                    isClearable
-                    placeholder="Выберите РЭС или ГП..."
-                    {...restDistrictField}
-                  />
+									<div className="custom-select-wrapper">
+										<label className='label'>
+											<span className="label__text">
+												Выберите РЭС или ГП
+												<span className='text-mandatory'>*</span>
+											</span>
+										</label>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={districts?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={
+												districtValue || districts ?
+													districts?.data.find(d => d.id === districtValue)
+													:
+													// id !== undefined ? districts?.data.find(d => d.id === +id) : null
+													null
+											}
+											onChange={option => districtOnChange(option ? option.id : option)}
+											isLoading={isLoadingDistricts}
+											isDisabled={isErrorDistricts}
+											isClearable
+											placeholder="Выберите РЭС или ГП..."
+											{...restDistrictField}
+										/>
+										{errors.districtId && <ValidationMessage className='error-bottom-23' children={errors.districtId?.message} />}
+									</div>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите КП</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={typesKp?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={typeKpValue ? typesKp?.data.find(t => t.id === typeKpValue) : null}
-                    onChange={option => typeKpOnChange(option ? option.id : option)}
-                    isLoading={isLoadingTypesKp}
-                    isDisabled={isErrorTypesKp}
-                    isClearable
-                    placeholder="Выберите КП..."
-                    {...restTypeKp}
-                  />
+									<div className="custom-select-wrapper">
+										<label className='label'>
+											<span className="label__text">
+												Выберите КП
+												<span className='text-mandatory'>*</span>
+											</span>
+										</label>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={typesKp?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={typeKpValue ? typesKp?.data.find(t => t.id === typeKpValue) : null}
+											onChange={option => typeKpOnChange(option ? option.id : option)}
+											isLoading={isLoadingTypesKp}
+											isDisabled={isErrorTypesKp}
+											isClearable
+											placeholder="Выберите КП..."
+											{...restTypeKp}
+										/>
+										{errors.typeKpId && <ValidationMessage className='error-bottom-23' children={errors.typeKpId?.message} />}
+									</div>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите головной контроллер</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={headControllers?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={headControllerValue ? headControllers?.data.find(h => h.id === headControllerValue) : null}
-                    onChange={option => headControllerOnChange(option ? option.id : option)}
-                    isLoading={isLoadingHeadControllers}
-                    isDisabled={isErrorHeadControllers}
-                    isClearable
-                    placeholder="Выберите головной контроллер..."
-                    {...restHeadController}
-                  />
+									<div className="custom-select-wrapper">
+										<label className='label'>
+											<span className="label__text">
+												Выберите головной контроллер
+												<span className='text-mandatory'>*</span>
+											</span>
+										</label>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={headControllers?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={headControllerValue ? headControllers?.data.find(h => h.id === headControllerValue) : null}
+											onChange={option => headControllerOnChange(option ? option.id : option)}
+											isLoading={isLoadingHeadControllers}
+											isDisabled={isErrorHeadControllers}
+											isClearable
+											placeholder="Выберите головной контроллер..."
+											{...restHeadController}
+										/>
+										{errors.headControllerId && <ValidationMessage className='error-bottom-23' children={errors.headControllerId?.message} />}
+									</div>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите основной канал</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={channelTypes?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={mainChannelTypeValue ? channelTypes?.data.find(mC => mC.id === mainChannelTypeValue) : null}
-                    onChange={option => mainChannelTypeOnChange(option ? option.id : option)}
-                    isLoading={isLoadingChannelTypes}
-                    isDisabled={isErrorChannelTypes}
-                    isClearable
-                    placeholder="Выберите основной канал..."
-                    {...restMainChannelType}
-                  />
+									<div className="custom-select-wrapper">
+										<label className='label'>
+											<span className="label__text">
+												Выберите основной канал
+												<span className='text-mandatory'>*</span>
+											</span>
+										</label>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={channelTypes?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={mainChannelTypeValue ? channelTypes?.data.find(mC => mC.id === mainChannelTypeValue) : null}
+											onChange={option => mainChannelTypeOnChange(option ? option.id : option)}
+											isLoading={isLoadingChannelTypes}
+											isDisabled={isErrorChannelTypes}
+											isClearable
+											placeholder="Выберите основной канал..."
+											{...restMainChannelType}
+										/>
+										{errors.mainChannelId && <ValidationMessage  className='error-bottom-23'children={errors.mainChannelId?.message} />}
+									</div>
                 </Group>
                 <Group className='group-col group-str'>
                   <label className='label'>Выберите резервный канал</label>
@@ -213,24 +245,33 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                       minLength: { value: 3, message: 'Минимальная длина поля 3 символа!' },
                       maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' }
                     }}
+										mandatory
                     placeholder='Введите название ПС...'
                   />
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите класс U</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={voltageClasses?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={voltageClassValue ? voltageClasses?.data.find(v => v.id === voltageClassValue) : null}
-                    onChange={option => voltageClassOnChange(option ? option.id : option)}
-                    isLoading={isLoadingVoltageClasses}
-                    isDisabled={isErrorVoltageClasses}
-                    isClearable
-                    placeholder="Выберите класс U..."
-                    {...restVoltageClass}
-                  />
+									<div className="custom-select-wrapper">
+										<label className='label'>
+											<span className="label__text">
+												Выберите класс U
+												<span className='text-mandatory'>*</span>
+											</span>
+										</label>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={voltageClasses?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={voltageClassValue ? voltageClasses?.data.find(v => v.id === voltageClassValue) : null}
+											onChange={option => voltageClassOnChange(option ? option.id : option)}
+											isLoading={isLoadingVoltageClasses}
+											isDisabled={isErrorVoltageClasses}
+											isClearable
+											placeholder="Выберите класс U..."
+											{...restVoltageClass}
+										/>
+										{errors.voltageClassesId && <ValidationMessage className='error-bottom-23' children={errors.voltageClassesId?.message} />}
+									</div>
                 </Group>
                 <Group className='group-col group-str'>
                   <CustomInput
@@ -250,8 +291,9 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                     placeholder='Введите ip резервного канала...'
                   />
                 </Group>
-                <Group>
+                <Group className='group-col'>
                   <CustomInput
+										className='custom-input-wrapper-row'
                     label='РДУ'
                     name='rdu'
                     type='checkbox'
@@ -260,6 +302,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                 </Group>
                 <Group>
                   <CustomInput
+										className='custom-input-wrapper-row'
                     label='Используется?'
                     name='active'
                     type='checkbox'
