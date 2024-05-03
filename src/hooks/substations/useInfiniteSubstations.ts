@@ -1,5 +1,5 @@
-import { SubstationService } from '../../services/substations/substation.service'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { SubstationService } from '../../services/substations/substation.service'
 
 export const useInfiniteSubstations = ({ limit }: { limit: number }) => {
   const { 
