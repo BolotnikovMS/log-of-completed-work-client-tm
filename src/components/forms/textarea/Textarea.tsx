@@ -1,4 +1,3 @@
-import './../customInput/custom-input.scss'
 import styles from './textarea.module.scss'
 
 import cx from 'classnames'
@@ -13,12 +12,16 @@ const Textarea: FC<IPropsTextarea> = ({
   name,
   label,
   className,
+	mandatory,
   ...attributes
 }) => {
   return (
-    <>
+    <div className={styles['textarea-wrapper']}>
       <label htmlFor={name} className='label'>
-        {label}
+				<span className="label__text">
+					{label}
+					{mandatory && (<span className='text-mandatory'>*</span>)}
+				</span>
       </label>
       <textarea 
         {...register(name, validation)}
@@ -27,8 +30,12 @@ const Textarea: FC<IPropsTextarea> = ({
         aria-invalid={Boolean(error)}
         {...attributes}
       ></textarea>
-      {error && <ValidationMessage children={error} />}
-    </>
+			{
+				error && (
+					<ValidationMessage className='error-bottom-25' children={error} />
+				)
+			}
+    </div>
   )
 }
 

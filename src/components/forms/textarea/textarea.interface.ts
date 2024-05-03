@@ -5,4 +5,5 @@ export interface IPropsTextarea extends React.TextareaHTMLAttributes<HTMLTextAre
   name: string
   label: string
   className?: string
+	mandatory?: boolean
 }

@@ -9,4 +9,5 @@ export interface IPropsCustomInput extends IPropsInput {
   name: string
   label: string
   classLabel?: string
+	mandatory?: boolean
 }

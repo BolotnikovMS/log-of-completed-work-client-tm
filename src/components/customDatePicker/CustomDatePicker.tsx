@@ -16,8 +16,8 @@ const CustomDatePicker: FC<IPropsCustomDatePicker> = forwardRef<unknown, IPropsC
 					{...props}
 				/>
 				{iconRight}
+				{errorMessage && <ValidationMessage className='error-bottom-23' children={errorMessage} />}
 			</div>
-			{errorMessage && <ValidationMessage children={errorMessage} />}
 		</>
 	)
 })
