@@ -17,6 +17,7 @@ import { useRoles } from './roles/useRoles'
 import { useDeleteSubstation } from './substations/useDeleteSubstation'
 import { useInfiniteSubstations } from './substations/useInfiniteSubstations'
 import { useSubstation } from './substations/useSubstation'
+import { useSubstations } from './substations/useSubstations'
 import { useDeleteTypeKp } from './types-kp/useDeleteTypeKp'
 import { useInfiniteTypesKp } from './types-kp/useInfiniteTypesKp'
 import { useTypesKp } from './types-kp/useTypesKp'
@@ -25,5 +26,5 @@ import { useDeleteVoltageClass } from './voltage-classes/useDeleteVoltageClass'
 import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageClasses'
 import { useVoltageClasses } from './voltage-classes/useVoltageClasses'
 
-export { useChannelTypes, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useTypesKp, useUsers, useVoltageClasses }
+export { useChannelTypes, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUsers, useVoltageClasses }
 
