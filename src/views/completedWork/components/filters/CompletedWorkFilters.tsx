@@ -4,7 +4,7 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button } from '../../../../components'
-import { useSubstations } from '../../../../hooks/substations/useSubstations'
+import { useSubstations } from '../../../../hooks'
 
 interface IFiltersFields {
   substation: string | null
