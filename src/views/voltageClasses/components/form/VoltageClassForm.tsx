@@ -69,6 +69,7 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
                     //   message: 'Формат данных: ххх/хх/хх!'
                     // }
                   }}
+									mandatory={true}
                   placeholder='Введите класс напряжения...'
                 />
               </Group>

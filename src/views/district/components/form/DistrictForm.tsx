@@ -61,6 +61,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                       minLength: { value: 2, message: 'Минимальная длина поля 3 символа!' },
                       maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' },
                     }}
+										mandatory={true}
                     placeholder='Введите название...'
                   />
                 </Group>
@@ -75,6 +76,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                       minLength: { value: 2, message: 'Минимальная длина поля 3 символа!' },
                       maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' }
                     }}
+										mandatory={true}
                     placeholder='Введите сокращенное название...'
                   />
                 </Group>

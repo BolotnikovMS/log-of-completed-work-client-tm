@@ -65,6 +65,7 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
                   minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
                   maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
                 }}
+								mandatory={true}
                 placeholder='Введите название контроллера...'
               />
             </Group>
