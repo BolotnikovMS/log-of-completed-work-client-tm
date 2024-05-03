@@ -1,0 +1,14 @@
+.custom-input-wrapper {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 7px;
+	font-size: clamp(17px, 2.5vw, 20px);
+
+	&-row {
+		flex-direction: row;
+		align-items: center;
+	}
+}

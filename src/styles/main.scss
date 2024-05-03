@@ -43,6 +43,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+	&__text {
+		position: relative;
+		display: inline;
+	}
 }
 
 .no_margin {
@@ -81,18 +86,22 @@ body {
     }
 
     &-mt + * {
-      margin-top: 20px;
+      margin-top: 27px;
     }
   }
 
   &__custom-select {
     &__value-container {
-      font-size: clamp(17px, 2vw, 21px) !important;
+      font-size: clamp(17px, 2.5vw, 20px) !important;
     }
 
-    &__control {
+		&__control {
       border: 1px solid #b1b1b1 !important;
       border-radius: 10px !important;
+
+			&:hover {
+				border: 1px solid #5cadf8 !important;
+			}
     }
 
     &__input-container {
@@ -162,9 +171,23 @@ body {
 	}
 }
 
+.custom-select-wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.text-mandatory {
+	position: absolute;
+	top: 0;
+	left: -14px;
+	color: #d80d0d;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover {
-    color:rgb(152, 145, 145);
+    color:rgb(94, 93, 93);
     border-bottom: 1px solid black;
   }
 }
