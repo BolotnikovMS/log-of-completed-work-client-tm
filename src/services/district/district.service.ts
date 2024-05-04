@@ -19,8 +19,10 @@ export const DistrictService = {
    return instance.post<IDistrict>(`${url}/districts`, data)
   },
 
-  async getSubstationsRelatedDistrict(id: string): Promise<TRespSubstations> {
-    const { data } = await instance.get<TRespSubstations>(`${url}/districts/${id}/substations`)
+  async getSubstationsRelatedDistrict(id: string, { search }: IQueryParams): Promise<TRespSubstations> {
+    const { data } = await instance.get<TRespSubstations>(`${url}/districts/${id}/substations`, {
+			params: { search },
+		})
 
     return data
   },

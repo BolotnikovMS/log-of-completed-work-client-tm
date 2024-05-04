@@ -1,16 +1,18 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
 import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
-import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 
 import { SubstationForm } from '..'
 import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
 const SubstationsCards: FC = () => {
+	const queryParams = new URLSearchParams(location.search)
+	const searchSubstationName = queryParams.get('search') ?? ''
 	const { authUser } = useAuthStore()
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10 })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchSubstationName })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)
