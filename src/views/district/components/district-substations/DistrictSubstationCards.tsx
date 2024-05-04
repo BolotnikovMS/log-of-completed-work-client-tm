@@ -10,9 +10,11 @@ import { SubstationForm } from '../../../substations/components'
 
 const DistrictSubstationCards: FC = () => {
   const { id } = useParams()
+	const queryParams = new URLSearchParams(location.search)
+	const searchSubstationName = queryParams.get('search') ?? ''
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
-  const { substations, error, isError, isLoading } = useDistrictSubstations(id)
+  const { substations, error, isError, isLoading } = useDistrictSubstations({id, search: searchSubstationName})
   const [substationData, setSubstation] = useState<ISubstation | null>(null)
   const { deleteSubstation } = useDeleteSubstation()
   const handleDelete = (id: number) => {
