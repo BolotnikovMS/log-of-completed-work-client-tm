@@ -5,7 +5,7 @@ import moment from 'moment'
 import { type FC } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
-import AsyncSelect from 'react-select'
+import { default as AsyncSelect } from 'react-select'
 import { toast } from 'react-toastify'
 import { Button, CustomDatePicker, Error, Group, Loader, Textarea, ValidationMessage } from '../../../../components'
 import { errorHandler } from '../../../../helpers/errorHandler.helper'
@@ -63,38 +63,52 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 					<form className="form form-col" onSubmit={handleSubmit(submit)}>
 						<div className="form__content form__content-w-55 form__content-mt">
 							<Group className='group-col group-str'>
-								<label htmlFor="label" className='label'>Выберите ПС</label>
-								<AsyncSelect
-									classNamePrefix='form__custom-select'
-									options={substations?.data}
-									getOptionValue={option => option.id.toString()}
-									getOptionLabel={option => option.fullNameSubstation}
-									value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue || d.id === completedWork?.substation.id) : null}
-									onChange={option => substationOnChange(option ? option.id : option)}
-									isLoading={isLoadingSubstations}
-									isDisabled={isErrorSubstations}
-									isClearable
-									placeholder="Выберите ПС..."
-									{...restSubstationField}
-								/>
-								{errors && <ValidationMessage children={errors.substationId?.message} />}
+								<div className="custom-select-wrapper">
+									<label htmlFor="label" className='label'>
+										<span className="label__text">
+											Выберите ПС
+											<span className='text-mandatory'>*</span>
+										</span>
+									</label>
+									<AsyncSelect
+										classNamePrefix='form__custom-select'
+										options={substations?.data}
+										getOptionValue={option => option.id.toString()}
+										getOptionLabel={option => option.fullNameSubstation}
+										value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue) : null}
+										onChange={option => substationOnChange(option?.id)}
+										isLoading={isLoadingSubstations}
+										isDisabled={isErrorSubstations}
+										isClearable
+										placeholder="Выберите ПС..."
+										{...restSubstationField}
+									/>
+									{errors.substationId && <ValidationMessage className='error-bottom-23' children={errors.substationId?.message} />}
+								</div>
 							</Group>
 							<Group className='group-col group-str'>
-								<label htmlFor="label" className='label'>Исполнитель работ</label>
-								<AsyncSelect
-									classNamePrefix='form__custom-select'
-									options={users?.data}
-									getOptionValue={option => option.id.toString()}
-									getOptionLabel={option => option.fullName}
-									value={userValue || completedWork ? users?.data?.find(d => d.id === userValue || d.id === completedWork?.work_producer.id) : null}
-									onChange={option => userOnChange(option ? option.id : option)}
-									isLoading={isLoadingUsers}
-									isDisabled={isErrorUsers}
-									isClearable
-									placeholder="Выберите исполнителя..."
-									{...restUserField}
-								/>
-								{errors && <ValidationMessage children={errors.workProducerId?.message} />}
+								<div className="custom-select-wrapper">
+									<label htmlFor="label" className='label'>
+										<span className="label__text">
+											Исполнитель работ
+											<span className='text-mandatory'>*</span>
+										</span>
+									</label>
+									<AsyncSelect
+										classNamePrefix='form__custom-select'
+										options={users?.data}
+										getOptionValue={option => option.id.toString()}
+										getOptionLabel={option => option.fullName}
+										value={userValue || completedWork ? users?.data?.find(d => d.id === userValue) : null}
+										onChange={option => userOnChange(option ? option.id : option)}
+										isLoading={isLoadingUsers}
+										isDisabled={isErrorUsers}
+										isClearable
+										placeholder="Выберите исполнителя..."
+										{...restUserField}
+									/>
+									{errors.workProducerId && <ValidationMessage className='error-bottom-23' children={errors.workProducerId?.message} />}
+								</div>
 							</Group>
 							<Group className='group-col group-str'>
 								<Textarea
@@ -107,6 +121,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 										minLength: {value: 5, message: 'Минимальная длина поля 5 символа!'},
 										maxLength: {value: 1000, message: 'Максимальная длина поля 1000 символов!'}
 									}}
+									mandatory={true}
 									placeholder='Введите описание...'
 								/>
 							</Group>
