@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { SubstationService } from '../../services/substations/substation.service'
 
-export const useInfiniteSubstations = ({ limit }: { limit: number }) => {
+export const useInfiniteSubstations = ({ limit, search }: { limit: number, search?: string }) => {
   const { 
     data,
     error,
@@ -11,8 +11,8 @@ export const useInfiniteSubstations = ({ limit }: { limit: number }) => {
     isFetching,
     isFetchingNextPage,
     } = useInfiniteQuery({
-    queryKey: ['substations', 'infinity'],
-    queryFn: ({ pageParam = 1 }) => SubstationService.getSubstations({page: pageParam, limit}),
+    queryKey: ['substations', 'infinity', search],
+    queryFn: ({ pageParam = 1 }) => SubstationService.getSubstations({page: pageParam, limit, search}),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1
