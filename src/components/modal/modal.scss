@@ -40,6 +40,7 @@
   }
 
   &__header {
+		position: relative;
     border-bottom: 1px solid #dbdbdb;
     justify-content: space-between;
   }
@@ -55,9 +56,16 @@
   }
 
   &__close {
+		position: absolute;
+		top: calc(100% - 50%);
+		right: 20px;
     cursor: pointer;
-    // padding: 1rem;
     margin: -1rem -1rem -1rem auto;
+		transition: transform 0.3s ease;
+
+		&:hover {
+			transform: scale(1.2);
+		}
   }
 
   &__body {

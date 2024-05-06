@@ -187,6 +187,10 @@ body {
 	color: #d80d0d;
 }
 
+.lucide {
+	transition: all 0.3s ease-in;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover {
     color:rgb(94, 93, 93);

@@ -30,4 +30,8 @@
   & .menu__item:hover {
     background-color: #cdcece;
   }
+
+	&-drop {
+		transform: rotate(180deg);
+	}
 }
