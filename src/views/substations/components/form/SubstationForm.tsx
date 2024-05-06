@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader, ValidationMessage } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader, SelectWrapper } from '../../../../components'
 import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
 import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
@@ -85,13 +85,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             <form className="form form-col" onSubmit={handleSubmit(submit)}>
               <div className="form__content form__content-w-55 form__content-mt">
                 <Group className='group-col group-str'>
-									<div className="custom-select-wrapper">
-										<label className='label'>
-											<span className="label__text">
-												Выберите РЭС или ГП
-												<span className='text-mandatory'>*</span>
-											</span>
-										</label>
+									<SelectWrapper label='Выберите РЭС или ГП' errorMessage={errors.districtId?.message} mandatory>
 										<AsyncSelect
 											classNamePrefix='form__custom-select'
 											options={districts?.data}
@@ -111,17 +105,10 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											placeholder="Выберите РЭС или ГП..."
 											{...restDistrictField}
 										/>
-										{errors.districtId && <ValidationMessage className='error-bottom-23' children={errors.districtId?.message} />}
-									</div>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-									<div className="custom-select-wrapper">
-										<label className='label'>
-											<span className="label__text">
-												Выберите КП
-												<span className='text-mandatory'>*</span>
-											</span>
-										</label>
+									<SelectWrapper label='Выберите КП' errorMessage={errors.typeKpId?.message} mandatory>
 										<AsyncSelect
 											classNamePrefix='form__custom-select'
 											options={typesKp?.data}
@@ -135,17 +122,10 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											placeholder="Выберите КП..."
 											{...restTypeKp}
 										/>
-										{errors.typeKpId && <ValidationMessage className='error-bottom-23' children={errors.typeKpId?.message} />}
-									</div>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-									<div className="custom-select-wrapper">
-										<label className='label'>
-											<span className="label__text">
-												Выберите головной контроллер
-												<span className='text-mandatory'>*</span>
-											</span>
-										</label>
+									<SelectWrapper label='Выберите головной контроллер' errorMessage={errors.headControllerId?.message} mandatory>
 										<AsyncSelect
 											classNamePrefix='form__custom-select'
 											options={headControllers?.data}
@@ -159,17 +139,10 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											placeholder="Выберите головной контроллер..."
 											{...restHeadController}
 										/>
-										{errors.headControllerId && <ValidationMessage className='error-bottom-23' children={errors.headControllerId?.message} />}
-									</div>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-									<div className="custom-select-wrapper">
-										<label className='label'>
-											<span className="label__text">
-												Выберите основной канал
-												<span className='text-mandatory'>*</span>
-											</span>
-										</label>
+									<SelectWrapper label='Выберите основной канал' errorMessage={errors.mainChannelId?.message} mandatory>
 										<AsyncSelect
 											classNamePrefix='form__custom-select'
 											options={channelTypes?.data}
@@ -183,56 +156,58 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											placeholder="Выберите основной канал..."
 											{...restMainChannelType}
 										/>
-										{errors.mainChannelId && <ValidationMessage  className='error-bottom-23'children={errors.mainChannelId?.message} />}
-									</div>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите резервный канал</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={channelTypes?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={backupChannelTypeValue ? channelTypes?.data.find(bC => bC.id === backupChannelTypeValue) : null}
-                    onChange={option => backupChannelTypeOnChange(option ? option.id : option)}
-                    isLoading={isLoadingChannelTypes}
-                    isDisabled={isErrorChannelTypes}
-                    isClearable
-                    placeholder="Выберите резервный канал..."
-                    {...restBackupChannelType}
-                  />
+									<SelectWrapper label='Выберите резервный канал'>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={channelTypes?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={backupChannelTypeValue ? channelTypes?.data.find(bC => bC.id === backupChannelTypeValue) : null}
+											onChange={option => backupChannelTypeOnChange(option ? option.id : option)}
+											isLoading={isLoadingChannelTypes}
+											isDisabled={isErrorChannelTypes}
+											isClearable
+											placeholder="Выберите резервный канал..."
+											{...restBackupChannelType}
+										/>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите дополнительный канал</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={channelTypes?.data}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={additionalChannelTypeValue ? channelTypes?.data.find(aC => aC.id === additionalChannelTypeValue) : null}
-                    onChange={option => additionalChannelTypeOnChange(option ? option.id : option)}
-                    isLoading={isLoadingChannelTypes}
-                    isDisabled={isErrorChannelTypes}
-                    isClearable
-                    placeholder="Выберите дополнительный канал..."
-                    {...restAdditionalChannelType}
-                  />
+									<SelectWrapper label='Выберите дополнительный канал'>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={channelTypes?.data}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={additionalChannelTypeValue ? channelTypes?.data.find(aC => aC.id === additionalChannelTypeValue) : null}
+											onChange={option => additionalChannelTypeOnChange(option ? option.id : option)}
+											isLoading={isLoadingChannelTypes}
+											isDisabled={isErrorChannelTypes}
+											isClearable
+											placeholder="Выберите дополнительный канал..."
+											{...restAdditionalChannelType}
+										/>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
-                  <label className='label'>Выберите GSM оператора</label>
-                  <AsyncSelect
-                    classNamePrefix='form__custom-select'
-                    options={gsmOperators}
-                    getOptionValue={option => option.id.toString()}
-                    getOptionLabel={option => option.name}
-                    value={gsmOperatorValue ? gsmOperators?.find(g => g.id === gsmOperatorValue) : null}
-                    onChange={option => gsmOperatorOnChange(option ? option.id : option)}
-                    isLoading={isLoadingGsmOperators}
-                    isDisabled={isErrorGsmOperators}
-                    isClearable
-                    placeholder="Выберите GSM оператора..."
-                    {...restGsmOperator}
-                  />
+									<SelectWrapper label='Выберите GSM оператора'>
+										<AsyncSelect
+											classNamePrefix='form__custom-select'
+											options={gsmOperators}
+											getOptionValue={option => option.id.toString()}
+											getOptionLabel={option => option.name}
+											value={gsmOperatorValue ? gsmOperators?.find(g => g.id === gsmOperatorValue) : null}
+											onChange={option => gsmOperatorOnChange(option ? option.id : option)}
+											isLoading={isLoadingGsmOperators}
+											isDisabled={isErrorGsmOperators}
+											isClearable
+											placeholder="Выберите GSM оператора..."
+											{...restGsmOperator}
+										/>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
                   <CustomInput
@@ -250,13 +225,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                   />
                 </Group>
                 <Group className='group-col group-str'>
-									<div className="custom-select-wrapper">
-										<label className='label'>
-											<span className="label__text">
-												Выберите класс U
-												<span className='text-mandatory'>*</span>
-											</span>
-										</label>
+									<SelectWrapper label='Выберите класс U' errorMessage={errors.voltageClassesId?.message} mandatory>
 										<AsyncSelect
 											classNamePrefix='form__custom-select'
 											options={voltageClasses?.data}
@@ -270,8 +239,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											placeholder="Выберите класс U..."
 											{...restVoltageClass}
 										/>
-										{errors.voltageClassesId && <ValidationMessage className='error-bottom-23' children={errors.voltageClassesId?.message} />}
-									</div>
+									</SelectWrapper>
                 </Group>
                 <Group className='group-col group-str'>
                   <CustomInput

@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { default as AsyncSelect } from 'react-select'
 import { toast } from 'react-toastify'
-import { Button, CustomDatePicker, Error, Group, Loader, Textarea, ValidationMessage } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { errorHandler } from '../../../../helpers/errorHandler.helper'
 import { useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
@@ -63,13 +63,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 					<form className="form form-col" onSubmit={handleSubmit(submit)}>
 						<div className="form__content form__content-w-55 form__content-mt">
 							<Group className='group-col group-str'>
-								<div className="custom-select-wrapper">
-									<label htmlFor="label" className='label'>
-										<span className="label__text">
-											Выберите ПС
-											<span className='text-mandatory'>*</span>
-										</span>
-									</label>
+								<SelectWrapper label='Выберите ПС' errorMessage={errors.substationId?.message} mandatory>
 									<AsyncSelect
 										classNamePrefix='form__custom-select'
 										options={substations?.data}
@@ -83,17 +77,10 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 										placeholder="Выберите ПС..."
 										{...restSubstationField}
 									/>
-									{errors.substationId && <ValidationMessage className='error-bottom-23' children={errors.substationId?.message} />}
-								</div>
+								</SelectWrapper>
 							</Group>
 							<Group className='group-col group-str'>
-								<div className="custom-select-wrapper">
-									<label htmlFor="label" className='label'>
-										<span className="label__text">
-											Исполнитель работ
-											<span className='text-mandatory'>*</span>
-										</span>
-									</label>
+								<SelectWrapper label='Исполнитель работ' errorMessage={errors.workProducerId?.message} mandatory>
 									<AsyncSelect
 										classNamePrefix='form__custom-select'
 										options={users?.data}
@@ -107,8 +94,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 										placeholder="Выберите исполнителя..."
 										{...restUserField}
 									/>
-									{errors.workProducerId && <ValidationMessage className='error-bottom-23' children={errors.workProducerId?.message} />}
-								</div>
+								</SelectWrapper>
 							</Group>
 							<Group className='group-col group-str'>
 								<Textarea
