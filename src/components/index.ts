@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { Button } from './button/Button'
 import { Card } from './cards/card/Card'
 import { SmallCard } from './cards/small-card/SmallCard'
+import { SelectWrapper } from './customSelect/SelectWrapper'
 import { Header } from './header/Header'
 import { Layout } from './layout/Layout'
 import { Loader } from './loader/Loader'
@@ -23,5 +24,5 @@ const ControlPanel = lazy(() => import('./controlPanel/ControlPanel'))
 const Group = lazy(() => import('./group/Group'))
 const CustomDatePicker = lazy(() => import('./customDatePicker/CustomDatePicker'))
 
-export { Badge, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SmallCard, Textarea, ValidationMessage }
+export { Badge, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Textarea, ValidationMessage }
 
