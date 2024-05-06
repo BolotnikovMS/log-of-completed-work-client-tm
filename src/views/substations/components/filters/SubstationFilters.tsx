@@ -1,3 +1,4 @@
+import { Search } from 'lucide-react'
 import { ChangeEvent, useEffect, useState, type FC } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { Input } from '../../../../components'
@@ -36,6 +37,7 @@ const SubstationFilters: FC = () => {
 				value={searchValue ?? ''}
 				autoComplete='off'
 				placeholder='Введите название ПС...'
+				iconLeft={<Search />}
 			/>
 		</div>
 	)
