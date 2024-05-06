@@ -4,11 +4,15 @@ import { isAxiosError } from 'axios'
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
 import { useParams } from 'react-router-dom'
+import { checkRole } from '../../../../helpers'
+import { ERoles } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 import { SubstationForm } from '../../../substations/components'
 
 const DistrictSubstationCards: FC = () => {
+	const { authUser } = useAuthStore()
   const { id } = useParams()
 	const queryParams = new URLSearchParams(location.search)
 	const searchSubstationName = queryParams.get('search') ?? ''
@@ -38,12 +42,20 @@ const DistrictSubstationCards: FC = () => {
               path={`/substations/${substation.id}`}
               childrenControl={
                 <>
-                  <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-                    <Pencil />
-                  </Button>
-                  <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
-                    <Trash2 />
-                  </Button>
+									{
+										checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+											<Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+												<Pencil />
+											</Button>
+										)
+									}
+									{
+										checkRole(authUser, [ERoles.Admin]) && (
+											<Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+												<Trash2 />
+											</Button>
+										)
+									}
                 </>
               }
             />))
