@@ -4,7 +4,7 @@ import { type FC } from "react"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
-import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader, ValidationMessage } from '../../../../components'
 import { useRoles } from '../../../../hooks'
 import { UserService } from '../../../../services/user/user.service'
 import { TUserData } from '../../../../services/user/user.type'
@@ -68,6 +68,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
 									maxLength: {value: 30, message: 'Максимальная длина поля 300 символов!'}
 								}}
+								mandatory
 								placeholder='Введите username...'
 							/>
 						</Group>
@@ -82,6 +83,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
 									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
 								}}
+								mandatory
 								placeholder='Введите фамилию...'
 							/>
 						</Group>
@@ -96,6 +98,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
 									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
 								}}
+								mandatory
 								placeholder='Введите имя...'
 							/>
 						</Group>
@@ -110,6 +113,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
 									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
 								}}
+								mandatory
 								placeholder='Введите отчество...'
 							/>
 						</Group>
@@ -124,6 +128,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
 									maxLength: {value: 30, message: 'Максимальная длина поля 30 символов!'}
 								}}
+								mandatory
 								placeholder='Введите отчество...'
 							/>
 						</Group>
@@ -138,6 +143,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									required: {value: true, message: 'Поле является обязательным!'},
 									pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: "Email должен быть формата: xxxx@xxx.xx"}
 								}}
+								mandatory
 								placeholder='Введите email...'
 							/>
 						</Group>
@@ -152,27 +158,35 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									required: {value: true, message: 'Поле является обязательным!'},
 									minLength: {value: 6, message: 'Минимальная длина пароля 6 символов!'},
 								}}
+								mandatory
 								placeholder='Придумайте пароль...'
 							/>
 						</Group>
 						<Group className='group-col group-str'>
-							<label className='label'>Выберите роль</label>
-							<AsyncSelect
-								classNamePrefix='form__custom-select'
-								options={roles}
-								getOptionValue={option => option.id.toString()}
-								getOptionLabel={option => option.name}
-								value={roleValue ? roles?.find(t => t.id === roleValue) : null}
-								onChange={option => roleChange(option ? option.id : option)}
-								isLoading={isLoadingRoles}
-								isDisabled={isErrorRoles}
-								isClearable
-								placeholder="Выберите роль пользователя..."
-								{...restRoles}
-							/>
+							<div className="custom-select-wrapper">
+								<label className='label'>
+									<span className="label__text">Выберите роль</span>
+									<span className='text-mandatory'>*</span>
+								</label>
+								<AsyncSelect
+									classNamePrefix='form__custom-select'
+									options={roles}
+									getOptionValue={option => option.id.toString()}
+									getOptionLabel={option => option.name}
+									value={roleValue ? roles?.find(t => t.id === roleValue) : null}
+									onChange={option => roleChange(option ? option.id : option)}
+									isLoading={isLoadingRoles}
+									isDisabled={isErrorRoles}
+									isClearable
+									placeholder="Выберите роль пользователя..."
+									{...restRoles}
+								/>
+								{errors.roleId && <ValidationMessage className='error-bottom-23' children={errors.roleId?.message} />}
+							</div>
 						</Group>
-						<Group className='group-center'>
+						<Group className='group-col'>
 							<CustomInput
+								className='custom-input-wrapper-row'
 								label='УЗ активна?'
 								name='active'
 								type='checkbox'
