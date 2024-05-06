@@ -1,10 +1,11 @@
-import { ChevronDown, ChevronUp } from 'lucide-react'
 import React, { useEffect, useRef, useState } from 'react'
 
+import cx from 'classnames'
+import { ChevronDown } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Button } from '..'
 import { DropdownMenu } from './DropdownMenu'
 import { IPropsMenuItems } from './menu-item.interface'
-import { Link } from 'react-router-dom'
 
 export const MenuItems: React.FC<IPropsMenuItems> = ({ title, url, submenus }) => {
   const [dropdown, setDropdown] = useState<boolean>(false)
@@ -36,7 +37,7 @@ export const MenuItems: React.FC<IPropsMenuItems> = ({ title, url, submenus }) =
               onClick={() => setDropdown((prev) => !prev)}
             >
               {title}
-              {dropdown ? <ChevronUp /> : <ChevronDown />}
+							{<ChevronDown className={cx(dropdown && 'dropdown-drop')} />}
             </Button>
             <DropdownMenu submenus={submenus} dropdown={dropdown} />
           </>
