@@ -1,4 +1,4 @@
-import { IChannelType, IDistrict, IGsmOperator, IHeadController, ITypeKp, IVoltageClass } from '.'
+import { IChannelType, IDistrict, IFile, IGsmOperator, IHeadController, ITypeKp, IVoltageClass } from '.'
 
 export interface ISubstation {
   id: number
@@ -26,4 +26,5 @@ export interface ISubstation {
 	backup_channel?: Pick<IChannelType, 'id' | 'name'>
 	additional_channel?: Pick<IChannelType, 'id' | 'name'>
 	gsm?: Pick<IGsmOperator, 'id' | 'name'>
+	files?: IFile[]
 }
