@@ -6,6 +6,13 @@
 	}
 }
 
+.table-wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 7px;
+}
+
 .table {
 	width: 100%;
 	border-collapse: collapse;
@@ -19,7 +26,7 @@
 	background: transparent;
 
 	& + * {
-		margin-top: 12px;
+		margin-top: 5px;
 	}
 
 	thead th {
@@ -42,7 +49,7 @@
 
 	tbody tr {
     border-bottom: 1px solid #dddddd;
-		transition: all 0.3s ease-in;
+		transition: all 0.4s ease-in;
 
 		&:hover {
 			background-color: rgba(92, 173, 248, .2);
@@ -57,5 +64,9 @@
 .table-pagination {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 12px;
+}
+
+.pagination-show {
+  font-size: clamp(13px, 2.3vw, 20px);
 }

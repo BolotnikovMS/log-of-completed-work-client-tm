@@ -1,7 +1,7 @@
 .info {
 	display: flex;
 	flex-direction: column;
-	gap: 10px;
+	gap: 17px;
 
 	&-mt {
 		margin-top: 20px;
@@ -31,8 +31,4 @@
 			margin-top: 15px;
 		}
 	}
-}
-
-.text__sub {
-	font-weight: bold;
 }
