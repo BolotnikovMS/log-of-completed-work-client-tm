@@ -23,6 +23,7 @@ const ValidationMessage = lazy(() => import('./forms/errorMessage/ValidationMess
 const ControlPanel = lazy(() => import('./controlPanel/ControlPanel'))
 const Group = lazy(() => import('./group/Group'))
 const CustomDatePicker = lazy(() => import('./customDatePicker/CustomDatePicker'))
+const BasicTable = lazy(() => import('./tables/BasicTable'))
 
-export { Badge, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Textarea, ValidationMessage }
+export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Textarea, ValidationMessage }
 
