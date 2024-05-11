@@ -1,8 +1,8 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { Settings } from 'lucide-react'
 import { type FC } from 'react'
-import { Error, Loader } from '../../../../components'
-import { BasicTable } from '../../../../components/tables/BasicTable'
+import { BasicTable, Error, Loader } from '../../../../components'
+
 import { useUsers } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 
@@ -46,7 +46,7 @@ const UsersTable: FC = () => {
 	if (isLoading) return <Loader />
 
 	return (
-		<BasicTable data={data!.data} columns={columns} />
+		<BasicTable data={data!.data} columns={columns} search />
 	)
 }
 
