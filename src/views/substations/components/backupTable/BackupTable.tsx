@@ -22,7 +22,7 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 			cell: ({row}) => {
 				return (
 					<>
-						<a href={`${row.original.filePath}`} className='link link-jcc'>
+						<a href={`${row.original.urlDownloadFile}`} className='link link-jcc' download>
 							{row.original.clientName}
 							<ArrowDownToLine className='lucide'/>
 						</a>
