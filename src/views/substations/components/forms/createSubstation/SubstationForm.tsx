@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader, SelectWrapper } from '../../../../components'
-import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../hooks'
+import { Button, CustomInput, Error, Group, Loader, SelectWrapper } from '../../../../../components'
+import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../../hooks'
 import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
 import { AxiosError, isAxiosError } from 'axios'
@@ -9,8 +9,8 @@ import { type FC } from 'react'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
-import { SubstationService } from '../../../../services/substations/substation.service'
-import { TSubstationData } from '../../../../services/substations/substation.type'
+import { SubstationService } from '../../../../../services/substations/substation.service'
+import { TSubstationData } from '../../../../../services/substations/substation.type'
 
 const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
   const { id } = useParams()
