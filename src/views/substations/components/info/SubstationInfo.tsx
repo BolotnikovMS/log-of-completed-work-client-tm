@@ -1,8 +1,9 @@
-import { ArrowLeft, BookTextIcon, Image } from 'lucide-react'
+import { ArrowLeft, BookTextIcon, Image, Paperclip } from 'lucide-react'
 import { type FC } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Button, Error, Loader } from '../../../../components'
-import { useSubstation } from '../../../../hooks'
+import { UploadSubstationFile } from '..'
+import { Button, Error, Loader, Modal } from '../../../../components'
+import { useModal, useSubstation } from '../../../../hooks'
 import BackupTable from '../backupTable/BackupTable'
 import './info.scss'
 
@@ -10,6 +11,7 @@ const SubstationInfo: FC = () => {
 	const { id } = useParams()
 	const { substation, error, isError, isLoading } = useSubstation(id)
 	const navigate = useNavigate()
+	const { isModal, toggleModal } = useModal()
 
 	if (isError && error) return <Error error={error}/>
 
@@ -17,6 +19,11 @@ const SubstationInfo: FC = () => {
 
 	return (
 		<>
+			<div className="info-control info-control-mb-15">
+				<Button onClick={() => toggleModal()}>
+					<Paperclip />
+				</Button>
+			</div>	
 			<h1 className='title'>{substation?.fullNameSubstation}</h1>
 			<div className="info info-mt">
 				<div className="info__wrapper">
@@ -48,6 +55,13 @@ const SubstationInfo: FC = () => {
 					</Link>
 				</div>
 			</div>
+			
+			<Modal
+				visible={isModal}
+				title='Добавление файла'
+				content={<UploadSubstationFile toggleModal={toggleModal} />}
+				onToggle={toggleModal}
+			/>
 		</>
 	)
 }
