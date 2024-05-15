@@ -1,5 +1,5 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowDownToLine } from 'lucide-react'
+import { ArrowDownToLine, Settings } from 'lucide-react'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
 import { BasicTable } from '../../../../components'
@@ -34,6 +34,12 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 			header: 'Размер (Кб)',
 			accessorKey: 'size'
 		},
+		{
+			header: '⚙️',
+			enableSorting: false,
+			accessorKey: 'setting',
+			cell: () =>  (<Settings />)
+		}
 	], [])
 
 	return (
