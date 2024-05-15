@@ -1,14 +1,14 @@
-import { ColumnDef } from '@tanstack/react-table'
 import { Settings } from 'lucide-react'
-import { type FC } from 'react'
+import { type FC, useMemo } from 'react'
 import { BasicTable, Error, Loader } from '../../../../components'
 
+import { ColumnDef } from '@tanstack/react-table'
 import { useUsers } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 
 const UsersTable: FC = () => {
 	const { data, error, isError, isLoading } = useUsers()
-	const columns: ColumnDef<IUser>[] = [
+	const columns = useMemo<ColumnDef<IUser>[]>(() => [
 		{
 			header: 'Ф.И.О.',
 			accessorKey: 'shortName',
@@ -39,7 +39,7 @@ const UsersTable: FC = () => {
 			accessorKey: 'setting',
 			cell: () =>  (<Settings />)
 		}
-	]
+	], [])
 
 	if (isError && error) return <Error error={error}/>
 
