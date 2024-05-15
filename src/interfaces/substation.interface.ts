@@ -26,5 +26,6 @@ export interface ISubstation {
 	backup_channel?: Pick<IChannelType, 'id' | 'name'>
 	additional_channel?: Pick<IChannelType, 'id' | 'name'>
 	gsm?: Pick<IGsmOperator, 'id' | 'name'>
-	files?: IFile[]
+	files_photos_ps?: IFile[]
+	files_backups?: IFile[]
 }
