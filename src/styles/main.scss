@@ -62,7 +62,7 @@ body {
 	}
 
 	&-upload {
-		padding: 4px 5px;
+  	padding: 6px 7px;
 		flex-direction: row;
 		align-items: center;
 		border: 1px dashed black;
@@ -197,6 +197,13 @@ body {
 	&-row {
 		display: flex;
 	}
+}
+
+.file-info {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 3px;
 }
 
 .text-mandatory {
