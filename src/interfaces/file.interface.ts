@@ -7,5 +7,4 @@ export interface IFile {
 	size: number
 	clientName: string
 	createdAt: Date
-	urlDownloadFile: string
 }
