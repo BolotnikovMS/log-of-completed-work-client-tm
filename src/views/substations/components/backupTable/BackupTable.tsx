@@ -1,16 +1,29 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowDownToLine, Settings } from 'lucide-react'
+import { ArrowDownToLine, Trash2 } from 'lucide-react'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
-import { BasicTable } from '../../../../components'
+import { BasicTable, Button } from '../../../../components'
+import { useDeleteFile } from '../../../../hooks'
 import { IFile } from '../../../../interfaces'
+import { FileService } from '../../../../services/file/file.service'
 
 interface IPropsBackupTable {
 	backupFiles: IFile[]
 }
 
 const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
-		const columns = useMemo<ColumnDef<IFile>[]>(() => [
+	const { deleteFile } = useDeleteFile()
+	const handleDownload = (file: IFile) => {
+		FileService.download(file)
+	}
+	const handleDelete = (id: number) => {
+		const answer = confirm('Подтвердите удаление записи.')
+
+		if (!answer) return null
+
+		return deleteFile.mutate(id)
+	}
+	const columns = useMemo<ColumnDef<IFile>[]>(() => [
 		{
 			header: 'Дата добавления',
 			accessorKey: 'createdAt',
@@ -19,16 +32,6 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 		{
 			header: 'Название',
 			accessorKey: 'clientName',
-			cell: ({row}) => {
-				return (
-					<>
-						<a href={`${row.original.urlDownloadFile}`} className='link link-jcc' download>
-							{row.original.clientName}
-							<ArrowDownToLine className='lucide'/>
-						</a>
-					</>
-				)
-			},
 		},
 		{
 			header: 'Размер (Кб)',
@@ -38,7 +41,19 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 			header: '⚙️',
 			enableSorting: false,
 			accessorKey: 'setting',
-			cell: () =>  (<Settings />)
+			joinClasses: 'test',
+			cell: ({row}) =>  {
+				return (
+					<div className='table-cell-row'>
+						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
+							<ArrowDownToLine className='lucide'/>
+						</Button>
+						<Button classBtn='btn-bg_red' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
+							<Trash2 />
+						</Button>
+					</div>
+				)
+			}
 		}
 	], [])
 
