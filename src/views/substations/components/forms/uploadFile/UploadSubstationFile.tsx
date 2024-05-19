@@ -7,8 +7,8 @@ import { toast } from 'react-toastify'
 import { Button, Error, FileUploader, Group, SelectWrapper } from '../../../../../components'
 import { EUploadFileType } from '../../../../../enums/upload-file-type.enum'
 import { errorHandler } from '../../../../../helpers'
-import { TNewFileUpload } from '../../../../../services/upload-file/file.type'
-import { UploadService } from '../../../../../services/upload-file/upload-file.service'
+import { FileService } from '../../../../../services/file/file.service'
+import { TNewFileUpload } from '../../../../../services/file/file.type'
 import { IPropUploadSubstationFile, IUploadField } from './uploadedFileForm.interface'
 
 const typeFileOptions = [
@@ -25,7 +25,7 @@ export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModa
 	})
 	const { field: { value: typeFileValue, onChange: typeFileOnChange, ...restTypeFileField } } = useController({ name: 'typeFile', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate } = useMutation({
-		mutationFn: (data: TNewFileUpload) => UploadService.upload(data),
+		mutationFn: (data: TNewFileUpload) => FileService.upload(data),
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({ queryKey: ['substation'] })
 
