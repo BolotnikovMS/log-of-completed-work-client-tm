@@ -230,6 +230,14 @@ body {
 	transition: all 0.3s ease-in;
 }
 
+// Table
+.table-cell-row {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover {
     color:rgb(94, 93, 93);
