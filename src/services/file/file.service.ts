@@ -16,6 +16,17 @@ export const FileService = {
 		})
 	},
 
+	// async getImages(substationId: string) {
+	// 	return await instance.get(`${url}/files/images`, {
+	// 		params: { substation: substationId },
+	// 		responseType: 'blob',
+	// 		headers: {
+	// 			'Cache-Control': 'no-cache',
+	// 			'Content-Type': 'image'
+	// 		},
+	// 	})
+	// },
+
 	async download(file: IFile): Promise<void> {
 		await instance.get(`${url}/files/download/${file.id}`, {
 			responseType: 'blob'
