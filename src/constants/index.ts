@@ -1,4 +1,5 @@
 export const url = 'http://127.0.0.1:3333/api/v1.0'
+export const urlFile = 'http://127.0.0.1:3333'
 export const menuItemData = [
   {
     title: 'Главная',
