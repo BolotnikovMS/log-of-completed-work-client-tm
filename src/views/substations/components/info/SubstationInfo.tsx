@@ -1,4 +1,5 @@
-import { ArrowLeft, BookTextIcon, ImageOff } from 'lucide-react'
+import { ArrowLeft, BookTextIcon, ImageOff, X } from 'lucide-react'
+import { Carousel } from 'nuka-carousel'
 import { type FC } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { Button, Error, Loader } from '../../../../components'
@@ -11,6 +12,7 @@ const SubstationInfo: FC = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const { substation, error, isError, isLoading } = useSubstation(id)
+	console.log('substation: ', substation);
 
 	if (isError && error) return <Error error={error}/>
 
@@ -34,12 +36,20 @@ const SubstationInfo: FC = () => {
 					<p className='text'>Всего выполнено работ: <span className="sub-text">{substation?.numberCompletedWorks}</span></p>
 				</div>
 				<div className="info__imgs">
-					{substation?.files_photos_ps?.length ? (
-						substation.files_photos_ps.map(photo => (
-							<img key={photo.id} src={`${urlFile}${photo.filePath}`} alt={photo.clientName} className='info__img' />
-						))) : (
-							<ImageOff width={400} height={400} />
-					)}
+						{substation?.files_photos_ps?.length ? (
+							<Carousel showDots showArrows wrapMode='wrap'>
+								{substation.files_photos_ps.map(photo => (
+									<>
+										<img key={photo.id} src={`${urlFile}${photo.filePath}`} alt={photo.clientName} className='info__img' />
+										<button key={`${photo.id}${photo.clientName}`} className='img__del'>
+											<X/>
+										</button>
+									</>
+								))}
+							</Carousel>
+							) : (
+								<ImageOff width={400} height={400} />
+						)}
 				</div>
 			</div>
 
