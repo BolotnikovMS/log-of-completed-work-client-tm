@@ -32,6 +32,7 @@ export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModa
 			toast.success('Файл успешно загружен!')
 			reset()
 			toggleModal()
+			location.reload()
 		},
 		onError: async (errors) => {
 			toast.error(errorHandler(errors))
