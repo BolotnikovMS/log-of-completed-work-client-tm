@@ -238,6 +238,23 @@ body {
 	gap: 8px;
 }
 
+// Nuka
+.nuka-page-indicator {
+	background-color: #7d7c7c !important;
+}
+
+.nuka-page-indicator-active {
+	background-color: #5cadf8 !important;
+}
+
+.nuka-nav-button-prev, .nuka-nav-button-next {
+	transition: all 0.3s ease-in !important;
+}
+
+.nuka-nav-button-prev:hover, .nuka-nav-button-next:hover {
+	transform: scale(1.2) !important;
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover {
     color:rgb(94, 93, 93);
