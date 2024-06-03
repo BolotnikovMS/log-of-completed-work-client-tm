@@ -5,10 +5,7 @@ import { BasicTable, Button } from '../../../../../components'
 import { useDeleteFile } from '../../../../../hooks'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
-
-interface IPropsImageTable {
-	imageFiles: IFile[]
-}
+import { IPropsImageTable } from './imageTable.interface'
 
 const ImageTable: FC<IPropsImageTable> = ({imageFiles}) => {
 	const { deleteFile } = useDeleteFile()
@@ -21,7 +18,6 @@ const ImageTable: FC<IPropsImageTable> = ({imageFiles}) => {
 		if (!answer) return null
 
 		deleteFile.mutate(id)
-		location.reload()
 	}
 	const columns = useMemo<ColumnDef<IFile>[]>(() => [
 		{
