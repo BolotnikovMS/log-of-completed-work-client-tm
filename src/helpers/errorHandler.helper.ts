@@ -11,6 +11,8 @@ export const errorHandler = (errors: Error | AxiosError<unknown>) => {
 		} else {
 			errorMessage = errors.message
 		}
+	} else {
+		errorMessage = errors.message
 	}
 
 	return errorMessage
