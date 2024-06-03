@@ -1,0 +1,42 @@
+.wrapper {}
+
+.tabs {
+  height: 45px;
+  display: flex;
+}
+
+.tab {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #dfdfdf;
+  position: relative;
+  cursor: pointer;
+
+	&.active {
+  	background: #eeeded;
+
+		&::before {
+			content: "";
+			display: block;
+			position: absolute;
+			top: 0;
+			left: 50%;
+			transform: translateX(-50%);
+			width: calc(100% + 2px);
+			height: 4px;
+			background: #5cadf8;
+		}
+	}
+
+	&-content {
+		display: none;
+		background-color: #eeeded;
+		padding: 0 4px 4px;
+
+		&.active {
+			display: block;
+		}
+	}
+}
