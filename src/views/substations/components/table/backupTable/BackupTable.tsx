@@ -2,10 +2,10 @@ import { ColumnDef } from '@tanstack/react-table'
 import { ArrowDownToLine, Trash2 } from 'lucide-react'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
-import { BasicTable, Button } from '../../../../components'
-import { useDeleteFile } from '../../../../hooks'
-import { IFile } from '../../../../interfaces'
-import { FileService } from '../../../../services/file/file.service'
+import { BasicTable, Button } from '../../../../../components'
+import { useDeleteFile } from '../../../../../hooks'
+import { IFile } from '../../../../../interfaces'
+import { FileService } from '../../../../../services/file/file.service'
 
 interface IPropsBackupTable {
 	backupFiles: IFile[]
@@ -41,7 +41,6 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 			header: '⚙️',
 			enableSorting: false,
 			accessorKey: 'setting',
-			joinClasses: 'test',
 			cell: ({row}) =>  {
 				return (
 					<div className='table-cell-row'>
@@ -58,7 +57,7 @@ const BackupTable: FC<IPropsBackupTable> = ({backupFiles}) => {
 	], [])
 
 	return (
-		<BasicTable data={backupFiles.filter(file => file.typeFile === 'backup')} columns={columns} title='Backups' />
+		<BasicTable data={backupFiles} columns={columns} />
 	)
 }
 
