@@ -3,6 +3,7 @@ import { Button } from './button/Button'
 import { Card } from './cards/card/Card'
 import { SmallCard } from './cards/small-card/SmallCard'
 import { SelectWrapper } from './customSelect/SelectWrapper'
+import { CustomSlider } from './customSlider/CustomSlider'
 import { Header } from './header/Header'
 import { Layout } from './layout/Layout'
 import { Loader } from './loader/Loader'
@@ -27,5 +28,5 @@ const BasicTable = lazy(() => import('./tables/BasicTable'))
 const FileUploader = lazy(() => import('./forms/fileUploader/FileUploader'))
 const Tab = lazy(() => import('./tab/Tab'))
 
-export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, ValidationMessage }
+export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, ValidationMessage }
 
