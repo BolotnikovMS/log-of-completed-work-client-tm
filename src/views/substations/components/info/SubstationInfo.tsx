@@ -1,9 +1,10 @@
 import { ArrowLeft, BookTextIcon, ImageOff } from 'lucide-react'
-import { Carousel } from 'nuka-carousel'
-import React, { useEffect, type FC } from 'react'
+import { type FC } from 'react'
+import 'react-awesome-slider/dist/captioned.css'
+import 'react-awesome-slider/dist/styles.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { BackupTable, ImageTable } from '..'
-import { Button, Error, Loader, Tab } from '../../../../components'
+import { Button, CustomSlider, Error, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
 import './info.scss'
@@ -11,15 +12,9 @@ import './info.scss'
 const SubstationInfo: FC = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
-	const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
-
 	const { substation, error, isError, isLoading } = useSubstation(id)
 	const backupsContent = substation?.files_backups?.length ?	<BackupTable backupFiles={substation.files_backups} /> : <p className='text text-center text-pad'>Пока бэкапов не добавлено!</p>
 	const photosContent = substation?.files_photos_ps?.length ? <ImageTable imageFiles={substation.files_photos_ps} /> : <p className='text text-center text-pad'>Пока фото не добавлено!</p>
-
-	useEffect(() => {
-		forceUpdate()
-	}, [forceUpdate, substation?.files_photos_ps])
 
 	if (isError && error) return <Error error={error}/>
 
@@ -44,11 +39,11 @@ const SubstationInfo: FC = () => {
 				</div>
 				<div className="info__imgs">
 					{substation?.files_photos_ps?.length ? (
-						<Carousel showDots showArrows wrapMode='wrap'>
+						<CustomSlider>
 							{substation.files_photos_ps.map(photo => (
-								<img key={photo.id} src={`${urlFile}${photo.filePath}`} alt={photo.clientName} className='info__img' />
+								<div key={photo.id} data-src={`${urlFile}${photo.filePath}`} />
 							))}
-						</Carousel>
+						</CustomSlider>
 						) : (
 							<ImageOff width={400} height={400} />
 						)
