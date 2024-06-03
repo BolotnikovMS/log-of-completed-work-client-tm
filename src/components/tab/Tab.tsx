@@ -1,21 +1,14 @@
 import cx from 'classnames'
-import { ReactNode, useState, type FC } from 'react'
+import { useState, type FC } from 'react'
 import Error from '../error/Error'
+import { IPropsTab } from './tab.interface'
 import styles from './tab.module.scss'
-
-interface IPropsTab {
-	tabs: {
-		id: string | number
-		label: string
-		content: ReactNode
-	}[]
-}
 
 const Tab: FC<IPropsTab> = ({tabs}) => {
 	const [toggleState, setToggleState] = useState<number>(0)
 	const toggleTab = (index: number) => setToggleState(index)
 
-	if (!tabs.length) return <Error error={{message: 'Не переданы табы'} as Error} />
+	if (!tabs.length) return <Error error={{message: 'Данные для табов не переданы!!'} as Error} />
 
 	return (
 		<div className={styles.wrapper}>
