@@ -29,7 +29,6 @@ export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModa
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({ queryKey: ['substation'] })
 
-			// location.reload()
 			toast.success('Файл успешно загружен!')
 			reset()
 			toggleModal()
