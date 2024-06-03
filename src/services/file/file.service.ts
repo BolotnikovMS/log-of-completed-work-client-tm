@@ -30,8 +30,8 @@ export const FileService = {
 	async download(file: IFile): Promise<void> {
 		await instance.get(`${url}/files/download/${file.id}`, {
 			responseType: 'blob'
-		}).then(downloadFile => {
-			fileDownload(downloadFile.data, file.clientName)
+		}).then(resp => {
+			fileDownload(resp.data, file.clientName)
 		}).catch(e => {
 			toast.error(errorHandler(e))
 		})
