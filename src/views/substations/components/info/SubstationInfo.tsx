@@ -1,18 +1,25 @@
-import { ArrowLeft, BookTextIcon, ImageOff, X } from 'lucide-react'
+import { ArrowLeft, BookTextIcon, ImageOff } from 'lucide-react'
 import { Carousel } from 'nuka-carousel'
-import { type FC } from 'react'
+import React, { useEffect, type FC } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { Button, Error, Loader } from '../../../../components'
+import { BackupTable, ImageTable } from '..'
+import { Button, Error, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
-import BackupTable from '../backupTable/BackupTable'
 import './info.scss'
 
 const SubstationInfo: FC = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
+	const forceUpdate = React.useReducer(() => ({}), {})[1] as () => void
+
 	const { substation, error, isError, isLoading } = useSubstation(id)
-	console.log('substation: ', substation);
+	const backupsContent = substation?.files_backups?.length ?	<BackupTable backupFiles={substation.files_backups} /> : <p className='text text-center text-pad'>Пока бэкапов не добавлено!</p>
+	const photosContent = substation?.files_photos_ps?.length ? <ImageTable imageFiles={substation.files_photos_ps} /> : <p className='text text-center text-pad'>Пока фото не добавлено!</p>
+
+	useEffect(() => {
+		forceUpdate()
+	}, [forceUpdate, substation?.files_photos_ps])
 
 	if (isError && error) return <Error error={error}/>
 
@@ -36,26 +43,21 @@ const SubstationInfo: FC = () => {
 					<p className='text'>Всего выполнено работ: <span className="sub-text">{substation?.numberCompletedWorks}</span></p>
 				</div>
 				<div className="info__imgs">
-						{substation?.files_photos_ps?.length ? (
-							<Carousel showDots showArrows wrapMode='wrap'>
-								{substation.files_photos_ps.map(photo => (
-									<>
-										<img key={photo.id} src={`${urlFile}${photo.filePath}`} alt={photo.clientName} className='info__img' />
-										<button key={`${photo.id}${photo.clientName}`} className='img__del'>
-											<X/>
-										</button>
-									</>
-								))}
-							</Carousel>
-							) : (
-								<ImageOff width={400} height={400} />
-						)}
+					{substation?.files_photos_ps?.length ? (
+						<Carousel showDots showArrows wrapMode='wrap'>
+							{substation.files_photos_ps.map(photo => (
+								<img key={photo.id} src={`${urlFile}${photo.filePath}`} alt={photo.clientName} className='info__img' />
+							))}
+						</Carousel>
+						) : (
+							<ImageOff width={400} height={400} />
+						)
+					}
 				</div>
 			</div>
 
-			{substation?.files_backups?.length ? (
-				<BackupTable backupFiles={substation?.files_backups} />
-			) : null}
+			<Tab tabs={[{id: 'backups', label: 'Backup', content: backupsContent}, {id: 'photos', label: 'Фото ПС', content: photosContent}]} />
+
 			<div className="info__btns info__btns-mt">
 				<Button classBtn='btn-bg_blue' onClick={() => navigate(-1)}><ArrowLeft />Обратно</Button>
 				<Link to={`/completed-works?substation=${substation?.id}`} className='btn btn-bg_green'>
