@@ -1,28 +1,32 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowDownToLine, Trash2 } from 'lucide-react'
+import moment from 'moment'
 import { useMemo, type FC } from 'react'
 import { BasicTable, Button } from '../../../../../components'
 import { useDeleteFile } from '../../../../../hooks'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
-import { IPropsImageTable } from './imageTable.interface'
+import { IPropsFileTable } from './fileTable.interface'
 
-const ImageTable: FC<IPropsImageTable> = ({imageFiles}) => {
+const FileTable: FC <IPropsFileTable>= ({files}) => {
 	const { deleteFile } = useDeleteFile()
-	const handleDownload = (file: IFile) => {
-		FileService.download(file)
-	}
+	const handleDownload = (file: IFile) => FileService.download(file)
 	const handleDelete = (id: number) => {
 		const answer = confirm('Подтвердите удаление записи.')
 
 		if (!answer) return null
 
-		deleteFile.mutate(id)
+		return deleteFile.mutate(id)
 	}
 	const columns = useMemo<ColumnDef<IFile>[]>(() => [
 		{
-			header: 'Наименование',
-			accessorKey: 'clientName'
+			header: 'Дата добавления',
+			accessorKey: 'createdAt',
+			accessorFn: row => moment(row.createdAt, 'yyyy-MM-DD').format('DD.MM.yyyy')
+		},
+		{
+			header: 'Название',
+			accessorKey: 'clientName',
 		},
 		{
 			header: 'Размер (Кб)',
@@ -44,12 +48,12 @@ const ImageTable: FC<IPropsImageTable> = ({imageFiles}) => {
 					</div>
 				)
 			}
-		},
+		}
 	], [])
 
 	return (
-		<BasicTable data={imageFiles} columns={columns} />
+		<BasicTable data={files} columns={columns} />
 	)
 }
 
-export default ImageTable
+export default FileTable
