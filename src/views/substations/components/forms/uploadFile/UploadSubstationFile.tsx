@@ -5,16 +5,11 @@ import { useParams } from 'react-router-dom'
 import ReactSelect from 'react-select'
 import { toast } from 'react-toastify'
 import { Button, Error, FileUploader, Group, SelectWrapper } from '../../../../../components'
-import { EUploadFileType } from '../../../../../enums/upload-file-type.enum'
 import { errorHandler } from '../../../../../helpers'
 import { FileService } from '../../../../../services/file/file.service'
 import { TNewFileUpload } from '../../../../../services/file/file.type'
+import { typeFileOptions } from './typeFileOptions'
 import { IPropUploadSubstationFile, IUploadField } from './uploadedFileForm.interface'
-
-const typeFileOptions = [
-	{ value: EUploadFileType.photoPs, label: 'Фото объекта' },
-	{ value: EUploadFileType.backup, label: 'Бэкап оборудования' },
-]
 
 export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModal }) => {
 	const { id } = useParams()
