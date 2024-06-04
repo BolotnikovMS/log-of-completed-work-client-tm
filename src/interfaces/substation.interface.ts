@@ -28,4 +28,5 @@ export interface ISubstation {
 	gsm?: Pick<IGsmOperator, 'id' | 'name'>
 	files_photos_ps?: IFile[]
 	files_backups?: IFile[]
+	other_files?: IFile[]
 }
