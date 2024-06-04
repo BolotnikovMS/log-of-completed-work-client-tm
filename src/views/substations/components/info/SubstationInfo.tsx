@@ -3,7 +3,7 @@ import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { BackupTable, ImageTable } from '..'
+import { FileTable } from '..'
 import { Button, CustomSlider, Error, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
@@ -13,8 +13,9 @@ const SubstationInfo: FC = () => {
 	const { id } = useParams()
 	const navigate = useNavigate()
 	const { substation, error, isError, isLoading } = useSubstation(id)
-	const backupsContent = substation?.files_backups?.length ?	<BackupTable backupFiles={substation.files_backups} /> : <p className='text text-center text-pad'>Пока бэкапов не добавлено!</p>
-	const photosContent = substation?.files_photos_ps?.length ? <ImageTable imageFiles={substation.files_photos_ps} /> : <p className='text text-center text-pad'>Пока фото не добавлено!</p>
+	const backupsContent = substation?.files_backups?.length ?	<FileTable files={substation.files_backups} /> : <p className='text text-center text-pad'>Пока бэкапов не добавлено!</p>
+	const photosContent = substation?.files_photos_ps?.length ? <FileTable files={substation.files_photos_ps} /> : <p className='text text-center text-pad'>Пока фото не добавлено!</p>
+	const otherContent = substation?.other_files?.length ? <FileTable files={substation.other_files}/> : <p className='text text-center text-pad'>Пока других файлов не добавлено!</p>
 
 	if (isError && error) return <Error error={error}/>
 
@@ -51,7 +52,11 @@ const SubstationInfo: FC = () => {
 				</div>
 			</div>
 
-			<Tab tabs={[{id: 'backups', label: 'Backup', content: backupsContent}, {id: 'photos', label: 'Фото ПС', content: photosContent}]} />
+			<Tab tabs={[
+				{id: 'backups', label: 'Backup', content: backupsContent},
+				{id: 'photos', label: 'Фото ПС', content: photosContent},
+				{id: 'other_files', label: 'Прочие файлы', content: otherContent}
+			]} />
 
 			<div className="info__btns info__btns-mt">
 				<Button classBtn='btn-bg_blue' onClick={() => navigate(-1)}><ArrowLeft />Обратно</Button>
