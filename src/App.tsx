@@ -27,7 +27,7 @@ export const App = () => {
 				if (data) {
 					userAuthStore.setAuthUser(data)
 				} else {
-					console.log('Error auth');
+					console.log('Error auth')
 					userAuthStore.setAuthUser(null)
 				}
 			} else {

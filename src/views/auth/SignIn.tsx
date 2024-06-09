@@ -47,43 +47,41 @@ export const SignIn: FC = () => {
 	const submit: SubmitHandler<ISignInFields> = data => mutateAsync(data)
 
 	return (
-		<>
-			<div className="work-log__form">
-				<form className="form form-col" onSubmit={handleSubmit(submit)}>
-					<div className="form__content form__content-w-55 form__content-mt">
-						<Group className='group-col group-str'>
-							<CustomInput
-								label='Логин'
-								name='username'
-								register={register}
-								errorMessage={errors.username?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-								}}
-								placeholder='Введите username...'
-							/>
-						</Group>
-						<Group className='group-col group-str'>
-							<CustomInput
-								label='Пароль'
-								name='password'
-								type='password'
-								register={register}
-								errorMessage={errors.password?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-								}}
-								placeholder='Введите пароль...'
-							/>
-						</Group>
-					</div>
-					<div className="form__btns">
-						<Button disabled={!isValid} classBtn='btn-bg_green'>
-							Войти
-						</Button>
-					</div>
-				</form>
-			</div>
-		</>
+		<div className="work-log__form">
+			<form className="form form-col" onSubmit={handleSubmit(submit)}>
+				<div className="form__content form__content-w-55 form__content-mt">
+					<Group className='group-col group-str'>
+						<CustomInput
+							label='Логин'
+							name='username'
+							register={register}
+							errorMessage={errors.username?.message}
+							validation={{
+								required: {value: true, message: 'Поле является обязательным!'},
+							}}
+							placeholder='Введите username...'
+						/>
+					</Group>
+					<Group className='group-col group-str'>
+						<CustomInput
+							label='Пароль'
+							name='password'
+							type='password'
+							register={register}
+							errorMessage={errors.password?.message}
+							validation={{
+								required: {value: true, message: 'Поле является обязательным!'},
+							}}
+							placeholder='Введите пароль...'
+						/>
+					</Group>
+				</div>
+				<div className="form__btns">
+					<Button disabled={!isValid} classBtn='btn-bg_green'>
+						Войти
+					</Button>
+				</div>
+			</form>
+		</div>
 	)
 }
