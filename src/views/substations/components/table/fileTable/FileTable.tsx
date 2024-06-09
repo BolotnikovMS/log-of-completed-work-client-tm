@@ -3,12 +3,16 @@ import { ArrowDownToLine, Trash2 } from 'lucide-react'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
 import { BasicTable, Button } from '../../../../../components'
+import { checkRole } from '../../../../../helpers'
+import { ERoles } from '../../../../../helpers/checkRole.helper'
 import { useDeleteFile } from '../../../../../hooks'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
+import { useAuthStore } from '../../../../../store/auth'
 import { IPropsFileTable } from './fileTable.interface'
 
 const FileTable: FC <IPropsFileTable>= ({files}) => {
+	const { authUser } = useAuthStore()
 	const { deleteFile } = useDeleteFile()
 	const handleDownload = (file: IFile) => FileService.download(file)
 	const handleDelete = (id: number) => {
@@ -42,9 +46,13 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
 							<ArrowDownToLine className='lucide'/>
 						</Button>
-						<Button classBtn='btn-bg_red' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
-							<Trash2 />
-						</Button>
+						{
+							checkRole(authUser, [ERoles.Moderator, ERoles.Admin]) && (
+								<Button classBtn='btn-bg_red' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
+									<Trash2 />
+								</Button>
+							)
+						}
 					</div>
 				)
 			}
