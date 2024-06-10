@@ -49,7 +49,7 @@ const CompletedWorksCards: FC = () => {
 											<SquareGanttIcon />
 										</Button>
 										{
-											checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+											checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
 												<Button onClick={() => {toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited)}}>
 													<Pencil />
 												</Button>
