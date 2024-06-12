@@ -3,9 +3,10 @@ import { Button, Modal } from '../../../../components'
 import { Plus } from 'lucide-react'
 import { type FC } from 'react'
 import { VoltageClassForm } from '..'
-import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
 import { useAuthStore } from '../../../../store/auth'
+import { ERoles } from '../../../../enums/roles.enum'
 
 const VoltageControl: FC = () => {
 	const { authUser } = useAuthStore()

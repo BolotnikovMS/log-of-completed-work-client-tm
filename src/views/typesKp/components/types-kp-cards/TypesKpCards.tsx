@@ -4,7 +4,8 @@ import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '
 import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks'
 
 import { TypeKpForm } from '..'
-import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { ERoles } from '../../../../enums/roles.enum'
+import { checkRole } from '../../../../helpers/checkRole.helper'
 import { ITypeKp } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 

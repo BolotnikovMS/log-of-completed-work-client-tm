@@ -4,7 +4,8 @@ import { Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../.
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
 
 import { GsmOperatorForm } from '..'
-import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { ERoles } from '../../../../enums/roles.enum'
+import { checkRole } from '../../../../helpers/checkRole.helper'
 import { IGsmOperator } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 

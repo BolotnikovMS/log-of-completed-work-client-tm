@@ -1,11 +1,11 @@
 import './navbar.scss'
 
-import { ERoles, checkRole } from '../../helpers/checkRole.helper'
-
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '..'
 import { menuItemData } from '../../constants'
+import { ERoles } from '../../enums/roles.enum'
+import { checkRole } from '../../helpers/checkRole.helper'
 import { useLogout } from '../../hooks'
 import { useAuthStore } from '../../store/auth'
 import { MenuItems } from './MenuItems'

@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout, Page, ProtectedRoute } from '..'
-import { ERoles, checkRole } from '../../helpers/checkRole.helper'
 import { Profile, SignIn } from '../../views/auth'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
@@ -13,6 +12,8 @@ import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
 
 import React from 'react'
+import { ERoles } from '../../enums/roles.enum'
+import { checkRole } from '../../helpers/checkRole.helper'
 import { useAuthStore } from '../../store/auth'
 import { HomePage } from '../../views/home/HomePage'
 

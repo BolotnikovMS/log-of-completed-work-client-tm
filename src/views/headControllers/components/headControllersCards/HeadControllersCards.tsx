@@ -4,7 +4,8 @@ import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '
 import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '../../../../hooks'
 
 import { HeadControllerForm } from '..'
-import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { ERoles } from '../../../../enums/roles.enum'
+import { checkRole } from '../../../../helpers/checkRole.helper'
 import { IHeadController } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 

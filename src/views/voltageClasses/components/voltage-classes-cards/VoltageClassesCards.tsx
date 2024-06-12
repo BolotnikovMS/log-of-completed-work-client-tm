@@ -4,7 +4,8 @@ import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '
 import { useDeleteVoltageClass, useInfiniteVoltageClasses, useModal } from '../../../../hooks'
 
 import { VoltageClassForm } from '..'
-import { checkRole, ERoles } from '../../../../helpers/checkRole.helper'
+import { ERoles } from '../../../../enums/roles.enum'
+import { checkRole } from '../../../../helpers/checkRole.helper'
 import { IVoltageClass } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
