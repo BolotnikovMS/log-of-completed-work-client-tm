@@ -1,6 +1,8 @@
 import { IGenericResponseLogout, IUser, IUserDataLogin, IUserLogin } from '../../interfaces'
 
+import { AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
+import { IChangePassword } from '../../interfaces/auth.interface'
 
 export const AuthService = {
 	async login(userDate: IUserDataLogin): Promise<IUserLogin | null> {
@@ -12,6 +14,9 @@ export const AuthService = {
 		const { data } = await instance.get<IUser>('/profile')
 
 		return data
+	},
+	async changePassword(data: IChangePassword): Promise<AxiosResponse<string>> {
+		return instance.patch('/change-password', data)
 	},
 	async logout(): Promise<IGenericResponseLogout> {
 		const { data } = await instance.get<IGenericResponseLogout>('/logout')
