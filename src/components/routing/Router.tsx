@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout, Page, ProtectedRoute } from '..'
-import { Profile, SignIn } from '../../views/auth'
+import { Profile, ProfileControl, SignIn } from '../../views/auth'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
@@ -195,6 +195,7 @@ export const Router: React.FC = () => {
 							title='Профиль'
 							children={
 								<>
+									<ProfileControl />
 									<Profile />
 								</>
 							}
