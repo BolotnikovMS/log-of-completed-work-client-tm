@@ -1,8 +1,7 @@
-import { IGenericResponseLogout, IUser, IUserDataLogin, IUserLogin } from '../../interfaces'
+import { IChangePassword, IGenericResponseLogout, IUser, IUserDataLogin, IUserLogin } from '../../interfaces'
 
 import { AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
-import { IChangePassword } from '../../interfaces/auth.interface'
 
 export const AuthService = {
 	async login(userDate: IUserDataLogin): Promise<IUserLogin | null> {
