@@ -1,13 +1,15 @@
-import { Settings } from 'lucide-react'
-import { type FC, useMemo } from 'react'
-import { BasicTable, Error, Loader } from '../../../../components'
+import { type FC, useMemo, useState } from 'react'
+import { BasicTable, Button, ChangePasswordForm, Error, InfoMessage, Loader, Modal } from '../../../../components'
 
 import { ColumnDef } from '@tanstack/react-table'
-import { useUsers } from '../../../../hooks'
+import { KeyRound } from 'lucide-react'
+import { useModal, useUsers } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 
 const UsersTable: FC = () => {
 	const { data, error, isError, isLoading } = useUsers()
+	const { isModal, toggleModal } = useModal()
+	const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined)
 	const columns = useMemo<ColumnDef<IUser>[]>(() => [
 		{
 			header: 'Ф.И.О.',
@@ -37,7 +39,13 @@ const UsersTable: FC = () => {
 			header: '⚙️',
 			enableSorting: false,
 			accessorKey: 'setting',
-			cell: () =>  (<Settings />)
+			cell: ({row}) =>  (
+				<div className='table-cell-row'>
+					<Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
+						<KeyRound />
+					</Button>
+				</div>
+			)
 		}
 	], [])
 
@@ -45,8 +53,18 @@ const UsersTable: FC = () => {
 
 	if (isLoading) return <Loader />
 
+	if (!data?.data) return <InfoMessage text='Пока нет данных для отображения!' />
+
 	return (
-		<BasicTable data={data!.data} columns={columns} search />
+		<>
+			<BasicTable data={data.data} columns={columns} search />
+			<Modal 
+				visible={isModal} 
+				title='Форма сброса пароля' 
+				content={<ChangePasswordForm toggleModal={toggleModal} isResetPassword user={currentUser} />} 
+				onToggle={toggleModal}
+			/>
+		</>
 	)
 }
 
