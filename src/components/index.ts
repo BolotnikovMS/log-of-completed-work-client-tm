@@ -27,6 +27,6 @@ const CustomDatePicker = lazy(() => import('./customDatePicker/CustomDatePicker'
 const BasicTable = lazy(() => import('./tables/BasicTable'))
 const FileUploader = lazy(() => import('./forms/fileUploader/FileUploader'))
 const Tab = lazy(() => import('./tab/Tab'))
+const ChangePasswordForm = lazy(() => import('./forms/changePassword/ChangePasswordForm'))
 
-export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, ValidationMessage }
-
+export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, ValidationMessage, ChangePasswordForm }
