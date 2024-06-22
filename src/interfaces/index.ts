@@ -1,6 +1,7 @@
 import { IGenericResponseLogout, ISignInFields, IUserLogin } from './auth.interface'
 import { IUser, IUserDataLogin } from './user'
 
+import { IChangePassword } from './change-password.interface'
 import { IChannelType } from './channel-type.interface'
 import { ICompletedWork } from './completed-work.interface'
 import { IDistrict } from './district.interface'
@@ -14,5 +15,5 @@ import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
+export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
 

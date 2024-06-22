@@ -17,8 +17,3 @@ export interface IUserLogin {
 export interface IGenericResponseLogout {
 	message: string
 }
-
-export interface IChangePassword {
-	password: string
-	passwordConfirm: string
-}
