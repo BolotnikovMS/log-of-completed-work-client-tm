@@ -31,7 +31,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 	const { field: {value: userValue, onChange: userOnChange, ...restUserField} } = useController({ name: 'workProducerId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { field: {value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion} } = useController({ name: 'dateCompletion', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
-	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers()
+	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
 		mutationFn: isEdited ? (data: TCompletedWorkData) => CompletedWorkService.update({id: completedWork!.id, data}) : (data: TCompletedWorkData) => CompletedWorkService.create(data),
 		onSuccess: async () => {

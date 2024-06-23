@@ -7,7 +7,7 @@ import { useModal, useUsers } from '../../../../hooks'
 import { IUser } from '../../../../interfaces'
 
 const UsersTable: FC = () => {
-	const { data, error, isError, isLoading } = useUsers()
+	const { data, error, isError, isLoading } = useUsers({})
 	const { isModal, toggleModal } = useModal()
 	const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined)
 	const columns = useMemo<ColumnDef<IUser>[]>(() => [
