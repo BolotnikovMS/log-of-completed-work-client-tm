@@ -9,4 +9,6 @@ export interface IQueryParams {
   offset?: number
   limit?: number
 	substation?: string | null
+	active?: boolean
+	cleanUser?: boolean
 }
