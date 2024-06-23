@@ -16,8 +16,11 @@
     position: relative;
 
     & a {
+			display: flex;
+			align-items: center;
+			gap: 3px;
       text-align: left;
-      padding: 0.2rem 1rem;
+      padding: 3px 5px;
     }
 
     & button {
