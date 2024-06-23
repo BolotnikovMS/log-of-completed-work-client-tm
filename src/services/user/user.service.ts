@@ -6,9 +6,9 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 
 export const UserService = {
-  async getUsers({ limit, page }: IQueryParams): Promise<TRespUsers> {
+  async getUsers({ limit, page, active, cleanUser }: IQueryParams): Promise<TRespUsers> {
     const { data } = await instance.get<TRespUsers>(`${url}/users`, {
-      params: { limit, page },
+      params: { limit, page, active, cleanUser },
     })
 
     return data
