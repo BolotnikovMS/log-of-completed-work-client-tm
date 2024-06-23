@@ -24,6 +24,15 @@
     background-color: #f64747;
   }
 
+	&-nav-bar {
+		padding: 0.13rem 1rem !important;
+		border: 1px solid #b8b8b8;
+
+		&:hover {
+			border-color: #d6d4d4;
+		}
+	}
+
   &:active {
     transform: scale(0.97);
   }
