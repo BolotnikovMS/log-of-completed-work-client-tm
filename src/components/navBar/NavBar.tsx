@@ -1,5 +1,7 @@
 import './navbar.scss'
 
+import { CircleUserRound, LogIn, LogOut } from 'lucide-react'
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '..'
@@ -27,14 +29,19 @@ export const NavBar: React.FC = () => {
 				{
 					checkRole(user, [ERoles.Admin]) && (
 						<li className="menu__item">
-							<Link to={'/users'}>Пользователи</Link>
+							<Link to={'/users'}>
+								Пользователи
+							</Link>
 						</li>
 					)
 				}
 				{
 					!user && (
 						<li className='menu__item'>
-							<Link to={'/sign-in'}>Вход</Link>
+							<Link to={'/sign-in'}>
+								<LogIn />
+								Вход
+							</Link>
 						</li>
 					)
 				}
@@ -43,11 +50,13 @@ export const NavBar: React.FC = () => {
 						<>
 							<li className="menu__item">
 								<Link to={'/profile'}>
+									<CircleUserRound />
 									Профиль
 								</Link>
 							</li>
 							<li className='menu__item'>
-								<Button onClick={logoutHandel}>
+								<Button onClick={logoutHandel} classBtn='btn-nav-bar'>
+									<LogOut width={18} />
 									Выход
 								</Button>
 							</li>
