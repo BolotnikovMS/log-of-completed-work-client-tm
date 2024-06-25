@@ -10,6 +10,8 @@ export const useDeleteSubstation = () => {
     mutationFn: (id: number) => SubstationService.deleteSubstation(id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({queryKey: ['substations']})
+      await queryClient.invalidateQueries({queryKey: ['district-substations']})
+			
 			toast.success('Запись успешно удалена!')
     },
 		onError: async (error) => {
