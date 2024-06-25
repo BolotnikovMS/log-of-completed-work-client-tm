@@ -12,10 +12,10 @@ export interface ISubstation {
   typeKpId: number
   headControllerId: number
   mainChannelId: number
-  backupChannelId: number | null
-  additionalChannelId: number | null
-  gsmId: number | null
-  mainChannelIp: string | null
+  backupChannelId?: number | null
+  additionalChannelId?: number | null
+  gsmId?: number | null
+  mainChannelIp?: string | null
   backupChannelIp?: string | null
 	numberCompletedWorks?: number
 	voltage_class?: Pick<IVoltageClass, 'id' | 'name'>

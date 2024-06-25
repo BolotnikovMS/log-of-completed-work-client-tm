@@ -4,12 +4,12 @@ export interface ICompletedWorkFields {
 	substationId: number
 	workProducerId: number
 	description: string
-	note: string | null
+	note?: string | null
 	dateCompletion: Date
 }
 
 export interface IPropsCompletedWorkForm {
-	completedWork?: ICompletedWork | null
+	completedWork?: ICompletedWork
 	isEdited?: boolean | undefined
 	toggleModal: () => void
 	setIsEdited?: (val: boolean) => void

@@ -7,18 +7,18 @@ export interface ISubstationFields {
   typeKpId: number
   headControllerId: number
   mainChannelId: number
-  backupChannelId: number | null
-  additionalChannelId: number | null
-  gsmId: number | null
+  backupChannelId?: number | null
+  additionalChannelId?: number | null
+  gsmId?: number | null
   name: string
   rdu: boolean
-  mainChannelIp: string | null
-  backupChannelIp: string | null
+  mainChannelIp?: string | null
+  backupChannelIp?: string | null
 }
 
 export interface IPropsSubstationForm {
-  substation?: ISubstation | null
-  isEdited?: boolean | null
+  substation?: ISubstation
+  isEdited?: boolean
   toggleModal: () => void
   setIsEdited?: (val: boolean) => void
 }
