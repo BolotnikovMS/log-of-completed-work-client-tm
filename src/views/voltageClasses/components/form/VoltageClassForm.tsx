@@ -3,15 +3,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
 import { toast } from 'react-toastify'
 import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
 import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
+import { validationSchema } from './voltageClasses.validation'
 
 const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema),
     defaultValues: {
       name: voltageClass?.name
     }
@@ -60,15 +63,6 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
                   name='name'
                   register={register}
                   errorMessage={errors.name?.message}
-                  validation={{
-                    required: { value: true, message: 'Поле является обязательным!' },
-                    minLength: { value: 2, message: 'Минимальная длина поля 2 символа!' },
-                    maxLength: { value: 20, message: 'Максимальная длина поля 20 символов!' },
-                    // pattern: {
-                    //   value: /^[0-9+/]+$/,
-                    //   message: 'Формат данных: ххх/хх/хх!'
-                    // }
-                  }}
 									mandatory={true}
                   placeholder='Введите класс напряжения...'
                 />

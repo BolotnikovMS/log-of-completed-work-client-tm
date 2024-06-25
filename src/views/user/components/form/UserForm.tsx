@@ -1,13 +1,15 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from "react"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
-import { Button, CustomInput, Error, Group, Loader, ValidationMessage } from '../../../../components'
+import { Button, CustomInput, Error, Group, Loader, SelectWrapper } from '../../../../components'
 import { useRoles } from '../../../../hooks'
 import { UserService } from '../../../../services/user/user.service'
 import { TUserData } from '../../../../services/user/user.type'
+import { validationSchema } from './user.validation'
 import { IPropsUserForm, IUserFields } from './userForm.interface'
 
 const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal }) => {
@@ -23,10 +25,10 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 			position:  user?.position,
 			email: user?.email,
 			roleId: user?.roleId,
-		}
+		},
+		resolver: yupResolver(validationSchema)
 	})
-	const { field: {value: roleValue, onChange: roleChange, ...restRoles} } = useController({name: 'roleId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
-
+	const { field: {value: roleValue, onChange: roleChange, ...restRoles} } = useController({name: 'roleId', control })
 	const { roles, error: errorRoles, isError: isErrorRoles, isLoading: isLoadingRoles } = useRoles()
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
 		mutationFn: (data: TUserData) => UserService.createUser(data),
@@ -63,11 +65,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='username'
 								register={register}
 								errorMessage={errors.username?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
-									maxLength: {value: 30, message: 'Максимальная длина поля 300 символов!'}
-								}}
 								mandatory
 								placeholder='Введите username...'
 							/>
@@ -78,11 +75,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='surname'
 								register={register}
 								errorMessage={errors.surname?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
-									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
-								}}
 								mandatory
 								placeholder='Введите фамилию...'
 							/>
@@ -93,11 +85,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='name'
 								register={register}
 								errorMessage={errors.name?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 2, message: 'Минимальная длина поля 3 символа!'},
-									maxLength: {value: 200, message: 'Максимальная длина поля 200 символов!'}
-								}}
 								mandatory
 								placeholder='Введите имя...'
 							/>
@@ -108,11 +95,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='patronymic'
 								register={register}
 								errorMessage={errors.patronymic?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
-									maxLength: {value: 20, message: 'Максимальная длина поля 20 символов!'}
-								}}
 								mandatory
 								placeholder='Введите отчество...'
 							/>
@@ -123,11 +105,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								name='position'
 								register={register}
 								errorMessage={errors.position?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 2, message: 'Минимальная длина поля 2 символа!'},
-									maxLength: {value: 30, message: 'Максимальная длина поля 30 символов!'}
-								}}
 								mandatory
 								placeholder='Введите отчество...'
 							/>
@@ -139,10 +116,6 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								type='email'
 								register={register}
 								errorMessage={errors.email?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									pattern: {value: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, message: "Email должен быть формата: xxxx@xxx.xx"}
-								}}
 								mandatory
 								placeholder='Введите email...'
 							/>
@@ -154,26 +127,18 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 								type='password'
 								register={register}
 								errorMessage={errors.password?.message}
-								validation={{
-									required: {value: true, message: 'Поле является обязательным!'},
-									minLength: {value: 6, message: 'Минимальная длина пароля 6 символов!'},
-								}}
 								mandatory
 								placeholder='Придумайте пароль...'
 							/>
 						</Group>
 						<Group className='group-col group-str'>
-							<div className="custom-select-wrapper">
-								<label className='label'>
-									<span className="label__text">Выберите роль</span>
-									<span className='text-mandatory'>*</span>
-								</label>
+							<SelectWrapper label='Выберите роль' errorMessage={errors.roleId?.message} mandatory>
 								<AsyncSelect
 									classNamePrefix='form__custom-select'
 									options={roles}
 									getOptionValue={option => option.id.toString()}
 									getOptionLabel={option => option.name}
-									value={roleValue ? roles?.find(t => t.id === roleValue) : null}
+									value={roleValue ? roles?.find(t => t.id === +roleValue) : null}
 									onChange={option => roleChange(option ? option.id : option)}
 									isLoading={isLoadingRoles}
 									isDisabled={isErrorRoles}
@@ -181,8 +146,7 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
 									placeholder="Выберите роль пользователя..."
 									{...restRoles}
 								/>
-								{errors.roleId && <ValidationMessage className='error-bottom-23' children={errors.roleId?.message} />}
-							</div>
+							</SelectWrapper>
 						</Group>
 						<Group className='group-col'>
 							<CustomInput

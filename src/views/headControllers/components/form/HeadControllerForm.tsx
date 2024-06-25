@@ -3,15 +3,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
 import { toast } from 'react-toastify'
 import { HeadControllerService } from '../../../../services/head-controller/head-controller.service'
 import { THeadControllerData } from '../../../../services/head-controller/head-controller.type'
+import { validationSchema } from './headController.validation'
 
 const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema),
     defaultValues: {
       name: headController?.name
     }
@@ -60,11 +63,6 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
                 name='name'
                 register={register}
                 errorMessage={errors.name?.message}
-                validation={{
-                  required: {value: true, message: 'Поле является обязательным!'},
-                  minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                  maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
-                }}
 								mandatory={true}
                 placeholder='Введите название контроллера...'
               />

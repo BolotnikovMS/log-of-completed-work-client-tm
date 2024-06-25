@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -8,10 +9,12 @@ import { AxiosError, isAxiosError } from 'axios'
 import { toast } from 'react-toastify'
 import { TypeKpService } from '../../../../services/types-kp/type-kp.service'
 import { TTypeKpData } from '../../../../services/types-kp/type-kp.type'
+import { validationSchema } from './typesKp.validation'
 
 const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema),
     defaultValues: {
       name: typeKp?.name
     }
@@ -60,11 +63,6 @@ const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIs
                 name='name'
                 register={register}
                 errorMessage={errors.name?.message}
-                validation={{
-                  required: {value: true, message: 'Поле является обязательным!'},
-                  minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                  maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
-                }}
 								mandatory={true}
                 placeholder='Введите название КП...'
               />

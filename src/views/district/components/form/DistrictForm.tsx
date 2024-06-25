@@ -4,14 +4,17 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { toast } from 'react-toastify'
 import { errorHandler } from '../../../../helpers/errorHandler.helper'
 import { DistrictService } from '../../../../services/district/district.service'
 import { TDistrictData } from '../../../../services/district/district.type'
+import { validationSchema } from './district.validation'
 
 const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema),
     defaultValues: {
       name: district?.name,
       shortName: district?.shortName
@@ -56,11 +59,6 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                     name='name'
                     register={register}
                     errorMessage={errors.name?.message}
-                    validation={{
-                      required: { value: true, message: 'Поле является обязательным!' },
-                      minLength: { value: 2, message: 'Минимальная длина поля 3 символа!' },
-                      maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' },
-                    }}
 										mandatory={true}
                     placeholder='Введите название...'
                   />
@@ -71,11 +69,6 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
                     name='shortName'
                     register={register}
                     errorMessage={errors.shortName?.message}
-                    validation={{
-                      required: { value: true, message: 'Поле является обязательным!' },
-                      minLength: { value: 2, message: 'Минимальная длина поля 3 символа!' },
-                      maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' }
-                    }}
 										mandatory={true}
                     placeholder='Введите сокращенное название...'
                   />

@@ -4,6 +4,7 @@ import { Button, CustomInput, Error, Group, Loader, SelectWrapper } from '../../
 import { useChannelTypes, useDistricts, useGsmOperators, useHeadControllers, useTypesKp, useVoltageClasses } from '../../../../../hooks'
 import { IPropsSubstationForm, ISubstationFields } from './substationForm.interface'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
 import { useParams } from 'react-router-dom'
@@ -11,13 +12,14 @@ import AsyncSelect from 'react-select'
 import { toast } from 'react-toastify'
 import { SubstationService } from '../../../../../services/substations/substation.service'
 import { TSubstationData } from '../../../../../services/substations/substation.type'
+import { validationSchema } from './substation.validation'
 
 const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsEdited, toggleModal }) => {
   const { id } = useParams()
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ISubstationFields>({
     mode: 'onBlur',
     defaultValues: {
-      districtId: substation?.districtId || (typeof id !== "undefined" && id ? +id : undefined),
+      districtId: substation?.districtId || (id ? +id : undefined),
       voltageClassesId: substation?.voltageClassesId,
       active: substation?.active,
       rdu: substation?.rdu,
@@ -30,16 +32,17 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
       mainChannelIp: substation?.mainChannelIp,
       name: substation?.name,
       typeKpId: substation?.typeKpId,
-    }
+    },
+		resolver: yupResolver(validationSchema)
   })
-  const { field: { value: districtValue, onChange: districtOnChange, ...restDistrictField } } = useController({ name: 'districtId', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
-  const { field: { value: voltageClassValue, onChange: voltageClassOnChange, ...restVoltageClass } } = useController({ name: 'voltageClassesId', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
-  const { field: { value: typeKpValue, onChange: typeKpOnChange, ...restTypeKp } } = useController({ name: 'typeKpId', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
-  const { field: { value: headControllerValue, onChange: headControllerOnChange, ...restHeadController } } = useController({ name: 'headControllerId', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
-  const { field: { value: gsmOperatorValue, onChange: gsmOperatorOnChange, ...restGsmOperator } } = useController({ name: 'gsmId', control, rules: { required: false } })
-  const { field: { value: mainChannelTypeValue, onChange: mainChannelTypeOnChange, ...restMainChannelType } } = useController({ name: 'mainChannelId', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
-  const { field: { value: backupChannelTypeValue, onChange: backupChannelTypeOnChange, ...restBackupChannelType } } = useController({ name: 'backupChannelId', control, rules: { required: false } })
-  const { field: { value: additionalChannelTypeValue, onChange: additionalChannelTypeOnChange, ...restAdditionalChannelType } } = useController({ name: 'additionalChannelId', control, rules: { required: false } })
+  const { field: { value: districtValue, onChange: districtOnChange, ...restDistrictField } } = useController({ name: 'districtId', control })
+  const { field: { value: voltageClassValue, onChange: voltageClassOnChange, ...restVoltageClass } } = useController({ name: 'voltageClassesId', control })
+  const { field: { value: typeKpValue, onChange: typeKpOnChange, ...restTypeKp } } = useController({ name: 'typeKpId', control })
+  const { field: { value: headControllerValue, onChange: headControllerOnChange, ...restHeadController } } = useController({ name: 'headControllerId', control })
+  const { field: { value: gsmOperatorValue, onChange: gsmOperatorOnChange, ...restGsmOperator } } = useController({ name: 'gsmId', control })
+  const { field: { value: mainChannelTypeValue, onChange: mainChannelTypeOnChange, ...restMainChannelType } } = useController({ name: 'mainChannelId', control })
+  const { field: { value: backupChannelTypeValue, onChange: backupChannelTypeOnChange, ...restBackupChannelType } } = useController({ name: 'backupChannelId', control })
+  const { field: { value: additionalChannelTypeValue, onChange: additionalChannelTypeOnChange, ...restAdditionalChannelType } } = useController({ name: 'additionalChannelId', control })
   const { districts, isLoading: isLoadingDistricts, isError: isErrorDistricts } = useDistricts({})
   const { voltageClasses, isError: isErrorVoltageClasses, isLoading: isLoadingVoltageClasses } = useVoltageClasses()
   const { typesKp, isError: isErrorTypesKp, isLoading: isLoadingTypesKp } = useTypesKp({})
@@ -50,6 +53,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isEdited ? (data: TSubstationData) => SubstationService.update({ id: substation!.id, data }) : (data: TSubstationData) => SubstationService.create(data),
     onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['substation'] })
       await queryClient.invalidateQueries({ queryKey: ['substations'] })
       await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
 
@@ -215,11 +219,6 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
                     name='name'
                     register={register}
                     errorMessage={errors.name?.message}
-                    validation={{
-                      required: { value: true, message: 'Поле является обязательным!' },
-                      minLength: { value: 3, message: 'Минимальная длина поля 3 символа!' },
-                      maxLength: { value: 200, message: 'Максимальная длина поля 200 символов!' }
-                    }}
 										mandatory
                     placeholder='Введите название ПС...'
                   />
@@ -291,3 +290,4 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 }
 
 export default SubstationForm
+// 301

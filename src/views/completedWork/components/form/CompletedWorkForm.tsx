@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import ru from 'date-fns/locale/ru'
 import { Calendar } from 'lucide-react'
@@ -14,22 +15,24 @@ import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
 import { TCompletedWorkData } from '../../../../services/completed-work/completed-work.type'
 import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.interface'
+import { validationSchema } from './completedWork.validation'
 
 const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdited, setIsEdited, toggleModal }) => {
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ICompletedWorkFields>({
 		mode: 'onBlur',
 		defaultValues: {
-			substationId: completedWork?.substation.id,
-			workProducerId: completedWork?.work_producer.id,
+			substationId: completedWork?.substation?.id,
+			workProducerId: completedWork?.work_producer?.id,
 			description: completedWork?.description,
 			note: completedWork?.note,
 			dateCompletion: completedWork ? new Date(completedWork?.dateCompletion) : undefined
-		}
+		},
+		resolver: yupResolver(validationSchema),
 	})
 	const queryClient = useQueryClient()
-	const { field: {value: substationValue, onChange: substationOnChange, ...restSubstationField} } = useController({ name: 'substationId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
-	const { field: {value: userValue, onChange: userOnChange, ...restUserField} } = useController({ name: 'workProducerId', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
-	const { field: {value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion} } = useController({ name: 'dateCompletion', control, rules: {required: {value: true, message: 'Поле является обязательным!'}}})
+	const { field: {value: substationValue, onChange: substationOnChange, ...restSubstationField} } = useController({ name: 'substationId', control })
+	const { field: {value: userValue, onChange: userOnChange, ...restUserField} } = useController({ name: 'workProducerId', control })
+	const { field: {value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion} } = useController({ name: 'dateCompletion', control })
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
 	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
 	const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
@@ -102,11 +105,6 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									name='description'
 									register={register}
 									error={errors.description?.message}
-									validation={{
-										required: {value: true, message: 'Поле является обязательным!'},
-										minLength: {value: 5, message: 'Минимальная длина поля 5 символа!'},
-										maxLength: {value: 1000, message: 'Максимальная длина поля 1000 символов!'}
-									}}
 									mandatory={true}
 									placeholder='Введите описание...'
 								/>
@@ -117,10 +115,6 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									name='note'
 									register={register}
 									error={errors.note?.message}
-									validation={{
-										minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-										maxLength: {value: 700, message: 'Максимальная длина поля 700 символов!'}
-									}}
 									placeholder='Введите примечание...'
 								/>
 							</Group>
@@ -134,6 +128,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
 									onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
 									placeholderText='Укажите дату работ'
 									iconLeft={<Calendar />}
+									autoComplete='off'
 									{...restDateCompletion}
 								/>
 							</Group>

@@ -3,15 +3,18 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
 
+import { yupResolver } from '@hookform/resolvers/yup'
 import { AxiosError, isAxiosError } from 'axios'
 import { type FC } from 'react'
 import { toast } from 'react-toastify'
 import { GsmOperatorService } from '../../../../services/gsm-operator/gsm-operator.service'
 import { TGsmOperatorData } from '../../../../services/gsm-operator/gsm-operator.type'
+import { validationSchema } from './gsmOperator.validation'
 
 const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema),
     defaultValues: {
       name: gsmOperator?.name
     }
@@ -59,11 +62,6 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
                   name='name'
                   register={register}
                   errorMessage={errors.name?.message}
-                  validation={{
-                    required: {value: true, message: 'Поле является обязательным!'},
-                    minLength: {value: 3, message: 'Минимальная длина поля 3 символа!'},
-                    maxLength: {value: 150, message: 'Максимальная длина поля 150 символов!'},
-                  }}
 									mandatory={true}
                   placeholder='Введите наименование...'
                 />
