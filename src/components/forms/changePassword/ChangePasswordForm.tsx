@@ -1,3 +1,4 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { useMutation } from '@tanstack/react-query'
 import { useCallback, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
@@ -7,10 +8,12 @@ import { errorHandler } from '../../../helpers'
 import { AuthService } from '../../../services/auth/auth.service'
 import { UserService } from '../../../services/user/user.service'
 import { IChangePasswordFields, IPropsChangePasswordForm } from './changePassword.interface'
+import { validationSchema } from './changePassword.validation'
 
 const ChangePasswordForm: FC<IPropsChangePasswordForm> = ({ user, isResetPassword, toggleModal }) => {
-  const { register, getValues, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChangePasswordFields>({
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChangePasswordFields>({
     mode: 'onBlur',
+		resolver: yupResolver(validationSchema)
   })
   const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
     mutationFn: isResetPassword ? (data: IChangePasswordFields) => UserService.resetPassword(user!.id, data) : (data: IChangePasswordFields) => AuthService.changePassword(data),
@@ -42,10 +45,6 @@ const ChangePasswordForm: FC<IPropsChangePasswordForm> = ({ user, isResetPasswor
                 type='password'
                 register={register}
                 errorMessage={errors.password?.message}
-                validation={{
-                  required: { value: true, message: 'Поле является обязательным!' },
-                  minLength: { value: 6, message: 'Минимальная длина поля 6 символов!' }
-                }}
                 mandatory
                 placeholder='Введите пароль...'
               />
@@ -57,15 +56,6 @@ const ChangePasswordForm: FC<IPropsChangePasswordForm> = ({ user, isResetPasswor
                 type='password'
                 register={register}
                 errorMessage={errors.passwordConfirm?.message}
-                validation={{
-                  required: { value: true, message: 'Поле является обязательным!' },
-                  minLength: { value: 6, message: 'Минимальная длина поля 6 символов!' },
-                  validate: (value: string) => {
-                    const { password } = getValues()
-
-                    return password === value || 'Введенные пароли не совпадают!'
-                  }
-                }}
                 mandatory
                 placeholder='Введите пароль повторно...'
               />
