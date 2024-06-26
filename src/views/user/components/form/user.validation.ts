@@ -1,51 +1,19 @@
 import * as yup from 'yup'
 
+import { email, numberCheck, text20, text30 } from '../../../../validations/rules'
+
 export const validationSchema = yup.object().shape({
-	username: yup
-		.string()
-		.trim()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(30, 'Максимальная длина поля 30 символов!'),
-	surname: yup
-		.string()
-		.trim()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(20, 'Максимальная длина поля 20 символов!'),
-	name: yup
-		.string()
-		.trim()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(20, 'Максимальная длина поля 20 символов!'),
-	patronymic: yup
-		.string()
-		.trim()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(20, 'Максимальная длина поля 20 символов!'),
-	position: yup
-		.string()
-		.trim()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(30, 'Максимальная длина поля 30 символов!'),
-	email: yup
-	.string()
-	.trim()
-	.email('Введите корректный email!')
-	.matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/, 'Формат email: xxxx@xxx.xx')
-	.required('Поле является обязательным!'),
+	username: text30,
+	surname: text20,
+	name: text20,
+	patronymic: text20,
+	position: text30,
+	email: email,
 	password: yup
 		.string()
 		.required('Поле является обязательным!')
 		.min(6, 'Минимальная длина поля 6 символа!'),
-	roleId: yup
-		.number()
-		.positive()
-		.integer()
-		.required('Поле является обязательным!'),
+	roleId: numberCheck,
 	active: yup
 		.boolean()
 		.default(true)

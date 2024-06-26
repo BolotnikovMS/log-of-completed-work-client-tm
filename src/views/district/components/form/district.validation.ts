@@ -1,14 +1,8 @@
 import * as yup from "yup"
 
+import { text240 } from '../../../../validations/rules'
+
 export const validationSchema = yup.object().shape({
-	name: yup
-		.string()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(240, 'Максимальная длина поля 240 символов!'),
-	shortName: yup
-		.string()
-		.required('Поле является обязательным!')
-		.min(2, 'Минимальная длина поля 2 символа!')
-		.max(240, 'Максимальная длина поля 240 символов!'),
+	name: text240,
+	shortName: text240,
 })
