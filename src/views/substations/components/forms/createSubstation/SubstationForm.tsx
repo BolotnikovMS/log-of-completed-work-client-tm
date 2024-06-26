@@ -23,10 +23,10 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
       voltageClassesId: substation?.voltageClassesId,
       active: substation?.active,
       rdu: substation?.rdu,
-      additionalChannelId: substation?.additionalChannelId,
-      backupChannelId: substation?.backupChannelId,
+      additionalChannelId: substation?.additionalChannelId || null,
+      backupChannelId: substation?.backupChannelId || null,
       backupChannelIp: substation?.backupChannelIp,
-      gsmId: substation?.gsmId,
+      gsmId: substation?.gsmId || null,
       headControllerId: substation?.headControllerId,
       mainChannelId: substation?.mainChannelId,
       mainChannelIp: substation?.mainChannelIp,
@@ -95,13 +95,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
 											options={districts?.data}
 											getOptionValue={option => option.id.toString()}
 											getOptionLabel={option => option.name}
-											value={
-												districtValue || districts ?
-													districts?.data.find(d => d.id === districtValue)
-													:
-													// id !== undefined ? districts?.data.find(d => d.id === +id) : null
-													null
-											}
+											value={districtValue ? districts?.data.find(d => d.id === districtValue) : null}
 											onChange={option => districtOnChange(option ? option.id : option)}
 											isLoading={isLoadingDistricts}
 											isDisabled={isErrorDistricts}
