@@ -1,6 +1,6 @@
 import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
+import { Badge, Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 
 import { SubstationForm } from '..'
 import { ERoles } from '../../../../enums/roles.enum'
@@ -38,6 +38,7 @@ const SubstationsCards: FC = () => {
 						substations.data.map(substation => (
 							<SmallCard
 								key={substation.id}
+								childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}
 								cardText={substation.fullNameSubstation}
 								path={`/substations/${substation.id}`}
 								childrenControl={

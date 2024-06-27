@@ -1,4 +1,4 @@
-import { Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
+import { Badge, Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 
 import { isAxiosError } from 'axios'
 import { Pencil, Trash2 } from 'lucide-react'
@@ -38,6 +38,7 @@ const DistrictSubstationCards: FC = () => {
           {substations.map(substation => (
             <SmallCard
               key={substation.id}
+							childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}
               cardText={substation.fullNameSubstation}
               path={`/substations/${substation.id}`}
               childrenControl={
