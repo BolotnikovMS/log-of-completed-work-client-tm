@@ -1,3 +1,5 @@
+import { IUser } from './user'
+
 export interface IFile {
 	id: number
 	userId: number
@@ -7,4 +9,5 @@ export interface IFile {
 	size: number
 	clientName: string
 	createdAt: Date
+	author?: Pick<IUser, 'id' | 'shortName'>
 }
