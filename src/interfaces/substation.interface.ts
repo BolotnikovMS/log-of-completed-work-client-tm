@@ -19,7 +19,7 @@ export interface ISubstation {
   backupChannelIp?: string | null
 	numberCompletedWorks?: number
 	voltage_class?: Pick<IVoltageClass, 'id' | 'name'>
-	district?: Pick<IDistrict, 'id' | 'name'>
+	district?: Pick<IDistrict, 'id' | 'name' | 'shortName'>
 	type_kp?: Pick<ITypeKp, 'id' | 'name'>
 	head_controller?: Pick<IHeadController, 'id' | 'name'>
 	main_channel?: Pick<IChannelType, 'id' | 'name'>
