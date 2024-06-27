@@ -41,9 +41,9 @@ const CompletedWorksCards: FC = () => {
 						completedWorks.data.map(completedWork => (
 							<Card
 								key={completedWork.id}
-								childrenHeader={<p className='card__text card__text-bold'><Link to={`/substations/${completedWork.substation.id}`}>{completedWork.substation.fullNameSubstation}</Link></p>}
+								childrenHeader={<p className='card__text card__text-bold'><Link to={`/substations/${completedWork?.substation?.id}`}>{completedWork?.substation?.fullNameSubstation}</Link></p>}
 								childrenBody={<p>{completedWork.shortText}</p>}
-								childrenFooter={<p>Дата работ: {moment(completedWork.dateCompletion, 'MM/DD/yyyy').format('DD.MM.yyyy')}. Выполнил: {completedWork.work_producer.shortName} </p>}
+								childrenFooter={<p>Дата работ: {moment(completedWork.dateCompletion, 'MM/DD/yyyy').format('DD.MM.yyyy')}. Выполнил: {completedWork?.work_producer?.shortName} </p>}
 								childrenControl={
 									<>
 										<Button onClick={() => {toggleModalView(), setCompetedWork(completedWork)}}>
