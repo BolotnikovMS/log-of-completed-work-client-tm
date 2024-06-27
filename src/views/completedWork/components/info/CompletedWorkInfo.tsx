@@ -12,7 +12,7 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
 				<Group>
 					<p className='text'>Объект:
 						<span className='sub-text'>
-							{completedWork.substation.fullNameSubstation}
+							{completedWork?.substation?.fullNameSubstation}
 						</span>
 					</p>
 				</Group>
@@ -27,7 +27,15 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
 					<p className='text'>
 						Производитель работ:
 						<span className='sub-text'>
-							{completedWork.work_producer.shortName}
+							{completedWork?.work_producer?.shortName}
+						</span>
+					</p>
+				</Group>
+				<Group>
+					<p className='text'>
+						Автор записи:
+						<span className='sub-text'>
+							{completedWork?.author?.shortName}
 						</span>
 					</p>
 				</Group>
