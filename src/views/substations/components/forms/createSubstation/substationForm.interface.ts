@@ -17,7 +17,7 @@ export interface ISubstationFields {
 }
 
 export interface IPropsSubstationForm {
-  substation?: ISubstation
+  substation?: ISubstation | null
   isEdited?: boolean
   toggleModal: () => void
   setIsEdited?: (val: boolean) => void

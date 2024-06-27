@@ -9,7 +9,7 @@ export interface ICompletedWorkFields {
 }
 
 export interface IPropsCompletedWorkForm {
-	completedWork?: ICompletedWork
+	completedWork?: ICompletedWork | null
 	isEdited?: boolean | undefined
 	toggleModal: () => void
 	setIsEdited?: (val: boolean) => void
