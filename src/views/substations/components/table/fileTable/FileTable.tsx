@@ -37,6 +37,13 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 			accessorKey: 'size'
 		},
 		{
+			header: 'Автор',
+			accessorKey: 'author',
+			cell: ({row}) => (
+				row.original.author?.shortName
+			)
+		},
+		{
 			header: '⚙️',
 			enableSorting: false,
 			accessorKey: 'setting',
