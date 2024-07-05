@@ -1,9 +1,9 @@
 import { Suspense, type FC } from 'react'
 
 import { Outlet } from 'react-router-dom'
+import { Loader } from '..'
 import { useAuthStore } from '../../store/auth'
 import { Header } from '../header/Header'
-import { Loader } from '../loader/Loader'
 
 export const Layout: FC = () => {
 	const userAuthStore = useAuthStore()
