@@ -14,28 +14,30 @@ const CustomInput: FC<IPropsCustomInput> = ({
   label,
   className,
   classLabel,
-	mandatory,
+  mandatory,
   ...attributes
 }) => {
   return (
-			<div className={cx(styles['custom-input-wrapper'], joinClasses(styles, className))}>
-				<label htmlFor={name} className={cx('label', classLabel)}>
-					<span className='label__text'>
-						{label}
-						{mandatory && (<span className='text-mandatory'>*</span>)}
-					</span>
-				</label>
-				<Input
-					{...register(name, validation)}
-					id={name}
-					type='text'
-					// className={cx(className)}
-					error={Boolean(errorMessage)}
-					aria-invalid={Boolean(errorMessage)}
-					{...attributes}
-				/>
-				{errorMessage && <ValidationMessage className='error-bottom-23' children={errorMessage} />}
-		</div>
+    <div className={cx(styles['custom-input-wrapper'], joinClasses(styles, className))}>
+      {label && (
+        <label htmlFor={name} className={cx('label', classLabel)}>
+          <span className='label__text'>
+            {label}
+            {mandatory && (<span className='text-mandatory'>*</span>)}
+          </span>
+        </label>
+      )}
+      <Input
+        {...register(name, validation)}
+        id={name}
+        type='text'
+        // className={cx(className)}
+        error={Boolean(errorMessage)}
+        aria-invalid={Boolean(errorMessage)}
+        {...attributes}
+      />
+      {errorMessage && <ValidationMessage className='error-bottom-23' children={errorMessage} />}
+    </div>
   )
 }
 
