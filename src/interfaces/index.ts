@@ -14,6 +14,6 @@ import { IRole } from './role.interface'
 import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
+import { IStatusAccount } from './status-account.interface'
 
-export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
-
+export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass, IStatusAccount }
