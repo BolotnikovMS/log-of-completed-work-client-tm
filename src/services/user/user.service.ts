@@ -1,4 +1,4 @@
-import { IChangePassword, IQueryParams, IUser } from '../../interfaces'
+import { IChangePassword, IQueryParams, IStatusAccount, IUser } from '../../interfaces'
 import { TRespUsers, TUserData } from './user.type'
 
 import { AxiosResponse } from 'axios'
@@ -20,5 +20,9 @@ export const UserService = {
 
   async resetPassword(idUser: number, data: IChangePassword): Promise<AxiosResponse<string>> {
     return instance.patch(`/users/reset-password/${idUser}`, data)
+  },
+
+  async changeStatusAccount(idUser: number, data: IStatusAccount): Promise<AxiosResponse<string>> {
+    return instance.patch(`/users/block-user-account/${idUser}`, data)
   }
 }
