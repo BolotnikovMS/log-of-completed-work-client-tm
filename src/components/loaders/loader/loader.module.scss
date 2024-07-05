@@ -1,9 +1,3 @@
-.loader-wrapper {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0;
-}
-
 .loader {
   width: 48px;
   height: 48px;
@@ -13,6 +7,12 @@
   display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
+
+  &Wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 40px 0;
+  }
 }
 
 @keyframes rotation {
