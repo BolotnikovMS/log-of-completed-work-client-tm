@@ -22,10 +22,10 @@ export const App = () => {
 		
 		try {
 			if (token && Date.now() < Date.parse(token.expiresIn)) {
-				const data = await AuthService.getProfile()
+				const userProfile = await AuthService.getProfile()
 
-				if (data) {
-					userAuthStore.setAuthUser(data)
+				if (userProfile) {
+					userAuthStore.setAuthUser(userProfile)
 				} else {
 					console.log('Error auth')
 					userAuthStore.setAuthUser(null)
