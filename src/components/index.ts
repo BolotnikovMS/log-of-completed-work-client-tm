@@ -6,7 +6,7 @@ import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
 import { Header } from './header/Header'
 import { Layout } from './layout/Layout'
-import { Loader } from './loader/Loader'
+import { Loader } from './loaders/loader/Loader'
 import { Modal } from './modal/Modal'
 import { NavBar } from './navBar/NavBar'
 import { Page } from './page/Page'
@@ -28,5 +28,8 @@ const BasicTable = lazy(() => import('./tables/BasicTable'))
 const FileUploader = lazy(() => import('./forms/fileUploader/FileUploader'))
 const Tab = lazy(() => import('./tab/Tab'))
 const ChangePasswordForm = lazy(() => import('./forms/changePassword/ChangePasswordForm'))
+const Toggle = lazy(() => import('./toggle/Toggle'))
+const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
 
-export { Badge, BasicTable, Button, Card, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, ValidationMessage, ChangePasswordForm }
+export { Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
+
