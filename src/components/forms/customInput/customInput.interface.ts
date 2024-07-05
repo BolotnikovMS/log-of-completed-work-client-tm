@@ -7,7 +7,7 @@ export interface IPropsCustomInput extends IPropsInput {
   validation?: { [key: string]: unknown }
   errorMessage?: string
   name: string
-  label: string
+  label?: string
   classLabel?: string
-	mandatory?: boolean
+  mandatory?: boolean
 }
