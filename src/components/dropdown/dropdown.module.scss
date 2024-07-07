@@ -1,0 +1,48 @@
+.dropdown {
+  position: relative;
+  display: inline-block;
+
+  &TriggerBtn {
+    padding: 5px 10px;
+    font-size: clamp(13px, 2.3vw, 22px) !important;
+  }
+
+  &Menu {
+    position: absolute;
+    min-width: 170px;
+    top: 40px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-radius: 10px;
+    background-color: rgba(201, 198, 198, 0.95);
+    font-size: 22px;
+    z-index: 4;
+    transition: all 0.2s ease-in;
+
+    & > li {
+      padding: 3px 5px;
+			display: grid;
+      cursor: pointer;
+      transition: all 0.3s ease-in;
+
+      &:hover {
+        border-radius: 10px;
+        background-color: #bdbbbb;
+      }
+    }
+  }
+}
+
+/* .dropdown__menu-btn {
+  width: 100%;
+  padding: 0 5px;
+  background-color: transparent;
+} */
+
+/* @media (hover: hover) and (pointer: fine) {
+  .dropdown__menu-btn:hover {
+    background-color: transparent;
+  }
+} */

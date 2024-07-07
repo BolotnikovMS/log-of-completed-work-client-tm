@@ -30,6 +30,7 @@ const Tab = lazy(() => import('./tab/Tab'))
 const ChangePasswordForm = lazy(() => import('./forms/changePassword/ChangePasswordForm'))
 const Toggle = lazy(() => import('./toggle/Toggle'))
 const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
+const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 
-export { Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
+export { Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Dropdown, Error, FileUploader, Group, Header, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
 
