@@ -8,12 +8,17 @@ import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
+import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationsCards: FC = () => {
 	const queryParams = new URLSearchParams(location.search)
 	const searchSubstationName = queryParams.get('search') ?? ''
+	const sortParams: {sort: string, order: TOrderSort} = {
+		sort: queryParams.get('sort') || 'name',
+		order: (queryParams.get('order') ?? 'asc') as TOrderSort
+	}
 	const { authUser } = useAuthStore()
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchSubstationName })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchSubstationName, sort: sortParams.sort, order: sortParams.order })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)

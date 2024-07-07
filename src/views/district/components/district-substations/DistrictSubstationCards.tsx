@@ -9,6 +9,7 @@ import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
+import { TOrderSort } from '../../../../types/order.types'
 import { SubstationForm } from '../../../substations/components'
 
 const DistrictSubstationCards: FC = () => {
@@ -16,9 +17,13 @@ const DistrictSubstationCards: FC = () => {
   const { id } = useParams()
 	const queryParams = new URLSearchParams(location.search)
 	const searchSubstationName = queryParams.get('search') ?? ''
+	const sortParams: {sort: string, order: TOrderSort} = {
+		sort: queryParams.get('sort') || 'name',
+		order: (queryParams.get('order') ?? 'asc') as TOrderSort
+	}
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
-  const { substations, error, isError, isLoading } = useDistrictSubstations({id, search: searchSubstationName})
+  const { substations, error, isError, isLoading } = useDistrictSubstations({id, search: searchSubstationName, sort: sortParams.sort, order: sortParams.order})
   const [substationData, setSubstation] = useState<ISubstation | null>(null)
   const { deleteSubstation } = useDeleteSubstation()
   const handleDelete = (id: number) => {
