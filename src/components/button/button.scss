@@ -22,7 +22,15 @@
   &-bg_red {
     border: 1px solid  #f64747;
     background-color: #f64747;
-  }
+  } 
+
+	&-bg_trnt {
+		background-color: transparent;
+
+		&:hover {
+			background-color: transparent !important;
+		}
+	}
 
 	&-nav-bar {
 		padding: 0.13rem 1rem !important;

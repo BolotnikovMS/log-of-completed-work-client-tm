@@ -184,18 +184,25 @@ body {
 
 .control {
 	&__wrapper {
+		width: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: 12px;
+		gap: 15px;
 	}
 }
 
 .filters {
+	width: 100%;
 	gap: 5px;
 	
 	&-row {
 		display: flex;
+		justify-content: space-between;
+	}
+
+	&-aic {
+		align-items: center;
 	}
 }
 
