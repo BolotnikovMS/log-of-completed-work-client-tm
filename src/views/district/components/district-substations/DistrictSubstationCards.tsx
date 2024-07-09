@@ -2,8 +2,8 @@ import { Badge, Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../
 
 import { isAxiosError } from 'axios'
 import { Pencil, Trash2 } from 'lucide-react'
-import { useState, type FC } from 'react'
-import { useParams } from 'react-router-dom'
+import { useMemo, useState, type FC } from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
@@ -15,17 +15,12 @@ import { SubstationForm } from '../../../substations/components'
 const DistrictSubstationCards: FC = () => {
 	const { authUser } = useAuthStore()
   const { id } = useParams()
-	const queryParams = new URLSearchParams(location.search)
-	const searchSubstationName = queryParams.get('search') ?? ''
-	const sortParams: {sort: string, order: TOrderSort} = {
-		sort: queryParams.get('sort') || 'name',
-		order: (queryParams.get('order') ?? 'asc') as TOrderSort
-	}
+	const [searchParams] = useSearchParams()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
-  const { substations, error, isError, isLoading } = useDistrictSubstations({id, search: searchSubstationName, sort: sortParams.sort, order: sortParams.order})
   const [substationData, setSubstation] = useState<ISubstation | null>(null)
   const { deleteSubstation } = useDeleteSubstation()
+  const { substations, error, isError, isLoading } = useDistrictSubstations({ id, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
   const handleDelete = (id: number) => {
     const answer = confirm('Подтвердите удаление записи.')
 
@@ -33,14 +28,15 @@ const DistrictSubstationCards: FC = () => {
 
     return deleteSubstation.mutate(id)
   }
+	const memoizedSubstations = useMemo(() => substations, [substations])
 
   return (
     <>
       {isLoading && <Loader />}
       {(isError && isAxiosError(error)) && <Error error={error} />}
-      {!!substations?.length && (
+      {!!memoizedSubstations?.length && (
         <div className="cards">
-          {substations.map(substation => (
+          {memoizedSubstations.map(substation => (
             <SmallCard
               key={substation.id}
 							childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}

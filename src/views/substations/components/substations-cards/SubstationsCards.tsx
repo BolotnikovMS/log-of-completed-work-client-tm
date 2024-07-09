@@ -1,7 +1,8 @@
 import { Pencil, Trash2 } from 'lucide-react'
-import { useState, type FC } from 'react'
+import { useMemo, useState, type FC } from 'react'
 import { Badge, Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 
+import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
@@ -11,14 +12,9 @@ import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationsCards: FC = () => {
-	const queryParams = new URLSearchParams(location.search)
-	const searchSubstationName = queryParams.get('search') ?? ''
-	const sortParams: {sort: string, order: TOrderSort} = {
-		sort: queryParams.get('sort') || 'name',
-		order: (queryParams.get('order') ?? 'asc') as TOrderSort
-	}
+	const [searchParams] = useSearchParams()
 	const { authUser } = useAuthStore()
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchSubstationName, sort: sortParams.sort, order: sortParams.order })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)
@@ -30,6 +26,7 @@ const SubstationsCards: FC = () => {
 
     return deleteSubstation.mutate(id)
   }
+	const memoizedSubstations = useMemo(() => data, [data])
 
 	if (isError && error) return <Error error={error}/>
 
@@ -37,9 +34,9 @@ const SubstationsCards: FC = () => {
   
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!memoizedSubstations?.pages[0].data.length && (
 				<div className="cards">
-					{data.pages.map(substations => (
+					{memoizedSubstations.pages.map(substations => (
 						substations.data.map(substation => (
 							<SmallCard
 								key={substation.id}
