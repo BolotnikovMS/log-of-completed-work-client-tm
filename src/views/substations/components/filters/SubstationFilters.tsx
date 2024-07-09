@@ -1,45 +1,35 @@
 import { AlertCircle, Search, SortAsc, SortDesc } from 'lucide-react'
-import { ChangeEvent, useEffect, useState, type FC } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { ChangeEvent, useCallback, useState, type FC } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Button, Dropdown, Input } from '../../../../components'
 import { transliterate } from '../../../../helpers'
 import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationFilters: FC = () => {
-  const location = useLocation()
-  const navigate = useNavigate()
-  const queryParams = new URLSearchParams(location.search)
-  const searchParamValue = queryParams.get('search')
-  const [searchValue, setSearchValue] = useState<string | null>(searchParamValue)
-	const [orderSort, setOrderSort] = useState<string | null>(queryParams.get('order') || 'asc')
-	const [sort, setSort] = useState<string>(queryParams.get('sort') || 'name')
-  const handelSearch = ({ target }: ChangeEvent<HTMLInputElement>) => {
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [searchValue, setSearchValue ] = useState(searchParams.get('search') || '')
+  const orderSort = searchParams.get('order') || 'asc'
+  const sort = searchParams.get('sort') || 'name'
+
+  const handleSearch = useCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
     const substationName = target.value
 
-    setSearchValue(substationName)
+		setSearchValue(substationName)
 
-    if (searchValue && searchValue.length >= 3) {
-      queryParams.set('search', transliterate(substationName))
-      navigate({ search: queryParams.toString() })
+    if (substationName.length >= 3) {
+      searchParams.set('search', transliterate(substationName))
+    } else {
+      searchParams.delete('search')
     }
-  }
-	const handelSort = (orderValue: TOrderSort, sortValue?: string) => {
-		const sortParam = new URLSearchParams({
-			sort: sortValue ?? 'name',
-			order: orderValue
-		})
-		setOrderSort(orderValue)
-		setSort(sortValue ?? 'name')
 
-		navigate({ search: sortParam.toString() })
-	}
+    setSearchParams(searchParams)
+  }, [searchParams, setSearchParams])
 
-  useEffect(() => {
-    if (!searchValue) {
-      queryParams.delete('search')
-      navigate({ search: queryParams.toString() })
-    }
-  }, [searchValue])
+  const handleSort = useCallback((orderValue: TOrderSort, sortValue: string = 'name') => {
+    searchParams.set('order', orderValue)
+    searchParams.set('sort', sortValue)
+    setSearchParams(searchParams)
+  }, [searchParams, setSearchParams])
 
   return (
     <div className='filters filters-row filters-aic'>
@@ -52,15 +42,15 @@ const SubstationFilters: FC = () => {
 					</>
 				}
         menuItems={[
-          <Button classBtn='btn-bg_trnt' onClick={() => handelSort('asc')}>
+          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('asc')}>
 						<SortAsc />
             А-Я
           </Button>,
-          <Button classBtn='btn-bg_trnt' onClick={() => handelSort('desc')}>
+          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('desc')}>
 						<SortDesc />
             Я-А
           </Button>,
-          <Button classBtn='btn-bg_trnt' onClick={() => handelSort('desc', 'rdu')}>
+          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('desc', 'rdu')}>
 						<AlertCircle />
             РДУ
           </Button>
@@ -70,8 +60,8 @@ const SubstationFilters: FC = () => {
 				<Input
 					name='substation'
 					type='search'
-					onChange={(e) => handelSearch(e)}
-					value={searchValue ?? ''}
+					onChange={(e) => handleSearch(e)}
+					value={searchValue}
 					autoComplete='off'
 					placeholder='Введите название ПС...'
 					iconLeft={<Search />}
