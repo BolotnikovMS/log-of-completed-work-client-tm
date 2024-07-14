@@ -18,8 +18,8 @@ export const ChannelTypeService = {
     return instance.post<IChannelType>(`${url}/channel-types`, data)
   },
 
-  async updateChannelType({id, data}: {id: number, data: TChannelTypeData}): Promise<AxiosResponse<IChannelType>> {
-    return await instance.patch<IChannelType>(`${url}/channel-types/${id}`, data)
+  async updateChannelType(id: number, data: TChannelTypeData): Promise<AxiosResponse<IChannelType>> {
+    return instance.patch<IChannelType>(`${url}/channel-types/${id}`, data)
   },
 
   async deleteChannelType(id: number): Promise<AxiosResponse<void>> {
