@@ -4,8 +4,7 @@ import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.int
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
-import { useCreateChannelType } from '../../../../hooks/channel-types/useCreateChannelType'
-import { useUpdateChannelType } from '../../../../hooks/channel-types/useUpdateChannelType'
+import { useCreateChannelType, useUpdateChannelType } from '../../../../hooks'
 import { validationSchema } from './channelType.validation'
 
 const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {

@@ -1,7 +1,9 @@
 import { useLogout } from './auth/useLogout'
 import { useChannelTypes } from './channel-types/useChannelTypes'
+import { useCreateChannelType } from './channel-types/useCreateChannelType'
 import { useDeleteChannelType } from './channel-types/useDeleteChannelType'
 import { useInfiniteChannelTypes } from './channel-types/useInfiniteChannelTypes'
+import { useUpdateChannelType } from './channel-types/useUpdateChannelType'
 import { useDeleteCompletedWork } from './completed-works/useDeleteCompletedWork'
 import { useDeleteDistrict } from './distrcts/useDeleteDistrict'
 import { useDistrictSubstations } from './distrcts/useDistrictSubstations'
@@ -28,4 +30,5 @@ import { useDeleteVoltageClass } from './voltage-classes/useDeleteVoltageClass'
 import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageClasses'
 import { useVoltageClasses } from './voltage-classes/useVoltageClasses'
 
-export { useChannelTypes, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUsers, useVoltageClasses, useChangeStatusAccountMutation }
+export { useChangeStatusAccountMutation, useChannelTypes, useCreateChannelType, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUpdateChannelType, useUsers, useVoltageClasses }
+
