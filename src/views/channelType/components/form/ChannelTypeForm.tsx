@@ -3,7 +3,7 @@ import { Button, CustomInput, Error, Group, Loader } from '../../../../component
 import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
 import { useCreateChannelType, useUpdateChannelType } from '../../../../hooks'
 import { validationSchema } from './channelType.validation'
 
@@ -15,27 +15,42 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
       name: channelType?.name
     }
   })
-	const { mutateAsync: createMutate, isError: isErrorCreate, error: errorCreate, isPending } = useCreateChannelType()
-	const { mutateAsync: updateMutate, isError: isErrorUpdate, error: errorUpdate } = useUpdateChannelType()
+	const [error, setError] = useState<Error | null>(null)
+	const { mutateAsync: createMutate, isError: isErrorCreate, isPending: isPendingCreate } = useCreateChannelType()
+	const { mutateAsync: updateMutate, isError: isErrorUpdate, isPending: isPendingUpdate } = useUpdateChannelType()
   const submitCreate: SubmitHandler<IChannelTypeFields> = data => {
-		createMutate(data)
-		reset()
-		toggleModal()
+		createMutate(data, {
+			onSuccess: () => {
+				reset()
+				toggleModal()
+			},
+			onError: (errors) => {
+				setError(errors)
+			}
+		})
   }
-	const submitUpdate: SubmitHandler<IChannelTypeFields> = data => {
+	const submitUpdate: SubmitHandler<IChannelTypeFields> = async data => {
 		if (!channelType?.id) return null
 
-		updateMutate({id: channelType?.id, data})
-		reset()
-		toggleModal()
+		await updateMutate({id: channelType?.id, data}, {
+			// !!! Не работает
+			onSuccess: () => {
+				reset()
+				toggleModal()
 
-		if (isEdited && setIsEdited) setIsEdited(false)
+				if (isEdited && setIsEdited) setIsEdited(false)
+			},
+			onError: (errors) => {
+				setError(errors)
+			}
+		})
 	}
+	const errorMessage = ((isErrorCreate || isErrorUpdate) && error !== null) && <Error error={error} />
 
   return (
 		<div className="work-log__form">
-			{(isErrorCreate) || (isErrorUpdate) && <Error error={errorCreate || errorUpdate} />}
-			{isPending ? 
+			{errorMessage}
+			{isPendingCreate || isPendingUpdate ? 
 				(<Loader />) : (
 				<form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
 					<div className="form__content form__content-w-55 form__content-mt">
