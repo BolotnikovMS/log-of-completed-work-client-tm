@@ -1,10 +1,11 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IChannelTypeFields, IPropsChannelTypeForm, IPropsMutation } from './channelTypeForm.interface'
+import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState, type FC } from 'react'
 import { useCreateChannelType, useUpdateChannelType } from '../../../../hooks'
+import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './channelType.validation'
 
 const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
@@ -18,7 +19,7 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
 	const [error, setError] = useState<Error | null>(null)
 	const { mutateAsync: createMutate, isError: isErrorCreate, isPending: isPendingCreate } = useCreateChannelType()
 	const { mutateAsync: updateMutate, isError: isErrorUpdate, isPending: isPendingUpdate } = useUpdateChannelType()
-	const handleMutation = async ({ data, mutateFn, id}: IPropsMutation) => {
+	const handleMutation = async ({ data, mutateFn, id}: IPropsMutation<IChannelTypeFields>) => {
     try {
       await mutateFn(id ? { id, data } : data)
 

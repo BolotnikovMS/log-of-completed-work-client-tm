@@ -9,11 +9,13 @@ import { IFile } from './file.interface'
 import { IGsmOperator } from './gsm-operator.interface'
 import { IHeadController } from './head-controller.interface'
 import { IMeta } from './meta.interface'
+import { IPropsMutation } from './mutation-data.interface'
 import { IQueryParams } from './qparams.interface'
 import { IRole } from './role.interface'
+import { IStatusAccount } from './status-account.interface'
 import { ISubstation } from './substation.interface'
 import { ITypeKp } from './type-kp'
 import { IVoltageClass } from './voltage-class.interface'
-import { IStatusAccount } from './status-account.interface'
 
-export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass, IStatusAccount }
+export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IPropsMutation, IQueryParams, IRole, ISignInFields, IStatusAccount, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IVoltageClass }
+
