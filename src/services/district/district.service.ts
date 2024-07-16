@@ -27,7 +27,7 @@ export const DistrictService = {
     return data
   },
 
-  async updateDistrict({id, data}: {id: number, data: TDistrictData}): Promise<AxiosResponse<IDistrict>> {
+  async updateDistrict(id: number, data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
     return await instance.patch<IDistrict>(`${url}/districts/${id}`, data)
   },
 
