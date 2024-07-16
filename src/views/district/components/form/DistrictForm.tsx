@@ -1,14 +1,11 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { type FC } from 'react'
+import { useState, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
 import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
 
 import { yupResolver } from '@hookform/resolvers/yup'
-import { toast } from 'react-toastify'
-import { errorHandler } from '../../../../helpers/errorHandler.helper'
-import { DistrictService } from '../../../../services/district/district.service'
-import { TDistrictData } from '../../../../services/district/district.type'
+import { useCreateDistrict, useUpdateDistrict } from '../../../../hooks'
+import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './district.validation'
 
 const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
@@ -20,69 +17,65 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
       shortName: district?.shortName
     }
   })
-  const queryClient = useQueryClient()
-  const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-    mutationFn: isEdited ? (data: TDistrictData) => DistrictService.updateDistrict({ id: district!.id, data }) : (data: TDistrictData) => DistrictService.create(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['districts', 'infinity'] })
+	const [error, setError] = useState<Error | null>(null)
+	const { mutateAsync: createMutate, isError: isErrorCreate, isPending: isPendingCreate } = useCreateDistrict()
+	const { mutateAsync: updateMutate, isError: isErrorUpdate, isPending: isPendingUpdate } = useUpdateDistrict()
+	const handleMutation = async ({ data, mutateFn, id}: IPropsMutation<IDistrictFields>) => {
+    try {
+      await mutateFn(id ? { id, data } : data)
 
-      if (district !== undefined && district !== null && setIsEdited) {
-        setIsEdited(false)
-        toast.success('Запись успешно обновлена!')
-      } else {
-        toast.success('Запись успешно добавлена!')
-      }
       reset()
       toggleModal()
-    },
-    onError: async (errors) => {
-      toast.error(errorHandler(errors))
-    },
-  })
-
-  const submit: SubmitHandler<IDistrictFields> = data => {
-    mutateAsync(data)
+      if (isEdited && setIsEdited) setIsEdited(false)
+    } catch (error) {
+      setError(error as Error)
+    }
   }
+  const submitCreate: SubmitHandler<IDistrictFields> = data => handleMutation({data, mutateFn: createMutate})
+  const submitUpdate: SubmitHandler<IDistrictFields> = data => {
+    if (!district?.id) return null
+		
+    handleMutation({data, mutateFn: updateMutate, id: district.id})
+  }
+	const errorMessage = ((isErrorCreate || isErrorUpdate) && error !== null) && <Error error={error} />
 
   return (
-    <>
-      <div className="work-log__form">
-        {(isErrorMutate) && <Error error={errorMutate} />}
-        {isPending ?
-          (<Loader />)
-          : (
-            <form className="form form-col" onSubmit={handleSubmit(submit)}>
-              <div className="form__content form__content-w-55 form__content-mt">
-                <Group className='group-col group-str'>
-                  <CustomInput
-                    label='Название Района или ГП'
-                    name='name'
-                    register={register}
-                    errorMessage={errors.name?.message}
-										mandatory={true}
-                    placeholder='Введите название...'
-                  />
-                </Group>
-                <Group className='group-col group-str'>
-                  <CustomInput
-                    label='Сокращенное название'
-                    name='shortName'
-                    register={register}
-                    errorMessage={errors.shortName?.message}
-										mandatory={true}
-                    placeholder='Введите сокращенное название...'
-                  />
-                </Group>
-              </div>
-              <div className="form__btns">
-                <Button disabled={!isValid} classBtn='btn-bg_green'>
-                  {isEdited ? 'Сохранить' : 'Добавить'}
-                </Button>
-              </div>
-            </form>
-          )}
-      </div>
-    </>
+		<div className="work-log__form">
+			{errorMessage}
+			{isPendingCreate || isPendingUpdate ?
+				(<Loader />)
+				: (
+					<form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+						<div className="form__content form__content-w-55 form__content-mt">
+							<Group className='group-col group-str'>
+								<CustomInput
+									label='Название Района или ГП'
+									name='name'
+									register={register}
+									errorMessage={errors.name?.message}
+									mandatory={true}
+									placeholder='Введите название...'
+								/>
+							</Group>
+							<Group className='group-col group-str'>
+								<CustomInput
+									label='Сокращенное название'
+									name='shortName'
+									register={register}
+									errorMessage={errors.shortName?.message}
+									mandatory={true}
+									placeholder='Введите сокращенное название...'
+								/>
+							</Group>
+						</div>
+						<div className="form__btns">
+							<Button disabled={!isValid} classBtn='btn-bg_green'>
+								{isEdited ? 'Сохранить' : 'Добавить'}
+							</Button>
+						</div>
+					</form>
+				)}
+		</div>
   )
 }
 
