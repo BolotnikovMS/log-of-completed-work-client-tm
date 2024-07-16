@@ -1,6 +1,6 @@
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface'
+import { IChannelTypeFields, IPropsChannelTypeForm, IPropsMutation } from './channelTypeForm.interface'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState, type FC } from 'react'
@@ -18,8 +18,7 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
 	const [error, setError] = useState<Error | null>(null)
 	const { mutateAsync: createMutate, isError: isErrorCreate, isPending: isPendingCreate } = useCreateChannelType()
 	const { mutateAsync: updateMutate, isError: isErrorUpdate, isPending: isPendingUpdate } = useUpdateChannelType()
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	const handleMutation = async (data: IChannelTypeFields, mutateFn: (data: any) => Promise<any>, id?: number) => {
+	const handleMutation = async ({ data, mutateFn, id}: IPropsMutation) => {
     try {
       await mutateFn(id ? { id, data } : data)
 
@@ -30,11 +29,11 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
       setError(error as Error)
     }
   }
-  const submitCreate: SubmitHandler<IChannelTypeFields> = data => handleMutation(data, createMutate)
+  const submitCreate: SubmitHandler<IChannelTypeFields> = data => handleMutation({data, mutateFn: createMutate})
   const submitUpdate: SubmitHandler<IChannelTypeFields> = data => {
     if (!channelType?.id) return null
 		
-    handleMutation(data, updateMutate, channelType.id)
+    handleMutation({data, mutateFn: updateMutate, id: channelType.id})
   }
 	const errorMessage = ((isErrorCreate || isErrorUpdate) && error !== null) && <Error error={error} />
 

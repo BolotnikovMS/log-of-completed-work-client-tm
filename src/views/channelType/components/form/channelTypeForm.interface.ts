@@ -10,3 +10,10 @@ export interface IPropsChannelTypeForm {
   toggleModal: () => void
   setIsEdited?: (val: boolean) => void
 }
+
+export interface IPropsMutation {
+	data: IChannelTypeFields
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	mutateFn: (data: any) => Promise<any>
+	id?: number
+}
