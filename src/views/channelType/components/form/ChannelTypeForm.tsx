@@ -18,33 +18,24 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
 	const [error, setError] = useState<Error | null>(null)
 	const { mutateAsync: createMutate, isError: isErrorCreate, isPending: isPendingCreate } = useCreateChannelType()
 	const { mutateAsync: updateMutate, isError: isErrorUpdate, isPending: isPendingUpdate } = useUpdateChannelType()
-  const submitCreate: SubmitHandler<IChannelTypeFields> = data => {
-		createMutate(data, {
-			onSuccess: () => {
-				reset()
-				toggleModal()
-			},
-			onError: (errors) => {
-				setError(errors)
-			}
-		})
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	const handleMutation = async (data: IChannelTypeFields, mutateFn: (data: any) => Promise<any>, id?: number) => {
+    try {
+      await mutateFn(id ? { id, data } : data)
+
+      reset()
+      toggleModal()
+      if (isEdited && setIsEdited) setIsEdited(false)
+    } catch (error) {
+      setError(error as Error)
+    }
   }
-	const submitUpdate: SubmitHandler<IChannelTypeFields> = async data => {
-		if (!channelType?.id) return null
-
-		await updateMutate({id: channelType?.id, data}, {
-			// !!! Не работает
-			onSuccess: () => {
-				reset()
-				toggleModal()
-
-				if (isEdited && setIsEdited) setIsEdited(false)
-			},
-			onError: (errors) => {
-				setError(errors)
-			}
-		})
-	}
+  const submitCreate: SubmitHandler<IChannelTypeFields> = data => handleMutation(data, createMutate)
+  const submitUpdate: SubmitHandler<IChannelTypeFields> = data => {
+    if (!channelType?.id) return null
+		
+    handleMutation(data, updateMutate, channelType.id)
+  }
 	const errorMessage = ((isErrorCreate || isErrorUpdate) && error !== null) && <Error error={error} />
 
   return (
