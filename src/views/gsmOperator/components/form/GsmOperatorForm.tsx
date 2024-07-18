@@ -1,60 +1,44 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AxiosError, isAxiosError } from 'axios'
-import { type FC } from 'react'
-import { toast } from 'react-toastify'
-import { GsmOperatorService } from '../../../../services/gsm-operator/gsm-operator.service'
-import { TGsmOperatorData } from '../../../../services/gsm-operator/gsm-operator.type'
+import { useCreateGsmOperator, useUpdateGsmOperator } from '../../../../hooks'
+import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './gsmOperator.validation'
+import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
 
 const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
     mode: 'onBlur',
-		resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       name: gsmOperator?.name
     }
   })
-  const queryClient = useQueryClient()
-  const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-    mutationFn: isEdited ? (data: TGsmOperatorData) => GsmOperatorService.updateGsmOperator({id: gsmOperator!.id, data}) : (data: TGsmOperatorData) => GsmOperatorService.create(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({queryKey: ['gsmOperators']})
+  const { mutateAsync: createGsmOperator, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateGsmOperator()
+  const { mutateAsync: updateGsmOperator, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateGsmOperator()
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IGsmOperatorFields>) => {
+    await mutateFn(id ? { id, data } : data)
 
-			if (gsmOperator !== undefined && gsmOperator !== null && setIsEdited) {
-				setIsEdited(false)
-				toast.success('Запись успешно обновлена!')
-			} else {
-				toast.success('Запись успешно добавлена!')
-			}
-			reset()
-			toggleModal()
-    },
-		onError: (errors) => {
-			if(isAxiosError(errors)) {
-				if (Array.isArray(errors.response?.data)) {
-					errors.response?.data.map((errData: AxiosError) => {
-						toast.error(errData.message)
-					})
-				}
-			}
-		}
-  })
+    reset()
+    toggleModal()
+    if (isEdited && setIsEdited) setIsEdited(false)
+  }
+  const submitCreate: SubmitHandler<IGsmOperatorFields> = data => handleMutation({ data, mutateFn: createGsmOperator })
+  const submitUpdate: SubmitHandler<IGsmOperatorFields> = data => {
+    if (!gsmOperator?.id) return null
 
-  const submit: SubmitHandler<IGsmOperatorFields> = data => mutateAsync(data)
+    handleMutation({ data, mutateFn: updateGsmOperator, id: gsmOperator.id })
+  }
+  const errorMessage = (isErrorCreate || isErrorUpdate && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
 
   return (
-    <>
-      <div className="work-log__form">
-        {(isErrorMutate) && <Error error={errorMutate} />}
-        {isPending ? 
-          (<Loader />)
+    <div className="work-log__form">
+      {errorMessage}
+      {isPendingCreate || isPendingUpdate ?
+        (<Loader />)
         : (
-          <form className="form form-col" onSubmit={handleSubmit(submit)}>
+          <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
             <div className="form__content form__content-w-55 form__content-mt">
               <Group className='group-col group-str'>
                 <CustomInput
@@ -62,7 +46,7 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
                   name='name'
                   register={register}
                   errorMessage={errors.name?.message}
-									mandatory={true}
+                  mandatory={true}
                   placeholder='Введите наименование...'
                 />
               </Group>
@@ -74,8 +58,7 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
             </div>
           </form>
         )}
-      </div>
-    </>
+    </div>
   )
 }
 

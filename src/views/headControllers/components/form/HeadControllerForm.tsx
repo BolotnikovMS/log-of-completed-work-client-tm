@@ -1,80 +1,63 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AxiosError, isAxiosError } from 'axios'
-import { type FC } from 'react'
-import { toast } from 'react-toastify'
-import { HeadControllerService } from '../../../../services/head-controller/head-controller.service'
-import { THeadControllerData } from '../../../../services/head-controller/head-controller.type'
+import { useCreateHeadController, useUpdateHeadController } from '../../../../hooks'
+import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './headController.validation'
+import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
 
 const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
     mode: 'onBlur',
-		resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       name: headController?.name
     }
   })
-  const queryClient = useQueryClient()
-  const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-    mutationFn: isEdited ? (data: THeadControllerData) => HeadControllerService.updateHeadController({id: headController!.id, data}) : (data: THeadControllerData) => HeadControllerService.create(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({queryKey: ['headControllers', 'infinity']})
+  const { mutateAsync: createHeadController, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateHeadController()
+  const { mutateAsync: updateHeadController, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateHeadController()
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IHeadControllerFields>) => {
+    await mutateFn(id ? { id, data } : data)
 
-			if (headController !== undefined && headController !== null && setIsEdited) {
-				setIsEdited(false)
-				toast.success('Запись успешно обновлена!')
-			} else {
-				toast.success('Запись успешно добавлена!')
-			}
-			reset()
-			toggleModal()
-    },
-		onError: (errors) => {
-			if(isAxiosError(errors)) {
-				if (Array.isArray(errors.response?.data)) {
-					errors.response?.data.map((errData: AxiosError) => {
-						toast.error(errData.message)
-					})
-				}
-			}
-		}
-  })
-
-  const submit: SubmitHandler<IHeadControllerFields> = data => {
-    mutateAsync(data)
+    reset()
+    toggleModal()
+    if (isEdited && setIsEdited) setIsEdited(false)
   }
-  
+  const submitCreate: SubmitHandler<IHeadControllerFields> = data => handleMutation({ data, mutateFn: createHeadController })
+  const submitUpdate: SubmitHandler<IHeadControllerFields> = data => {
+    if (!headController?.id) return null
+
+    handleMutation({ data, mutateFn: updateHeadController, id: headController.id })
+  }
+  const errorMessage = (isErrorCreate || isErrorUpdate && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
+
   return (
     <div className="work-log__form">
-      {(isErrorMutate) && <Error error={errorMutate} />}
-      {isPending ? 
+      {errorMessage}
+      {isPendingCreate || isPendingUpdate ?
         (<Loader />)
-      : (
-        <form className="form form-col" onSubmit={handleSubmit(submit)}>
-          <div className="form__content form__content-w-55 form__content-mt">
-            <Group className='group-col group-str'>
-              <CustomInput
-                label='Название контроллера'
-                name='name'
-                register={register}
-                errorMessage={errors.name?.message}
-								mandatory={true}
-                placeholder='Введите название контроллера...'
-              />
-            </Group>
-          </div>
-          <div className="form__btns">
-            <Button disabled={!isValid} classBtn='btn-bg_green'>
-              {isEdited ? 'Сохранить' : 'Добавить'}
-            </Button>
-          </div> 
-        </form>
-      )}
+        : (
+          <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+            <div className="form__content form__content-w-55 form__content-mt">
+              <Group className='group-col group-str'>
+                <CustomInput
+                  label='Название контроллера'
+                  name='name'
+                  register={register}
+                  errorMessage={errors.name?.message}
+                  mandatory={true}
+                  placeholder='Введите название контроллера...'
+                />
+              </Group>
+            </div>
+            <div className="form__btns">
+              <Button disabled={!isValid} classBtn='btn-bg_green'>
+                {isEdited ? 'Сохранить' : 'Добавить'}
+              </Button>
+            </div>
+          </form>
+        )}
     </div>
   )
 }
