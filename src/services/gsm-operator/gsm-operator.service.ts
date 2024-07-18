@@ -15,7 +15,7 @@ export const GsmOperatorService = {
     return instance.post<IGsmOperator>(`${url}/gsm-operators`, data)
   },
 
-  async updateGsmOperator({id, data}: {id: number, data: TGsmOperatorData}): Promise<AxiosResponse<IGsmOperator>> {
+  async updateGsmOperator(id: number, data: TGsmOperatorData): Promise<AxiosResponse<IGsmOperator>> {
     return await instance.patch<IGsmOperator>(`${url}/gsm-operators/${id}`, data)
   },
 

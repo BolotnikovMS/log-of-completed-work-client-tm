@@ -18,7 +18,7 @@ export const TypeKpService = {
     return instance.post<ITypeKp>(`${url}/types-kp`, data)
   },
 
-  async updateTypeKp({id, data}: {id: number, data: TTypeKpData}): Promise<AxiosResponse<ITypeKp>> {
+  async updateTypeKp(id: number, data: TTypeKpData): Promise<AxiosResponse<ITypeKp>> {
     return await instance.patch<ITypeKp>(`${url}/types-kp/${id}`, data)
   },
 

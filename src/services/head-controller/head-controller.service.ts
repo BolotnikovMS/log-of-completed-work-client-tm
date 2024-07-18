@@ -18,7 +18,7 @@ export const HeadControllerService = {
     return instance.post<IHeadController>(`${url}/head-controllers`, data)
   },
 
-  async updateHeadController({id, data}: {id: number, data: THeadControllerData}): Promise<AxiosResponse<IHeadController>> {
+  async updateHeadController(id: number, data: THeadControllerData): Promise<AxiosResponse<IHeadController>> {
     return await instance.patch<IHeadController>(`${url}/head-controllers/${id}`, data)
   },
 
