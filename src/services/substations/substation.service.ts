@@ -14,17 +14,17 @@ export const SubstationService = {
     return data
   },
 
-	async getSubstation(id: string): Promise<ISubstation> {
-		const { data } = await instance.get<ISubstation>(`${url}/substations/${id}`)
+  async getSubstation(id: string): Promise<ISubstation> {
+    const { data } = await instance.get<ISubstation>(`${url}/substations/${id}`)
 
-		return data
-	},
+    return data
+  },
 
   async create(data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
     return instance.post<ISubstation>(`${url}/substations`, data)
   },
 
-  async update({id, data}: {id: number, data: TSubstationData}): Promise<AxiosResponse<ISubstation>> {
+  async update(id: number, data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
     return await instance.patch<ISubstation>(`${url}/substations/${id}`, data)
   },
 

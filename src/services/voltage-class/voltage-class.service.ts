@@ -1,9 +1,8 @@
 import { type AxiosResponse } from 'axios'
-import { IQueryParams, IVoltageClass } from '../../interfaces'
-import { TResponseVoltageClass, TVoltageClass } from './voltage-class.type'
-
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
+import { IQueryParams, IVoltageClass } from '../../interfaces'
+import { TResponseVoltageClass, TVoltageClass } from './voltage-class.type'
 
 export const VoltageClassService = {
   async getVoltageClasses({ limit, page }: IQueryParams): Promise<TResponseVoltageClass> {
@@ -18,7 +17,7 @@ export const VoltageClassService = {
     return instance.post<IVoltageClass>(`${url}/voltage-classes`, data)
   },
 
-  async updateVoltageClass({id, data}: {id: number, data: TVoltageClass}): Promise<AxiosResponse<IVoltageClass>> {
+  async updateVoltageClass(id: number, data: TVoltageClass): Promise<AxiosResponse<IVoltageClass>> {
     return await instance.patch<IVoltageClass>(`${url}/voltage-classes/${id}`, data)
   },
 
