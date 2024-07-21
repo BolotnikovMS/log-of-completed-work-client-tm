@@ -1,61 +1,44 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
-
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AxiosError, isAxiosError } from 'axios'
-import { type FC } from 'react'
-import { toast } from 'react-toastify'
-import { VoltageClassService } from '../../../../services/voltage-class/voltage-class.service'
-import { TVoltageClass } from '../../../../services/voltage-class/voltage-class.type'
+import { useCreateVoltageClass, useUpdateVoltageClass } from '../../../../hooks'
+import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './voltageClasses.validation'
+import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
 
 const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
     mode: 'onBlur',
-		resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       name: voltageClass?.name
     }
   })
-  const queryClient = useQueryClient()
-  const { mutateAsync, isError: isErrorMutate, error: errorMutate, isPending } = useMutation({
-    mutationFn: isEdited ? (data: TVoltageClass) => VoltageClassService.updateVoltageClass({ id: voltageClass!.id, data }) : (data: TVoltageClass) => VoltageClassService.create(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['voltageClasses', 'infinity'] })
+  const { mutateAsync: createVoltageClass, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateVoltageClass()
+  const { mutateAsync: updateVoltageClass, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateVoltageClass()
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IVoltageClassFields>) => {
+    await mutateFn(id ? { id, data } : data)
 
-      if (voltageClass !== undefined && voltageClass !== null && setIsEdited) {
-        setIsEdited(false)
-        toast.success('Запись успешно обновлена!')
-      } else {
-        toast.success('Запись успешно добавлена!')
-      }
-      reset()
-      toggleModal()
-    },
-    onError: (errors) => {
-      if (isAxiosError(errors)) {
-        if (Array.isArray(errors.response?.data)) {
-          errors.response?.data.map((errData: AxiosError) => {
-            toast.error(errData.message)
-          })
-        }
-      }
-    }
-  })
-
-  const submit: SubmitHandler<IVoltageClassFields> = data => {
-    mutateAsync(data)
+    reset()
+    toggleModal()
+    if (isEdited && setIsEdited) setIsEdited(false)
   }
+  const submitCreate: SubmitHandler<IVoltageClassFields> = data => handleMutation({ data, mutateFn: createVoltageClass })
+  const submitUpdate: SubmitHandler<IVoltageClassFields> = data => {
+    if (!voltageClass?.id) return null
+
+    handleMutation({ data, mutateFn: updateVoltageClass, id: voltageClass.id })
+  }
+  const errorMessage = (isErrorCreate || isErrorUpdate && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
 
   return (
     <div className="work-log__form">
-      {(isErrorMutate) && <Error error={errorMutate} />}
-      {isPending ?
+      {errorMessage}
+      {isPendingCreate || isPendingUpdate ?
         (<Loader />)
         : (
-          <form className="form form-col" onSubmit={handleSubmit(submit)}>
+          <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
             <div className="form__content form__content-w-55 form__content-mt">
               <Group className='group-col group-str'>
                 <CustomInput
@@ -63,7 +46,7 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
                   name='name'
                   register={register}
                   errorMessage={errors.name?.message}
-									mandatory={true}
+                  mandatory={true}
                   placeholder='Введите класс напряжения...'
                 />
               </Group>
