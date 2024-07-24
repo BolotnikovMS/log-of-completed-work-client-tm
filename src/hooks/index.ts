@@ -37,6 +37,7 @@ import { useInfiniteTypesKp } from './types-kp/useInfiniteTypesKp'
 import { useTypesKp } from './types-kp/useTypesKp'
 import { useUpdateTypeKp } from './types-kp/useUpdateTypeKp'
 import { useChangeStatusAccountMutation } from './users/useChangeStatusAccountMutation'
+import { useCreateAccount } from './users/useCreateAccount'
 import { useUsers } from './users/useUsers'
 import { useCreateVoltageClass } from './voltage-classes/useCreateVoltageClass'
 import { useDeleteVoltageClass } from './voltage-classes/useDeleteVoltageClass'
@@ -44,4 +45,4 @@ import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageC
 import { useUpdateVoltageClass } from './voltage-classes/useUpdateVoltageClass'
 import { useVoltageClasses } from './voltage-classes/useVoltageClasses'
 
-export { useChangeStatusAccountMutation, useChannelTypes, useCreateChannelType, useCreateCompletedWork, useCreateDistrict, useCreateGsmOperator, useCreateHeadController, useCreateSubstation, useCreateTypeKp, useCreateVoltageClass, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUpdateChannelType, useUpdateCompletedWork, useUpdateDistrict, useUpdateGsmOperator, useUpdateHeadController, useUpdateSubstation, useUpdateTypeKp, useUpdateVoltageClass, useUsers, useVoltageClasses }
+export { useChangeStatusAccountMutation, useChannelTypes, useCreateChannelType, useCreateCompletedWork, useCreateDistrict, useCreateGsmOperator, useCreateHeadController, useCreateSubstation, useCreateTypeKp, useCreateVoltageClass, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUpdateChannelType, useUpdateCompletedWork, useUpdateDistrict, useUpdateGsmOperator, useUpdateHeadController, useUpdateSubstation, useUpdateTypeKp, useUpdateVoltageClass, useUsers, useVoltageClasses, useCreateAccount }
