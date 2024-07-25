@@ -32,32 +32,30 @@ const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIs
   }
   const errorMessage = (isErrorCreate || isErrorUpdate && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
 
+  if (isPendingCreate || isPendingUpdate) return <Loader />
+
   return (
     <div className="work-log__form">
       {errorMessage}
-      {isPendingCreate || isPendingUpdate ?
-        (<Loader />)
-        : (
-          <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-            <div className="form__content form__content-w-55 form__content-mt">
-              <Group className='group-col group-str'>
-                <CustomInput
-                  label='Название КП'
-                  name='name'
-                  register={register}
-                  errorMessage={errors.name?.message}
-                  mandatory={true}
-                  placeholder='Введите название КП...'
-                />
-              </Group>
-            </div>
-            <div className="form__btns">
-              <Button disabled={!isValid} classBtn='btn-bg_green'>
-                {isEdited ? 'Сохранить' : 'Добавить'}
-              </Button>
-            </div>
-          </form>
-        )}
+      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <div className="form__content form__content-w-55 form__content-mt">
+          <Group className='group-col group-str'>
+            <CustomInput
+              label='Название КП'
+              name='name'
+              register={register}
+              errorMessage={errors.name?.message}
+              mandatory={true}
+              placeholder='Введите название КП...'
+            />
+          </Group>
+        </div>
+        <div className="form__btns">
+          <Button disabled={!isValid} classBtn='btn-bg_green'>
+            {isEdited ? 'Сохранить' : 'Добавить'}
+          </Button>
+        </div>
+      </form>
     </div>
   )
 }
