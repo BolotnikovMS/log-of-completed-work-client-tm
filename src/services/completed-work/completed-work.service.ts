@@ -5,9 +5,9 @@ import { ICompletedWork, IQueryParams } from '../../interfaces'
 import { TCompletedWorkData, TRespCompletedWork } from './completed-work.type'
 
 export const CompletedWorkService = {
-  async getAll({ limit, page, substation }: IQueryParams): Promise<TRespCompletedWork> {
+  async getAll({ limit, page, substation, executor, dateStart, dateEnd }: IQueryParams): Promise<TRespCompletedWork> {
     const { data } = await instance.get<TRespCompletedWork>(`${url}/completed-works`, {
-      params: { page, limit, substation }
+      params: { page, limit, substation, executor, dateStart, dateEnd }
     })
 
     return data
