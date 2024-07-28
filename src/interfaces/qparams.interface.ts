@@ -8,7 +8,10 @@ export interface IQueryParams {
   order?: TOrderSort
   offset?: number
   limit?: number
-	substation?: string | null
-	active?: boolean
-	cleanUser?: boolean
+  substation?: string | null
+  active?: boolean
+  cleanUser?: boolean
+  executor?: string | null
+  dateStart?: string | null
+  dateEnd?: string | null
 }
