@@ -1,0 +1,42 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  height: clamp(100px, 45vw, 370px);
+
+  &Content {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  &Text {
+    font-size: clamp(17px, 2.5vw, 20px) !important;
+    text-align: center;
+  }
+
+  &DataInput {
+    width: 100%;
+    padding: 6px 7px;
+    font-size: clamp(17px, 2.5vw, 20px) !important;
+    border: 1px solid #b1b1b1;
+    border-radius: 10px;
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      border: 1px solid #5cadf8;
+    }
+
+    &:focus {
+      border: 1px solid #5cadf8;
+    }
+  }
+
+  &Btns {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+}
