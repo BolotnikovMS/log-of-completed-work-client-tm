@@ -1,22 +1,22 @@
-.work-info {
-	display: flex;
+.workInfo {
+  display: flex;
 	flex-direction: column;
 	justify-content: center;
 	gap: 16px;
-}
 
-.work-info-content {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
+  &Content {
+   	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  }
 
-.work-info-titles {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  &Titles {
+    display: flex;
+  	align-items: center;
+  	justify-content: center;
 
-	&-mt-18 {
-		margin-top: 18px;
-	}
+  	&-mt-18 {
+  		margin-top: 18px;
+  	}
+  }
 }
