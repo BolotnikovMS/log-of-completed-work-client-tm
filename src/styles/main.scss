@@ -167,18 +167,15 @@ body {
     }
   }
 
-	// .react-datepicker__view-calendar-icon input {
-	// 	padding: 6px 10px 5px 40px;
-	// }
-
-	// .react-datepicker__input-container .react-datepicker__calendar-icon {
-	// 	padding: 0.4rem;
-	// }
-
   &__btns {
     display: flex;
     align-items: center;
   }
+}
+
+.react-datepicker__view-calendar-icon {
+  display: flex !important;
+  align-items: center;
 }
 
 .control {
@@ -242,6 +239,19 @@ body {
 
 .lucide {
 	transition: all 0.3s ease-in;
+
+	&-filter {
+	  color: black;
+
+		&:hover {
+		  color: #666565;
+		}
+	}
+}
+
+/* slider */
+.awssld__content > img {
+  object-fit: contain !important;
 }
 
 // Table
