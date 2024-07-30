@@ -33,9 +33,9 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
   const { mutateAsync: createCompletedWork, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateCompletedWork()
   const { mutateAsync: updateCompletedWork, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateCompletedWork()
   const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<ICompletedWorkFields>) => {
-    const transformDate = { ...data, dateCompletion: moment(data.dateCompletion).format('MM/DD/YYYY') }
+    const transformDate = { ...data, dateCompletion: moment(data.dateCompletion).format('YYYY-MM-DD') }
 
-    await mutateFn(id ? { id, data: transformDate } : { ...data, dateCompletion: moment(data.dateCompletion).format('MM/DD/YYYY') })
+    await mutateFn(id ? { id, data: transformDate } : { ...data, dateCompletion: moment(data.dateCompletion).format('YYYY-MM-DD') })
 
     reset()
     toggleModal()
