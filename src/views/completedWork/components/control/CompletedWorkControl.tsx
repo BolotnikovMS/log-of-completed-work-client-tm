@@ -1,10 +1,12 @@
-import { Filter, Plus } from 'lucide-react'
+import { Filter, FilterX, Plus } from 'lucide-react'
 import { type FC } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkFilters, CompletedWorkForm } from '..'
 import { Button, Modal } from '../../../../components'
 import { useModal } from '../../../../hooks'
 
 const CompletedWorkControl: FC = () => {
+  const [searchParams] = useSearchParams()
   const { isModal, toggleModal } = useModal()
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
@@ -15,7 +17,7 @@ const CompletedWorkControl: FC = () => {
           <Plus />
         </Button>
         <Button classBtn='btn-bg_trnt' onClick={() => toggleModalFilters()}>
-          <Filter />
+          {searchParams.size ? <FilterX className='lucide-filter' /> : <Filter className='lucide-filter' />}
         </Button>
         <Modal
           visible={isModal}
