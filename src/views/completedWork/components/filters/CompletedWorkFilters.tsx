@@ -1,5 +1,5 @@
 import ru from 'date-fns/locale/ru'
-import { Filter, FilterX } from 'lucide-react'
+import { CalendarRange, Filter, FilterX } from 'lucide-react'
 import moment from 'moment'
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { default as DatePicker } from 'react-datepicker'
@@ -8,9 +8,9 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group } from '../../../../components'
 import { useSubstations, useUsers } from '../../../../hooks'
+import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 import styles from './compleated-filter.module.scss'
-import { EFilterType } from './compleated-filter.enum'
 
 const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -35,8 +35,10 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   const updateSearchParams = () => {
     substation && searchParams.set(EFilterType.substation, substation)
     executor && searchParams.set(EFilterType.executor, executor)
-    dateStart && searchParams.set(EFilterType.dateStart, moment(dateStart).format('MM/DD/YYYY'))
-    dateEnd && searchParams.set(EFilterType.dateEnd, moment(dateEnd).format('MM/DD/YYYY'))
+    if (dateStart && dateEnd) {
+      searchParams.set(EFilterType.dateStart, moment(dateStart).format('YYYY-MM-DD'))
+      searchParams.set(EFilterType.dateEnd, moment(dateEnd).format('YYYY-MM-DD'))
+    }
     setSearchParams(searchParams)
   }
   const applyFilters = () => {
@@ -87,6 +89,11 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
               dateFormat='dd.MM.yyyy'
               locale={ru}
               className={styles.filtersDataInput}
+              showIcon
+              icon={
+                <CalendarRange />
+              }
+              popperPlacement="top-end"
               placeholderText='Укажите дату начала'
               selected={dateStart}
               onChange={(date) => setDateStart(date)}
@@ -99,6 +106,11 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
               dateFormat='dd.MM.yyyy'
               locale={ru}
               className={styles.filtersDataInput}
+              showIcon
+              icon={
+                <CalendarRange />
+              }
+              popperPlacement="top-end"
               placeholderText='Укажите дату окончания'
               selected={dateEnd}
               onChange={(date) => setDateEnd(date)}
