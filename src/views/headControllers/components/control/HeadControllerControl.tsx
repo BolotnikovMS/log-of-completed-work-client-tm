@@ -1,31 +1,30 @@
-import { Button, Modal } from '../../../../components'
-
-import { Plus } from 'lucide-react'
 import { type FC } from 'react'
 import { HeadControllerForm } from '..'
+import { Button, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
+import { Add } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const HeadControllerControl: FC = () => {
-	const { authUser } = useAuthStore()
+  const { authUser } = useAuthStore()
   const { isModal, toggleModal } = useModal()
-  
+
   return (
     <div className="work-log__control">
-			{
-				checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-					<Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
-						<Plus />
-					</Button>
-				)
-			}
+      {
+        checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+          <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
+            <Add className='icon' />
+          </Button>
+        )
+      }
       <Modal
-        visible={isModal} 
-        title='Форма добавления нового контроллера' 
+        visible={isModal}
+        title='Форма добавления нового контроллера'
         content={<HeadControllerForm toggleModal={toggleModal} />}
-        onToggle={toggleModal} 
+        onToggle={toggleModal}
       />
     </div>
   )

@@ -1,11 +1,10 @@
-import { Pencil, Trash2 } from 'lucide-react'
 import { useState, type FC } from 'react'
-import { Button, Error, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
-import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks'
-
 import { TypeKpForm } from '..'
+import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
+import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks'
+import { Delete, Edit } from '../../../../icons'
 import { ITypeKp } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -42,14 +41,14 @@ const TypesKpCards: FC = () => {
                     {
                       checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
                         <Button onClick={() => { toggleModal(), setDistrict(typeKp), setIsEdited(!isEdited) }}>
-                          <Pencil />
+                          <Edit className='icon' />
                         </Button>
                       )
                     }
                     {
                       checkRole(authUser, [ERoles.Admin]) && (
                         <Button classBtn='btn-bg_red' onClick={() => handleDelete(typeKp.id)}>
-                          <Trash2 />
+                          <Delete className='icon' />
                         </Button>
                       )
                     }

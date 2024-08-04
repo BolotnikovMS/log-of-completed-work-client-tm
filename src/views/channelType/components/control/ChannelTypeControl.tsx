@@ -1,11 +1,10 @@
-import { Button, Modal } from '../../../../components'
-
-import { Plus } from 'lucide-react'
 import { type FC } from 'react'
 import { ChannelTypeForm } from '..'
+import { Button, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
+import { Add } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const ChannelTypeControl: FC = () => {
@@ -17,15 +16,15 @@ const ChannelTypeControl: FC = () => {
 			{
 				checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
 					<Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
-						<Plus />
+						<Add className='icon' />
 					</Button>
 				)
 			}
       <Modal
-        visible={isModal} 
-        title='Форма добавления нового канала' 
+        visible={isModal}
+        title='Форма добавления нового канала'
         content={<ChannelTypeForm toggleModal={toggleModal} />}
-        onToggle={toggleModal} 
+        onToggle={toggleModal}
       />
     </div>
   )

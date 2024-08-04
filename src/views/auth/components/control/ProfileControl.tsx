@@ -1,7 +1,7 @@
-import { KeyRound } from 'lucide-react'
 import { type FC } from 'react'
 import { Button, ChangePasswordForm, Modal } from '../../../../components'
 import { useModal } from '../../../../hooks'
+import { Key } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const ProfileControl: FC = () => {
@@ -12,7 +12,7 @@ const ProfileControl: FC = () => {
     <div className='work-log__control'>
       {authUser && (
         <Button classBtn='btn-bg_blue' onClick={() => toggleModal()}>
-          <KeyRound />
+          <Key className='icon' />
           Сменить пароль
         </Button>
       )}

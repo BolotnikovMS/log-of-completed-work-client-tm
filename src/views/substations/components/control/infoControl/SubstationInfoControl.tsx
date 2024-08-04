@@ -1,7 +1,7 @@
-import { Paperclip } from 'lucide-react'
 import { type FC } from 'react'
 import { Button, Modal } from '../../../../../components'
 import { useModal } from '../../../../../hooks'
+import { FileAdd } from '../../../../../icons'
 import { UploadSubstationFile } from '../../index'
 
 const SubstationInfoControl: FC = () => {
@@ -11,7 +11,7 @@ const SubstationInfoControl: FC = () => {
 		<div className="work-log__control">
 			<div className="control__wrapper">
 				<Button onClick={toggleModal}>
-					<Paperclip />
+					<FileAdd className='icon' />
 				</Button>
 				<Modal
 					visible={isModal}

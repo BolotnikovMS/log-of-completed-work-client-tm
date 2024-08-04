@@ -1,6 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import ru from 'date-fns/locale/ru'
-import { Calendar } from 'lucide-react'
 import moment from 'moment'
 import { type FC } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
@@ -9,6 +8,7 @@ import { default as AsyncSelect } from 'react-select'
 import { Button, CustomDatePicker, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateCompletedWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
+import { Calendar } from '../../../../icons'
 import { IPropsMutation } from '../../../../interfaces'
 import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.interface'
 import { validationSchema } from './completedWork.validation'
@@ -118,7 +118,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
               selected={dateCompletionValue}
               onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
               placeholderText='Укажите дату работ'
-              iconLeft={<Calendar />}
+              iconLeft={<Calendar className='icon' />}
               autoComplete='off'
               {...restDateCompletion}
             />

@@ -1,8 +1,7 @@
-import './header.scss'
-
-import { BookCheck } from 'lucide-react'
 import React from 'react'
+import { NoteDone } from '../../icons'
 import { NavBar } from '../navBar/NavBar'
+import './header.scss'
 
 export const Header: React.FC = () => {
   return (
@@ -10,8 +9,8 @@ export const Header: React.FC = () => {
       <div className="container">
         <div className='header__content'>
           <div className='header__logo'>
-						<BookCheck />
-					</div>
+            <NoteDone />
+          </div>
           <NavBar />
         </div>
       </div>

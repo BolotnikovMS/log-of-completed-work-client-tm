@@ -1,5 +1,4 @@
 import ru from 'date-fns/locale/ru'
-import { CalendarRange, Filter, FilterX } from 'lucide-react'
 import moment from 'moment'
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { default as DatePicker } from 'react-datepicker'
@@ -8,6 +7,7 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group } from '../../../../components'
 import { useSubstations, useUsers } from '../../../../hooks'
+import { Calendar, FilterAdd, FilterRemove } from '../../../../icons'
 import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 import styles from './compleated-filter.module.scss'
@@ -91,7 +91,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
               className={styles.filtersDataInput}
               showIcon
               icon={
-                <CalendarRange />
+                <Calendar />
               }
               popperPlacement="top-end"
               placeholderText='Укажите дату начала'
@@ -108,7 +108,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
               className={styles.filtersDataInput}
               showIcon
               icon={
-                <CalendarRange />
+                <Calendar />
               }
               popperPlacement="top-end"
               placeholderText='Укажите дату окончания'
@@ -122,11 +122,11 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
       </div>
       <div className={styles.filtersBtns}>
         <Button classBtn='btn-bg_green' onClick={applyFilters}>
-          <Filter />
+          <FilterAdd className='icon' />
           Применить фильтры
         </Button>
         <Button onClick={clearQueryParams}>
-          <FilterX />
+          <FilterRemove className='icon' />
           Очистить фильтры
         </Button>
       </div>

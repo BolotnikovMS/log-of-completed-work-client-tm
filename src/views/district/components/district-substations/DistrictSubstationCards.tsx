@@ -1,21 +1,20 @@
-import { Badge, Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
-
 import { isAxiosError } from 'axios'
-import { Pencil, Trash2 } from 'lucide-react'
 import { useMemo, useState, type FC } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
+import { Badge, Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
+import { Delete, Edit } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
 import { SubstationForm } from '../../../substations/components'
 
 const DistrictSubstationCards: FC = () => {
-	const { authUser } = useAuthStore()
+  const { authUser } = useAuthStore()
   const { id } = useParams()
-	const [searchParams] = useSearchParams()
+  const [searchParams] = useSearchParams()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substationData, setSubstation] = useState<ISubstation | null>(null)
@@ -28,7 +27,7 @@ const DistrictSubstationCards: FC = () => {
 
     return deleteSubstation.mutate(id)
   }
-	const memoizedSubstations = useMemo(() => substations, [substations])
+  const memoizedSubstations = useMemo(() => substations, [substations])
 
   return (
     <>
@@ -39,25 +38,25 @@ const DistrictSubstationCards: FC = () => {
           {memoizedSubstations.map(substation => (
             <SmallCard
               key={substation.id}
-							childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}
+              childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}
               cardText={substation.fullNameSubstation}
               path={`/substations/${substation.id}`}
               childrenControl={
                 <>
-									{
-										checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-											<Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-												<Pencil />
-											</Button>
-										)
-									}
-									{
-										checkRole(authUser, [ERoles.Admin]) && (
-											<Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
-												<Trash2 />
-											</Button>
-										)
-									}
+                  {
+                    checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+                      <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+                        <Edit className='icon' />
+                      </Button>
+                    )
+                  }
+                  {
+                    checkRole(authUser, [ERoles.Admin]) && (
+                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+                        <Delete className='icon' />
+                      </Button>
+                    )
+                  }
                 </>
               }
             />))

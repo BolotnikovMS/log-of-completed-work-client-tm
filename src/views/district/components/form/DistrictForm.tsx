@@ -1,12 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
-import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
-
-import { yupResolver } from '@hookform/resolvers/yup'
 import { useCreateDistrict, useUpdateDistrict } from '../../../../hooks'
 import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './district.validation'
+import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
 
 const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({

@@ -1,9 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { KeyRound } from 'lucide-react'
-import { type FC, useMemo, useState } from 'react'
+import { useMemo, useState, type FC } from 'react'
 import { ChangeStatusAccountForm } from '..'
 import { BasicTable, Button, ChangePasswordForm, Error, InfoMessage, Loader, Modal } from '../../../../components'
 import { useModal, useUsers } from '../../../../hooks'
+import { Key, Setting } from '../../../../icons'
 import { IUser } from '../../../../interfaces'
 
 const UsersTable: FC = () => {
@@ -39,13 +39,13 @@ const UsersTable: FC = () => {
       accessorFn: row => row.role.name
     },
     {
-      header: '⚙️',
+      header: () => <Setting className='icon' />,
       enableSorting: false,
       accessorKey: 'setting',
       cell: ({ row }) => (
         <div className='table-cell-row'>
           <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
-            <KeyRound />
+            <Key className='icon' />
           </Button>
         </div>
       )

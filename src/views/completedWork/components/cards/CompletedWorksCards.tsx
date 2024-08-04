@@ -1,4 +1,3 @@
-import { Pencil, SquareGanttIcon, Trash2 } from 'lucide-react'
 import moment from 'moment'
 import { useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
@@ -8,6 +7,7 @@ import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
+import { Delete, Edit, Note } from '../../../../icons'
 import { ICompletedWork } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -51,19 +51,19 @@ const CompletedWorksCards: FC = () => {
                 childrenControl={
                   <>
                     <Button onClick={() => { toggleModalView(), setCompetedWork(completedWork) }}>
-                      <SquareGanttIcon />
+                      <Note className='icon' />
                     </Button>
                     {
                       checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
                         <Button onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
-                          <Pencil />
+                          <Edit className='icon' />
                         </Button>
                       )
                     }
                     {
                       checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
                         <Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
-                          <Trash2 />
+                          <Delete className='icon' />
                         </Button>
                       )
                     }

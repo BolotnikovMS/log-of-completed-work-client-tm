@@ -1,4 +1,3 @@
-import { CircleUserRound, LogIn, LogOut } from 'lucide-react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '..'
@@ -6,6 +5,7 @@ import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers/checkRole.helper'
 import { useLogout } from '../../hooks'
+import { Login, Logout, Profile } from '../../icons'
 import { useAuthStore } from '../../store/auth'
 import { MenuItems } from './MenuItems'
 import './navbar.scss'
@@ -42,7 +42,7 @@ export const NavBar: React.FC = () => {
           !user && (
             <li className='menu__item'>
               <Link to={'/sign-in'}>
-                <LogIn />
+                <Login className='icon' />
                 Вход
               </Link>
             </li>
@@ -53,13 +53,13 @@ export const NavBar: React.FC = () => {
             <>
               <li className="menu__item">
                 <Link to={'/profile'}>
-                  <CircleUserRound />
+                  <Profile className='icon' />
                   Профиль
                 </Link>
               </li>
               <li className='menu__item'>
                 <Button onClick={logoutHandel} classBtn='btn-nav-bar'>
-                  <LogOut width={18} />
+                  <Logout className='icon' />
                   Выход
                 </Button>
               </li>

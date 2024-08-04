@@ -10,7 +10,6 @@ import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
 import { useAuthStore } from '../../store/auth'
 
-
 export const SignIn: FC = () => {
 	const userAuthStore = useAuthStore()
 	const navigate = useNavigate()

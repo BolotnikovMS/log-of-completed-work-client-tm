@@ -1,10 +1,10 @@
-import { Plus } from 'lucide-react'
 import { type FC } from 'react'
 import { UserForm } from '..'
 import { Button, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
+import { Add } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const UserControl: FC = () => {
@@ -16,7 +16,7 @@ const UserControl: FC = () => {
 			{
 				checkRole(authUser, [ERoles.Admin]) && (
 					<Button classBtn='btn-bg_green' onClick={toggleModal}>
-						<Plus />
+						<Add className='icon' />
 					</Button>
 				)
 			}

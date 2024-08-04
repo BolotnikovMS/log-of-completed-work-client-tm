@@ -1,11 +1,11 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowDownToLine, Trash2 } from 'lucide-react'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
 import { BasicTable, Button } from '../../../../../components'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useDeleteFile } from '../../../../../hooks'
+import { Delete, Download, Setting } from '../../../../../icons'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
 import { useAuthStore } from '../../../../../store/auth'
@@ -44,19 +44,19 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 			)
 		},
 		{
-			header: '⚙️',
+			header: () => <Setting className='icon' />,
 			enableSorting: false,
 			accessorKey: 'setting',
 			cell: ({row}) =>  {
 				return (
 					<div className='table-cell-row'>
 						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
-							<ArrowDownToLine className='lucide'/>
+							<Download className='icon'/>
 						</Button>
 						{
 							checkRole(authUser, [ERoles.Moderator, ERoles.Admin]) && (
 								<Button classBtn='btn-bg_red' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
-									<Trash2 />
+									<Delete className='icon' />
 								</Button>
 							)
 						}
