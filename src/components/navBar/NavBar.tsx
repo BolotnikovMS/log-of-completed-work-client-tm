@@ -21,14 +21,16 @@ export const NavBar: React.FC = () => {
       <ul className='menus'>
         {
           user && (
-            menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)
+            <>
+              {menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)}
+              <li className='menu__item'>
+                <Link to={'/completed-works'}>
+                  Выполненные работы
+                </Link>
+              </li>
+            </>
           )
         }
-        <li className='menu__item'>
-          <Link to={'/completed-works'}>
-            Выполненные работы
-          </Link>
-        </li>
         {
           checkRole(user, [ERoles.Admin]) && (
             <li className="menu__item">
