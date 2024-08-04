@@ -1,4 +1,9 @@
 import { lazy } from 'react'
+import ChevronDown from './chevron-down.svg?react'
+import Login from './login.svg?react'
+import Logout from './logout.svg?react'
+import NoteDone from './note-done.svg?react'
+import Profile from './profile.svg?react'
 
 const Add = lazy(() => import('./add.svg?react'))
 const Alert = lazy(() => import('./alert.svg?react'))
@@ -7,7 +12,6 @@ const ArrowLeft = lazy(() => import('./arrow-left.svg?react'))
 const ArrowRightLine = lazy(() => import('./arrow-right-line.svg?react'))
 const ArrowRight = lazy(() => import('./arrow-right.svg?react'))
 const Calendar = lazy(() => import('./calendar.svg?react'))
-const ChevronDown = lazy(() => import('./chevron-down.svg?react'))
 const Delete = lazy(() => import('./delete.svg?react'))
 const Download = lazy(() => import('./download.svg?react'))
 const Edit = lazy(() => import('./edit.svg?react'))
@@ -17,11 +21,7 @@ const FilterRemove = lazy(() => import('./filter-remove.svg?react'))
 const Filter = lazy(() => import('./filter.svg?react'))
 const ImgOff = lazy(() => import('./img-off.svg?react'))
 const Key = lazy(() => import('./key.svg?react'))
-const Login = lazy(() => import('./login.svg?react'))
-const Logout = lazy(() => import('./logout.svg?react'))
-const NoteDone = lazy(() => import('./note-done.svg?react'))
 const Note = lazy(() => import('./note.svg?react'))
-const Profile = lazy(() => import('./profile.svg?react'))
 const Search = lazy(() => import('./search.svg?react'))
 const Setting = lazy(() => import('./setting.svg?react'))
 const SortAsc = lazy(() => import('./sort-asc.svg?react'))
