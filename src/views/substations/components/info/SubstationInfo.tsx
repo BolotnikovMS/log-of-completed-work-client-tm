@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import { MouseEvent, type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -16,6 +16,19 @@ const SubstationInfo: FC = () => {
   const backupsContent = substation?.files_backups?.length ? <FileTable files={substation.files_backups} /> : <p className='text text-center text-pad'>Пока бэкапов не добавлено!</p>
   const photosContent = substation?.files_photos_ps?.length ? <FileTable files={substation.files_photos_ps} /> : <p className='text text-center text-pad'>Пока фото не добавлено!</p>
   const otherContent = substation?.other_files?.length ? <FileTable files={substation.other_files} /> : <p className='text text-center text-pad'>Пока других файлов не добавлено!</p>
+  const toggleFullscreen = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const target = e.currentTarget as HTMLDivElement
+
+    if (target.requestFullscreen) {
+      if (!document.fullscreenElement) {
+        target.requestFullscreen().catch((err) => console.error('Error entering fullscreen:', err))
+      } else {
+        document.exitFullscreen().catch((err) => console.error('Error exiting fullscreen:', err))
+      }
+    } else {
+      console.warn('Fullscreen API is not supported in this browser.')
+    }
+  }
 
   if (isError && error) return <Error error={error} />
 
@@ -42,7 +55,7 @@ const SubstationInfo: FC = () => {
           {substation?.files_photos_ps?.length ? (
             <CustomSlider>
               {substation.files_photos_ps.map(photo => (
-                <div key={photo.id} data-src={`${urlFile}${photo.filePath}`} />
+                <div key={photo.id} data-src={`${urlFile}${photo.filePath}`} onClick={(e) => toggleFullscreen(e)} />
               ))}
             </CustomSlider>
           ) : (
