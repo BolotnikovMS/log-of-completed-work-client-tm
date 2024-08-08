@@ -1,11 +1,11 @@
 import { isAxiosError } from 'axios'
 import { useMemo, useState, type FC } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { Badge, Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
-import { Delete, Edit } from '../../../../icons'
+import { Delete, Edit, Setting } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
@@ -13,6 +13,8 @@ import { SubstationForm } from '../../../substations/components'
 
 const DistrictSubstationCards: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { id } = useParams()
   const [searchParams] = useSearchParams()
   const { isModal, toggleModal } = useModal()
@@ -42,22 +44,26 @@ const DistrictSubstationCards: FC = () => {
               cardText={substation.fullNameSubstation}
               path={`/substations/${substation.id}`}
               childrenControl={
-                <>
-                  {
-                    checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-                      <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-                        <Edit className='icon' />
-                      </Button>
-                    )
-                  }
-                  {
-                    checkRole(authUser, [ERoles.Admin]) && (
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
-                        <Delete className='icon' />
-                      </Button>
-                    )
-                  }
-                </>
+                isAdminOrModerator && (
+                  <Dropdown
+                    classMenu='dropdownMenuRow dropdownMenuCenter'
+                    children={
+                      <Setting className='icon' />
+                    }
+                    menuItems={[
+                      isAdminOrModerator && (
+                        <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+                          <Edit className='icon' />
+                        </Button>
+                      ),
+                      isAdmin && (
+                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+                          <Delete className='icon' />
+                        </Button>
+                      )
+                    ]}
+                  />
+                )
               }
             />))
           }

@@ -2,17 +2,18 @@ import moment from 'moment'
 import { useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { CompletedWorkForm, CompletedWorkInfo } from '..'
-import { Button, Card, Error, InfoMessage, LoadMore, Loader, Modal } from '../../../../components'
+import { Button, Card, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
-import { Delete, Edit, Note } from '../../../../icons'
+import { Delete, Edit, Note, Setting } from '../../../../icons'
 import { ICompletedWork } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
 const CompletedWorksCards: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
   const [searchParams] = useSearchParams()
   const substationParam = searchParams.get('substation')
   const executorParam = searchParams.get('executor')
@@ -53,20 +54,26 @@ const CompletedWorksCards: FC = () => {
                     <Button onClick={() => { toggleModalView(), setCompetedWork(completedWork) }}>
                       <Note className='icon' />
                     </Button>
-                    {
-                      checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
-                        <Button onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
-                          <Edit className='icon' />
-                        </Button>
-                      )
-                    }
-                    {
-                      checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
-                          <Delete className='icon' />
-                        </Button>
-                      )
-                    }
+                    {checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
+                      <Dropdown
+                        classMenu='dropdownMenuRow dropdownMenuCenter'
+                        children={
+                          <Setting className='icon' />
+                        }
+                        menuItems={[
+                          checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
+                            <Button onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
+                              <Edit className='icon' />
+                            </Button>
+                          ),
+                          isAdmin && (
+                            <Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
+                              <Delete className='icon' />
+                            </Button>
+                          )
+                        ]}
+                      />
+                    )}
                   </>
                 }
               />

@@ -1,15 +1,17 @@
 import { useState, type FC } from 'react'
 import { HeadControllerForm } from '..'
-import { Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteHeadController, useInfiniteHeadControllers, useModal } from '../../../../hooks'
-import { Delete, Edit } from '../../../../icons'
+import { Delete, Edit, Setting } from '../../../../icons'
 import { IHeadController } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
 const HeadControllersCards: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteHeadControllers({ limit: 10 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -37,22 +39,26 @@ const HeadControllersCards: FC = () => {
                 key={headController.id}
                 cardText={headController.name}
                 childrenControl={
-                  <>
-                    {
-                      checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-                        <Button onClick={() => { toggleModal(), setHeadController(headController), setIsEdited(!isEdited) }}>
-                          <Edit className='icon' />
-                        </Button>
-                      )
-                    }
-                    {
-                      checkRole(authUser, [ERoles.Admin]) && (
-                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
-                          <Delete className='icon' />
-                        </Button>
-                      )
-                    }
-                  </>
+                  isAdminOrModerator && (
+                    <Dropdown
+                      classMenu='dropdownMenuRow dropdownMenuCenter'
+                      children={
+                        <Setting className='icon' />
+                      }
+                      menuItems={[
+                        isAdminOrModerator && (
+                          <Button onClick={() => { toggleModal(), setHeadController(headController), setIsEdited(!isEdited) }}>
+                            <Edit className='icon' />
+                          </Button>
+                        ),
+                        isAdmin && (
+                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
+                            <Delete className='icon' />
+                          </Button>
+                        )
+                      ]}
+                    />
+                  )
                 }
               />
             ))

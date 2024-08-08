@@ -1,11 +1,11 @@
 import { useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
-import { Badge, Button, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
-import { Delete, Edit } from '../../../../icons'
+import { Delete, Edit, Setting } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
@@ -13,6 +13,8 @@ import { TOrderSort } from '../../../../types/order.types'
 const SubstationsCards: FC = () => {
   const [searchParams] = useSearchParams()
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -43,22 +45,26 @@ const SubstationsCards: FC = () => {
                 cardText={substation.fullNameSubstation}
                 path={`/substations/${substation.id}`}
                 childrenControl={
-                  <>
-                    {
-                      checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-                        <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-                          <Edit className='icon' />
-                        </Button>
-                      )
-                    }
-                    {
-                      checkRole(authUser, [ERoles.Admin]) && (
-                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
-                          <Delete className='icon' />
-                        </Button>
-                      )
-                    }
-                  </>
+                  isAdminOrModerator && (
+                    <Dropdown
+                      classMenu='dropdownMenuRow dropdownMenuCenter'
+                      children={
+                        <Setting className='icon' />
+                      }
+                      menuItems={[
+                        isAdminOrModerator && (
+                          <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+                            <Edit className='icon' />
+                          </Button>
+                        ),
+                        isAdmin && (
+                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+                            <Delete className='icon' />
+                          </Button>
+                        )
+                      ]}
+                    />
+                  )
                 }
               />
             ))

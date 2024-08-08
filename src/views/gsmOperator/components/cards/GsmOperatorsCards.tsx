@@ -1,15 +1,17 @@
 import { useState, type FC } from 'react'
 import { GsmOperatorForm } from '..'
-import { Button, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
-import { checkRole } from '../../../../helpers/checkRole.helper'
+import { checkRole } from '../../../../helpers'
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
-import { Delete, Edit } from '../../../../icons'
+import { Delete, Edit, Setting } from '../../../../icons'
 import { IGsmOperator } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
 const GsmOperatorsCards: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { data, error, isError, isFetching } = useGsmOperators()
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -36,22 +38,26 @@ const GsmOperatorsCards: FC = () => {
               key={gsmOperator.id}
               cardText={gsmOperator.name}
               childrenControl={
-                <>
-                  {
-                    checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-                      <Button onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
-                        <Edit className='icon' />
-                      </Button>
-                    )
-                  }
-                  {
-                    checkRole(authUser, [ERoles.Admin]) && (
-                      <Button classBtn='btn-bg_red' onClick={() => handleDelete(gsmOperator.id)}>
-                        <Delete className='icon' />
-                      </Button>
-                    )
-                  }
-                </>
+                isAdminOrModerator && (
+                  <Dropdown
+                    classMenu='dropdownMenuRow dropdownMenuCenter'
+                    children={
+                      <Setting className='icon' />
+                    }
+                    menuItems={[
+                      isAdminOrModerator && (
+                        <Button onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
+                          <Edit className='icon' />
+                        </Button>
+                      ),
+                      isAdmin && (
+                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(gsmOperator.id)}>
+                          <Delete className='icon' />
+                        </Button>
+                      ),
+                    ]}
+                  />
+                )
               }
             />
           ))}
