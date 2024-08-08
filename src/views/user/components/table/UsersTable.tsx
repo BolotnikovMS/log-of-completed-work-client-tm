@@ -2,11 +2,16 @@ import { ColumnDef } from '@tanstack/react-table'
 import { useMemo, useState, type FC } from 'react'
 import { ChangeStatusAccountForm } from '..'
 import { BasicTable, Button, ChangePasswordForm, Error, InfoMessage, Loader, Modal } from '../../../../components'
+import { ERoles } from '../../../../enums/roles.enum'
+import { checkRole } from '../../../../helpers'
 import { useModal, useUsers } from '../../../../hooks'
 import { Key, Setting } from '../../../../icons'
 import { IUser } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 
 const UsersTable: FC = () => {
+  const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
   const { data, error, isError, isLoading } = useUsers({})
   const { isModal, toggleModal } = useModal()
   const [currentUser, setCurrentUser] = useState<IUser | undefined>(undefined)
@@ -23,7 +28,7 @@ const UsersTable: FC = () => {
       header: 'УЗ активна',
       accessorKey: 'active',
       cell: ({ row }) => (
-        <ChangeStatusAccountForm active={row.original.active} userId={row.original.id} />
+        isAdmin && <ChangeStatusAccountForm active={row.original.active} userId={row.original.id} />
       )
     },
     {
@@ -43,11 +48,13 @@ const UsersTable: FC = () => {
       enableSorting: false,
       accessorKey: 'setting',
       cell: ({ row }) => (
-        <div className='table-cell-row'>
-          <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
-            <Key className='icon' />
-          </Button>
-        </div>
+        isAdmin && (
+          <div className='table-cell-row'>
+            <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
+              <Key className='icon' />
+            </Button>
+          </div>
+        )
       )
     }
   ], [])
