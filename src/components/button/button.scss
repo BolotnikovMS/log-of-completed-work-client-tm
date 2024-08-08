@@ -22,7 +22,7 @@
   &-bg_red {
     border: 1px solid  #f64747;
     background-color: #f64747;
-  } 
+  }
 
 	&-bg_trnt {
 		background-color: transparent;
@@ -58,22 +58,22 @@
     &:hover {
       background-color: #d6d4d4;
     }
-  
+
     &-bg_blue:hover {
       border: 1px solid #b1b1b1;
       background-color: transparent;
     }
-  
+
     &-bg_green:hover {
 			border: 1px solid #59b653;
       background-color: transparent;
-    } 
-  
+    }
+
     &.btn-disabled:hover {
       background-color: #8f8c8c;
     }
   }
-  
+
   @media (max-width: 768px) {
     padding: 5px 10px;
   }
