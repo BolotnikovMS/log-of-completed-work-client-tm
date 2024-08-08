@@ -1,29 +1,43 @@
 .dropdown {
-  position: relative;
-  display: inline-block;
+  &Content {
+    position: relative;
+  }
 
   &TriggerBtn {
     padding: 5px 10px;
     font-size: clamp(13px, 2.3vw, 22px) !important;
+    cursor: pointer;
   }
 
   &Menu {
     position: absolute;
-    min-width: 170px;
-    top: 40px;
-    left: 0;
+    min-width: 140px;
+    top: 9px;
+    right: -40px;
     display: flex;
     flex-direction: column;
+    padding: 2px;
     gap: 4px;
     border-radius: 10px;
     background-color: rgba(201, 198, 198, 0.95);
-    font-size: 22px;
-    z-index: 4;
+    font-size: 20px;
+    z-index: 2;
     transition: all 0.2s ease-in;
+
+    &Row {
+      flex-direction: row;
+    }
+
+    &Center {
+      align-items: center;
+      justify-content: center;
+    }
 
     & > li {
       padding: 3px 5px;
-			display: grid;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
       cursor: pointer;
       transition: all 0.3s ease-in;
 
