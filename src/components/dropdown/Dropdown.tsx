@@ -1,10 +1,11 @@
+import cx from 'classnames'
 import { useEffect, useRef, useState } from 'react'
-
 import { Button } from '..'
+import { joinClasses } from '../../helpers'
 import { IPropsDropdown } from './dropdown.interface'
 import styles from './dropdown.module.scss'
 
-const Dropdown = ({ children, menuItems }: IPropsDropdown) => {
+const Dropdown = ({ children, menuItems, classMenu }: IPropsDropdown) => {
   const [dropdownState, setDropdownState] = useState<boolean>(false)
   const dropdown = useRef<HTMLDivElement | null>(null)
 
@@ -25,21 +26,22 @@ const Dropdown = ({ children, menuItems }: IPropsDropdown) => {
   }, [])
 
   return (
-    <div className={styles.dropdown} ref={dropdown}>
+    <div ref={dropdown}>
       <Button classBtn={styles.dropdownTriggerBtn} onClick={handelDropdownClick}>
         {children}
       </Button>
-      { dropdownState ? (
-        <ul className={styles.dropdownMenu}>
-          {
-            menuItems.map((item, i) => (
-              <li key={i}>
-                {item}
-              </li>
-            ))
-          }
-        </ul>
-      ) : null }
+      {dropdownState ? (
+        <div className={styles.dropdownContent}>
+          <ul className={cx(styles.dropdownMenu, joinClasses(styles, classMenu))}>
+            {menuItems.map((item, i) => (
+              item && (
+                <li key={i}>
+                  {item}
+                </li>)
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   )
 }
