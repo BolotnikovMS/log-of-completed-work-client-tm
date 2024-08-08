@@ -9,17 +9,16 @@ import { useAuthStore } from '../../../../store/auth'
 
 const HeadControllerControl: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
   const { isModal, toggleModal } = useModal()
 
   return (
     <div className="work-log__control">
-      {
-        checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
-          <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
-            <Add className='icon' />
-          </Button>
-        )
-      }
+      {isAdmin && (
+        <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
+          <Add className='icon' />
+        </Button>
+      )}
       <Modal
         visible={isModal}
         title='Форма добавления нового контроллера'

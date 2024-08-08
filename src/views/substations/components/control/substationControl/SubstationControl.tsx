@@ -9,12 +9,13 @@ import { useAuthStore } from '../../../../../store/auth'
 
 const SubstationControl: FC = () => {
   const { authUser } = useAuthStore()
+  const isAdmin = checkRole(authUser, [ERoles.Admin])
   const { isModal, toggleModal } = useModal()
 
   return (
     <div className="work-log__control">
       <div className="control__wrapper">
-        {checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+        {isAdmin && (
           <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
             <Add className='icon' />
           </Button>
