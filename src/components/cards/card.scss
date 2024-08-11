@@ -28,10 +28,21 @@
     border: 1px solid #72afff;
   }
 
+  &:not(&__control) {
+    .card__link {
+      width: 99%;
+    }
+  }
+
+  &:has(&__control) {
+    .card__link {
+      width: clamp(50%, 93% - 31px, 95%);
+    }
+  }
+
   &__link {
     position: absolute;
     content: '';
-    width: clamp(50%, 90% - 35px, 90%);
     height: 100%;
   }
 
