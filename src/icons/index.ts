@@ -27,5 +27,6 @@ const Setting = lazy(() => import('./setting.svg?react'))
 const SortAsc = lazy(() => import('./sort-asc.svg?react'))
 const SortDesc = lazy(() => import('./sort-desc.svg?react'))
 const Upload = lazy(() => import('./upload.svg?react'))
+const Excel = lazy(() => import('./excel.svg?react'))
 
-export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Calendar, ChevronDown, Delete, Download, Edit, FileAdd, Filter, FilterAdd, FilterRemove, ImgOff, Key, Login, Logout, Note, NoteDone, Profile, Search, Setting, SortAsc, SortDesc, Upload }
+export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Calendar, ChevronDown, Delete, Download, Edit, Excel, FileAdd, Filter, FilterAdd, FilterRemove, ImgOff, Key, Login, Logout, Note, NoteDone, Profile, Search, Setting, SortAsc, SortDesc, Upload }
