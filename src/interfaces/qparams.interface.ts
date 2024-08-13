@@ -12,6 +12,6 @@ export interface IQueryParams {
   active?: boolean
   cleanUser?: boolean
   executor?: string | null
-  dateStart?: string | null
-  dateEnd?: string | null
+  dateStart?: string | null | Date
+  dateEnd?: string | null | Date
 }
