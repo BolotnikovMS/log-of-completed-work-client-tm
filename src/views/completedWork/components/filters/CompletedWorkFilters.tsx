@@ -7,7 +7,8 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group } from '../../../../components'
 import { useSubstations, useUsers } from '../../../../hooks'
-import { Calendar, FilterAdd, FilterRemove } from '../../../../icons'
+import { Calendar, Excel, FilterAdd, FilterRemove } from '../../../../icons'
+import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
 import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 import styles from './compleated-filter.module.scss'
@@ -46,6 +47,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
+  const handleDownload = () => CompletedWorkService.downloadExcel({ page: 1, limit: -1, substation, executor, dateStart, dateEnd })
   const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
 
   return (
@@ -128,6 +130,10 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
         <Button onClick={clearQueryParams}>
           <FilterRemove className='icon' />
           Очистить фильтры
+        </Button>
+        <Button onClick={handleDownload}>
+          <Excel className='icon' />
+          Сохранить в Excel
         </Button>
       </div>
     </div>
