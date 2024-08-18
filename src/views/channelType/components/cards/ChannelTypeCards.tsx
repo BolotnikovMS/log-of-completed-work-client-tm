@@ -38,11 +38,14 @@ const ChannelTypeCards: FC = () => {
             channelTypes.data.map(channelType => (
               <SmallCard
                 key={channelType.id}
-                cardText={channelType.name}
+                childrenContent={
+                  <p className='text-lg'>
+                    {channelType.name}
+                  </p>
+                }
                 childrenControl={
                   isAdminOrModerator && (
                     <Dropdown
-                      classMenu='dropdownMenuRow dropdownMenuCenter'
                       children={
                         <Setting className='icon' />
                       }
@@ -50,11 +53,13 @@ const ChannelTypeCards: FC = () => {
                         isAdminOrModerator && (
                           <Button onClick={() => { toggleModal(), setChannelType(channelType), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
+                            Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(channelType.id)}>
+                          <Button className='btn-error' onClick={() => handleDelete(channelType.id)}>
                             <Delete className='icon' />
+                            Удалить
                           </Button>
                         )
                       ]}

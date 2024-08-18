@@ -37,11 +37,14 @@ const VoltageClassesCards: FC = () => {
             voltageClasses.data.map(voltageClass => (
               <SmallCard
                 key={voltageClass.id}
-                cardText={voltageClass.name}
+                childrenContent={
+                  <p className='text-lg'>
+                    {voltageClass.name}
+                  </p>
+                }
                 childrenControl={
                   isAdminOrModerator && (
                     <Dropdown
-                      classMenu='dropdownMenuRow dropdownMenuCenter'
                       children={
                         <Setting className='icon' />
                       }
@@ -49,11 +52,13 @@ const VoltageClassesCards: FC = () => {
                         isAdminOrModerator && (
                           <Button onClick={() => { toggleModal(), setVoltageClass(voltageClass), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
+                            Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(voltageClass.id)}>
+                          <Button className='btn-error' onClick={() => handleDelete(voltageClass.id)}>
                             <Delete className='icon' />
+                            Удалить
                           </Button>
                         )
                       ]}

@@ -1,74 +1,96 @@
-import React from 'react'
+import { type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '..'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
-import { checkRole } from '../../helpers/checkRole.helper'
+import { checkRole } from '../../helpers'
 import { useLogout } from '../../hooks'
-import { Login, Logout, Profile } from '../../icons'
+import { Books, Home, Logout, Note, NoteDone, Profile, User, Users } from '../../icons'
 import { useAuthStore } from '../../store/auth'
-import { MenuItems } from './MenuItems'
-import './navbar.scss'
+import './navbar.css'
 
-export const NavBar: React.FC = () => {
+export const NavBar: FC = () => {
   const userAuthStore = useAuthStore()
   const user = userAuthStore.authUser
   const { logout } = useLogout()
   const logoutHandel = () => logout.mutate()
 
   return (
-    <nav className='nav'>
-      <ul className='menus'>
-        {
-          user && (
-            <>
-              {menuItemData.map((menu, i) => <MenuItems key={i} title={menu.title} url={menu.url} submenus={menu.submenu} />)}
-              <li className='menu__item'>
-                <Link to={'/completed-works'}>
-                  Выполненные работы
-                </Link>
-              </li>
-            </>
-          )
-        }
-        {
-          checkRole(user, [ERoles.Admin]) && (
-            <li className="menu__item">
+    <div className='mNavBar'>
+      <nav>
+        <div className='mNavBar__logo'>
+          <Note />
+          <span className='text-xl font-bold'>ЖВР</span>
+        </div>
+        <ul className='mNavBar__menu'>
+          <li>
+            <Link to={'/'}>
+              <Home className='icon' />
+              Главная
+            </Link>
+          </li>
+          <li>
+            <details>
+              <summary>
+                <Books className='icon' />
+                Справочники
+              </summary>
+              <ul className='flex flex-col gap-1'>
+                {menuItemData.map((menu, i) => (
+                  <li key={i}>
+                    <Link to={menu.url}>{menu.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          </li>
+          <li>
+            <Link to={'/completed-works'}>
+              <NoteDone className='icon' />
+              Выполненные работы
+            </Link>
+          </li>
+          {checkRole(user, [ERoles.Admin]) && (
+            <li>
               <Link to={'/users'}>
+                <Users className='icon' />
                 Пользователи
               </Link>
             </li>
-          )
-        }
-        {
-          !user && (
-            <li className='menu__item'>
-              <Link to={'/sign-in'}>
-                <Login className='icon' />
-                Вход
+          )}
+        </ul>
+      </nav>
+      {user && (
+        <nav>
+          <ul className='mNavBar__menu'>
+            <div className='flex items-center gap-3'>
+              <div className="avatar placeholder">
+                <div className="bg-neutral text-neutral-content w-12 rounded-full">
+                  <span><User /></span>
+                </div>
+              </div>
+              <div className='leading-3'>
+                <p className='text-lg'>
+                  {user.shortName}
+                </p>
+                <span className='text-[11px]'>
+                  {user.position}
+                </span>
+              </div>
+            </div>
+            <li className=''>
+              <Link to={'/profile'}>
+                <Profile className='icon' />
+                Профиль
               </Link>
             </li>
-          )
-        }
-        {
-          user && (
-            <>
-              <li className="menu__item">
-                <Link to={'/profile'}>
-                  <Profile className='icon' />
-                  Профиль
-                </Link>
-              </li>
-              <li className='menu__item'>
-                <Button onClick={logoutHandel} classBtn='btn-nav-bar'>
-                  <Logout className='icon' />
-                  Выход
-                </Button>
-              </li>
-            </>
-          )
-        }
-      </ul>
-    </nav>
+            <Button className='btn-error mt-5' onClick={logoutHandel}>
+              <Logout className='icon' />
+              Выход
+            </Button>
+          </ul>
+        </nav>
+      )}
+    </div>
   )
 }

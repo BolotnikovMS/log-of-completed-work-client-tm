@@ -37,11 +37,14 @@ const TypesKpCards: FC = () => {
             typesKp.data.map(typeKp => (
               <SmallCard
                 key={typeKp.id}
-                cardText={typeKp.name}
+                childrenContent={
+                  <p className='text-lg'>
+                    {typeKp.name}
+                  </p>
+                }
                 childrenControl={
                   isAdminOrModerator && (
                     <Dropdown
-                      classMenu='dropdownMenuRow dropdownMenuCenter'
                       children={
                         <Setting className='icon' />
                       }
@@ -49,11 +52,13 @@ const TypesKpCards: FC = () => {
                         isAdminOrModerator && (
                           <Button onClick={() => { toggleModal(), setDistrict(typeKp), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
+                            Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(typeKp.id)}>
+                          <Button className='btn-error' onClick={() => handleDelete(typeKp.id)}>
                             <Delete className='icon' />
+                            Удалить
                           </Button>
                         )
                       ]}

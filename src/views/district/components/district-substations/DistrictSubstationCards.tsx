@@ -40,13 +40,16 @@ const DistrictSubstationCards: FC = () => {
           {memoizedSubstations.map(substation => (
             <SmallCard
               key={substation.id}
-              childrenContent={substation.rdu && <Badge text='РДУ' className='badge-color_red' />}
-              cardText={substation.fullNameSubstation}
+              childrenContent={
+                <>
+                  {substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
+                  <p className='text-lg'>{substation.fullNameSubstation}</p>
+                </>
+              }
               path={`/substations/${substation.id}`}
               childrenControl={
                 isAdminOrModerator && (
                   <Dropdown
-                    classMenu='dropdownMenuRow dropdownMenuCenter'
                     children={
                       <Setting className='icon' />
                     }
@@ -54,11 +57,13 @@ const DistrictSubstationCards: FC = () => {
                       isAdminOrModerator && (
                         <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
                           <Edit className='icon' />
+                          Редактировать
                         </Button>
                       ),
                       isAdmin && (
-                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(substation.id)}>
+                        <Button className='btn-error' onClick={() => handleDelete(substation.id)}>
                           <Delete className='icon' />
+                          Удалить
                         </Button>
                       )
                     ]}

@@ -34,6 +34,7 @@ const SubstationFilters: FC = () => {
   return (
     <div className='filters filters-row filters-aic'>
       <Dropdown
+        classMenu='dropdown-bottom'
         children={
           <>
             {orderSort === 'asc' && <SortAsc className='icon' />}
@@ -42,15 +43,15 @@ const SubstationFilters: FC = () => {
           </>
         }
         menuItems={[
-          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('asc')}>
+          <Button onClick={() => handleSort('asc')}>
             <SortAsc className='icon' />
             А-Я
           </Button>,
-          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('desc')}>
+          <Button onClick={() => handleSort('desc')}>
             <SortDesc className='icon' />
             Я-А
           </Button>,
-          <Button classBtn='btn-bg_trnt' onClick={() => handleSort('desc', 'rdu')}>
+          <Button onClick={() => handleSort('desc', 'rdu')}>
             <Alert className='icon' />
             РДУ
           </Button>

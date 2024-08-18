@@ -1,16 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 body {
-	width: 100%;
-	height: 100%;
   font-size: clamp(14px, 2.5vw, 25px);
-  color: #000;
-  background-color: #dfdfdf;
 }
 
-.container {
-  max-width: 1400px;
-  padding: 0 30px;
-  margin: 0 auto;
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+  justify-items: center;
+  gap: 15px;
+
+  & + * {
+    margin-top: 17px;
+  }
 }
+
+.btnLink {
+  @apply btn btn-sm;
+}
+
+
+/* ------- */
 
 .none {
 	display: none;
@@ -51,9 +63,8 @@ body {
 }
 
 .icon {
-  width: 25px;
-  height: 25px;
-  flex-shrink: 0;
+  @apply w-5;
+  /* flex-shrink: 0;
   transition: all 0.3s ease-in;
 
 	&-filter {
@@ -62,7 +73,7 @@ body {
 		&:hover {
 		  color: #666565;
 		}
-	}
+	} */
 }
 
 .label {
@@ -96,9 +107,9 @@ body {
   margin-top: unset !important;
 }
 
-.work-log {
+/* .work-log {
 	padding: 5px 0 15px;
-}
+} */
 
 .form {
   &-col {

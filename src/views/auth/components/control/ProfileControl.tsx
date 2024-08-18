@@ -11,7 +11,7 @@ const ProfileControl: FC = () => {
   return (
     <div className='work-log__control'>
       {authUser && (
-        <Button classBtn='btn-bg_blue' onClick={() => toggleModal()}>
+        <Button className='mBtn_primary' onClick={() => toggleModal()}>
           <Key className='icon' />
           Сменить пароль
         </Button>

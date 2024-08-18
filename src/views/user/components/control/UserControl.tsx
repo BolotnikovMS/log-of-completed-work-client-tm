@@ -15,7 +15,7 @@ const UserControl: FC = () => {
   return (
     <div className="work-log__control">
       {isAdmin && (
-        <Button classBtn='btn-bg_green' onClick={toggleModal}>
+        <Button className='mBtn_outline-green' onClick={toggleModal}>
           <Add className='icon' />
         </Button>
       )}

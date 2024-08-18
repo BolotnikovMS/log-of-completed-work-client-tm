@@ -37,30 +37,33 @@ const DistrictsCards: FC = () => {
             districts.data.map(district => (
               <SmallCard
                 key={district.id}
-                cardText={district.name}
+                childrenContent={
+                  <p className='text-lg'>
+                    {district.name}
+                  </p>
+                }
                 path={`/districts/${district.id}/substations`}
                 childrenControl={
-                  isAdminOrModerator && (
-                    <Dropdown
-                      classMenu='dropdownMenuRow dropdownMenuCenter'
-                      children={
-                        <Setting className='icon' />
-                      }
-                      menuItems={[
-                        isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
-                            <Edit className='icon' />
-                          </Button>
-                        ),
-                        isAdmin && (
-                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(district.id)}>
-                            <Delete className='icon' />
-                          </Button>
-                        )
-                      ]}
-                    />
-                  )
-                }
+                  isAdminOrModerator &&
+                  <Dropdown
+                    children={
+                      <Setting className='icon' />
+                    }
+                    menuItems={[
+                      isAdminOrModerator && (
+                        <Button onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
+                          <Edit className='icon' />
+                          Редактировать
+                        </Button>
+                      ),
+                      isAdmin && (
+                        <Button className='btn-error' onClick={() => handleDelete(district.id)}>
+                          <Delete className='icon' />
+                          Удалить
+                        </Button>
+                      )
+                    ]}
+                  />}
               />
             ))
           ))}

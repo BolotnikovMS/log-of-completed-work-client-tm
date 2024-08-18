@@ -1,5 +1,6 @@
 .btn {
-  padding: 5px 16px;
+  @apply btn btn-sm flex items-center justify-center content-center gap-1;
+  /* padding: 5px 16px;
   display: flex;
   align-items: center;
   column-gap: 5px;
@@ -7,7 +8,7 @@
   font-size: clamp(13px, 2.3vw, 20px);
   border-radius: 8px;
   background-color: #eaeaea;
-  transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in; */
 
   &-bg_green {
 		border: 1px solid #59b653;

@@ -1,0 +1,15 @@
+.mNavBar {
+  @apply flex flex-col justify-between items-center bg-gray-300/70 w-64 m-3 px-1 py-3 rounded-lg;
+}
+
+.mNavBar__logo {
+  @apply p-2 mb-3 flex items-center gap-2;
+}
+
+.mNavBar__menu {
+  @apply menu bg-base-200 rounded-box w-56 gap-1
+}
+
+.mNavBar__menu_gap-5 {
+  @apply gap-5;
+}

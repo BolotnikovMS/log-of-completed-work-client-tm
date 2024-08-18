@@ -16,7 +16,7 @@ const SubstationControl: FC = () => {
     <div className="work-log__control">
       <div className="control__wrapper">
         {isAdmin && (
-          <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
+          <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
             <Add className='icon' />
           </Button>
         )}

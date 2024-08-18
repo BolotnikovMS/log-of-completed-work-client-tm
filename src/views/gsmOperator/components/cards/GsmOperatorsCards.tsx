@@ -36,11 +36,14 @@ const GsmOperatorsCards: FC = () => {
           {data.map(gsmOperator => (
             <SmallCard
               key={gsmOperator.id}
-              cardText={gsmOperator.name}
+              childrenContent={
+                <p className='text-lg'>
+                  {gsmOperator.name}
+                </p>
+              }
               childrenControl={
                 isAdminOrModerator && (
                   <Dropdown
-                    classMenu='dropdownMenuRow dropdownMenuCenter'
                     children={
                       <Setting className='icon' />
                     }
@@ -48,11 +51,13 @@ const GsmOperatorsCards: FC = () => {
                       isAdminOrModerator && (
                         <Button onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
                           <Edit className='icon' />
+                          Редактировать
                         </Button>
                       ),
                       isAdmin && (
-                        <Button classBtn='btn-bg_red' onClick={() => handleDelete(gsmOperator.id)}>
+                        <Button className='btn-error' onClick={() => handleDelete(gsmOperator.id)}>
                           <Delete className='icon' />
+                          Удалить
                         </Button>
                       ),
                     ]}

@@ -1,16 +1,14 @@
-import './badge.scss'
-
 import cx from 'classnames'
-import { type FC } from 'react'
+import { HTMLAttributes, type FC } from 'react'
+import './bage.css'
 
-interface IPropsBadge {
+interface IPropsBadge extends HTMLAttributes<HTMLDivElement> {
   text: string | number
-  className?: string
 }
 
 const Badge: FC<IPropsBadge> = ({ text, className }) => {
   return (
-    <span className={cx('badge', className)}>{text}</span>
+    <div className={cx('badge', className)}>{text}</div>
   )
 }
 

@@ -37,11 +37,14 @@ const HeadControllersCards: FC = () => {
             headControllers.data.map(headController => (
               <SmallCard
                 key={headController.id}
-                cardText={headController.name}
+                childrenContent={
+                  <p className='text-lg'>
+                    {headController.name}
+                  </p>
+                }
                 childrenControl={
                   isAdminOrModerator && (
                     <Dropdown
-                      classMenu='dropdownMenuRow dropdownMenuCenter'
                       children={
                         <Setting className='icon' />
                       }
@@ -49,11 +52,13 @@ const HeadControllersCards: FC = () => {
                         isAdminOrModerator && (
                           <Button onClick={() => { toggleModal(), setHeadController(headController), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
+                            Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button classBtn='btn-bg_red' onClick={() => handleDelete(headController.id)}>
+                          <Button className='btn-error' onClick={() => handleDelete(headController.id)}>
                             <Delete className='icon' />
+                            Удалить
                           </Button>
                         )
                       ]}

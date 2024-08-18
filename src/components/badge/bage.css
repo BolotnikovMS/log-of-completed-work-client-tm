@@ -1,0 +1,3 @@
+.mBadge_red {
+  @apply bg-red-400 border-red-400;
+}
