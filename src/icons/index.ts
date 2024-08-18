@@ -1,9 +1,14 @@
 import { lazy } from 'react'
+import Books from './books.svg?react'
 import ChevronDown from './chevron-down.svg?react'
+import Home from './home.svg?react'
 import Login from './login.svg?react'
 import Logout from './logout.svg?react'
 import NoteDone from './note-done.svg?react'
+import Notebook from './notebook.svg?react'
 import Profile from './profile.svg?react'
+import User from './user.svg?react'
+import Users from './users.svg?react'
 
 const Add = lazy(() => import('./add.svg?react'))
 const Alert = lazy(() => import('./alert.svg?react'))
@@ -28,5 +33,6 @@ const SortAsc = lazy(() => import('./sort-asc.svg?react'))
 const SortDesc = lazy(() => import('./sort-desc.svg?react'))
 const Upload = lazy(() => import('./upload.svg?react'))
 const Excel = lazy(() => import('./excel.svg?react'))
+const View = lazy(() => import('./view.svg?react'))
 
-export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Calendar, ChevronDown, Delete, Download, Edit, Excel, FileAdd, Filter, FilterAdd, FilterRemove, ImgOff, Key, Login, Logout, Note, NoteDone, Profile, Search, Setting, SortAsc, SortDesc, Upload }
+export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Delete, Download, Edit, Excel, FileAdd, Filter, FilterAdd, FilterRemove, Home, ImgOff, Key, Login, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
