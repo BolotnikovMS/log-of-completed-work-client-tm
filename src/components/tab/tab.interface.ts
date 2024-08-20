@@ -1,9 +1,12 @@
 import { ReactNode } from 'react'
 
+interface ITab {
+  id: string
+  label: string
+  content: ReactNode
+  icon?: ReactNode
+}
+
 export interface IPropsTab {
-	tabs: {
-		id: string | number
-		label: string
-		content: ReactNode
-	}[]
+  tabs: ITab[]
 }
