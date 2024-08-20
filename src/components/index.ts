@@ -4,7 +4,8 @@ import { Card } from './cards/card/Card'
 import { SmallCard } from './cards/small-card/SmallCard'
 import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
-import { Layout } from './layout/Layout'
+import { AuthLayout } from './layouts/AuthLayout'
+import { Layout } from './layouts/Layout'
 import { Loader } from './loaders/loader/Loader'
 import { Modal } from './modal/Modal'
 import { NavBar } from './navBar/NavBar'
@@ -31,4 +32,4 @@ const Toggle = lazy(() => import('./toggle/Toggle'))
 const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
 const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 
-export { Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
