@@ -1,5 +1,5 @@
 .mNavBar {
-  @apply flex flex-col justify-between items-center bg-gray-300/70 w-64 m-3 px-1 py-3 rounded-lg;
+  @apply flex flex-col justify-between items-center w-64 mx-2 my-6 p-1 border-r-2;
 }
 
 .mNavBar__logo {
