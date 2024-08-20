@@ -76,7 +76,7 @@ export const SignIn: FC = () => {
 					</Group>
 				</div>
 				<div className="form__btns">
-					<Button disabled={!isValid} classBtn='btn-bg_green'>
+					<Button disabled={!isValid} className='mBtn_primary'>
 						Войти
 					</Button>
 				</div>
