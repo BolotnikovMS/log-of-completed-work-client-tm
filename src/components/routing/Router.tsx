@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Layout, Page, ProtectedRoute } from '..'
+import { AuthLayout, Layout, Page, ProtectedRoute } from '..'
 import { Profile, ProfileControl, SignIn } from '../../views/auth'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
@@ -18,203 +18,203 @@ import { useAuthStore } from '../../store/auth'
 import { HomePage } from '../../views/home/HomePage'
 
 export const Router: React.FC = () => {
-	const { authUser } = useAuthStore()
+  const { authUser } = useAuthStore()
 
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path='/' element={authUser ? <Layout /> : <AuthLayout />}>
         <Route index element={<HomePage />} />
         <Route path='/districts'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='Районы и ГП'
-								children={
-									<>
-										<DistrictControl />
-										<DistrictsCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Районы и ГП'
+                children={
+                  <>
+                    <DistrictControl />
+                    <DistrictsCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/districts/:id/substations'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='Подстанций'
-								children={
-									<>
-										{/* !!Использование компонента с карточками ПС */}
-										<SubstationControl />
-										<DistrictSubstationCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Подстанций'
+                children={
+                  <>
+                    {/* !!Использование компонента с карточками ПС */}
+                    <SubstationControl />
+                    <DistrictSubstationCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/substations'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='Подстанций'
-								children={
-									<>
-										<SubstationControl />
-										<SubstationsCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Подстанций'
+                children={
+                  <>
+                    <SubstationControl />
+                    <SubstationsCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
-				<Route path='/substations/:id' 
-					element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page 
-								children={
-									<>
-										<SubstationInfoControl />
-										<SubstationInfo />
-									</>
-								}
-							/>
-						</ProtectedRoute>
-					}
-				/>
+        <Route path='/substations/:id'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                children={
+                  <>
+                    <SubstationInfoControl />
+                    <SubstationInfo />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
         <Route path='/voltage-classes'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page 
-								title='Классы напряжения'
-								children={
-									<>
-										<VoltageControl />
-										<VoltageClassesCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Классы напряжения'
+                children={
+                  <>
+                    <VoltageControl />
+                    <VoltageClassesCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/types-kp'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page 
-								title='Типы КП'
-								children={
-									<>
-										<TypeKpControl />
-										<TypesKpCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Типы КП'
+                children={
+                  <>
+                    <TypeKpControl />
+                    <TypesKpCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/head-controllers'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page 
-								title='Головные контроллеры'
-								children={
-									<>
-										<HeadControllerControl />
-										<HeadControllersCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Головные контроллеры'
+                children={
+                  <>
+                    <HeadControllerControl />
+                    <HeadControllersCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/channel-types'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='Типы каналов'
-								children={
-									<>
-										<ChannelTypeControl />
-										<ChannelTypeCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Типы каналов'
+                children={
+                  <>
+                    <ChannelTypeControl />
+                    <ChannelTypeCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
         <Route path='/gsm-operators'
           element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='GSM операторы'
-								children={
-									<>
-										<GsmOperatorControl />
-										<GsmOperatorsCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='GSM операторы'
+                children={
+                  <>
+                    <GsmOperatorControl />
+                    <GsmOperatorsCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
           }
         />
-				<Route path='/completed-works'
-					element={
-						<ProtectedRoute isAllowed={!!authUser}>
-							<Page
-								title='Выполненные работы'
-								children={
-									<>
-										<CompletedWorkControl />
-										<CompletedWorksCards />
-									</>
-								}
-							/>
-						</ProtectedRoute>
-					}
-				/>
-				<Route path='/users'
-					element={
-						<ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
-							<Page
-								title='Пользователи'
-								children={
-									<>
-										<UserControl />
-										<UsersTable />
-									</>
-								}
-							/>
-						</ProtectedRoute>
-					}
-				/>
-				<Route path='/profile'
-					element={
-						<Page
-							title='Профиль'
-							children={
-								<>
-									<ProfileControl />
-									<Profile />
-								</>
-							}
-						/>
-					}
-				/>
-				<Route path='/sign-in'
-					element={
-						<Page
-							title='Вход'
-							classTitle='title-center'
-							children={
-								<>
-									<SignIn />
-								</>
-							}
-						/>
-					}
-				/>
+        <Route path='/completed-works'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Выполненные работы'
+                children={
+                  <>
+                    <CompletedWorkControl />
+                    <CompletedWorksCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/users'
+          element={
+            <ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
+              <Page
+                title='Пользователи'
+                children={
+                  <>
+                    <UserControl />
+                    <UsersTable />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/profile'
+          element={
+            <Page
+              title='Профиль'
+              children={
+                <>
+                  <ProfileControl />
+                  <Profile />
+                </>
+              }
+            />
+          }
+        />
+        <Route path='/sign-in'
+          element={
+            <Page
+              title='Вход'
+              classTitle='title-center'
+              children={
+                <>
+                  <SignIn />
+                </>
+              }
+            />
+          }
+        />
         <Route path='*' element={<div>Not Found</div>} />
       </Route>
     </Routes>
