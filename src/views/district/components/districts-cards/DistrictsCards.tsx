@@ -12,7 +12,7 @@ const DistrictsCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10 })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 20 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [district, setDistrict] = useState<IDistrict | null>(null)

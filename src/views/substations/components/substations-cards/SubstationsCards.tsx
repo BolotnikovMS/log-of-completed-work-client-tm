@@ -15,7 +15,7 @@ const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 10, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)

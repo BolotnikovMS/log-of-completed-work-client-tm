@@ -12,7 +12,7 @@ const VoltageClassesCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 10 })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 20 })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [voltageClass, setVoltageClass] = useState<IVoltageClass | null>(null)
