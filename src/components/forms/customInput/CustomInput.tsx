@@ -1,7 +1,6 @@
-import { Input, ValidationMessage } from '../..'
-
 import cx from 'classnames'
 import { type FC } from 'react'
+import { Input, ValidationMessage } from '../..'
 import { joinClasses } from '../../../helpers/joinClasses.helper'
 import { IPropsCustomInput } from './customInput.interface'
 import styles from './customInput.module.scss'
