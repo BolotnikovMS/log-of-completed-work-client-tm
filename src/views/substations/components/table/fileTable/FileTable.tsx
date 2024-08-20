@@ -55,7 +55,7 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 						</Button>
 						{
 							checkRole(authUser, [ERoles.Moderator, ERoles.Admin]) && (
-								<Button classBtn='btn-bg_red' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
+								<Button className='btn-error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
 									<Delete className='icon' />
 								</Button>
 							)
