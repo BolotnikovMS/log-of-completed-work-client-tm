@@ -38,8 +38,8 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <div className="form__content form__content-w-55 form__content-mt">
+      <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <div className="">
           <Group className='group-col group-str'>
             <CustomInput
               label='Название Района или ГП'
@@ -62,7 +62,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
           </Group>
         </div>
         <div className="form__btns">
-          <Button disabled={!isValid} classBtn='btn-bg_green'>
+          <Button disabled={!isValid}>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
         </div>
