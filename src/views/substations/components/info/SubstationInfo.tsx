@@ -6,7 +6,7 @@ import { FileTable } from '..'
 import { Button, CustomSlider, Error, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
-import { ArrowLeft, ImgOff, Note } from '../../../../icons'
+import { ArrowLeft, Database, FilesFolder, Img, ImgOff, Note } from '../../../../icons'
 import './info.scss'
 
 const SubstationInfo: FC = () => {
@@ -66,14 +66,14 @@ const SubstationInfo: FC = () => {
       </div>
 
       <Tab tabs={[
-        { id: 'backups', label: 'Backup', content: backupsContent },
-        { id: 'photos', label: 'Фото ПС', content: photosContent },
-        { id: 'other_files', label: 'Прочие файлы', content: otherContent }
+        { id: 'backups', label: 'Backup', content: backupsContent, icon: <Database className='icon' /> },
+        { id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Img className='icon' /> },
+        { id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <FilesFolder className='icon' /> }
       ]} />
 
       <div className="info__btns info__btns-mt">
-        <Button classBtn='btn-bg_blue' onClick={() => navigate(-1)}><ArrowLeft className='icon' />Обратно</Button>
-        <Link to={`/completed-works?substation=${substation?.id}`} className='btn btn-bg_green'>
+        <Button className='mBtn_primary' onClick={() => navigate(-1)}><ArrowLeft className='icon' />Обратно</Button>
+        <Link to={`/completed-works?substation=${substation?.id}`} className='mBtn btn-sm mBtn_outline-green'>
           <Note className='icon' />Работы
         </Link>
       </div>
