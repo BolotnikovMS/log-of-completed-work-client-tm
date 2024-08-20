@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+img {
+	vertical-align: top;
+}
+
+img, svg {
+	max-width: 100%;
+	height: auto;
+}
+
+input:focus, input:active, textarea:active, textarea:focus,
+button:focus, button:active {
+  outline: none !important;
+}
+
 body {
   font-size: clamp(14px, 2.5vw, 25px);
 }
@@ -64,16 +78,6 @@ body {
 
 .icon {
   @apply w-5;
-  /* flex-shrink: 0;
-  transition: all 0.3s ease-in;
-
-	&-filter {
-	  color: black;
-
-		&:hover {
-		  color: #666565;
-		}
-	} */
 }
 
 .label {
@@ -107,12 +111,9 @@ body {
   margin-top: unset !important;
 }
 
-/* .work-log {
-	padding: 5px 0 15px;
-} */
-
 .form {
-  &-col {
+  @apply flex flex-col gap-4;
+  /* &-col {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,7 +141,7 @@ body {
     &-mt + * {
       margin-top: 27px;
     }
-  }
+  } */
 
   &__custom-select {
     &__value-container {
@@ -194,8 +195,7 @@ body {
   }
 
   &__btns {
-    display: flex;
-    align-items: center;
+    @apply flex items-center justify-center;
   }
 }
 
