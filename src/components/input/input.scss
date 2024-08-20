@@ -1,0 +1,4 @@
+.input-wrapper {
+  @apply input-md rounded-xl w-full flex items-center gap-3 border border-solid border-gray-300 transition-colors duration-300 ease-in-out focus-within:border-blue-300 hover:border-blue-200 cursor-text;
+  font-size: clamp(17px, 2.5vw, 19px);
+}
