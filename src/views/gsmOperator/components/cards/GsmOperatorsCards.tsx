@@ -37,7 +37,7 @@ const GsmOperatorsCards: FC = () => {
             <SmallCard
               key={gsmOperator.id}
               childrenContent={
-                <p className='text-lg'>
+                <p className='text-content'>
                   {gsmOperator.name}
                 </p>
               }
@@ -49,13 +49,13 @@ const GsmOperatorsCards: FC = () => {
                     }
                     menuItems={[
                       isAdminOrModerator && (
-                        <Button onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
+                        <Button className='!justify-start' onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
                           <Edit className='icon' />
                           Редактировать
                         </Button>
                       ),
                       isAdmin && (
-                        <Button className='btn-error' onClick={() => handleDelete(gsmOperator.id)}>
+                        <Button className='btn-error !justify-start' onClick={() => handleDelete(gsmOperator.id)}>
                           <Delete className='icon' />
                           Удалить
                         </Button>

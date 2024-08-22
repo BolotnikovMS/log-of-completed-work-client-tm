@@ -64,6 +64,7 @@ const SubstationFilters: FC = () => {
           onChange={(e) => handleSearch(e)}
           value={searchValue}
           autoComplete='off'
+          classInput='!input-sm'
           placeholder='Введите название ПС...'
           iconLeft={<Search className='icon' />}
         />

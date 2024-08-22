@@ -38,7 +38,7 @@ const HeadControllersCards: FC = () => {
               <SmallCard
                 key={headController.id}
                 childrenContent={
-                  <p className='text-lg'>
+                  <p className='text-content'>
                     {headController.name}
                   </p>
                 }
@@ -50,13 +50,13 @@ const HeadControllersCards: FC = () => {
                       }
                       menuItems={[
                         isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setHeadController(headController), setIsEdited(!isEdited) }}>
+                          <Button className='!justify-start' onClick={() => { toggleModal(), setHeadController(headController), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button className='btn-error' onClick={() => handleDelete(headController.id)}>
+                          <Button className='btn-error !justify-start' onClick={() => handleDelete(headController.id)}>
                             <Delete className='icon' />
                             Удалить
                           </Button>

@@ -38,7 +38,7 @@ const TypesKpCards: FC = () => {
               <SmallCard
                 key={typeKp.id}
                 childrenContent={
-                  <p className='text-lg'>
+                  <p className='text-content'>
                     {typeKp.name}
                   </p>
                 }
@@ -50,13 +50,13 @@ const TypesKpCards: FC = () => {
                       }
                       menuItems={[
                         isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setDistrict(typeKp), setIsEdited(!isEdited) }}>
+                          <Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(typeKp), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button className='btn-error' onClick={() => handleDelete(typeKp.id)}>
+                          <Button className='btn-error !justify-start' onClick={() => handleDelete(typeKp.id)}>
                             <Delete className='icon' />
                             Удалить
                           </Button>

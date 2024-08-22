@@ -38,7 +38,7 @@ const VoltageClassesCards: FC = () => {
               <SmallCard
                 key={voltageClass.id}
                 childrenContent={
-                  <p className='text-lg'>
+                  <p className='text-content'>
                     {voltageClass.name}
                   </p>
                 }
@@ -50,13 +50,13 @@ const VoltageClassesCards: FC = () => {
                       }
                       menuItems={[
                         isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setVoltageClass(voltageClass), setIsEdited(!isEdited) }}>
+                          <Button className='!justify-start' onClick={() => { toggleModal(), setVoltageClass(voltageClass), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button className='btn-error' onClick={() => handleDelete(voltageClass.id)}>
+                          <Button className='btn-error !justify-start' onClick={() => handleDelete(voltageClass.id)}>
                             <Delete className='icon' />
                             Удалить
                           </Button>

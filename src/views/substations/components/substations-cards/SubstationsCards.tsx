@@ -56,13 +56,13 @@ const SubstationsCards: FC = () => {
                       }
                       menuItems={[
                         isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+                          <Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button className='btn-error' onClick={() => handleDelete(substation.id)}>
+                          <Button className='btn-error !justify-start' onClick={() => handleDelete(substation.id)}>
                             <Delete className='icon' />
                             Удалить
                           </Button>

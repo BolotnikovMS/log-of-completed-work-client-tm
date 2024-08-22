@@ -38,7 +38,7 @@ const DistrictsCards: FC = () => {
               <SmallCard
                 key={district.id}
                 childrenContent={
-                  <p className='text-lg'>
+                  <p className='text-content'>
                     {district.name}
                   </p>
                 }
@@ -51,13 +51,13 @@ const DistrictsCards: FC = () => {
                     }
                     menuItems={[
                       isAdminOrModerator && (
-                        <Button onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
+                        <Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
                           <Edit className='icon' />
                           Редактировать
                         </Button>
                       ),
                       isAdmin && (
-                        <Button className='btn-error' onClick={() => handleDelete(district.id)}>
+                        <Button className='btn-error !justify-start' onClick={() => handleDelete(district.id)}>
                           <Delete className='icon' />
                           Удалить
                         </Button>
