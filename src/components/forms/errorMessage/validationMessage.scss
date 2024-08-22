@@ -1,0 +1,4 @@
+.validation-error {
+  @apply absolute right-0 left-0 flex justify-center text-red-600;
+  font-size: clamp(13px, 2vw, 20px);
+}
