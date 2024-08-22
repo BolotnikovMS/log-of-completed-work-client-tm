@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateGsmOperator, useUpdateGsmOperator } from '../../../../hooks'
 import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './gsmOperator.validation'
@@ -37,21 +37,19 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <div className="form__content form__content-w-55 form__content-mt">
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Наименование GSM оператора'
-              name='name'
-              register={register}
-              errorMessage={errors.name?.message}
-              mandatory={true}
-              placeholder='Введите наименование...'
-            />
-          </Group>
-        </div>
+      <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <Group className='group-col group-str'>
+          <Input
+            label='Наименование GSM оператора'
+            name='name'
+            register={register}
+            errorMessage={errors.name?.message}
+            mandatory={true}
+            placeholder='Введите наименование...'
+          />
+        </Group>
         <div className="form__btns">
-          <Button disabled={!isValid} classBtn='btn-bg_green'>
+          <Button disabled={!isValid} className='mBtn_outline-green'>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
         </div>

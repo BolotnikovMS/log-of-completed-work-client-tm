@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateDistrict, useUpdateDistrict } from '../../../../hooks'
 import { IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './district.validation'
@@ -39,30 +39,28 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <div className="">
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Название Района или ГП'
-              name='name'
-              register={register}
-              errorMessage={errors.name?.message}
-              mandatory={true}
-              placeholder='Введите название...'
-            />
-          </Group>
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Сокращенное название'
-              name='shortName'
-              register={register}
-              errorMessage={errors.shortName?.message}
-              mandatory={true}
-              placeholder='Введите сокращенное название...'
-            />
-          </Group>
-        </div>
+        <Group className='group-col group-str'>
+          <Input
+            label='Название Района или ГП'
+            name='name'
+            register={register}
+            errorMessage={errors.name?.message}
+            mandatory={true}
+            placeholder='Введите название...'
+          />
+        </Group>
+        <Group className='group-col group-str'>
+          <Input
+            label='Сокращенное название'
+            name='shortName'
+            register={register}
+            errorMessage={errors.shortName?.message}
+            mandatory={true}
+            placeholder='Введите сокращенное название...'
+          />
+        </Group>
         <div className="form__btns">
-          <Button disabled={!isValid}>
+          <Button className='mBtn_outline-green' disabled={!isValid}>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
         </div>

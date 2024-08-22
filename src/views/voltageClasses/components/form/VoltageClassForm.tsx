@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader } from '../../../../components'
+import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateVoltageClass, useUpdateVoltageClass } from '../../../../hooks'
 import { IPropsMutation } from '../../../../interfaces'
 import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
@@ -37,21 +37,19 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <div className="form__content form__content-w-55 form__content-mt">
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Класс напряжения'
-              name='name'
-              register={register}
-              errorMessage={errors.name?.message}
-              mandatory={true}
-              placeholder='Введите класс напряжения...'
-            />
-          </Group>
-        </div>
+      <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <Group className='group-col group-str'>
+          <Input
+            label='Класс напряжения'
+            name='name'
+            register={register}
+            errorMessage={errors.name?.message}
+            mandatory
+            placeholder='Введите класс напряжения...'
+          />
+        </Group>
         <div className="form__btns">
-          <Button disabled={!isValid} classBtn='btn-bg_green'>
+          <Button disabled={!isValid} className='mBtn_outline-green'>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
         </div>
