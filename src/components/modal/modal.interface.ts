@@ -5,5 +5,6 @@ export interface IPropsModal {
   title: string
   content: ReactNode | string
   footer?: ReactNode | string
+  classDialog?: string
   onToggle: () => void
 }
