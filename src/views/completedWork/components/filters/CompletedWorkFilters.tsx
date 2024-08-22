@@ -123,7 +123,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
         </Group>
       </div>
       <div className={styles.filtersBtns}>
-        <Button classBtn='btn-bg_green' onClick={applyFilters}>
+        <Button className='mBtn_outline-green' onClick={applyFilters}>
           <FilterAdd className='icon' />
           Применить фильтры
         </Button>

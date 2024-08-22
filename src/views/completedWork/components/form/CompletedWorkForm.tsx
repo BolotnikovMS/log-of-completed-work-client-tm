@@ -54,78 +54,77 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <div className="form__content form__content-w-55 form__content-mt">
-          <Group className='group-col group-str'>
-            <SelectWrapper label='Выберите ПС' errorMessage={errors.substationId?.message} mandatory>
-              <AsyncSelect
-                classNamePrefix='form__custom-select'
-                options={substations?.data}
-                getOptionValue={option => option.id.toString()}
-                getOptionLabel={option => option.fullNameSubstation}
-                value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue) : null}
-                onChange={option => substationOnChange(option?.id)}
-                isLoading={isLoadingSubstations}
-                isDisabled={isErrorSubstations}
-                isClearable
-                placeholder="Выберите ПС..."
-                {...restSubstationField}
-              />
-            </SelectWrapper>
-          </Group>
-          <Group className='group-col group-str'>
-            <SelectWrapper label='Исполнитель работ' errorMessage={errors.workProducerId?.message} mandatory>
-              <AsyncSelect
-                classNamePrefix='form__custom-select'
-                options={users?.data}
-                getOptionValue={option => option.id.toString()}
-                getOptionLabel={option => option.fullName}
-                value={userValue || completedWork ? users?.data?.find(d => d.id === userValue) : null}
-                onChange={option => userOnChange(option ? option.id : option)}
-                isLoading={isLoadingUsers}
-                isDisabled={isErrorUsers}
-                isClearable
-                placeholder="Выберите исполнителя..."
-                {...restUserField}
-              />
-            </SelectWrapper>
-          </Group>
-          <Group className='group-col group-str'>
-            <Textarea
-              label='Описание'
-              name='description'
-              register={register}
-              error={errors.description?.message}
-              mandatory={true}
-              placeholder='Введите описание...'
+      <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <Group className='group-col group-str'>
+          <SelectWrapper label='Выберите ПС' errorMessage={errors.substationId?.message} mandatory>
+            <AsyncSelect
+              classNamePrefix='form__custom-select'
+              options={substations?.data}
+              getOptionValue={option => option.id.toString()}
+              getOptionLabel={option => option.fullNameSubstation}
+              value={substationValue || completedWork ? substations?.data.find(d => d.id === substationValue) : null}
+              onChange={option => substationOnChange(option?.id)}
+              isLoading={isLoadingSubstations}
+              isDisabled={isErrorSubstations}
+              isClearable
+              placeholder="Выберите ПС..."
+              {...restSubstationField}
             />
-          </Group>
-          <Group className='group-col group-str'>
-            <Textarea
-              label='Примечание'
-              name='note'
-              register={register}
-              error={errors.note?.message}
-              placeholder='Введите примечание...'
+          </SelectWrapper>
+        </Group>
+        <Group className='group-col group-str'>
+          <SelectWrapper label='Исполнитель работ' errorMessage={errors.workProducerId?.message} mandatory>
+            <AsyncSelect
+              classNamePrefix='form__custom-select'
+              options={users?.data}
+              getOptionValue={option => option.id.toString()}
+              getOptionLabel={option => option.fullName}
+              value={userValue || completedWork ? users?.data?.find(d => d.id === userValue) : null}
+              onChange={option => userOnChange(option ? option.id : option)}
+              isLoading={isLoadingUsers}
+              isDisabled={isErrorUsers}
+              isClearable
+              placeholder="Выберите исполнителя..."
+              {...restUserField}
             />
-          </Group>
-          <Group className='group-col group-str'>
-            <CustomDatePicker
-              register={register}
-              errorMessage={errors.dateCompletion?.message}
-              dateFormat='dd.MM.yyyy'
-              locale={ru}
-              selected={dateCompletionValue}
-              onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
-              placeholderText='Укажите дату работ'
-              iconLeft={<Calendar className='icon' />}
-              autoComplete='off'
-              {...restDateCompletion}
-            />
-          </Group>
-        </div>
+          </SelectWrapper>
+        </Group>
+        <Group className='group-col group-str'>
+          <Textarea
+            label='Описание'
+            name='description'
+            register={register}
+            error={errors.description?.message}
+            mandatory={true}
+            placeholder='Введите описание...'
+          />
+        </Group>
+        <Group className='group-col group-str'>
+          <Textarea
+            label='Примечание'
+            name='note'
+            register={register}
+            className='!h-28'
+            error={errors.note?.message}
+            placeholder='Введите примечание...'
+          />
+        </Group>
+        <Group className='group-col group-str'>
+          <CustomDatePicker
+            register={register}
+            errorMessage={errors.dateCompletion?.message}
+            dateFormat='dd.MM.yyyy'
+            locale={ru}
+            selected={dateCompletionValue}
+            onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
+            placeholderText='Укажите дату работ'
+            iconLeft={<Calendar className='icon' />}
+            autoComplete='off'
+            {...restDateCompletion}
+          />
+        </Group>
         <div className="form__btns">
-          <Button disabled={!isValid} classBtn='btn-bg_green'>
+          <Button disabled={!isValid} className='mBtn_outline-green'>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
         </div>

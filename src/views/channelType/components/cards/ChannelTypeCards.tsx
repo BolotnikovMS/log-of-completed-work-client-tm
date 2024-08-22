@@ -39,7 +39,7 @@ const ChannelTypeCards: FC = () => {
               <SmallCard
                 key={channelType.id}
                 childrenContent={
-                  <p className='text-lg'>
+                  <p className='text-content'>
                     {channelType.name}
                   </p>
                 }
@@ -51,13 +51,13 @@ const ChannelTypeCards: FC = () => {
                       }
                       menuItems={[
                         isAdminOrModerator && (
-                          <Button onClick={() => { toggleModal(), setChannelType(channelType), setIsEdited(!isEdited) }}>
+                          <Button className='!justify-start' onClick={() => { toggleModal(), setChannelType(channelType), setIsEdited(!isEdited) }}>
                             <Edit className='icon' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
-                          <Button className='btn-error' onClick={() => handleDelete(channelType.id)}>
+                          <Button className='btn-error !justify-start' onClick={() => handleDelete(channelType.id)}>
                             <Delete className='icon' />
                             Удалить
                           </Button>

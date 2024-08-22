@@ -13,10 +13,10 @@ const CompletedWorkControl: FC = () => {
   return (
     <div className="work-log__control control">
       <div className="control__wrapper">
-        <Button classBtn='btn-bg_green' onClick={() => toggleModal()}>
+        <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
           <Add className='icon' />
         </Button>
-        <Button classBtn='btn-bg_trnt' onClick={() => toggleModalFilters()}>
+        <Button onClick={() => toggleModalFilters()}>
           {searchParams.size ? <FilterRemove className='icon icon-filter' /> : <Filter className='icon icon-filter' />}
         </Button>
         <Modal
