@@ -1,0 +1,15 @@
+.work-info {
+  @apply flex flex-col justify-center gap-4;
+
+  &__content {
+    @apply flex flex-col justify-center;
+  }
+
+  &__titles {
+    @apply flex items-center justify-center;
+  }
+
+  &__text {
+    @apply flex gap-1 items-center text-lg font-bold;
+  }
+}
