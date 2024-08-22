@@ -2,6 +2,6 @@ export interface ISelectWrapperProps {
   label: string
   classLabel?: string
   errorMessage?: string | undefined
-	mandatory?: boolean
+  mandatory?: boolean
   children: React.ReactNode
 }
