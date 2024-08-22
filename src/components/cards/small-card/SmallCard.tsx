@@ -1,22 +1,21 @@
-import './../card.css'
 // import cx from 'classnames'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import styles from './../card.module.css'
+import './../card.scss'
 import { IPropsSmallCard } from './smallCard.interface'
 
 export const SmallCard: React.FC<IPropsSmallCard> = ({ childrenContent, childrenControl, path }) => {
   return (
-    <div className={styles.mCard}>
-      {path && <Link to={path} className={styles.mCardLink} />}
-      <div className={styles.mCardBody}>
-        <div className={styles.mCardContent}>
-          {childrenContent && (
-            childrenContent
-          )}
-        </div>
+    <div className='mCard'>
+      {path && <Link to={path} className='mCard__link' />}
+      <div className='mCard__body'>
+        {childrenContent && (
+          <div className='mCard__content'>
+            {childrenContent}
+          </div>
+        )}
         {childrenControl && (
-          <div className={styles.mCardActions}>
+          <div className='mCard__actions'>
             {childrenControl}
           </div>
         )}
