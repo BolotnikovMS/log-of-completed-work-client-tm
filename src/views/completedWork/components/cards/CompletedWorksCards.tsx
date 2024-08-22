@@ -7,7 +7,7 @@ import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
-import { Delete, Edit, Note, Setting } from '../../../../icons'
+import { Delete, Edit, LinkIcon, Note, Setting } from '../../../../icons'
 import { ICompletedWork } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -39,16 +39,32 @@ const CompletedWorksCards: FC = () => {
 
   return (
     <>
-      <div style={{ 'padding': '0 0 15px' }}>Всего записей: {data?.pages[0].meta.total}</div>
+      <div className='text-title py-3'>Всего записей: <span className='font-bold'>{data?.pages[0].meta.total}</span></div>
       {!!data?.pages[0].data.length && (
-        <div className="cards">
+        <div className="cards-work">
           {data.pages.map(completedWorks => (
             completedWorks.data.map(completedWork => (
               <Card
                 key={completedWork.id}
-                childrenHeader={<p className='card__text card__text-bold'><Link to={`/substations/${completedWork?.substation?.id}`}>{completedWork?.substation?.fullNameSubstation}</Link></p>}
-                childrenBody={<p>{completedWork.shortText}</p>}
-                childrenFooter={<p>Дата работ: {moment(completedWork.dateCompletion, 'YYYY-MM-DD').format('DD.MM.yyyy')}. Выполнил: {completedWork?.work_producer?.shortName} </p>}
+                childrenHeader={
+                  <p className='text-title font-bold'>
+                    <Link to={`/substations/${completedWork?.substation?.id}`} className='flex items-center gap-1'>
+                      <LinkIcon className='icon' />
+                      {completedWork?.substation?.fullNameSubstation}
+                    </Link>
+                  </p>
+                }
+                childrenContent={
+                  <p className='text-content'>{completedWork.shortText}</p>
+                }
+                childrenFooter={
+                  <>
+                    <hr className='pb-2' />
+                    <p className='text-base text-gray-400/70'>
+                      Дата работ: {moment(completedWork.dateCompletion, 'YYYY-MM-DD').format('DD.MM.yyyy')}. Выполнил: {completedWork?.work_producer?.shortName}
+                    </p>
+                  </>
+                }
                 childrenControl={
                   <>
                     <Button onClick={() => { toggleModalView(), setCompetedWork(completedWork) }}>
@@ -56,19 +72,20 @@ const CompletedWorksCards: FC = () => {
                     </Button>
                     {checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
                       <Dropdown
-                        classMenu='dropdownMenuRow dropdownMenuCenter'
                         children={
                           <Setting className='icon' />
                         }
                         menuItems={[
                           checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
-                            <Button onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
+                            <Button className='!justify-start' onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
                               <Edit className='icon' />
+                              Редактировать
                             </Button>
                           ),
                           isAdmin && (
-                            <Button classBtn='btn-bg_red' onClick={() => handleDelete(completedWork.id)}>
+                            <Button className='!justify-start btn-error' onClick={() => handleDelete(completedWork.id)}>
                               <Delete className='icon' />
+                              Удалить
                             </Button>
                           )
                         ]}
@@ -87,7 +104,11 @@ const CompletedWorksCards: FC = () => {
       <Modal
         visible={isModalView}
         title='Подробный просмотр выполненной работы'
-        onToggle={() => { toggleModalView() }} content={<CompletedWorkInfo completedWork={completedWork!} />}
+        classDialog='!min-w-[850px]'
+        onToggle={() => { toggleModalView() }}
+        content={
+          <CompletedWorkInfo completedWork={completedWork!} />
+        }
       />
     </>
   )
