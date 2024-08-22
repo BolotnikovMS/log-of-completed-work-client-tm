@@ -1,9 +1,8 @@
-import styles from './textarea.module.scss'
-
 import cx from 'classnames'
 import { type FC } from 'react'
 import { ValidationMessage } from '../..'
 import { IPropsTextarea } from './textarea.interface'
+import './textarea.scss'
 
 const Textarea: FC<IPropsTextarea> = ({
   register,
@@ -12,29 +11,27 @@ const Textarea: FC<IPropsTextarea> = ({
   name,
   label,
   className,
-	mandatory,
+  mandatory,
   ...attributes
 }) => {
   return (
-    <div className={styles['textarea-wrapper']}>
+    <div className='textarea-wrapper'>
       <label htmlFor={name} className='label'>
-				<span className="label__text">
-					{label}
-					{mandatory && (<span className='text-mandatory'>*</span>)}
-				</span>
+        <span className="label__text">
+          {label}
+          {mandatory && <span className='text-mandatory'>*</span>}
+        </span>
       </label>
-      <textarea 
+      <textarea
         {...register(name, validation)}
         id={name}
-        className={cx(styles.textarea, className, error && styles['textarea-error'] )}
+        className={cx('mTextarea',
+          className,
+          error && '!border-red-500')}
         aria-invalid={Boolean(error)}
         {...attributes}
       ></textarea>
-			{
-				error && (
-					<ValidationMessage className='error-bottom-25' children={error} />
-				)
-			}
+      {error && <ValidationMessage className='bottom-[-27px]' children={error} />}
     </div>
   )
 }
