@@ -11,7 +11,7 @@ export const Layout: FC = () => {
   return (
     <div className='flex h-screen'>
       <NavBar />
-      <main className='flex-1 p-4'>
+      <main className='flex-1'>
         <div className="container mx-auto max-w-[100%] overflow-y-auto h-[100%]">
           <Suspense fallback={<Loader />}>
             <Outlet />
