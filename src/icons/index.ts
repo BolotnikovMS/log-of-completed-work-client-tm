@@ -37,5 +37,6 @@ const View = lazy(() => import('./view.svg?react'))
 const Img = lazy(() => import('./img.svg?react'))
 const Database = lazy(() => import('./database.svg?react'))
 const FilesFolder = lazy(() => import('./files-folder.svg?react'))
+const LinkIcon = lazy(() => import('./link.svg?react'))
 
-export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, Login, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
+export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, LinkIcon, Login, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
