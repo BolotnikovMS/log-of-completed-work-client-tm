@@ -28,6 +28,7 @@ const CompletedWorkControl: FC = () => {
         <Modal
           visible={isModalFilters}
           title='Фильтры'
+          classDialog=''
           content={<CompletedWorkFilters toggleModal={toggleModalFilters} />}
           onToggle={toggleModalFilters}
         />
