@@ -233,7 +233,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
         </Group>
         <Group className='group-col'>
           <Input
-            classWrapper='!flex-row'
+            classWrapper='!flex-row !items-center'
             label='РДУ'
             name='rdu'
             type='checkbox'
@@ -242,7 +242,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
         </Group>
         <Group>
           <Input
-            classWrapper='!flex-row'
+            classWrapper='!flex-row !items-center'
             label='Используется?'
             name='active'
             type='checkbox'
