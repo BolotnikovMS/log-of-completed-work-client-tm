@@ -120,24 +120,14 @@ body {
 
 .label {
   @apply flex flex-col gap-2 ml-3 p-0;
-  font-size: clamp(14px, 2.2vw, 20px);
+  font-size: clamp(14px, 2.2vw, 19px);
 
 	&__text {
 	 @apply relative inline;
 	}
 
 	&-upload {
-  	padding: 6px 7px;
-		flex-direction: row;
-		align-items: center;
-		border: 1px dashed black;
-		border-radius: 10px;
-		transition: all 0.3s ease-in;
-
-		&:hover {
-			color: #5e5d5d;
-			border-color: #5e5d5d;
-		}
+	  @apply flex-row items-center m-0 px-[10px] py-2 border border-solid border-gray-300 transition-colors duration-300 ease-in-out hover:border-blue-200 cursor-text;
 	}
 }
 
@@ -167,6 +157,10 @@ body {
 			&-error {
 			  border: 1px solid red !important;
 			}
+    }
+
+    &__placeholder {
+      color: #9ca3af !important;
     }
 
     &__input-container {
@@ -269,7 +263,7 @@ body {
 	font-weight: bold;
 } */
 
-.lucide {
+/* .lucide {
 	transition: all 0.3s ease-in;
 
 	&-filter {
@@ -279,7 +273,7 @@ body {
 		  color: #666565;
 		}
 	}
-}
+} */
 
 /* slider */
 .awssld__content > img {

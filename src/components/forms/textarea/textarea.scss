@@ -3,6 +3,6 @@
 }
 
 .mTextarea {
-  @apply textarea textarea-bordered rounded-xl textarea-md w-full max-w-full h-40 resize-none transition-colors duration-300 ease-in-out focus-within:border-blue-300 hover:border-blue-200 cursor-text;
+  @apply textarea textarea-bordered rounded-xl textarea-md w-full max-w-full h-40 resize-none transition-colors duration-300 ease-in-out focus-within:border-blue-300 hover:border-blue-200 cursor-text placeholder:text-gray-400;
   font-size: clamp(17px, 2.5vw, 19px);
 }

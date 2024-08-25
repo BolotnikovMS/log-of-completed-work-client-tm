@@ -1,0 +1,23 @@
+.substation-info {
+  @apply flex flex-col gap-4;
+
+	&__wrapper {
+	 @apply flex items-center justify-between;
+	}
+
+	&__content {
+	 @apply flex flex-col justify-center gap-1;
+	}
+
+	&__text {
+    @apply flex gap-1 items-center text-lg font-bold;
+  }
+
+	&__imgs {
+	 @apply flex flex-col items-center justify-center w-1/2 h-1/2;
+	}
+
+	&__btns {
+	  @apply flex justify-center gap-3;
+	}
+}
