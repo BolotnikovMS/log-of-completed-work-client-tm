@@ -67,7 +67,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите РЭС или ГП' errorMessage={errors.districtId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -84,7 +84,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите КП' errorMessage={errors.typeKpId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -101,7 +101,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите головной контроллер' errorMessage={errors.headControllerId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -118,7 +118,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите основной канал' errorMessage={errors.mainChannelId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -135,7 +135,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите резервный канал'>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -152,7 +152,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите дополнительный канал'>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -169,7 +169,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите GSM оператора'>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -186,7 +186,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Название ПС'
             name='name'
@@ -196,7 +196,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             placeholder='Введите название ПС...'
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите класс U' errorMessage={errors.voltageClassesId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -213,7 +213,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='ip основного канала'
             name='mainChannelIp'
@@ -222,7 +222,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             placeholder='Введите ip основного канала...'
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='ip резервного канала'
             name='backupChannelIp'
@@ -231,7 +231,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             placeholder='Введите ip резервного канала...'
           />
         </Group>
-        <Group className='group-col'>
+        <Group className='!items-center !justify-center'>
           <Input
             classWrapper='!flex-row !items-center'
             label='РДУ'
@@ -240,7 +240,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
             register={register}
           />
         </Group>
-        <Group>
+        <Group className='!items-center !justify-center'>
           <Input
             classWrapper='!flex-row !items-center'
             label='Используется?'

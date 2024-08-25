@@ -38,7 +38,7 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Класс напряжения'
             name='name'

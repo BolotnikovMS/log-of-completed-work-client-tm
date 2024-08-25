@@ -55,7 +55,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Выберите ПС' errorMessage={errors.substationId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -72,7 +72,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <SelectWrapper label='Исполнитель работ' errorMessage={errors.workProducerId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -89,7 +89,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
             />
           </SelectWrapper>
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Textarea
             label='Описание'
             name='description'
@@ -99,7 +99,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
             placeholder='Введите описание...'
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Textarea
             label='Примечание'
             name='note'
@@ -109,7 +109,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
             placeholder='Введите примечание...'
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <CustomDatePicker
             register={register}
             errorMessage={errors.dateCompletion?.message}

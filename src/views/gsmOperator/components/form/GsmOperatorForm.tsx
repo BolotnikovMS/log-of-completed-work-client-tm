@@ -38,7 +38,7 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Наименование GSM оператора'
             name='name'

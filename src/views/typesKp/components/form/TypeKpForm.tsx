@@ -37,8 +37,8 @@ const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIs
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+      <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
+        <Group>
           <Input
             label='Название КП'
             name='name'

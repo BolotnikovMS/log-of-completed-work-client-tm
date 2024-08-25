@@ -38,7 +38,7 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Название контроллера'
             name='name'

@@ -39,7 +39,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
     <div className="work-log__form">
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Название Района или ГП'
             name='name'
@@ -49,7 +49,7 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
             placeholder='Введите название...'
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <Input
             label='Сокращенное название'
             name='shortName'

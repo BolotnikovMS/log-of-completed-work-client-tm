@@ -53,42 +53,44 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   return (
     <div className='filters'>
       {errorMessage}
-      <Group className='group-col group-str'>
-        <AsyncSelect
-          classNamePrefix='form__custom-select'
-          options={substations?.data}
-          value={substation ? substations?.data.find(s => s.id === +substation) : null}
-          getOptionValue={option => option.id.toString()}
-          getOptionLabel={option => option.fullNameSubstation}
-          onChange={option => setSubstation(option ? option.id.toString() : null)}
-          isLoading={isLoadingSubstations}
-          isDisabled={isErrorSubstations}
-          isClearable
-          placeholder="Выберите ПС..."
-        />
+      <Group className='group-col w-full'>
+        <Group className='group-col group-str'>
+          <AsyncSelect
+            classNamePrefix='form__custom-select'
+            options={substations?.data}
+            value={substation ? substations?.data.find(s => s.id === +substation) : null}
+            getOptionValue={option => option.id.toString()}
+            getOptionLabel={option => option.fullNameSubstation}
+            onChange={option => setSubstation(option ? option.id.toString() : null)}
+            isLoading={isLoadingSubstations}
+            isDisabled={isErrorSubstations}
+            isClearable
+            placeholder="Выберите ПС..."
+          />
+        </Group>
+        <Group className='group-col group-str'>
+          <AsyncSelect
+            classNamePrefix='form__custom-select'
+            options={executors?.data}
+            value={executor ? executors?.data.find(s => s.id === +executor) : null}
+            getOptionValue={option => option.id.toString()}
+            getOptionLabel={option => option.fullName}
+            onChange={option => setExecutor(option ? option.id.toString() : null)}
+            isLoading={isLoadingExecutors}
+            isDisabled={isErrorExecutors}
+            isClearable
+            placeholder="Выберите производителя работ..."
+          />
+        </Group>
       </Group>
-      <Group className='group-col group-str'>
-        <AsyncSelect
-          classNamePrefix='form__custom-select'
-          options={executors?.data}
-          value={executor ? executors?.data.find(s => s.id === +executor) : null}
-          getOptionValue={option => option.id.toString()}
-          getOptionLabel={option => option.fullName}
-          onChange={option => setExecutor(option ? option.id.toString() : null)}
-          isLoading={isLoadingExecutors}
-          isDisabled={isErrorExecutors}
-          isClearable
-          placeholder="Выберите производителя работ..."
-        />
-      </Group>
-      <div className='filters__text'>
-        <p>Промежуток времени</p>
-      </div>
       <Group className='group-jcse'>
+        <div className='filters__text'>
+          <p>Промежуток времени</p>
+        </div>
         <Group className='group-no-gap'>
           <DatePicker
             dateFormat='dd.MM.yyyy'
-            locale={ru} 
+            locale={ru}
             className='filters__date-input'
             showIcon
             icon={
