@@ -13,7 +13,7 @@ const CustomDatePicker: FC<IPropsCustomDatePicker> = forwardRef<unknown, IPropsC
     >
       {iconLeft}
       <DatePicker
-        className='w-full'
+        className='w-full placeholder:text-gray-400'
         ref={ref}
         {...props}
       />
