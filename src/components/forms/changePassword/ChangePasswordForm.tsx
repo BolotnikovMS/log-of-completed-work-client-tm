@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, CustomInput, Error, Group, Loader } from '../..'
+import { Button, Error, Group, Input, Loader } from '../..'
 import { useChangePassword, useResetPassword } from '../../../hooks'
 import { IPropsMutation } from '../../../interfaces'
 import { IChangePasswordFields, IPropsChangePasswordForm } from './changePassword.interface'
@@ -33,33 +33,31 @@ const ChangePasswordForm: FC<IPropsChangePasswordForm> = ({ user, isResetPasswor
   return (
     <div className="work-log__form">
       {errorMessage}
-      <form className="form form-col" onSubmit={handleSubmit(isResetPassword ? submitReset : submitChange)}>
-        <div className="form__content form__content-w-55 form__content-mt">
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Введите новый пароль'
-              name='password'
-              type='password'
-              register={register}
-              errorMessage={errors.password?.message}
-              mandatory
-              placeholder='Введите пароль...'
-            />
-          </Group>
-          <Group className='group-col group-str'>
-            <CustomInput
-              label='Подтвердите новый пароль'
-              name='passwordConfirm'
-              type='password'
-              register={register}
-              errorMessage={errors.passwordConfirm?.message}
-              mandatory
-              placeholder='Введите пароль повторно...'
-            />
-          </Group>
-        </div>
+      <form className="form" onSubmit={handleSubmit(isResetPassword ? submitReset : submitChange)}>
+        <Group>
+          <Input
+            label='Введите новый пароль'
+            name='password'
+            type='password'
+            register={register}
+            errorMessage={errors.password?.message}
+            mandatory
+            placeholder='Введите пароль...'
+          />
+        </Group>
+        <Group>
+          <Input
+            label='Подтвердите новый пароль'
+            name='passwordConfirm'
+            type='password'
+            register={register}
+            errorMessage={errors.passwordConfirm?.message}
+            mandatory
+            placeholder='Введите пароль повторно...'
+          />
+        </Group>
         <div className="form__btns">
-          <Button disabled={!isValid} classBtn='btn-bg_green'>
+          <Button disabled={!isValid} className='mBtn_outline-green'>
             Сохранить
           </Button>
         </div>

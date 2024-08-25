@@ -27,7 +27,7 @@ const Input: FC<IPropsInput> = forwardRef<HTMLInputElement, IPropsInput>(({ clas
         <input
           id={name}
           name={name}
-          className='w-full bg-transparent'
+          className='w-full bg-transparent placeholder:text-gray-400'
           ref={ref}
           {...attributes}
           {...register && register(name, validation)}

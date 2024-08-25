@@ -4,7 +4,7 @@ import { Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCar
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../icons'
+import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { IDistrict } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -38,7 +38,8 @@ const DistrictsCards: FC = () => {
               <SmallCard
                 key={district.id}
                 childrenContent={
-                  <p className='text-content'>
+                  <p className='text-content flex items-center gap-1'>
+                    <LinkIcon className='icon' />
                     {district.name}
                   </p>
                 }

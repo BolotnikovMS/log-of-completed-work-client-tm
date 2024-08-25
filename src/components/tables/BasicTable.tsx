@@ -1,8 +1,7 @@
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, PaginationState, SortingState, useReactTable } from '@tanstack/react-table'
 import { useState, type FC } from 'react'
-import { Button, Group } from '..'
+import { Button, Group, Input } from '..'
 import { ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Search, SortAsc, SortDesc } from '../../icons'
-import InputTest from '../input/Input'
 import { IPropsBasicTable } from './basicTable.interface'
 import styles from './table.module.scss'
 
@@ -38,8 +37,8 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
         )}
         {search && (
           <div className={styles.controls}>
-            <Group className='group-row'>
-              <InputTest type='search' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Search className='icon' />} />
+            <Group>
+              <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Search className='icon' />} />
             </Group>
           </div>
         )}
@@ -48,8 +47,8 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header =>
-                  <th key={header.id} onClick={header.column.getToggleSortingHandler()}>
-                    <Group className='group-center'>
+                  <th key={header.id} onClick={header.column.getToggleSortingHandler()} className='text-title'>
+                    <Group className='!flex-row justify-center'>
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {{ asc: <SortAsc className='icon' />, desc: <SortDesc className='icon' /> }[header.column.getIsSorted() as string] ?? null}
                     </Group>
@@ -61,7 +60,7 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
             {table.getRowModel().rows.map(row => (
               <tr key={row.id}>
                 {row.getVisibleCells().map(cell => (
-                  <td key={cell.id}>
+                  <td key={cell.id} className='text-content'>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

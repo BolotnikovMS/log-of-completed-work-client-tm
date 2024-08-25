@@ -16,7 +16,7 @@ const Tab: FC<IPropsTab> = ({ tabs }) => {
         {tabs.map((tab, index) => (
           <li key={tab.id} className={cx('mTab__menu-item', toggleState === index && '!border-black')} onClick={() => toggleTab(index)} aria-label={tab.label}>
             {tab.icon && tab.icon}
-            <span className='text'>{tab.label}</span>
+            <span className='text-title'>{tab.label}</span>
           </li>
         ))}
       </ul>

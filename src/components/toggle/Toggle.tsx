@@ -1,13 +1,10 @@
+import cx from 'classnames'
 import { forwardRef, type FC } from 'react'
-import styles from './toggle.module.scss'
 import { IPropsToggle } from './toggle.interface'
 
-const Toggle: FC<IPropsToggle> = forwardRef<HTMLInputElement, IPropsToggle>(({ idToggle, ...attributes }, ref) => {
+const Toggle: FC<IPropsToggle> = forwardRef<HTMLInputElement, IPropsToggle>(({ idToggle, className, ...attributes }, ref) => {
   return (
-    <div className={styles.toggleContainer}>
-      <input type="checkbox" id={idToggle} className={styles.toggleInput} ref={ref} {...attributes} />
-      <label htmlFor={idToggle} className={styles.toggleLabel}></label>
-    </div>
+    <input id={idToggle} type="checkbox" className={cx('toggle', className)} ref={ref} {...attributes} />
   )
 })
 

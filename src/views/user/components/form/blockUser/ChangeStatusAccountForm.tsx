@@ -1,8 +1,7 @@
-import { type FC, useEffect, useState } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { LoaderLine, Toggle } from '../../../../../components'
 import { useChangeStatusAccountMutation } from '../../../../../hooks'
-import styles from './change-status.module.scss'
 import { IPropChangeStatusAccountFields, IPropsChangeStatusAccountForm } from './changeStatus.interface'
 
 const ChangeStatusAccountForm: FC<IPropsChangeStatusAccountForm> = ({ active, userId }) => {
@@ -31,9 +30,10 @@ const ChangeStatusAccountForm: FC<IPropsChangeStatusAccountForm> = ({ active, us
   if (isPending) return <LoaderLine />
 
   return (
-    <form className={styles.changeStatusForm} onChange={handleSubmit(submit)}>
+    <form className='flex justify-center' onChange={handleSubmit(submit)}>
       <Toggle
         idToggle={userId.toString()}
+        className='toggle-success'
         defaultChecked={isActive}
         {...register('active')}
       />

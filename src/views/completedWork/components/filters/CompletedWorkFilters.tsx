@@ -1,11 +1,10 @@
 import ru from 'date-fns/locale/ru'
 import moment from 'moment'
 import { useEffect, useMemo, useState, type FC } from 'react'
-import { default as DatePicker } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group } from '../../../../components'
 import { useSubstations, useUsers } from '../../../../hooks'
 import { Calendar, Excel, FilterAdd, FilterRemove } from '../../../../icons'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
@@ -51,10 +50,10 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
 
   return (
-    <div className='filters'>
+    <div className='filters-completed-work'>
       {errorMessage}
-      <Group className='group-col w-full'>
-        <Group className='group-col group-str'>
+      <Group className='!gap-4'>
+        <Group>
           <AsyncSelect
             classNamePrefix='form__custom-select'
             options={substations?.data}
@@ -68,7 +67,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             placeholder="Выберите ПС..."
           />
         </Group>
-        <Group className='group-col group-str'>
+        <Group>
           <AsyncSelect
             classNamePrefix='form__custom-select'
             options={executors?.data}
@@ -83,46 +82,36 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           />
         </Group>
       </Group>
-      <Group className='group-jcse'>
-        <div className='filters__text'>
-          <p>Промежуток времени</p>
+      <Group className='!gap-4'>
+        <div className='text-center'>
+          <p className='text-title font-bold'>Промежуток времени</p>
         </div>
-        <Group className='group-no-gap'>
-          <DatePicker
+        <Group>
+          <CustomDatePicker
             dateFormat='dd.MM.yyyy'
             locale={ru}
-            className='filters__date-input'
-            showIcon
-            icon={
-              <Calendar />
-            }
-            popperPlacement="top-end"
-            placeholderText='Дату начала'
             selected={dateStart}
             onChange={(date) => setDateStart(date)}
-            isClearable
+            iconLeft={<Calendar className='w-6' />}
             autoComplete='off'
+            placeholderText='От'
+            popperPlacement="left"
           />
         </Group>
-        <Group className='group-no-mg group-no-gap'>
-          <DatePicker
+        <Group>
+          <CustomDatePicker
             dateFormat='dd.MM.yyyy'
             locale={ru}
-            className='filters__date-input'
-            showIcon
-            icon={
-              <Calendar />
-            }
-            popperPlacement="top-end"
-            placeholderText='Дату окончания'
             selected={dateEnd}
             onChange={(date) => setDateEnd(date)}
-            isClearable
+            iconLeft={<Calendar className='w-6' />}
             autoComplete='off'
+            placeholderText='До'
+            popperPlacement="left"
           />
         </Group>
       </Group>
-      <div className='filters__btns'>
+      <div className='filters-completed-work__btns'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
           <FilterAdd className='icon' />
           Применить фильтры

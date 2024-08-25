@@ -5,7 +5,7 @@ import { Badge, Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, S
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../icons'
+import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
@@ -44,7 +44,10 @@ const SubstationsCards: FC = () => {
                 childrenContent={
                   <>
                     {substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
-                    <p className='text-lg'>{substation.fullNameSubstation}</p>
+                    <p className='text-content flex items-center gap-1'>
+                      <LinkIcon className='icon' />
+                      {substation.fullNameSubstation}
+                    </p>
                   </>
                 }
                 path={`/substations/${substation.id}`}
