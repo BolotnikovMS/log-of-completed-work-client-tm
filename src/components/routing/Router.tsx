@@ -6,7 +6,7 @@ import { CompletedWorkControl, CompletedWorksCards } from '../../views/completed
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/components'
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
-import { SubstationControl, SubstationInfo, SubstationInfoControl, SubstationsCards } from '../../views/substations/components'
+import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
@@ -76,7 +76,6 @@ export const Router: React.FC = () => {
               <Page
                 children={
                   <>
-                    <SubstationInfoControl />
                     <SubstationInfo />
                   </>
                 }
