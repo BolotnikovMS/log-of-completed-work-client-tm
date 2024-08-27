@@ -14,6 +14,7 @@ import { IPropsFileTable } from './fileTable.interface'
 const FileTable: FC <IPropsFileTable>= ({files}) => {
 	const { authUser } = useAuthStore()
 	const { deleteFile } = useDeleteFile()
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
 	const handleDownload = (file: IFile) => FileService.download(file)
 	const handleDelete = (id: number) => {
 		const answer = confirm('Подтвердите удаление записи.')
@@ -53,13 +54,11 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
 							<Download className='icon'/>
 						</Button>
-						{
-							checkRole(authUser, [ERoles.Moderator, ERoles.Admin]) && (
-								<Button className='btn-error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
-									<Delete className='icon' />
-								</Button>
-							)
-						}
+						{isAdminOrModerator && (
+							<Button className='btn-error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
+								<Delete className='icon' />
+							</Button>
+						)}
 					</div>
 				)
 			}
