@@ -67,7 +67,7 @@ const UsersTable: FC = () => {
 
   return (
     <>
-      <BasicTable data={data.data} columns={columns} search />
+      <BasicTable data={data.data} columns={columns} size={15} search />
       <Modal
         visible={isModal}
         title='Форма сброса пароля'
