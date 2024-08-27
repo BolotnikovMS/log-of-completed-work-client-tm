@@ -1,0 +1,29 @@
+.table-controls {
+  display: flex;
+
+	& + * {
+		margin-top: 13px;
+	}
+}
+
+.table-wrapper {
+  @apply flex flex-col justify-center gap-2;
+}
+
+.mTable {
+  @apply table cursor-pointer;
+
+  tbody {
+    tr {
+      @apply text-center transition-colors duration-300 ease-in-out hover:bg-blue-300/25;
+    }
+  }
+}
+
+.table-pagination {
+  @apply flex items-center gap-3;
+}
+
+.pagination-show {
+  font-size: clamp(13px, 2.3vw, 19px);
+}

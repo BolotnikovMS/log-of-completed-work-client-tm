@@ -3,7 +3,7 @@ import { useState, type FC } from 'react'
 import { Button, Group, Input } from '..'
 import { ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Search, SortAsc, SortDesc } from '../../icons'
 import { IPropsBasicTable } from './basicTable.interface'
-import styles from './table.module.scss'
+import './table.scss'
 
 const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }) => {
   const [sorting, setSorting] = useState<SortingState>([])
@@ -31,23 +31,23 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
 
   return (
     <>
-      <div className={styles['table-wrapper']}>
+      <div className='table-wrapper'>
         {title && (
           <h3 className="title-1">{title}</h3>
         )}
         {search && (
-          <div className={styles.controls}>
+          <div className='table-controls'>
             <Group>
               <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Search className='icon' />} />
             </Group>
           </div>
         )}
-        <table className={styles.table}>
+        <table className='mTable'>
           <thead>
             {table.getHeaderGroups().map(headerGroup => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map(header =>
-                  <th key={header.id} onClick={header.column.getToggleSortingHandler()} className='text-title'>
+                  <th key={header.id} onClick={header.column.getToggleSortingHandler()} className='text-title text-center'>
                     <Group className='!flex-row justify-center'>
                       {flexRender(header.column.columnDef.header, header.getContext())}
                       {{ asc: <SortAsc className='icon' />, desc: <SortDesc className='icon' /> }[header.column.getIsSorted() as string] ?? null}
@@ -68,7 +68,7 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
             ))}
           </tbody>
         </table>
-        <div className={styles['table-pagination']}>
+        <div className='table-pagination'>
           {data.length > pagination.pageSize && (
             <>
               <Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
