@@ -4,8 +4,9 @@ import { useEffect, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Button, CustomInput, Group } from '../../components'
+import { Button, Group, Input } from '../../components'
 import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
+import { Login } from '../../icons'
 import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
 import { useAuthStore } from '../../store/auth'
@@ -47,36 +48,37 @@ export const SignIn: FC = () => {
 
 	return (
 		<div className="work-log__form">
-			<form className="form form-col" onSubmit={handleSubmit(submit)}>
-				<div className="form__content form__content-w-55 form__content-mt">
-					<Group className='group-col group-str'>
-						<CustomInput
-							label='Логин'
-							name='username'
-							register={register}
-							errorMessage={errors.username?.message}
-							validation={{
-								required: {value: true, message: 'Поле является обязательным!'},
-							}}
-							placeholder='Введите username...'
-						/>
-					</Group>
-					<Group className='group-col group-str'>
-						<CustomInput
-							label='Пароль'
-							name='password'
-							type='password'
-							register={register}
-							errorMessage={errors.password?.message}
-							validation={{
-								required: {value: true, message: 'Поле является обязательным!'},
-							}}
-							placeholder='Введите пароль...'
-						/>
-					</Group>
-				</div>
+			<form className="form" onSubmit={handleSubmit(submit)}>
+				<Group>
+					<Input
+						label='Логин'
+						name='username'
+						classWrapper='!items-center'
+						register={register}
+						errorMessage={errors.username?.message}
+						validation={{
+							required: {value: true, message: 'Поле является обязательным!'},
+						}}
+						placeholder='Введите username...'
+					/>
+				</Group>
+				<Group>
+					<Input
+						label='Пароль'
+						name='password'
+						type='password'
+						classWrapper='!items-center'
+						register={register}
+						errorMessage={errors.password?.message}
+						validation={{
+							required: {value: true, message: 'Поле является обязательным!'},
+						}}
+						placeholder='Введите пароль...'
+					/>
+				</Group>
 				<div className="form__btns">
 					<Button disabled={!isValid} className='mBtn_primary'>
+				    <Login className='icon' />
 						Войти
 					</Button>
 				</div>
