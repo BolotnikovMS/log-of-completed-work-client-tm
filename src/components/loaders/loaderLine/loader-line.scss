@@ -1,0 +1,8 @@
+.loader {
+  @apply loading loading-dots loading-lg;
+  
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}

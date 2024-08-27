@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './loader.module.scss'
+import './loader.scss'
 
 export const Loader: React.FC = () => {
   return (
-    <div className={styles.loaderWrapper}>
-      <span className={styles.loader}></span>
+    <div className='loader-spinner__wrapper'>
+      <span className='loader-spinner !bg-blue-300'></span>
     </div>
   )
 }

@@ -1,10 +1,10 @@
 import { type FC } from "react"
-import styles from './loader-line.module.scss'
+import './loader-line.scss'
 
 const LoaderLine: FC = () => {
   return (
-    <div className={styles.loaderWrapper}>
-      <span className={styles.loader}></span>
+    <div className='loader__wrapper'>
+      <span className='loader !bg-blue-300'></span>
     </div>
   )
 }

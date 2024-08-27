@@ -1,6 +1,6 @@
 import cx from 'classnames'
 import { HTMLAttributes, type FC } from 'react'
-import './bage.css'
+import './bage.scss'
 
 interface IPropsBadge extends HTMLAttributes<HTMLDivElement> {
   text: string | number

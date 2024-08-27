@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { type FC } from 'react'
-import './button.css'
 import { IPropsButton } from './button.interface'
+import './button.scss'
 
 export const Button: FC<IPropsButton> = ({ children, className, ...attributes }) => {
   return (
