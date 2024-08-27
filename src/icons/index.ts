@@ -3,6 +3,7 @@ import Books from './books.svg?react'
 import ChevronDown from './chevron-down.svg?react'
 import Home from './home.svg?react'
 import Login from './login.svg?react'
+import LogoBe from './logo-be.svg?react'
 import Logout from './logout.svg?react'
 import NoteDone from './note-done.svg?react'
 import Note from './note.svg?react'
@@ -39,4 +40,4 @@ const Database = lazy(() => import('./database.svg?react'))
 const FilesFolder = lazy(() => import('./files-folder.svg?react'))
 const LinkIcon = lazy(() => import('./link.svg?react'))
 
-export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, LinkIcon, Login, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
+export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, LinkIcon, Login, LogoBe, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
