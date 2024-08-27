@@ -7,7 +7,7 @@ import { checkRole } from '../../helpers'
 import { useLogout } from '../../hooks'
 import { Books, Home, Logout, Note, NoteDone, Profile, User, Users } from '../../icons'
 import { useAuthStore } from '../../store/auth'
-import './navbar.css'
+import './navbar.scss'
 
 export const NavBar: FC = () => {
   const userAuthStore = useAuthStore()
@@ -20,7 +20,7 @@ export const NavBar: FC = () => {
       <nav>
         <div className='mNavBar__logo'>
           <Note />
-          <span className='text-xl font-bold'>ЖВР</span>
+          <span className='text-title font-bold'>ЖВР</span>
         </div>
         <ul className='mNavBar__menu'>
           <li>
@@ -62,7 +62,7 @@ export const NavBar: FC = () => {
       </nav>
       {user && (
         <nav>
-          <ul className='mNavBar__menu'>
+          <ul className='mNavBar__menu !gap-2'>
             <div className='flex items-center gap-3'>
               <div className="avatar placeholder">
                 <div className="bg-neutral text-neutral-content w-12 rounded-full">
