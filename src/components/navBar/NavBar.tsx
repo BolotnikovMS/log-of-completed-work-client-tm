@@ -5,7 +5,7 @@ import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers'
 import { useLogout } from '../../hooks'
-import { Books, Home, Logout, Note, NoteDone, Profile, User, Users } from '../../icons'
+import { Books, Home, LogoBe, Logout, NoteDone, Profile, User, Users } from '../../icons'
 import { useAuthStore } from '../../store/auth'
 import './navbar.scss'
 
@@ -19,7 +19,7 @@ export const NavBar: FC = () => {
     <div className='mNavBar'>
       <nav>
         <div className='mNavBar__logo'>
-          <Note />
+          <LogoBe />
           <span className='text-title font-bold'>ЖВР</span>
         </div>
         <ul className='mNavBar__menu'>
