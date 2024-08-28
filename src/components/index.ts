@@ -18,10 +18,8 @@ const Error = lazy(() => import('./error/Error'))
 const InfoMessage = lazy(() => import('./infoMessage/InfoMessage'))
 const LoadMore = lazy(() => import('./loadMore/LoadMore'))
 const Input = lazy(() => import('./input/Input'))
-const CustomInput = lazy(() => import('./forms/customInput/CustomInput'))
 const Textarea = lazy(() => import('./forms/textarea/Textarea'))
 const ValidationMessage = lazy(() => import('./forms/errorMessage/ValidationMessage'))
-const ControlPanel = lazy(() => import('./controlPanel/ControlPanel'))
 const Group = lazy(() => import('./group/Group'))
 const CustomDatePicker = lazy(() => import('./customDatePicker/CustomDatePicker'))
 const BasicTable = lazy(() => import('./tables/BasicTable'))
@@ -32,4 +30,4 @@ const Toggle = lazy(() => import('./toggle/Toggle'))
 const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
 const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, ControlPanel, CustomDatePicker, CustomInput, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
