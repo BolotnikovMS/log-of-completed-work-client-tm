@@ -85,6 +85,16 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
           </SelectWrapper>
         </Group>
         <Group>
+          <Input
+            label='Название ПС'
+            name='name'
+            register={register}
+            errorMessage={errors.name?.message}
+            mandatory
+            placeholder='Введите название ПС...'
+          />
+        </Group>
+        <Group>
           <SelectWrapper label='Выберите КП' errorMessage={errors.typeKpId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
@@ -185,16 +195,6 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
               {...restGsmOperator}
             />
           </SelectWrapper>
-        </Group>
-        <Group>
-          <Input
-            label='Название ПС'
-            name='name'
-            register={register}
-            errorMessage={errors.name?.message}
-            mandatory
-            placeholder='Введите название ПС...'
-          />
         </Group>
         <Group>
           <SelectWrapper label='Выберите класс U' errorMessage={errors.voltageClassesId?.message} mandatory>
