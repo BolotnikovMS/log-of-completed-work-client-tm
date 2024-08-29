@@ -47,10 +47,11 @@ body {
 }
 
 .cards-work {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
   justify-items: center;
-  gap: 15px;
+  gap: 15px; */
+  @apply flex flex-col gap-3;
 
   & + * {
     margin-top: 25px;
