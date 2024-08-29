@@ -48,7 +48,7 @@ const CompletedWorksCards: FC = () => {
                 key={completedWork.id}
                 classBody='!py-4'
                 childrenHeader={
-                  < p className='text-title font-bold' >
+                  <p className='text-title font-bold' >
                     <Link to={`/substations/${completedWork?.substation?.id}`} className='flex items-center gap-1'>
                       <LinkIcon className='icon' />
                       {completedWork?.substation?.fullNameSubstation}
