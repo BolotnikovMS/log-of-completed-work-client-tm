@@ -7,7 +7,7 @@ const SubstationForm = lazy(() => import('./forms/createSubstation/SubstationFor
 const SubstationInfo = lazy(() => import('./info/SubstationInfo'))
 const SubstationFilters = lazy(() => import('./filters/SubstationFilters'))
 const SubstationInfoControl = lazy(() => import('./control/infoControl/SubstationInfoControl'))
+const SubstationFlterParameters = lazy(() => import('./filters/SubstationFlterParameters'))
 const FileTable = lazy(() => import('./table/fileTable/FileTable'))
 
-export { FileTable, SubstationControl, SubstationFilters, SubstationForm, SubstationInfo, SubstationInfoControl, SubstationsCards, UploadSubstationFile }
-
+export { FileTable, SubstationControl, SubstationFilters, SubstationFlterParameters, SubstationForm, SubstationInfo, SubstationInfoControl, SubstationsCards, UploadSubstationFile }
