@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Button } from '..'
+import { Button, Group } from '..'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers'
@@ -17,10 +17,13 @@ export const NavBar: FC = () => {
 
   return (
     <div className='mNavBar'>
-      <nav>
-        <div className='mNavBar__logo'>
-          <LogoBe />
-          <span className='text-title font-bold'>ЖВР</span>
+      <nav className='mNavBar__nav'>
+        <div className='mNavBar__logo '>
+          <Group className='!flex-row !items-center'>
+            <LogoBe />
+            <span className='text-2xl font-bold text-sky-500'>ПО "ИТиС"</span>
+          </Group>
+          <span className='text-content text-center'>Журнал выполненных работ по ТМ</span>
         </div>
         <ul className='mNavBar__menu'>
           <li>
@@ -61,7 +64,7 @@ export const NavBar: FC = () => {
         </ul>
       </nav>
       {user && (
-        <nav>
+        <nav className='mNavBar__nav'>
           <ul className='mNavBar__menu !gap-2'>
             <div className='flex items-center gap-3'>
               <div className="avatar placeholder">
