@@ -4,6 +4,7 @@ import moment from 'moment'
 import { type FC } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
+import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
 import { Button, CustomDatePicker, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateCompletedWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
@@ -14,10 +15,12 @@ import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.i
 import { validationSchema } from './completedWork.validation'
 
 const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdited, setIsEdited, toggleModal }) => {
+  const [searchParams] = useSearchParams()
+  const substationId = searchParams.get('substation')
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ICompletedWorkFields>({
     mode: 'onBlur',
     defaultValues: {
-      substationId: completedWork?.substation?.id,
+      substationId: completedWork?.substation?.id || (substationId ? +substationId : undefined),
       workProducerId: completedWork?.work_producer?.id,
       description: completedWork?.description,
       note: completedWork?.note,

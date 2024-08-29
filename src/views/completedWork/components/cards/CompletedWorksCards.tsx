@@ -46,8 +46,9 @@ const CompletedWorksCards: FC = () => {
             completedWorks.data.map(completedWork => (
               <Card
                 key={completedWork.id}
+                classBody='!py-4'
                 childrenHeader={
-                  <p className='text-title font-bold'>
+                  < p className='text-title font-bold' >
                     <Link to={`/substations/${completedWork?.substation?.id}`} className='flex items-center gap-1'>
                       <LinkIcon className='icon' />
                       {completedWork?.substation?.fullNameSubstation}
@@ -96,7 +97,7 @@ const CompletedWorksCards: FC = () => {
               />
             ))
           ))}
-        </div>
+        </div >
       )}
       {(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока нет выполненных работ по ПС...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
