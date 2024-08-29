@@ -28,7 +28,7 @@ export const Router: React.FC = () => {
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
-                title='Районы и ГП'
+                title='Районы, ГП, УС'
                 children={
                   <>
                     <DistrictControl />
@@ -43,7 +43,7 @@ export const Router: React.FC = () => {
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
-                title='Подстанций'
+                title='Список ПС'
                 children={
                   <>
                     {/* !!Использование компонента с карточками ПС */}
@@ -59,7 +59,7 @@ export const Router: React.FC = () => {
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
-                title='Подстанций'
+                title='Список ПС'
                 children={
                   <>
                     <SubstationControl />

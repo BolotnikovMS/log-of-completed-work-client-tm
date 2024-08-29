@@ -2,7 +2,7 @@ export const url = import.meta.env.VITE_API_URL
 export const urlFile = import.meta.env.VITE_FILE_URL
 export const menuItemData = [
   {
-    title: 'Районы и ГП',
+    title: 'Районы, ГП, УС',
     url: '/districts',
   },
   {
