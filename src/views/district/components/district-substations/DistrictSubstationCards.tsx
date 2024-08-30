@@ -17,11 +17,16 @@ const DistrictSubstationCards: FC = () => {
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { id } = useParams()
   const [searchParams] = useSearchParams()
+  const searchParam = searchParams.get('search')
+  const sortParam = searchParams.get('sort')
+  const orderParam = searchParams.get('order')
+  const typeKpParam = searchParams.get('typeKp')
+  const headControllerParam = searchParams.get('headController')
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substationData, setSubstation] = useState<ISubstation | null>(null)
   const { deleteSubstation } = useDeleteSubstation()
-  const { substations, error, isError, isLoading } = useDistrictSubstations({ id, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
+  const { substations, error, isError, isLoading } = useDistrictSubstations({ id, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam })
   const handleDelete = (id: number) => {
     const answer = confirm('Подтвердите удаление записи.')
 
@@ -35,6 +40,11 @@ const DistrictSubstationCards: FC = () => {
     <>
       {isLoading && <Loader />}
       {(isError && isAxiosError(error)) && <Error error={error} />}
+      <div className='flex items-center gap-1 text-title py-3'>Всего объектов:
+        <span className='font-bold'>
+          {substations?.length}
+        </span>
+      </div>
       {!!memoizedSubstations?.length && (
         <div className="cards">
           {memoizedSubstations.map(substation => (
