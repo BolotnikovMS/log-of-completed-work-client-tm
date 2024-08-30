@@ -29,5 +29,6 @@ const ChangePasswordForm = lazy(() => import('./forms/changePassword/ChangePassw
 const Toggle = lazy(() => import('./toggle/Toggle'))
 const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
 const Dropdown = lazy(() => import('./dropdown/Dropdown'))
+const Sort = lazy(() => import('./filters/sort/Sort'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
