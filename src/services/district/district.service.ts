@@ -16,13 +16,13 @@ export const DistrictService = {
   },
 
   async create(data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
-   return instance.post<IDistrict>(`${url}/districts`, data)
+    return instance.post<IDistrict>(`${url}/districts`, data)
   },
 
-  async getSubstationsRelatedDistrict(id: string, { search, sort, order }: IQueryParams): Promise<TRespSubstations> {
+  async getSubstationsRelatedDistrict(id: string, { search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
     const { data } = await instance.get<TRespSubstations>(`${url}/districts/${id}/substations`, {
-			params: { search, sort, order },
-		})
+      params: { search, sort, order, typeKp, headController },
+    })
 
     return data
   },

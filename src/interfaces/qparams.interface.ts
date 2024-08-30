@@ -3,9 +3,9 @@ import { TOrderSort } from '../types/order.types'
 export interface IQueryParams {
   page?: number
   size?: number
-  search?: string
-  sort?: string
-  order?: TOrderSort
+  search?: string | null
+  sort?: string | null
+  order?: TOrderSort | null
   offset?: number
   limit?: number
   substation?: string | null
@@ -14,4 +14,6 @@ export interface IQueryParams {
   executor?: string | null
   dateStart?: string | null | Date
   dateEnd?: string | null | Date
+  typeKp?: string | null
+  headController?: string | null
 }

@@ -6,9 +6,9 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 
 export const SubstationService = {
-  async getSubstations({ limit, page, search, sort, order }: IQueryParams): Promise<TRespSubstations> {
+  async getSubstations({ limit, page, search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
     const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
-      params: { page, limit, search, sort, order }
+      params: { page, limit, search, sort, order, typeKp, headController }
     })
 
     return data
