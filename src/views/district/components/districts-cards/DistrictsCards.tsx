@@ -1,4 +1,5 @@
 import { useState, type FC } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { DistrictForm } from '..'
 import { Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
@@ -7,12 +8,16 @@ import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../h
 import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { IDistrict } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
+import { TOrderSort } from '../../../../types/order.types'
 
 const DistrictsCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 20 })
+  const [searchParams] = useSearchParams()
+  const sortParam = searchParams.get('sort') || 'name'
+  const orderParam = searchParams.get('order') || 'asc'
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 20, sort: sortParam, order: orderParam as TOrderSort })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [district, setDistrict] = useState<IDistrict | null>(null)

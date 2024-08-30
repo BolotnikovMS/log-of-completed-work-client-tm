@@ -6,6 +6,7 @@ import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
 import { Add } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
+import DistrictFilters from '../filters/DistrictFilters'
 
 const DistrictControl: FC = () => {
   const { authUser } = useAuthStore()
@@ -14,17 +15,20 @@ const DistrictControl: FC = () => {
 
   return (
     <div className="work-log__control">
-      {isAdmin && (
-        <Button className='mBtn_outline-green' onClick={toggleModal}>
-          <Add className='icon' />
-        </Button>
-      )}
-      <Modal
-        visible={isModal}
-        title='Форма добавления нового района или ГП'
-        content={<DistrictForm toggleModal={toggleModal} />}
-        onToggle={toggleModal}
-      />
+      <div className="control__wrapper !justify-start">
+        {isAdmin && (
+          <Button className='mBtn_outline-green' onClick={toggleModal}>
+            <Add className='icon' />
+          </Button>
+        )}
+        <Modal
+          visible={isModal}
+          title='Форма добавления нового района или ГП'
+          content={<DistrictForm toggleModal={toggleModal} />}
+          onToggle={toggleModal}
+        />
+        <DistrictFilters />
+      </div>
     </div>
   )
 }

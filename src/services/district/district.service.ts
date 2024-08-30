@@ -7,9 +7,9 @@ import { url } from '../../constants'
 import { TRespSubstations } from '../substations/substation.type'
 
 export const DistrictService = {
-  async getDistricts({ limit, page }: IQueryParams): Promise<TRespDistricts> {
+  async getDistricts({ limit, page, sort, order }: IQueryParams): Promise<TRespDistricts> {
     const { data } = await instance.get<TRespDistricts>(`${url}/districts`, {
-      params: { page, limit },
+      params: { page, limit, sort, order },
     })
 
     return data
