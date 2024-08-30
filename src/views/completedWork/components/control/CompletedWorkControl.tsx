@@ -17,7 +17,10 @@ const CompletedWorkControl: FC = () => {
           <Add className='icon' />
         </Button>
         <Button onClick={() => toggleModalFilters()}>
-          {searchParams.size ? <FilterRemove className='icon icon-filter' /> : <Filter className='icon icon-filter' />}
+          {searchParams.size ?
+            <FilterRemove className='icon' /> :
+            <Filter className='icon' />
+          }
         </Button>
         <Modal
           visible={isModal}

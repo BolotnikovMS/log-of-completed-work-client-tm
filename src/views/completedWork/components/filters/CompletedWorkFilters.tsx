@@ -10,7 +10,6 @@ import { Calendar, Excel, FilterAdd, FilterRemove } from '../../../../icons'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
 import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
-import './compleated-filter.scss'
 
 const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) => {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -50,7 +49,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
 
   return (
-    <div className='filters-completed-work'>
+    <div className='filters'>
       {errorMessage}
       <Group className='!gap-4'>
         <Group>
@@ -111,7 +110,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           />
         </Group>
       </Group>
-      <div className='filters-completed-work__btns'>
+      <div className='filters__btns'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
           <FilterAdd className='icon' />
           Применить фильтры

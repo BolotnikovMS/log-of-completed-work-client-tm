@@ -39,7 +39,10 @@ const CompletedWorksCards: FC = () => {
 
   return (
     <>
-      <div className='text-title py-3'>Всего записей: <span className='font-bold'>{data?.pages[0].meta.total}</span></div>
+      <div className='flex items-center gap-1 text-title py-3'>
+        Всего записей:
+        <span className='font-bold'>{data?.pages[0].meta.total}</span>
+      </div>
       {!!data?.pages[0].data.length && (
         <div className="cards-work">
           {data.pages.map(completedWorks => (
