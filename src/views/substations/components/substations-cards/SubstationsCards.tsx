@@ -11,11 +11,16 @@ import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationsCards: FC = () => {
-  const [searchParams] = useSearchParams()
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParams.get('search') ?? '', sort: searchParams.get('sort') || 'name', order: (searchParams.get("order") ?? 'asc') as TOrderSort })
+  const [searchParams] = useSearchParams()
+  const searchParam = searchParams.get('search')
+  const sortParam = searchParams.get('sort')
+  const orderParam = searchParams.get('order')
+  const typeKpParam = searchParams.get('typeKp')
+  const headControllerParam = searchParams.get('headController')
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)
@@ -35,6 +40,12 @@ const SubstationsCards: FC = () => {
 
   return (
     <>
+      <div className='flex items-center gap-1 text-title py-3'>
+        Всего объектов:
+        <span className='font-bold'>
+          {data?.pages[0].meta.total}
+        </span>
+      </div>
       {!!memoizedSubstations?.pages[0].data.length && (
         <div className="cards">
           {memoizedSubstations.pages.map(substations => (

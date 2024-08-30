@@ -4,7 +4,7 @@ import { SubstationFlterParameters } from '..'
 import { Button, Dropdown, Group, Input, Modal } from '../../../../components'
 import { transliterate } from '../../../../helpers'
 import { useModal } from '../../../../hooks'
-import { Alert, Filter, Search, SortAsc, SortDesc } from '../../../../icons'
+import { Alert, Filter, FilterRemove, Search, SortAsc, SortDesc } from '../../../../icons'
 import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationFilters: FC = () => {
@@ -12,6 +12,8 @@ const SubstationFilters: FC = () => {
   const [searchValue, setSearchValue] = useState(searchParams.get('search') || '')
   const orderSort = searchParams.get('order') || 'asc'
   const sort = searchParams.get('sort') || 'name'
+  const typeKpParam = searchParams.get('typeKp')
+  const headControllerParam = searchParams.get('headController')
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
   const handleSearch = useCallback(({ target }: ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +38,7 @@ const SubstationFilters: FC = () => {
 
   return (
     <>
-      <div className='filters filters-row filters-aic'>
+      <div className='w-full flex gap-1 items-center justify-between'>
         <Group className='!flex-row'>
           <Dropdown
             classMenu='dropdown-bottom'
@@ -63,7 +65,10 @@ const SubstationFilters: FC = () => {
             ]}
           />
           <Button onClick={() => toggleModalFilters()}>
-            <Filter className='icon icon-filter' />
+            {typeKpParam || headControllerParam ?
+              <FilterRemove className='icon' /> :
+              <Filter className='icon' />
+            }
           </Button>
         </Group>
         <div className="search-wrapper">
