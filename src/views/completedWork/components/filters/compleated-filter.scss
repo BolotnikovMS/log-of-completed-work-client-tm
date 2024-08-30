@@ -1,8 +1,0 @@
-.filters-completed-work {
-  @apply flex flex-col justify-between gap-5;
-  height: clamp(100px, 45vw, 370px);
-
-  &__btns {
-    @apply flex justify-center items-center gap-3;
-  }
-}
