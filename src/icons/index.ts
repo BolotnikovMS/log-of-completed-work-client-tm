@@ -28,7 +28,7 @@ const FilterRemove = lazy(() => import('./filter-remove.svg?react'))
 const Filter = lazy(() => import('./filter.svg?react'))
 const ImgOff = lazy(() => import('./img-off.svg?react'))
 const Key = lazy(() => import('./key.svg?react'))
-const Search = lazy(() => import('./search.svg?react'))
+const SearchIcon = lazy(() => import('./search-icon.svg?react'))
 const Setting = lazy(() => import('./setting.svg?react'))
 const SortAsc = lazy(() => import('./sort-asc.svg?react'))
 const SortDesc = lazy(() => import('./sort-desc.svg?react'))
@@ -41,4 +41,4 @@ const FilesFolder = lazy(() => import('./files-folder.svg?react'))
 const LinkIcon = lazy(() => import('./link.svg?react'))
 const Close = lazy(() => import('./close.svg?react'))
 
-export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Close, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, LinkIcon, Login, LogoBe, Logout, Note, NoteDone, Notebook, Profile, Search, Setting, SortAsc, SortDesc, Upload, User, Users, View }
+export { Add, Alert, ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Books, Calendar, ChevronDown, Close, Database, Delete, Download, Edit, Excel, FileAdd, FilesFolder, Filter, FilterAdd, FilterRemove, Home, Img, ImgOff, Key, LinkIcon, Login, LogoBe, Logout, Note, NoteDone, Notebook, Profile, SearchIcon, Setting, SortAsc, SortDesc, Upload, User, Users, View }
