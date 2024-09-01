@@ -3,7 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group } from '../../../../components'
 import { useHeadControllers, useTypesKp } from '../../../../hooks'
-import { FilterAdd, FilterRemove } from '../../../../icons'
+import { Excel, FilterAdd, FilterRemove } from '../../../../icons'
+import { SubstationService } from '../../../../services/substations/substation.service'
 import { EFilterSubstation } from './substationFilter.enum'
 
 interface IPropsSubstationFlterParameters {
@@ -34,6 +35,7 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
+  const handleDownload = () => SubstationService.downloadExcel({ typeKp, headController })
 
   const errorMessage = useMemo(() => (isErrorTypeKp || isErrorHeadController) && <Error error={errorTypeKp! || errorHeadController!} />, [errorTypeKp, errorHeadController, isErrorHeadController, isErrorTypeKp])
 
@@ -79,8 +81,12 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
           <FilterRemove className='icon' />
           Очистить фильтры
         </Button>
+        <Button onClick={handleDownload}>
+          <Excel className='icon' />
+          Сохранить в Excel
+        </Button>
       </div>
-    </div>
+    </div >
   )
 }
 

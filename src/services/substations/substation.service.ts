@@ -2,8 +2,11 @@ import { type AxiosResponse } from 'axios'
 import { IQueryParams, ISubstation } from '../../interfaces'
 import { TRespSubstations, TSubstationData } from './substation.type'
 
+import fileDownload from 'js-file-download'
+import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
+import { errorHandler } from '../../helpers'
 
 export const SubstationService = {
   async getSubstations({ limit, page, search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
@@ -30,5 +33,16 @@ export const SubstationService = {
 
   async deleteSubstation(id: number): Promise<AxiosResponse<void>> {
     return instance.delete(`${url}/substations/${id}`)
+  },
+
+  async downloadExcel({ typeKp, headController }: IQueryParams) {
+    await instance.get(`${url}/substations/download-substations-excel`, {
+      params: { typeKp, headController },
+      responseType: 'blob'
+    }).then(resp => {
+      fileDownload(resp.data, 'report.xlsx')
+    }).catch(e => {
+      toast.error(errorHandler(e))
+    })
   }
 }
