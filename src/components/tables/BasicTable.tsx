@@ -1,7 +1,7 @@
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, PaginationState, SortingState, useReactTable } from '@tanstack/react-table'
 import { useState, type FC } from 'react'
 import { Button, Group, Input } from '..'
-import { ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, Search, SortAsc, SortDesc } from '../../icons'
+import { ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, SearchIcon, SortAsc, SortDesc } from '../../icons'
 import { IPropsBasicTable } from './basicTable.interface'
 import './table.scss'
 
@@ -38,7 +38,7 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
         {search && (
           <div className='table-controls'>
             <Group>
-              <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Search className='icon' />} />
+              <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<SearchIcon className='icon' />} />
             </Group>
           </div>
         )}
