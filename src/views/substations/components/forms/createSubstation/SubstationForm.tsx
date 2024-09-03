@@ -146,7 +146,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
           </SelectWrapper>
         </Group>
         <Group>
-          <SelectWrapper label='Выберите резервный канал'>
+          <SelectWrapper label='Выберите резервный канал' mandatory errorMessage={errors.backupChannelId?.message}>
             <AsyncSelect
               classNamePrefix='form__custom-select'
               options={channelTypes?.data}
@@ -163,7 +163,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
           </SelectWrapper>
         </Group>
         <Group>
-          <SelectWrapper label='Выберите дополнительный канал'>
+          <SelectWrapper label='Выберите дополнительный канал' mandatory errorMessage={errors.additionalChannelId?.message}>
             <AsyncSelect
               classNamePrefix='form__custom-select'
               options={channelTypes?.data}
@@ -180,7 +180,7 @@ const SubstationForm: FC<IPropsSubstationForm> = ({ substation, isEdited, setIsE
           </SelectWrapper>
         </Group>
         <Group>
-          <SelectWrapper label='Выберите GSM оператора'>
+          <SelectWrapper label='Выберите GSM оператора' mandatory errorMessage={errors.gsmId?.message}>
             <AsyncSelect
               classNamePrefix='form__custom-select'
               options={gsmOperators}
