@@ -1,17 +1,16 @@
 import { MouseEvent, type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { FileTable, SubstationInfoControl } from '..'
-import { Button, CustomSlider, Error, Loader, Tab } from '../../../../components'
+import { CustomSlider, Error, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
-import { ArrowLeft, Database, FilesFolder, Img, ImgOff, Note } from '../../../../icons'
+import { Database, FilesFolder, Img, ImgOff } from '../../../../icons'
 import './substationInfo.scss'
 
 const SubstationInfo: FC = () => {
   const { id } = useParams()
-  const navigate = useNavigate()
   const { substation, error, isError, isLoading } = useSubstation(id)
   const backupsContent = substation?.files_backups?.length ? <FileTable files={substation.files_backups} /> : <p className='text-content text-center'>Пока бэкапов не добавлено!</p>
   const photosContent = substation?.files_photos_ps?.length ? <FileTable files={substation.files_photos_ps} /> : <p className='text-content text-center'>Пока фото не добавлено!</p>
@@ -70,13 +69,6 @@ const SubstationInfo: FC = () => {
         { id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Img className='icon' /> },
         { id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <FilesFolder className='icon' /> }
       ]} />
-
-      <div className="substation-info__btns">
-        <Button className='mBtn_primary' onClick={() => navigate(-1)}><ArrowLeft className='icon' />Обратно</Button>
-        <Link to={`/completed-works?substation=${substation?.id}`} className='mBtn btn-sm mBtn_outline-green'>
-          <Note className='icon' />Работы
-        </Link>
-      </div>
     </div>
   )
 }

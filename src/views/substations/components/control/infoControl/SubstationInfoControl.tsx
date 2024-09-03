@@ -1,14 +1,16 @@
 import { useState, type FC } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Modal } from '../../../../../components'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useModal } from '../../../../../hooks'
-import { Edit, FileAdd } from '../../../../../icons'
+import { ArrowLeft, Edit, FileAdd, Note } from '../../../../../icons'
 import { useAuthStore } from '../../../../../store/auth'
 import { SubstationForm, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 
 const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) => {
+  const navigate = useNavigate()
   const { authUser } = useAuthStore()
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { isModal, toggleModal } = useModal()
@@ -18,6 +20,15 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
   return (
     <div className="work-log__control">
       <div className="control__wrapper !justify-start">
+        <Button onClick={() => navigate(-1)}>
+          <ArrowLeft className='icon' />
+          Обратно
+        </Button>
+        <Link to={`/completed-works?substation=${substation?.id}`} className='mBtn btn-sm'>
+          <Note className='icon' />
+          Работы
+          ({substation?.numberCompletedWorks})
+        </Link>
         <Button onClick={toggleModal}>
           <FileAdd className='icon' />
           Добавить файл
