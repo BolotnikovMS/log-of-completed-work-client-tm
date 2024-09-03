@@ -1,17 +1,16 @@
 import { type AxiosResponse } from 'axios'
-import { IQueryParams, ISubstation } from '../../interfaces'
-import { TRespSubstations, TSubstationData } from './substation.type'
-
 import fileDownload from 'js-file-download'
 import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
+import { IQueryParams, ISubstation } from '../../interfaces'
+import { TRespSubstations, TSubstationData } from './substation.type'
 
 export const SubstationService = {
-  async getSubstations({ limit, page, search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
+  async getSubstations({ limit, page, search, sort, order, typeKp, headController, mainChannel, backupChannel, district }: IQueryParams): Promise<TRespSubstations> {
     const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
-      params: { page, limit, search, sort, order, typeKp, headController }
+      params: { page, limit, search, sort, order, typeKp, headController, mainChannel, backupChannel, district }
     })
 
     return data
@@ -35,9 +34,9 @@ export const SubstationService = {
     return instance.delete(`${url}/substations/${id}`)
   },
 
-  async downloadExcel({ typeKp, headController }: IQueryParams) {
+  async downloadExcel({ typeKp, headController, mainChannel, backupChannel, district }: IQueryParams) {
     await instance.get(`${url}/substations/download-substations-excel`, {
-      params: { typeKp, headController },
+      params: { typeKp, headController, mainChannel, backupChannel, district },
       responseType: 'blob'
     }).then(resp => {
       fileDownload(resp.data, 'report.xlsx')

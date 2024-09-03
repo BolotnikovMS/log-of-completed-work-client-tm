@@ -16,4 +16,7 @@ export interface IQueryParams {
   dateEnd?: string | null | Date
   typeKp?: string | null
   headController?: string | null
+  mainChannel?: string | null
+  backupChannel?: string | null
+  district?: string | null
 }
