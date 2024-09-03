@@ -62,7 +62,6 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             onChange={option => setSubstation(option ? option.id.toString() : null)}
             isLoading={isLoadingSubstations}
             isDisabled={isErrorSubstations}
-            isClearable
             placeholder="Выберите ПС..."
           />
         </Group>
@@ -76,7 +75,6 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             onChange={option => setExecutor(option ? option.id.toString() : null)}
             isLoading={isLoadingExecutors}
             isDisabled={isErrorExecutors}
-            isClearable
             placeholder="Выберите производителя работ..."
           />
         </Group>
