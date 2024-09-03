@@ -39,17 +39,28 @@ const SubstationInfo: FC = () => {
       <SubstationInfoControl substation={substation} />
       <div className="substation-info__wrapper">
         <div className="substation-info__content">
-          <p className='substation-info__text'>РЭС/ГП: <span className='text-content'>{substation?.district?.name}</span></p>
-          <p className='substation-info__text'>РДУ: <span className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</span></p>
-          <p className='substation-info__text'>Тип КП: <span className='text-content'>{substation?.type_kp?.name}</span></p>
-          <p className='substation-info__text'>Головной контроллер: <span className='text-content'>{substation?.head_controller?.name}</span></p>
-          <p className='substation-info__text'>Основной канал: <span className='text-content'>{substation?.main_channel?.name}</span></p>
-          {substation?.backup_channel && <p className='substation-info__text'>Резервный канал: <span className='text-content'>{substation?.backup_channel ? substation?.backup_channel.name : '-'}</span></p>}
-          {substation?.additional_channel && <p className='substation-info__text'>Дополнительный канал: <span className='text-content'>{substation?.additional_channel.name}</span></p>}
-          {substation?.gsm && <p className='substation-info__text'>GSM оператор: <span className='text-content'>{substation?.gsm?.name}</span></p>}
-          {substation?.mainChannelIp && <p className='substation-info__text'>IP основного канала: <span className='text-content'>{substation?.mainChannelIp}</span></p>}
-          {substation?.backupChannelIp && <p className='substation-info__text'>IP резервного канала: <span className='text-content'>{substation?.backupChannelIp}</span></p>}
-          <p className='substation-info__text'>Всего выполнено работ: <span className="text-content">{substation?.numberCompletedWorks}</span></p>
+          <p className='substation-info__text'>РЭС/ГП: </p>
+          <span className='text-content'>{substation?.district?.name}</span>
+          <p className='substation-info__text'>РДУ: </p>
+          <span className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</span>
+          <p className='substation-info__text'>Тип КП: </p>
+          <span className='text-content'>{substation?.type_kp?.name}</span>
+          <p className='substation-info__text'>Головной контроллер: </p>
+          <span className='text-content'>{substation?.head_controller?.name}</span>
+          <p className='substation-info__text'>Основной канал: </p>
+          <span className='text-content'>{substation?.main_channel?.name}</span>
+          <p className='substation-info__text'>Резервный канал: </p>
+          <span className='text-content'>{substation?.backup_channel ? substation?.backup_channel.name : '-'}</span>
+          <p className='substation-info__text'>Дополнительный канал: </p>
+          <span className='text-content'>{substation?.additional_channel ? substation?.additional_channel?.name : '-'}</span>
+          <p className='substation-info__text'>GSM оператор: </p>
+          <span className='text-content'>{substation?.gsm?.name}</span>
+          <p className='substation-info__text'>IP основного канала: </p>
+          <span className='text-content'>{substation?.mainChannelIp ? substation?.mainChannelIp : '-'}</span>
+          <p className='substation-info__text'>IP резервного канала: </p>
+          <span className='text-content'>{substation?.backupChannelIp ? substation?.backupChannelIp : '-'}</span>
+          <p className='substation-info__text'>Всего выполнено работ: </p>
+          <span className="text-content">{substation?.numberCompletedWorks}</span>
         </div>
         <div className="substation-info__imgs">
           {substation?.files_photos_ps?.length ? (
@@ -74,3 +85,15 @@ const SubstationInfo: FC = () => {
 }
 
 export default SubstationInfo
+
+// <p className='substation-info__text'>РЭС/ГП: <span className='text-content'>{substation?.district?.name}</span></p>
+// <p className='substation-info__text'>РДУ: <span className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</span></p>
+// <p className='substation-info__text'>Тип КП: <span className='text-content'>{substation?.type_kp?.name}</span></p>
+// <p className='substation-info__text'>Головной контроллер: <span className='text-content'>{substation?.head_controller?.name}</span></p>
+// <p className='substation-info__text'>Основной канал: <span className='text-content'>{substation?.main_channel?.name}</span></p>
+// {substation?.backup_channel && <p className='substation-info__text'>Резервный канал: <span className='text-content'>{substation?.backup_channel ? substation?.backup_channel.name : '-'}</span></p>}
+// {substation?.additional_channel && <p className='substation-info__text'>Дополнительный канал: <span className='text-content'>{substation?.additional_channel.name}</span></p>}
+// {substation?.gsm && <p className='substation-info__text'>GSM оператор: <span className='text-content'>{substation?.gsm?.name}</span></p>}
+// {substation?.mainChannelIp && <p className='substation-info__text'>IP основного канала: <span className='text-content'>{substation?.mainChannelIp}</span></p>}
+// {substation?.backupChannelIp && <p className='substation-info__text'>IP резервного канала: <span className='text-content'>{substation?.backupChannelIp}</span></p>}
+// <p className='substation-info__text'>Всего выполнено работ: <span className="text-content">{substation?.numberCompletedWorks}</span></p>

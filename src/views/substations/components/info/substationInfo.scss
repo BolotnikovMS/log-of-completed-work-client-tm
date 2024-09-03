@@ -6,11 +6,11 @@
 	}
 
 	&__content {
-	 @apply flex flex-col justify-center gap-1;
+		@apply grid grid-cols-2 gap-3;
 	}
 
 	&__text {
-    @apply flex gap-1 items-center text-lg font-bold;
+    @apply flex gap-1 justify-end items-center text-lg font-bold;
   }
 
 	&__imgs {
