@@ -17,6 +17,7 @@ const ChannelTypeControl: FC = () => {
       {isAdmin && (
         <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
           <Add className='icon' />
+          Добавить
         </Button>
       )}
       <Modal

@@ -15,12 +15,14 @@ const CompletedWorkControl: FC = () => {
       <div className="control__wrapper">
         <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
           <Add className='icon' />
+          Добавить
         </Button>
         <Button onClick={() => toggleModalFilters()}>
           {searchParams.size ?
             <FilterRemove className='icon' /> :
             <Filter className='icon' />
           }
+          Фильтры
         </Button>
         <Modal
           visible={isModal}

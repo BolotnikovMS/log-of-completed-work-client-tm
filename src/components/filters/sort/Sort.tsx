@@ -19,12 +19,12 @@ const Sort: FC<IPropsSort> = ({ orderSort, sort, sortOptions }) => {
         children={
           <>
             {sortOptions.map(option => (
-              option.value === sort && option.order === orderSort && <span key={option.value}>{option.icon}</span>
+              option.value === sort && option.order === orderSort && <span key={option.value} className='flex items-center gap-1'>{option.icon}{option.label}</span>
             ))}
           </>
         }
         menuItems={sortOptions.map(option => (
-          <Button key={option.value} onClick={() => handleSort(option.order, option.value)}>
+          <Button key={option.value} className='!justify-start' onClick={() => handleSort(option.order, option.value)}>
             {option.icon}
             {option.label}
           </Button>
