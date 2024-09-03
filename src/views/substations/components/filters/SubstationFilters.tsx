@@ -5,6 +5,7 @@ import { Button, Group, Modal, Search, Sort } from '../../../../components'
 import { useModal } from '../../../../hooks'
 import { Alert, Filter, FilterRemove, SortAsc, SortDesc } from '../../../../icons'
 import { TOrderSort } from '../../../../types/order.types'
+import { EFilterSubstation } from './substationFilter.enum'
 
 const SubstationFilters: FC = () => {
   const [searchParams] = useSearchParams()
@@ -16,8 +17,11 @@ const SubstationFilters: FC = () => {
     { value: 'name', label: 'Я-А', icon: <SortDesc className='icon' />, order: 'desc' as TOrderSort },
     { value: 'rdu', label: 'РДУ', icon: <Alert className='icon' />, order: 'desc' as TOrderSort },
   ]
-  const typeKpParam = searchParams.get('typeKp')
-  const headControllerParam = searchParams.get('headController')
+  const districtParam = searchParams.get(EFilterSubstation.district)
+  const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
+  const headControllerParam = searchParams.get(EFilterSubstation.headController)
+  const mainChannelParam = searchParams.get(EFilterSubstation.mainChannel)
+  const bacupChannelParam = searchParams.get(EFilterSubstation.backupChannel)
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
   return (
@@ -27,10 +31,11 @@ const SubstationFilters: FC = () => {
           <Sort orderSort={orderSort as TOrderSort} sort={sort} sortOptions={sortOptions} />
           {location.pathname === '/substations' && (
             <Button onClick={() => toggleModalFilters()}>
-              {typeKpParam || headControllerParam ?
+              {districtParam || typeKpParam || headControllerParam || mainChannelParam || bacupChannelParam ?
                 <FilterRemove className='icon' /> :
                 <Filter className='icon' />
               }
+              Фильтры
             </Button>
           )}
         </Group>
