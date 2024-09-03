@@ -9,6 +9,7 @@ import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
+import { EFilterSubstation } from '../filters/substationFilter.enum'
 
 const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
@@ -18,9 +19,12 @@ const SubstationsCards: FC = () => {
   const searchParam = searchParams.get('search')
   const sortParam = searchParams.get('sort')
   const orderParam = searchParams.get('order')
-  const typeKpParam = searchParams.get('typeKp')
-  const headControllerParam = searchParams.get('headController')
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam })
+  const districtParam = searchParams.get(EFilterSubstation.district)
+  const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
+  const headControllerParam = searchParams.get(EFilterSubstation.headController)
+  const mainChannelParam = searchParams.get(EFilterSubstation.mainChannel)
+  const buckupChannelParam = searchParams.get(EFilterSubstation.backupChannel)
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, mainChannel: mainChannelParam, backupChannel: buckupChannelParam, district: districtParam })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)

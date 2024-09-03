@@ -1,5 +1,5 @@
 import { type FC } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import { SubstationFlterParameters } from '..'
 import { Button, Group, Modal, Search, Sort } from '../../../../components'
 import { useModal } from '../../../../hooks'
@@ -8,6 +8,7 @@ import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationFilters: FC = () => {
   const [searchParams] = useSearchParams()
+  const location = useLocation()
   const orderSort = searchParams.get('order') || 'asc'
   const sort = searchParams.get('sort') || 'name'
   const sortOptions = [
@@ -24,12 +25,14 @@ const SubstationFilters: FC = () => {
       <div className='w-full flex gap-1 items-center justify-between'>
         <Group className='!flex-row'>
           <Sort orderSort={orderSort as TOrderSort} sort={sort} sortOptions={sortOptions} />
-          <Button onClick={() => toggleModalFilters()}>
-            {typeKpParam || headControllerParam ?
-              <FilterRemove className='icon' /> :
-              <Filter className='icon' />
-            }
-          </Button>
+          {location.pathname === '/substations' && (
+            <Button onClick={() => toggleModalFilters()}>
+              {typeKpParam || headControllerParam ?
+                <FilterRemove className='icon' /> :
+                <Filter className='icon' />
+              }
+            </Button>
+          )}
         </Group>
         <div className="search-wrapper">
           <Search
@@ -42,7 +45,6 @@ const SubstationFilters: FC = () => {
       <Modal
         visible={isModalFilters}
         title='Фильтры'
-        classDialog=''
         content={<SubstationFlterParameters toggleModal={toggleModalFilters} />}
         onToggle={toggleModalFilters}
       />
