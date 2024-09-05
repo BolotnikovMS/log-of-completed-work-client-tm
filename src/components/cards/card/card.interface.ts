@@ -8,4 +8,5 @@ export interface IPropsCard {
   className?: string
   classBody?: string
   path?: string
+  onClick?: () => void
 }
