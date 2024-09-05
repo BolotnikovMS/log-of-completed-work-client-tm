@@ -7,7 +7,7 @@ import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteCompletedWork, useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
-import { Delete, Edit, LinkIcon, Note, Setting } from '../../../../icons'
+import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { ICompletedWork } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -25,6 +25,10 @@ const CompletedWorksCards: FC = () => {
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
   const { deleteCompletedWork } = useDeleteCompletedWork()
+  const handleOpenInfo = (work: ICompletedWork) => {
+    toggleModalView()
+    setCompetedWork(work)
+  }
   const handleDelete = (id: number) => {
     const answer = confirm('Подтвердите удаление записи.')
 
@@ -51,7 +55,7 @@ const CompletedWorksCards: FC = () => {
                 key={completedWork.id}
                 classBody='!py-4'
                 childrenHeader={
-                  <p className='text-title font-bold' >
+                  <p className='flex text-title font-bold' >
                     <Link to={`/substations/${completedWork?.substation?.id}`} className='flex items-center gap-1'>
                       <LinkIcon className='icon' />
                       {completedWork?.substation?.fullNameSubstation}
@@ -71,23 +75,20 @@ const CompletedWorksCards: FC = () => {
                 }
                 childrenControl={
                   <>
-                    <Button onClick={() => { toggleModalView(), setCompetedWork(completedWork) }}>
-                      <Note className='icon' />
-                    </Button>
                     {checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
                       <Dropdown
                         children={
-                          <Setting className='icon' />
+                          <Setting className='icon icon__setting ' />
                         }
                         menuItems={[
                           checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
-                            <Button className='!justify-start' onClick={() => { toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
+                            <Button className='!justify-start' onClick={(e) => { e.stopPropagation(), toggleModal(), setCompetedWork(completedWork), setIsEdited(!isEdited) }}>
                               <Edit className='icon' />
                               Редактировать
                             </Button>
                           ),
                           isAdmin && (
-                            <Button className='!justify-start btn-error' onClick={() => handleDelete(completedWork.id)}>
+                            <Button className='!justify-start btn-error' onClick={(e) => { e.stopPropagation(), handleDelete(completedWork.id) }}>
                               <Delete className='icon' />
                               Удалить
                             </Button>
@@ -97,6 +98,7 @@ const CompletedWorksCards: FC = () => {
                     )}
                   </>
                 }
+                onClick={() => handleOpenInfo(completedWork)}
               />
             ))
           ))}
