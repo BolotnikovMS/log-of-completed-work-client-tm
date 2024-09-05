@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import './../card.scss'
 import { IPropsCard } from './card.interface'
 
-export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, childrenFooter, childrenControl, className, classBody, path }) => {
+export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, childrenFooter, childrenControl, className, classBody, path, ...attributes }) => {
   return (
-    <div className={cx('mCard !w-full', className)}>
+    <div className={cx('mCard !w-full', className)} {...attributes}>
       {path && <Link to={path} className='card__link' />}
       <div className={cx('mCard__body', classBody)}>
         {childrenHeader && (
-          <div className="card__header">
+          <div className="mCard__header">
             {childrenHeader}
           </div>
         )}
@@ -20,7 +20,7 @@ export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, children
           </div>
         )}
         {childrenFooter && (
-          <div className="card__footer">
+          <div className="mCard__footer">
             {childrenFooter}
           </div>
         )}
