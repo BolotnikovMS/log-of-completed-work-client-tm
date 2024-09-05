@@ -113,6 +113,10 @@ body {
 
 .icon {
   @apply w-5;
+
+  &__setting {
+    @apply hover:animate-spin;
+  }
 }
 
 .label {
