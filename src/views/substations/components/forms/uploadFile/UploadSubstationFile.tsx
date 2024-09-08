@@ -2,9 +2,8 @@ import { useState, type FC } from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import ReactSelect from 'react-select'
-import { Button, Error, FileUploader, Group, Loader, SelectWrapper } from '../../../../../components'
+import { Button, Error, FileUploader, Group, Icon, Loader, SelectWrapper } from '../../../../../components'
 import { useUploadSubstationFile } from '../../../../../hooks/substations/useUploadSubstationFile'
-import { Upload } from '../../../../../icons'
 import { IPropsMutation } from '../../../../../interfaces'
 import { typeFileOptions } from './typeFileOptions'
 import { IPropUploadSubstationFile, IUploadField } from './uploadedFileForm.interface'
@@ -65,7 +64,7 @@ export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModa
         </Group>
         <div className="form__btns">
           <Button disabled={!isValid} type='submit' className='mBtn_outline-green'>
-            <Upload className='icon' />
+            <Icon id='upload' />
             Добавить
           </Button>
         </div>

@@ -1,10 +1,9 @@
 import { useState, type FC } from 'react'
 import { GsmOperatorForm } from '..'
-import { Button, Dropdown, Error, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteGsmOperator, useGsmOperators, useModal } from '../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../icons'
 import { IGsmOperator } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -45,18 +44,18 @@ const GsmOperatorsCards: FC = () => {
                 isAdminOrModerator && (
                   <Dropdown
                     children={
-                      <Setting className='icon' />
+                      <Icon id='setting' />
                     }
                     menuItems={[
                       isAdminOrModerator && (
                         <Button className='!justify-start' onClick={() => { toggleModal(), setGsmOperator(gsmOperator), setIsEdited(!isEdited) }}>
-                          <Edit className='icon' />
+                          <Icon id='edit' />
                           Редактировать
                         </Button>
                       ),
                       isAdmin && (
                         <Button className='btn-error !justify-start' onClick={() => handleDelete(gsmOperator.id)}>
-                          <Delete className='icon' />
+                          <Icon id='delete' />
                           Удалить
                         </Button>
                       ),

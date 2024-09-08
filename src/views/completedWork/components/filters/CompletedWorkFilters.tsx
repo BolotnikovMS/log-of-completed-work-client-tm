@@ -4,9 +4,8 @@ import { useEffect, useMemo, useState, type FC } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, CustomDatePicker, Error, Group } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Icon } from '../../../../components'
 import { useSubstations, useUsers } from '../../../../hooks'
-import { Calendar, Excel, FilterAdd, FilterRemove } from '../../../../icons'
 import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
 import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
@@ -89,7 +88,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             locale={ru}
             selected={dateStart}
             onChange={(date) => setDateStart(date)}
-            iconLeft={<Calendar className='w-6' />}
+            iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             placeholderText='От'
             popperPlacement="left"
@@ -101,7 +100,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             locale={ru}
             selected={dateEnd}
             onChange={(date) => setDateEnd(date)}
-            iconLeft={<Calendar className='w-6' />}
+            iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             placeholderText='До'
             popperPlacement="left"
@@ -110,15 +109,15 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
       </Group>
       <div className='filters__btns'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
-          <FilterAdd className='icon' />
+          <Icon id='filter-add' />
           Применить фильтры
         </Button>
         <Button onClick={clearQueryParams}>
-          <FilterRemove className='icon' />
+          <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
         <Button onClick={handleDownload}>
-          <Excel className='icon' />
+          <Icon id='excel' />
           Сохранить в Excel
         </Button>
       </div>

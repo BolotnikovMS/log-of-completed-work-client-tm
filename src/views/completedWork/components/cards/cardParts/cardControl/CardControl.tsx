@@ -1,10 +1,9 @@
 import { MouseEvent, memo, useCallback, useState, type FC } from 'react'
 import { CompletedWorkForm } from '../../..'
-import { Button, Dropdown, Modal } from '../../../../../../components'
+import { Button, Dropdown, Icon, Modal } from '../../../../../../components'
 import { ERoles } from '../../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../../helpers'
 import { useDeleteCompletedWork, useModal } from '../../../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../../../icons'
 import { useAuthStore } from '../../../../../../store/auth'
 import { IPropsCardControl } from './cardControl.interface'
 
@@ -33,18 +32,18 @@ const CardControl: FC<IPropsCardControl> = memo(({ completedWork }) => {
       {checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
         <Dropdown
           children={
-            <Setting className='icon icon__setting ' />
+            <Icon id='setting' className='icon__setting' />
           }
           menuItems={[
             checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
               <Button className='!justify-start' onClick={(e) => { handleEdit(e) }}>
-                <Edit className='icon' />
+                <Icon id='edit' />
                 Редактировать
               </Button>
             ),
             isAdmin && (
               <Button className='!justify-start btn-error' onClick={(e) => { handleDelete(completedWork.id, e) }}>
-                <Delete className='icon' />
+                <Icon id='delete' />
                 Удалить
               </Button>
             )

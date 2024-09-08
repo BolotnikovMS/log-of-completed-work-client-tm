@@ -3,10 +3,9 @@ import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import { useParams } from 'react-router-dom'
 import { FileTable, SubstationInfoControl } from '..'
-import { CustomSlider, Error, Loader, Tab } from '../../../../components'
+import { CustomSlider, Error, Icon, Loader, Tab } from '../../../../components'
 import { urlFile } from '../../../../constants'
 import { useSubstation } from '../../../../hooks'
-import { Database, FilesFolder, Img, ImgOff } from '../../../../icons'
 import './substationInfo.scss'
 
 const SubstationInfo: FC = () => {
@@ -70,30 +69,18 @@ const SubstationInfo: FC = () => {
               ))}
             </CustomSlider>
           ) : (
-            <ImgOff width={400} height={400} />
+            <Icon id='img-off' className='!w-96 !h-96' />
           )}
         </div>
       </div>
 
       <Tab tabs={[
-        { id: 'backups', label: 'Backup', content: backupsContent, icon: <Database className='icon' /> },
-        { id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Img className='icon' /> },
-        { id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <FilesFolder className='icon' /> }
+        { id: 'backups', label: 'Backup', content: backupsContent, icon: <Icon id='database' /> },
+        { id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Icon id='img' /> },
+        { id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <Icon id='files-folder' /> }
       ]} />
     </div>
   )
 }
 
 export default SubstationInfo
-
-// <p className='substation-info__text'>РЭС/ГП: <span className='text-content'>{substation?.district?.name}</span></p>
-// <p className='substation-info__text'>РДУ: <span className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</span></p>
-// <p className='substation-info__text'>Тип КП: <span className='text-content'>{substation?.type_kp?.name}</span></p>
-// <p className='substation-info__text'>Головной контроллер: <span className='text-content'>{substation?.head_controller?.name}</span></p>
-// <p className='substation-info__text'>Основной канал: <span className='text-content'>{substation?.main_channel?.name}</span></p>
-// {substation?.backup_channel && <p className='substation-info__text'>Резервный канал: <span className='text-content'>{substation?.backup_channel ? substation?.backup_channel.name : '-'}</span></p>}
-// {substation?.additional_channel && <p className='substation-info__text'>Дополнительный канал: <span className='text-content'>{substation?.additional_channel.name}</span></p>}
-// {substation?.gsm && <p className='substation-info__text'>GSM оператор: <span className='text-content'>{substation?.gsm?.name}</span></p>}
-// {substation?.mainChannelIp && <p className='substation-info__text'>IP основного канала: <span className='text-content'>{substation?.mainChannelIp}</span></p>}
-// {substation?.backupChannelIp && <p className='substation-info__text'>IP резервного канала: <span className='text-content'>{substation?.backupChannelIp}</span></p>}
-// <p className='substation-info__text'>Всего выполнено работ: <span className="text-content">{substation?.numberCompletedWorks}</span></p>

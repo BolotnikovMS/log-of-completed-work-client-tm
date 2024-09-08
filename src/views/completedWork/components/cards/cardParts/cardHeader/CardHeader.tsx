@@ -1,6 +1,6 @@
 import { memo, type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { LinkIcon } from '../../../../../../icons'
+import { Icon } from '../../../../../../components'
 import { IPropsCardHeader } from './cardHeader.interface'
 
 const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullName }) => {
@@ -11,7 +11,7 @@ const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullNam
   return (
     <p className='flex text-title font-bold' >
       <Link to={`/substations/${substationId}`} className='flex items-center gap-1'>
-        <LinkIcon className='icon' />
+        <Icon id='link' />
         {substationFullName}
       </Link>
     </p>

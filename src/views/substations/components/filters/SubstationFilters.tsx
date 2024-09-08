@@ -1,9 +1,8 @@
 import { type FC } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { SubstationFlterParameters } from '..'
-import { Button, Group, Modal, Search, Sort } from '../../../../components'
+import { Button, Group, Icon, Modal, Search, Sort } from '../../../../components'
 import { useModal } from '../../../../hooks'
-import { Alert, Filter, FilterRemove, SortAsc, SortDesc } from '../../../../icons'
 import { TOrderSort } from '../../../../types/order.types'
 import { EFilterSubstation } from './substationFilter.enum'
 
@@ -13,9 +12,9 @@ const SubstationFilters: FC = () => {
   const orderSort = searchParams.get('order') || 'asc'
   const sort = searchParams.get('sort') || 'name'
   const sortOptions = [
-    { value: 'name', label: 'А-Я', icon: <SortAsc className='icon' />, order: 'asc' as TOrderSort },
-    { value: 'name', label: 'Я-А', icon: <SortDesc className='icon' />, order: 'desc' as TOrderSort },
-    { value: 'rdu', label: 'РДУ', icon: <Alert className='icon' />, order: 'desc' as TOrderSort },
+    { value: 'name', label: 'А-Я', icon: <Icon id='sort-asc' />, order: 'asc' as TOrderSort },
+    { value: 'name', label: 'Я-А', icon: <Icon id='sort-desc' />, order: 'desc' as TOrderSort },
+    { value: 'rdu', label: 'РДУ', icon: <Icon id='alter' />, order: 'desc' as TOrderSort },
   ]
   const districtParam = searchParams.get(EFilterSubstation.district)
   const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
@@ -32,8 +31,8 @@ const SubstationFilters: FC = () => {
           {location.pathname === '/substations' && (
             <Button onClick={() => toggleModalFilters()}>
               {districtParam || typeKpParam || headControllerParam || mainChannelParam || bacupChannelParam ?
-                <FilterRemove className='icon' /> :
-                <Filter className='icon' />
+                <Icon id='filter-remove' /> :
+                <Icon id='filter' />
               }
               Фильтры
             </Button>

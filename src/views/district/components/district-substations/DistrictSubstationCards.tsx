@@ -1,11 +1,10 @@
 import { isAxiosError } from 'axios'
 import { useMemo, useState, type FC } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
-import { Badge, Button, Dropdown, Error, InfoMessage, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
-import { Delete, Edit, LinkIcon, Setting } from '../../../../icons'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
@@ -50,7 +49,7 @@ const DistrictSubstationCards: FC = () => {
                 <>
                   {substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
                   <p className='text-content flex items-center gap-1'>
-                    <LinkIcon className='icon' />
+                    <Icon id='link' />
                     {substation.fullNameSubstation}
                   </p>
                 </>
@@ -60,18 +59,18 @@ const DistrictSubstationCards: FC = () => {
                 isAdminOrModerator && (
                   <Dropdown
                     children={
-                      <Setting className='icon' />
+                      <Icon id='setting' />
                     }
                     menuItems={[
                       isAdminOrModerator && (
                         <Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-                          <Edit className='icon' />
+                          <Icon id='edit' />
                           Редактировать
                         </Button>
                       ),
                       isAdmin && (
                         <Button className='btn-error !justify-start' onClick={() => handleDelete(substation.id)}>
-                          <Delete className='icon' />
+                          <Icon id='delete' />
                           Удалить
                         </Button>
                       )

@@ -6,10 +6,9 @@ import "react-datepicker/dist/react-datepicker.css"
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Icon, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateCompletedWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
-import { Calendar } from '../../../../icons'
 import { IPropsMutation } from '../../../../interfaces'
 import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.interface'
 import { validationSchema } from './completedWork.validation'
@@ -121,7 +120,7 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
             selected={dateCompletionValue}
             onChange={(dateCompletionValue) => dateCompletionOnChange(dateCompletionValue)}
             placeholderText='Укажите дату работ'
-            iconLeft={<Calendar className='icon' />}
+            iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             {...restDateCompletion}
           />

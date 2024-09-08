@@ -1,10 +1,9 @@
 import { useState, type FC } from 'react'
 import { ChannelTypeForm } from '..'
-import { Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteChannelType, useInfiniteChannelTypes, useModal } from '../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../icons'
 import { IChannelType } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -47,18 +46,18 @@ const ChannelTypeCards: FC = () => {
                   isAdminOrModerator && (
                     <Dropdown
                       children={
-                        <Setting className='icon' />
+                        <Icon id='setting' />
                       }
                       menuItems={[
                         isAdminOrModerator && (
                           <Button className='!justify-start' onClick={() => { toggleModal(), setChannelType(channelType), setIsEdited(!isEdited) }}>
-                            <Edit className='icon' />
+                            <Icon id='edit' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
                           <Button className='btn-error !justify-start' onClick={() => handleDelete(channelType.id)}>
-                            <Delete className='icon' />
+                            <Icon id='delete' />
                             Удалить
                           </Button>
                         )

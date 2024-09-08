@@ -1,10 +1,9 @@
 import { type FC } from 'react'
 import { HeadControllerForm } from '..'
-import { Button, Modal } from '../../../../components'
+import { Button, Icon, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useModal } from '../../../../hooks'
-import { Add } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const HeadControllerControl: FC = () => {
@@ -16,7 +15,7 @@ const HeadControllerControl: FC = () => {
     <div className="work-log__control">
       {isAdmin && (
         <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
-          <Add className='icon' />
+          <Icon id='add' />
           Добавить
         </Button>
       )}

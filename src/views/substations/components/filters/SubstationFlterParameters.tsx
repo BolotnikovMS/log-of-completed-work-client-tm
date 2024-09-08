@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group } from '../../../../components'
+import { Button, Error, Group, Icon } from '../../../../components'
 import { useChannelTypes, useDistricts, useHeadControllers, useTypesKp } from '../../../../hooks'
-import { Excel, FilterAdd, FilterRemove } from '../../../../icons'
 import { SubstationService } from '../../../../services/substations/substation.service'
 import { EFilterSubstation } from './substationFilter.enum'
 import { IPropsSubstationFlterParameters } from './substationFlterParameters.interface'
@@ -122,15 +121,15 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
       </Group>
       <div className='filters__btns'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
-          <FilterAdd className='icon' />
+          <Icon id='filter-add' />
           Применить фильтры
         </Button>
         <Button onClick={clearQueryParams}>
-          <FilterRemove className='icon' />
+          <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
         <Button onClick={handleDownload}>
-          <Excel className='icon' />
+          <Icon id='excel' />
           Сохранить в Excel
         </Button>
       </div>
