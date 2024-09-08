@@ -5,6 +5,7 @@ import { SmallCard } from './cards/small-card/SmallCard'
 import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
 import { Group } from './group/Group'
+import Icon from './icon/Icon'
 import { AuthLayout } from './layouts/AuthLayout'
 import { Layout } from './layouts/Layout'
 import { Loader } from './loaders/loader/Loader'
@@ -33,4 +34,4 @@ const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 const Sort = lazy(() => import('./filters/sort/Sort'))
 const Search = lazy(() => import('./filters/search/Search'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, NumberRecords, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, NumberRecords, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
