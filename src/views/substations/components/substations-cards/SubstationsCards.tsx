@@ -1,7 +1,7 @@
 import { useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
-import { Badge, Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
@@ -44,12 +44,7 @@ const SubstationsCards: FC = () => {
 
   return (
     <>
-      <div className='flex items-center gap-1 text-title py-3'>
-        Всего объектов:
-        <span className='font-bold'>
-          {data?.pages[0].meta.total}
-        </span>
-      </div>
+      <NumberRecords text='Всего объектов:' numberRecords={data?.pages[0].meta.total} />
       {!!memoizedSubstations?.pages[0].data.length && (
         <div className="cards">
           {memoizedSubstations.pages.map(substations => (
