@@ -4,15 +4,16 @@ import { Card } from './cards/card/Card'
 import { SmallCard } from './cards/small-card/SmallCard'
 import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
+import { Group } from './group/Group'
 import { AuthLayout } from './layouts/AuthLayout'
 import { Layout } from './layouts/Layout'
 import { Loader } from './loaders/loader/Loader'
 import { Modal } from './modal/Modal'
 import { NavBar } from './navBar/NavBar'
+import NumberRecords from './numberRecords/NumberRecords'
 import { Page } from './page/Page'
 import { ProtectedRoute } from './protectedRoute/ProtectedRoute'
 import { Router } from './routing/Router'
-import { Group } from './group/Group'
 
 const Badge = lazy(() => import('./badge/Badge'))
 const Error = lazy(() => import('./error/Error'))
@@ -32,4 +33,4 @@ const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 const Sort = lazy(() => import('./filters/sort/Sort'))
 const Search = lazy(() => import('./filters/search/Search'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, NumberRecords, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
