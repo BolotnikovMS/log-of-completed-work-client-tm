@@ -1,18 +1,20 @@
 import cx from 'classnames'
-import { type FC } from 'react'
+import { memo, type FC } from 'react'
 import spriteIcons from './../../icons/sprite.svg'
+import { IPropsIcon } from './icon.interface'
 
-interface IPropsIcon {
-  id: string
-  className?: string
-}
+const Icon: FC<IPropsIcon> = memo(({ id, className }) => {
+  if (!id) {
+    console.error('Не передан id иконки!')
 
-const Icon: FC<IPropsIcon> = ({ id, className }) => {
+    return null
+  }
+
   return (
     <svg className={cx('icon', className)}>
-      <use href={`${spriteIcons}#icon-${id}`} />
+      <use xlinkHref={`${spriteIcons}#icon-${id}`} />
     </svg>
   )
-}
+})
 
 export default Icon
