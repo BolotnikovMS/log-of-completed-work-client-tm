@@ -1,5 +1,4 @@
 import './error.scss'
-
 import { AxiosError } from 'axios'
 import { type FC } from 'react'
 import { errorHandler } from '../../helpers/errorHandler.helper'
