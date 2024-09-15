@@ -1,11 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
-import { BasicTable, Button, Loader } from '../../../../../components'
+import { BasicTable, Button, Icon, Loader } from '../../../../../components'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useDeleteFile } from '../../../../../hooks'
-import { Delete, Download, Setting } from '../../../../../icons'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
 import { useAuthStore } from '../../../../../store/auth'
@@ -45,18 +44,18 @@ const FileTable: FC <IPropsFileTable>= ({files}) => {
 			)
 		},
 		{
-			header: () => <Setting className='icon' />,
+			header: () => <Icon id='setting' />,
 			enableSorting: false,
 			accessorKey: 'setting',
 			cell: ({row}) =>  {
 				return (
 					<div className='table-cell-row'>
 						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
-							<Download className='icon'/>
+							<Icon id='download'/>
 						</Button>
 						{isAdminOrModerator && (
 							<Button className='btn-error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
-								<Delete className='icon' />
+								<Icon id='delete' />
 							</Button>
 						)}
 					</div>

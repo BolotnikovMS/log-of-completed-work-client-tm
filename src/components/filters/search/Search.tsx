@@ -1,8 +1,7 @@
 import { ChangeEvent, useCallback, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { Input } from '../..'
+import { Icon, Input } from '../..'
 import { transliterate } from '../../../helpers'
-import { SearchIcon } from '../../../icons'
 import { IPropsSearch } from './search.interface'
 
 const Search: FC<IPropsSearch> = ({ name, placeholderText = 'Поиск...', classSearch }) => {
@@ -33,7 +32,7 @@ const Search: FC<IPropsSearch> = ({ name, placeholderText = 'Поиск...', cla
       classInput={classSearch}
       placeholder={placeholderText}
       iconLeft={
-        <SearchIcon className='icon' />
+        <Icon id='search  ' />
       }
     />
   )

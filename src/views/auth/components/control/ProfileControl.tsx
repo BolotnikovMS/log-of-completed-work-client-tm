@@ -1,7 +1,6 @@
 import { type FC } from 'react'
-import { Button, ChangePasswordForm, Modal } from '../../../../components'
+import { Button, ChangePasswordForm, Icon, Modal } from '../../../../components'
 import { useModal } from '../../../../hooks'
-import { Key } from '../../../../icons'
 import { useAuthStore } from '../../../../store/auth'
 
 const ProfileControl: FC = () => {
@@ -12,7 +11,7 @@ const ProfileControl: FC = () => {
     <div className='work-log__control'>
       {authUser && (
         <Button className='mBtn_primary' onClick={() => toggleModal()}>
-          <Key className='icon' />
+          <Icon id='key' />
           Сменить пароль
         </Button>
       )}

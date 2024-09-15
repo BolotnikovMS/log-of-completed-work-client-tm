@@ -1,6 +1,5 @@
 import { type FC } from 'react'
-import { ValidationMessage } from '../..'
-import { FileAdd } from '../../../icons'
+import { Icon, ValidationMessage } from '../..'
 
 interface IPropsFileUploader extends React.InputHTMLAttributes<HTMLInputElement> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -14,7 +13,7 @@ const FileUploader: FC<IPropsFileUploader> = ({ register, errorMessage, validati
   return (
     <>
       <label htmlFor="file" className='label label-upload !rounded-xl'>
-        <FileAdd className='w-6' />
+        <Icon id='file-add' />
         <span className='label__text'>
           {files ? files.length === 1 ? files[0].name : `Выбрано файлов: ${files.length}` : 'Загрузить файл(ы)'}
         </span>

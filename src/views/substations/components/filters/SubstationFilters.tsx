@@ -14,7 +14,7 @@ const SubstationFilters: FC = () => {
   const sortOptions = [
     { value: 'name', label: 'А-Я', icon: <Icon id='sort-asc' />, order: 'asc' as TOrderSort },
     { value: 'name', label: 'Я-А', icon: <Icon id='sort-desc' />, order: 'desc' as TOrderSort },
-    { value: 'rdu', label: 'РДУ', icon: <Icon id='alter' />, order: 'desc' as TOrderSort },
+    { value: 'rdu', label: 'РДУ', icon: <Icon id='alert' />, order: 'desc' as TOrderSort },
   ]
   const districtParam = searchParams.get(EFilterSubstation.district)
   const typeKpParam = searchParams.get(EFilterSubstation.typeKp)

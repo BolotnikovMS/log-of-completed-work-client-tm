@@ -4,9 +4,8 @@ import { useEffect, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { Button, Group, Input } from '../../components'
+import { Button, Group, Icon, Input } from '../../components'
 import { setTokenToLocalStorage } from '../../helpers/localstorege.helper'
-import { Login } from '../../icons'
 import { ISignInFields, IUserDataLogin } from '../../interfaces'
 import { AuthService } from '../../services/auth/auth.service'
 import { useAuthStore } from '../../store/auth'
@@ -54,6 +53,7 @@ export const SignIn: FC = () => {
 						label='Логин'
 						name='username'
 						classWrapper='!items-center'
+						classLabel='!m-0'
 						register={register}
 						errorMessage={errors.username?.message}
 						validation={{
@@ -68,6 +68,7 @@ export const SignIn: FC = () => {
 						name='password'
 						type='password'
 						classWrapper='!items-center'
+						classLabel='!m-0'
 						register={register}
 						errorMessage={errors.password?.message}
 						validation={{
@@ -78,7 +79,7 @@ export const SignIn: FC = () => {
 				</Group>
 				<div className="form__btns">
 					<Button disabled={!isValid} className='mBtn_primary'>
-				    <Login className='icon' />
+				    <Icon id='login' />
 						Войти
 					</Button>
 				</div>

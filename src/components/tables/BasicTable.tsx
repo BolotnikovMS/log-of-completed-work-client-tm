@@ -1,7 +1,6 @@
 import { flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, PaginationState, SortingState, useReactTable } from '@tanstack/react-table'
 import { useState, type FC } from 'react'
-import { Button, Group, Input } from '..'
-import { ArrowLeft, ArrowLeftLine, ArrowRight, ArrowRightLine, SearchIcon, SortAsc, SortDesc } from '../../icons'
+import { Button, Group, Icon, Input } from '..'
 import { IPropsBasicTable } from './basicTable.interface'
 import './table.scss'
 
@@ -38,7 +37,7 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
         {search && (
           <div className='table-controls'>
             <Group>
-              <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<SearchIcon className='icon' />} />
+              <Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Icon id='search' />} />
             </Group>
           </div>
         )}
@@ -50,7 +49,7 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
                   <th key={header.id} onClick={header.column.getToggleSortingHandler()} className='text-title text-center'>
                     <Group className='!flex-row justify-center'>
                       {flexRender(header.column.columnDef.header, header.getContext())}
-                      {{ asc: <SortAsc className='icon' />, desc: <SortDesc className='icon' /> }[header.column.getIsSorted() as string] ?? null}
+                      {{ asc: <Icon id='sort-asc' />, desc: <Icon id='sort-desc' /> }[header.column.getIsSorted() as string] ?? null}
                     </Group>
                   </th>)}
               </tr>
@@ -72,16 +71,16 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
           {data.length > pagination.pageSize && (
             <>
               <Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
-                <ArrowLeftLine className='icon' />
+                <Icon id='arrow-left-line' />
               </Button>
               <Button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()}>
-                <ArrowLeft className='icon' />
+                <Icon id='arrow-left' />
               </Button>
               <Button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>
-                <ArrowRight className='icon' />
+                <Icon id='arrow-right' />
               </Button>
               <Button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-                <ArrowRightLine className='icon' />
+                <Icon id='arrow-right-line' />
               </Button>
             </>
           )}

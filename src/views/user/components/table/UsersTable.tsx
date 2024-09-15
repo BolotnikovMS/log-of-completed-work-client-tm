@@ -1,11 +1,10 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo, useState, type FC } from 'react'
 import { ChangeStatusAccountForm } from '..'
-import { BasicTable, Button, ChangePasswordForm, Error, InfoMessage, Loader, Modal } from '../../../../components'
+import { BasicTable, Button, ChangePasswordForm, Error, Icon, InfoMessage, Loader, Modal } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useModal, useUsers } from '../../../../hooks'
-import { Key, Setting } from '../../../../icons'
 import { IUser } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -44,14 +43,14 @@ const UsersTable: FC = () => {
       accessorFn: row => row.role.name
     },
     {
-      header: () => <Setting className='icon' />,
+      header: () => <Icon id='setting' />,
       enableSorting: false,
       accessorKey: 'setting',
       cell: ({ row }) => (
         isAdmin && (
           <div className='table-cell-row'>
             <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
-              <Key className='icon' />
+              <Icon id='key' />
             </Button>
           </div>
         )

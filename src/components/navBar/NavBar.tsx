@@ -1,11 +1,10 @@
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Group } from '..'
+import { Button, Group, Icon } from '..'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers'
 import { useLogout } from '../../hooks'
-import { Books, Home, LogoBe, Logout, NoteDone, Profile, User, Users } from '../../icons'
 import { useAuthStore } from '../../store/auth'
 import './navbar.scss'
 
@@ -20,22 +19,25 @@ export const NavBar: FC = () => {
       <nav className='mNavBar__nav'>
         <div className='mNavBar__logo '>
           <Group className='!flex-row !items-center'>
-            <LogoBe />
+            {/*<Icon id='logo-be' className='!w-12 !h-12 !z-30' />
             <span className='text-2xl font-bold text-sky-500'>ПО "ИТиС"</span>
+            */}
           </Group>
-          <span className='text-content text-center'>Журнал выполненных работ по ТМ</span>
+          <span className='text-content text-center'>
+            Журнал выполненных работ по ТМ
+          </span>
         </div>
         <ul className='mNavBar__menu'>
           <li>
             <Link to={'/'}>
-              <Home className='icon' />
+              <Icon id='home' />
               Главная
             </Link>
           </li>
           <li>
             <details>
               <summary>
-                <Books className='icon' />
+                <Icon id='books' />
                 Справочники
               </summary>
               <ul className='flex flex-col gap-1'>
@@ -49,14 +51,14 @@ export const NavBar: FC = () => {
           </li>
           <li>
             <Link to={'/completed-works'}>
-              <NoteDone className='icon' />
+              <Icon id='note-done' />
               Выполненные работы
             </Link>
           </li>
           {checkRole(user, [ERoles.Admin]) && (
             <li>
               <Link to={'/users'}>
-                <Users className='icon' />
+                <Icon id='users' />
                 Пользователи
               </Link>
             </li>
@@ -69,7 +71,9 @@ export const NavBar: FC = () => {
             <div className='flex items-center gap-3'>
               <div className="avatar placeholder">
                 <div className="bg-neutral text-neutral-content w-12 rounded-full">
-                  <span><User /></span>
+                  <span>
+                    <Icon id='user' className='!w-7 !h-7' />
+                  </span>
                 </div>
               </div>
               <div className='leading-3'>
@@ -83,12 +87,12 @@ export const NavBar: FC = () => {
             </div>
             <li className=''>
               <Link to={'/profile'}>
-                <Profile className='icon' />
+                <Icon id='profile' />
                 Профиль
               </Link>
             </li>
             <Button className='btn-error mt-5' onClick={logoutHandel}>
-              <Logout className='icon' />
+              <Icon id='logout' />
               Выход
             </Button>
           </ul>

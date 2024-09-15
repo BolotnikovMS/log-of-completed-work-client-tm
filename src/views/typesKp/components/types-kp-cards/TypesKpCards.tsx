@@ -1,10 +1,9 @@
 import { useState, type FC } from 'react'
 import { TypeKpForm } from '..'
-import { Button, Dropdown, Error, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteTypeKp, useInfiniteTypesKp, useModal } from '../../../../hooks'
-import { Delete, Edit, Setting } from '../../../../icons'
 import { ITypeKp } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -46,18 +45,18 @@ const TypesKpCards: FC = () => {
                   isAdminOrModerator && (
                     <Dropdown
                       children={
-                        <Setting className='icon' />
+                        <Icon id='setting' />
                       }
                       menuItems={[
                         isAdminOrModerator && (
                           <Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(typeKp), setIsEdited(!isEdited) }}>
-                            <Edit className='icon' />
+                            <Icon id='edit' />
                             Редактировать
                           </Button>
                         ),
                         isAdmin && (
                           <Button className='btn-error !justify-start' onClick={() => handleDelete(typeKp.id)}>
-                            <Delete className='icon' />
+                            <Icon id='delete' />
                             Удалить
                           </Button>
                         )
