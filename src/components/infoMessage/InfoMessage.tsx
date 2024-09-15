@@ -1,6 +1,5 @@
-import './info-message.scss'
-
 import { type FC } from 'react'
+import './info-message.scss'
 
 interface IPropsInfoMessage {
   text: string
