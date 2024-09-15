@@ -1,13 +1,6 @@
 import { type FC } from 'react'
 import { Icon, ValidationMessage } from '../..'
-
-interface IPropsFileUploader extends React.InputHTMLAttributes<HTMLInputElement> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  register: any
-  validation?: { [key: string]: unknown }
-  errorMessage?: string
-  files: FileList | null
-}
+import { IPropsFileUploader } from './fileUpload.interface'
 
 const FileUploader: FC<IPropsFileUploader> = ({ register, errorMessage, validation, files, ...attributes }) => {
   return (
