@@ -55,3 +55,11 @@ VIYE_FILE_URL=http://127.0.0.1:3333/
 ```
 npm run dev
 ```
+
+## Backend:
+
+*Ссылка:* [Backend репозиторий](https://github.com/BolotnikovMS/log-of-completed-work-server-tm-v2.git)
+
+## Связь со мной:
+
+[bolotnikovms@yandex.ru](mailto:bolotnikovms@yandex.ru)
