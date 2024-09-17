@@ -37,6 +37,12 @@
 
 ## Устанока:
 
-1. Склонируйте репозиторий: ```git clone https://github.com/BolotnikovMS/log-of-completed-work-client-tm.git```
+1. Склонируйте репозиторий:
+```
+git clone https://github.com/BolotnikovMS/log-of-completed-work-client-tm.git
+```
   - При необходимости добавьте в конце `./` чтобы не создавалась дополнительная папка.
-2. Установить зависимости: `npm install`
+2. Установить зависимости:
+```
+npm install
+```
