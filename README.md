@@ -47,7 +47,7 @@ git clone https://github.com/BolotnikovMS/log-of-completed-work-client-tm.git
 npm install
 ```
 3. Скопировать файл `.env.example` и убрать приписку `.example`. Файле .env в переменных указать `url` адреса для работы с бэкендом. <br>Пример: <br>
-`
-VITE_API_URL=http://127.0.0.1:3333/api/v1.0 <br>
+``
+VITE_API_URL=http://127.0.0.1:3333/api/v1.0
 VIYE_FILE_URL=http://127.0.0.1:3333/
-`
+``
