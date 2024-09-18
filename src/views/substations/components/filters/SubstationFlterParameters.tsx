@@ -1,9 +1,8 @@
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group, Icon } from '../../../../components'
-import { useChannelTypes, useDistricts, useHeadControllers, useTypesKp } from '../../../../hooks'
-import { SubstationService } from '../../../../services/substations/substation.service'
+import { Button, Error, Group, Icon, LoaderLine } from '../../../../components'
+import { useChannelTypes, useDistricts, useDownloadExcelSubstations, useHeadControllers, useTypesKp } from '../../../../hooks'
 import { EFilterSubstation } from './substationFilter.enum'
 import { IPropsSubstationFlterParameters } from './substationFlterParameters.interface'
 
@@ -45,7 +44,9 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const handleDownload = () => SubstationService.downloadExcel({ typeKp, headController, mainChannel, backupChannel, district })
+  // const handleDownload = () => SubstationService.downloadExcel({ typeKp, headController, mainChannel, backupChannel, district })
+  const { isFetching: isFetchingDownloadExcel, refetch } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp, headController, mainChannel, backupChannel, district })
+  const handleDownload = () => refetch()
 
   const errorMessage = useMemo(() => (isErrorTypeKp || isErrorHeadController || isErrorTypesChannel || isErrorDistricts) && <Error error={errorTypeKp! || errorHeadController! || errorTypesChannel! || errorDistricts!} />, [errorTypeKp, errorHeadController, errorTypesChannel, errorDistricts, isErrorHeadController, isErrorTypeKp, isErrorTypesChannel, isErrorDistricts])
 
@@ -128,9 +129,9 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
           <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
-        <Button onClick={handleDownload}>
+        <Button onClick={handleDownload} disabled={isFetchingDownloadExcel}>
           <Icon id='excel' />
-          Сохранить в Excel
+          {isFetchingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
         </Button>
       </div>
     </div >

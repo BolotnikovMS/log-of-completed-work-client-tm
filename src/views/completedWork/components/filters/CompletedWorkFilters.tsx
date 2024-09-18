@@ -4,9 +4,8 @@ import { useEffect, useMemo, useState, type FC } from 'react'
 import "react-datepicker/dist/react-datepicker.css"
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Icon } from '../../../../components'
-import { useSubstations, useUsers } from '../../../../hooks'
-import { CompletedWorkService } from '../../../../services/completed-work/completed-work.service'
+import { Button, CustomDatePicker, Error, Group, Icon, LoaderLine } from '../../../../components'
+import { useDownloadExcelCompletedWork, useSubstations, useUsers } from '../../../../hooks'
 import { EFilterType } from './compleated-filter.enum'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 
@@ -44,7 +43,8 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const handleDownload = () => CompletedWorkService.downloadExcel({ page: 1, limit: -1, substation, executor, dateStart, dateEnd })
+  const { isFetching: isFetchingDownloadExcel, refetch } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation, executor, dateStart, dateEnd })
+  const handleDownload = () => refetch()
   const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
 
   return (
@@ -116,9 +116,9 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
-        <Button onClick={handleDownload}>
+        <Button onClick={handleDownload} disabled={isFetchingDownloadExcel}>
           <Icon id='excel' />
-          Сохранить в Excel
+          {isFetchingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
         </Button>
       </div>
     </div>
