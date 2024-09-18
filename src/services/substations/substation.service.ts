@@ -34,9 +34,9 @@ export const SubstationService = {
     return instance.delete(`${url}/substations/${id}`)
   },
 
-  async downloadExcel({ typeKp, headController, mainChannel, backupChannel, district }: IQueryParams) {
+  async downloadExcel({ page, limit, typeKp, headController, mainChannel, backupChannel, district }: IQueryParams) {
     await instance.get(`${url}/substations/download-substations-excel`, {
-      params: { typeKp, headController, mainChannel, backupChannel, district },
+      params: { page, limit, typeKp, headController, mainChannel, backupChannel, district },
       responseType: 'blob'
     }).then(resp => {
       fileDownload(resp.data, 'report.xlsx')
