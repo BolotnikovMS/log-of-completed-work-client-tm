@@ -1,4 +1,6 @@
+import { TIconName } from "../../types/icons.type"
+
 export interface IPropsIcon {
-  id: string
+  id: TIconName
   className?: string
 }
