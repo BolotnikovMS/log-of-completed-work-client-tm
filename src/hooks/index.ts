@@ -6,6 +6,7 @@ import { useInfiniteChannelTypes } from './channel-types/useInfiniteChannelTypes
 import { useUpdateChannelType } from './channel-types/useUpdateChannelType'
 import { useCreateCompletedWork } from './completed-works/useCreateCompletedWork'
 import { useDeleteCompletedWork } from './completed-works/useDeleteCompletedWork'
+import { useDownloadExcelCompletedWork } from './completed-works/useDownloadExcelCompletedWork'
 import { useUpdateCompletedWork } from './completed-works/useUpdateCompletedWork'
 import { useCreateDistrict } from './distrcts/useCreateDistrict'
 import { useDeleteDistrict } from './distrcts/useDeleteDistrict'
@@ -27,6 +28,7 @@ import { useModal } from './modal/useModal'
 import { useRoles } from './roles/useRoles'
 import { useCreateSubstation } from './substations/useCreateSubstation'
 import { useDeleteSubstation } from './substations/useDeleteSubstation'
+import { useDownloadExcelSubstations } from './substations/useDownloadExcelSubstations'
 import { useInfiniteSubstations } from './substations/useInfiniteSubstations'
 import { useSubstation } from './substations/useSubstation'
 import { useSubstations } from './substations/useSubstations'
@@ -47,4 +49,4 @@ import { useInfiniteVoltageClasses } from './voltage-classes/useInfiniteVoltageC
 import { useUpdateVoltageClass } from './voltage-classes/useUpdateVoltageClass'
 import { useVoltageClasses } from './voltage-classes/useVoltageClasses'
 
-export { useChangeStatusAccountMutation, useChannelTypes, useCreateChannelType, useCreateCompletedWork, useCreateDistrict, useCreateGsmOperator, useCreateHeadController, useCreateSubstation, useCreateTypeKp, useCreateVoltageClass, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUpdateChannelType, useUpdateCompletedWork, useUpdateDistrict, useUpdateGsmOperator, useUpdateHeadController, useUpdateSubstation, useUpdateTypeKp, useUpdateVoltageClass, useUsers, useVoltageClasses, useCreateAccount, useResetPassword, useChangePassword }
+export { useChangeStatusAccountMutation, useChannelTypes, useCreateChannelType, useCreateCompletedWork, useCreateDistrict, useCreateGsmOperator, useCreateHeadController, useCreateSubstation, useCreateTypeKp, useCreateVoltageClass, useDeleteChannelType, useDeleteCompletedWork, useDeleteDistrict, useDeleteFile, useDeleteGsmOperator, useDeleteHeadController, useDeleteSubstation, useDeleteTypeKp, useDeleteVoltageClass, useDistricts, useDistrictSubstations, useGsmOperators, useHeadControllers, useInfiniteChannelTypes, useInfiniteDistricts, useInfiniteHeadControllers, useInfiniteSubstations, useInfiniteTypesKp, useInfiniteVoltageClasses, useLogout, useModal, useRoles, useSubstation, useSubstations, useTypesKp, useUpdateChannelType, useUpdateCompletedWork, useUpdateDistrict, useUpdateGsmOperator, useUpdateHeadController, useUpdateSubstation, useUpdateTypeKp, useUpdateVoltageClass, useUsers, useVoltageClasses, useCreateAccount, useResetPassword, useChangePassword, useDownloadExcelCompletedWork, useDownloadExcelSubstations }
