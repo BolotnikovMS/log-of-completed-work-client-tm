@@ -44,10 +44,7 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  // const handleDownload = () => SubstationService.downloadExcel({ typeKp, headController, mainChannel, backupChannel, district })
-  const { isFetching: isFetchingDownloadExcel, refetch } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp, headController, mainChannel, backupChannel, district })
-  const handleDownload = () => refetch()
-
+  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp, headController, mainChannel, backupChannel, district })
   const errorMessage = useMemo(() => (isErrorTypeKp || isErrorHeadController || isErrorTypesChannel || isErrorDistricts) && <Error error={errorTypeKp! || errorHeadController! || errorTypesChannel! || errorDistricts!} />, [errorTypeKp, errorHeadController, errorTypesChannel, errorDistricts, isErrorHeadController, isErrorTypeKp, isErrorTypesChannel, isErrorDistricts])
 
   return (
@@ -129,9 +126,9 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
           <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
-        <Button onClick={handleDownload} disabled={isFetchingDownloadExcel}>
+        <Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
           <Icon id='excel' />
-          {isFetchingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
+          {isLoadingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
         </Button>
       </div>
     </div >

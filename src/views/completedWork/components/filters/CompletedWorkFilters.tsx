@@ -43,8 +43,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const { isFetching: isFetchingDownloadExcel, refetch } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation, executor, dateStart, dateEnd })
-  const handleDownload = () => refetch()
+  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation, executor, dateStart, dateEnd })
   const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
 
   return (
@@ -116,9 +115,9 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
-        <Button onClick={handleDownload} disabled={isFetchingDownloadExcel}>
+        <Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
           <Icon id='excel' />
-          {isFetchingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
+          {isLoadingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
         </Button>
       </div>
     </div>

@@ -1,13 +1,27 @@
-import { useQuery } from "@tanstack/react-query"
+import { AxiosError } from "axios"
+import { useState } from "react"
+import { errorHandler } from "../../helpers"
 import { IQueryParams } from "../../interfaces"
 import { SubstationService } from "../../services/substations/substation.service"
 
 export const useDownloadExcelSubstations = ({ page, limit, typeKp, headController, mainChannel, backupChannel, district }: IQueryParams) => {
-  const { error, isError, isFetching, refetch } = useQuery({
-    queryKey: ['downloadExcelSubstations'],
-    queryFn: () => SubstationService.downloadExcel({ page, limit, typeKp, headController, mainChannel, backupChannel, district }),
-    enabled: false,
-  })
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  return { error, isError, isFetching, refetch }
+  const fetchData = async () => {
+    setIsLoading(true)
+
+    try {
+      await SubstationService.downloadExcel({ page, limit, typeKp, headController, mainChannel, backupChannel, district })
+    } catch (error) {
+      const err = error as AxiosError
+
+      errorHandler(err)
+      console.log(`Error download file: ${error}`)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+
+  return { isLoading, fetchData }
 }
