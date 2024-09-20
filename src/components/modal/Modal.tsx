@@ -17,7 +17,7 @@ export const Modal: FC<IPropsModal> = ({ visible, title, content, footer, classD
             <Icon id='close' />
           </span>
         </div>
-        <div className="overflow-y-auto p-4">
+        <div className="overflow-y-auto p-4 h-full">
           {content}
         </div>
         {footer && (
