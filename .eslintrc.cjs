@@ -14,6 +14,7 @@ module.exports = {
       "warn",
       { allowConstantExport: true },
     ],
+    "quotes": [2, "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
     "@typescript-eslint/no-unused-vars": "off",
     "sort-imports": [
       "error",
