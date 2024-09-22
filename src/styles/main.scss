@@ -243,6 +243,17 @@ body {
 	gap: 8px;
 }
 
+/* Rechart */
+.recharts {
+  &-text {
+    font-size: clamp(15px, 2.5vw, 17px) !important;
+  }
+
+  &-legend-item-text, &-tooltip-item-list, &-tooltip-label {
+    font-size: clamp(16px, 2.5vw, 19px) !important;
+  }
+}
+
 @media (hover: hover) and (pointer: fine) {
   .link:hover {
     color:rgb(94, 93, 93);
