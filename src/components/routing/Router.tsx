@@ -15,7 +15,7 @@ import React from 'react'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers/checkRole.helper'
 import { useAuthStore } from '../../store/auth'
-import { HomePage } from '../../views/home/HomePage'
+import Dashboard from '../../views/dashboard/Dashboard'
 
 export const Router: React.FC = () => {
   const { authUser } = useAuthStore()
@@ -23,7 +23,16 @@ export const Router: React.FC = () => {
   return (
     <Routes>
       <Route path='/' element={authUser ? <Layout /> : <AuthLayout />}>
-        <Route index element={<HomePage />} />
+        <Route index element={
+          <ProtectedRoute isAllowed={!!authUser}>
+            <Page
+              title='Статистика'
+              children={
+                <Dashboard />
+              }
+            />
+          </ProtectedRoute>
+        } />
         <Route path='/districts'
           element={
             <ProtectedRoute isAllowed={!!authUser}>
