@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import './../card.scss'
 import { IPropsCard } from './card.interface'
 
-export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, childrenFooter, childrenControl, className, classBody, path, ...attributes }) => {
+export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, childrenFooter, childrenControl, className, classBody, classContent, path, ...attributes }) => {
   return (
     <div className={cx('mCard !w-full', className)} {...attributes}>
       {path && <Link to={path} className='card__link' />}
@@ -15,7 +15,7 @@ export const Card: FC<IPropsCard> = ({ childrenHeader, childrenContent, children
           </div>
         )}
         {childrenContent && (
-          <div className="mCard__content">
+          <div className={cx('mCard__content', classContent)}>
             {childrenContent}
           </div>
         )}

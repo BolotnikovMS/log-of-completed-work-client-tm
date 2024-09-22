@@ -5,6 +5,7 @@ export interface IPropsSmallCard {
   childrenFooter?: ReactNode
   childrenControl?: ReactNode
   className?: string
+  classContent?: string
   cardText?: string
   path?: string
 }
