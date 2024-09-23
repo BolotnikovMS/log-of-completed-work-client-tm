@@ -1,13 +1,33 @@
 import { type FC } from 'react'
+import { Link } from 'react-router-dom'
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { Error, Loader } from '../../../../../components'
 import { useSubstationsTypeKp } from '../../../../../hooks'
-import { ICustomBarLabel } from './substationsTypeKpChart.interface'
+import { ICustomAxisTick, ICustomBarLabel } from './substationsTypeKpChart.interface'
 
 const SubstationsTypeKpChart: FC = () => {
   const { data, error, isError, isLoading } = useSubstationsTypeKp()
+  const transformedData = data?.map(item => ({
+    ...item,
+    combinedKey: `${item.id}-${item.name}`
+  }))
   const renderCustomBarLabel = ({ x, y, width, value }: ICustomBarLabel) => {
     return <text className='recharts-text' x={x + width / 2} y={y} fill="#666" textAnchor="middle" dy={-6}>{`${value}`}</text>
+  }
+  const CustomizedAxisTick = ({ x, y, payload }: ICustomAxisTick) => {
+    const { value } = payload
+    const [id, name] = value.split('-')
+    const link = `/substations?typeKp=${id}`
+
+    return (
+      <g transform={`translate(${x},${y})`}>
+        <text className='recharts-text' x={0} y={0} dy={16} textAnchor="middle" fill="#666">
+          <Link to={link}>
+            {name}
+          </Link>
+        </text>
+      </g>
+    )
   }
 
   if (isLoading) return <Loader />
@@ -15,8 +35,8 @@ const SubstationsTypeKpChart: FC = () => {
 
   return (
     <ResponsiveContainer width='100%' height={330}>
-      <BarChart width={500} height={330} data={data}>
-        <XAxis dataKey="name" />
+      <BarChart width={500} height={330} data={transformedData}>
+        <XAxis dataKey='combinedKey' tick={CustomizedAxisTick} />
         <YAxis />
         <Tooltip />
         <Legend verticalAlign='top' height={55} />
