@@ -1,6 +1,6 @@
 import { type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Group, Icon } from '..'
+import { Button, Icon } from '..'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers'
@@ -18,11 +18,10 @@ export const NavBar: FC = () => {
     <div className='mNavBar'>
       <nav className='mNavBar__nav'>
         <div className='mNavBar__logo '>
-          <Group className='!flex-row !items-center'>
-            {/*<Icon id='logo-be' className='!w-12 !h-12 !z-30' />
+          {/*<Group className='!flex-row !items-center'>
+            <Icon id='logo-be' className='!w-12 !h-12 !z-30' />
             <span className='text-2xl font-bold text-sky-500'>ПО "ИТиС"</span>
-            */}
-          </Group>
+          </Group>*/}
           <span className='text-content text-center'>
             Журнал выполненных работ по ТМ
           </span>
@@ -30,8 +29,8 @@ export const NavBar: FC = () => {
         <ul className='mNavBar__menu'>
           <li>
             <Link to={'/'}>
-              <Icon id='home' />
-              Главная
+              <Icon id='pie-chart' />
+              Статистика
             </Link>
           </li>
           <li>
