@@ -12,3 +12,8 @@ export interface ICustomAxisTick {
   y: number
   payload: Payload
 }
+
+export interface ICustomTooltip {
+  active: boolean
+  payload: Payload[]
+}
