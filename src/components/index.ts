@@ -2,6 +2,7 @@ import { lazy } from 'react'
 import { Button } from './button/Button'
 import { Card } from './cards/card/Card'
 import { SmallCard } from './cards/small-card/SmallCard'
+import CustomBarChartLabel from './charts/customBarChartLabel/CustomBarChartLabel'
 import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
 import { Group } from './group/Group'
@@ -15,6 +16,8 @@ import NumberRecords from './numberRecords/NumberRecords'
 import { Page } from './page/Page'
 import { ProtectedRoute } from './protectedRoute/ProtectedRoute'
 import { Router } from './routing/Router'
+import CustomTooltipChart from './charts/customTooltipChart/CustomTooltipChart'
+import CustomAxisTickChart from './charts/customAxisTickChart/CustomAxisTickChart'
 
 const Badge = lazy(() => import('./badge/Badge'))
 const Error = lazy(() => import('./error/Error'))
@@ -34,4 +37,4 @@ const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 const Sort = lazy(() => import('./filters/sort/Sort'))
 const Search = lazy(() => import('./filters/search/Search'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, LoadMore, Loader, LoaderLine, Modal, NavBar, NumberRecords, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomBarChartLabel, CustomDatePicker, CustomSlider, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage, CustomTooltipChart, CustomAxisTickChart }
