@@ -7,7 +7,7 @@ const SubstationsTypeKpChart: FC = () => {
   const { data, error, isError, isLoading } = useSubstationsTypeKp()
   const transformedData = data?.map(item => ({
     ...item,
-    combinedKey: `${item.id}:${item.name.slice(3)}`
+    combinedKey: `${item.id}:${item.name}`
   }))
 
   if (isLoading) return <Loader />

@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import ru from 'date-fns/locale/ru'
 import moment from 'moment'
 import { type FC } from 'react'
-import "react-datepicker/dist/react-datepicker.css"
+import 'react-datepicker/dist/react-datepicker.css'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
