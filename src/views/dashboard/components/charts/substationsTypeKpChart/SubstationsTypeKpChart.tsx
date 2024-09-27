@@ -18,6 +18,7 @@ const SubstationsTypeKpChart: FC = () => {
       <BarChart width={500} height={330} data={transformedData}>
         <XAxis
           dataKey='combinedKey'
+          tickFormatter={(value) => value.substring(0, 5)}
           tick={
             <CustomAxisTickChart x={0} y={0} payload={undefined} linkTemplate={(typeKpId) => `/substations?typeKp=${typeKpId}`} renderValue={(_, textLabel) => textLabel} valueSeparator=':' />
           }
