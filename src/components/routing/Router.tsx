@@ -1,8 +1,14 @@
+import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AuthLayout, Layout, Page, ProtectedRoute } from '..'
+import { ERoles } from '../../enums/roles.enum'
+import { checkRole } from '../../helpers/checkRole.helper'
+import { useAuthStore } from '../../store/auth'
 import { Profile, ProfileControl, SignIn } from '../../views/auth'
+import { ChannelCategoriesCards, ChannelCategoryControl } from '../../views/channelCategory/components'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
+import Dashboard from '../../views/dashboard/Dashboard'
 import { DistrictControl, DistrictSubstationCards, DistrictsCards } from '../../views/district/components'
 import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/components'
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
@@ -10,12 +16,6 @@ import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
-
-import React from 'react'
-import { ERoles } from '../../enums/roles.enum'
-import { checkRole } from '../../helpers/checkRole.helper'
-import { useAuthStore } from '../../store/auth'
-import Dashboard from '../../views/dashboard/Dashboard'
 
 export const Router: React.FC = () => {
   const { authUser } = useAuthStore()
@@ -131,6 +131,21 @@ export const Router: React.FC = () => {
                   <>
                     <HeadControllerControl />
                     <HeadControllersCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/channel-categories'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Категории каналов'
+                children={
+                  <>
+                    <ChannelCategoryControl />
+                    <ChannelCategoriesCards />
                   </>
                 }
               />
