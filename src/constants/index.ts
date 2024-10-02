@@ -22,6 +22,10 @@ export const menuItemData = [
     url: '/head-controllers',
   },
   {
+    title: 'Категории каналов',
+    url: '/channel-categories',
+  },
+  {
     title: 'Типы каналов',
     url: '/channel-types',
   },
