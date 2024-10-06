@@ -19,4 +19,5 @@ export interface IQueryParams {
   mainChannel?: string | null
   backupChannel?: string | null
   district?: string | null
+  channelType?: string | null
 }
