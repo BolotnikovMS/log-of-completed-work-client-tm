@@ -2,19 +2,31 @@
   @apply flex flex-col gap-4;
 
 	&__wrapper {
-	 @apply flex items-center justify-between;
+	 @apply flex items-center justify-between gap-3;
 	}
 
 	&__content {
+	 @apply flex flex-col gap-3 w-[30%];
+	}
+
+	&__equipment-tm {
 		@apply grid grid-cols-2 items-center gap-3;
+	}
+
+	&__channel {
+	 @apply  p-1 grid grid-cols-2 items-center gap-3 border-2 border-dashed border-gray-300 rounded-xl;
 	}
 
 	&__text {
     @apply flex gap-1 items-center text-lg font-bold;
   }
 
+  &__section-text {
+    @apply col-span-2 text-xl text-center font-bold;
+  }
+
 	&__imgs {
-	 @apply flex flex-col items-center justify-center w-1/2 h-1/2;
+	 @apply flex flex-col items-center justify-center w-1/2 h-1/2 shrink-0;
 	}
 
 	&__btns {
