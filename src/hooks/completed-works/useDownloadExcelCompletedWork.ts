@@ -1,12 +1,11 @@
-import { AxiosError } from "axios"
-import { useState } from "react"
-import { errorHandler } from "../../helpers"
-import { IQueryParams } from "../../interfaces"
-import { CompletedWorkService } from "../../services/completed-work/completed-work.service"
+import { AxiosError } from 'axios'
+import { useState } from 'react'
+import { errorHandler } from '../../helpers'
+import { IQueryParams } from '../../interfaces'
+import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
 
 export const useDownloadExcelCompletedWork = ({ page, limit, substation, executor, dateStart, dateEnd }: IQueryParams) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
-
   const fetchData = async () => {
     setIsLoading(true)
 
