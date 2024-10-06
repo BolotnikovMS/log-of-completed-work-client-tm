@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { IChannelCategory, IQueryParams } from '../../interfaces'
-import { TChannelCategoryData, TRespChannelCategories } from './channel-category.type'
+import { TRespChannelCategories, TChannelCategoryData } from '../../types'
 
 export const ChannelCategoryService = {
   async getChannelCategories({ limit, page }: IQueryParams): Promise<TRespChannelCategories> {
