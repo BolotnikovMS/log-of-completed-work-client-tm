@@ -1,18 +1,17 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
-import { useController, useForm } from 'react-hook-form'
+import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Group, Input, SelectWrapper, Textarea } from '../../../../components'
-import { useChannelCategories, useChannelTypes, useSubstations } from '../../../../hooks'
-import { IPropsChannelForm } from './channelForm.interface'
+import { Button, Error, Group, Input, SelectWrapper, Textarea } from '../../../../components'
+import { useChannelCategories, useChannelTypes, useCreateChannel, useSubstations, useUpdateChannel } from '../../../../hooks'
+import { IChannel, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { TChannelData } from '../../../../types'
 import { validationSchema } from './channelForm.validation'
-import { IChannelFields } from './channelForm.type'
 
-const ChannelForm: FC<IPropsChannelForm> = ({ channel, isEdited, setIsEdited, toggleModal }) => {
+const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsEdited, toggleModal }) => {
   const { id } = useParams()
-
-  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<IChannelFields>({
+  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TChannelData>({
     mode: 'onBlur',
     defaultValues: {
       substationId: channel?.substationId || (id ? +id : undefined),
@@ -29,10 +28,27 @@ const ChannelForm: FC<IPropsChannelForm> = ({ channel, isEdited, setIsEdited, to
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
   const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
+  const { mutateAsync: createChannel, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannel()
+  const { mutateAsync: updateChannel, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannel()
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelData>) => {
+    await mutateFn(id ? { id, data } : data)
+
+    reset()
+    toggleModal()
+    if (isEdited && setIsEdited) setIsEdited(false)
+  }
+  const submitCreate: SubmitHandler<TChannelData> = data => handleMutation({ data, mutateFn: createChannel })
+  const submitUpdate: SubmitHandler<TChannelData> = data => {
+    if (!channel?.id) return null
+
+    handleMutation({ data, mutateFn: updateChannel, id: channel.id })
+  }
+  const errorMessage = (isErrorCreate || isErrorUpdate && errorChannelTypes && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
 
   return (
     <>
-      <form className='form'>
+      {errorMessage}
+      <form className='form' onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
         <Group>
           <SelectWrapper label='Выберите объект' errorMessage={errors.substationId?.message} mandatory>
             <AsyncSelect
