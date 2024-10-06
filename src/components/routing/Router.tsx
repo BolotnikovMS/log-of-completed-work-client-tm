@@ -5,6 +5,7 @@ import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers/checkRole.helper'
 import { useAuthStore } from '../../store/auth'
 import { Profile, ProfileControl, SignIn } from '../../views/auth'
+import { ChannelCards, ChannelControl } from '../../views/channel/components'
 import { ChannelCategoriesCards, ChannelCategoryControl } from '../../views/channelCategory/components'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
@@ -161,6 +162,21 @@ export const Router: React.FC = () => {
                   <>
                     <ChannelTypeControl />
                     <ChannelTypeCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/channels'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Каналы'
+                children={
+                  <>
+                    <ChannelControl />
+                    <ChannelCards />
                   </>
                 }
               />
