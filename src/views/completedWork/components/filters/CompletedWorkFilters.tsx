@@ -1,7 +1,7 @@
 import ru from 'date-fns/locale/ru'
 import moment from 'moment'
 import { useEffect, useMemo, useState, type FC } from 'react'
-import "react-datepicker/dist/react-datepicker.css"
+import 'react-datepicker/dist/react-datepicker.css'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, CustomDatePicker, Error, Group, Icon, LoaderLine } from '../../../../components'
