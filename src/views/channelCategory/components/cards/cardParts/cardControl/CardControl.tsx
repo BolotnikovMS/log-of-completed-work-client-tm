@@ -4,10 +4,10 @@ import { Button, Dropdown, Icon, Modal } from '../../../../../../components'
 import { ERoles } from '../../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../../helpers'
 import { useDeleteChannelCategory, useModal } from '../../../../../../hooks'
+import { IChannelCategory, IPropsCardControl } from '../../../../../../interfaces'
 import { useAuthStore } from '../../../../../../store/auth'
-import { IPropsCardControl } from './cardControl.interface'
 
-const CardControl: FC<IPropsCardControl> = memo(({ channelCategory }) => {
+const CardControl: FC<IPropsCardControl<IChannelCategory>> = memo(({ data: channelCategory }) => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
@@ -55,7 +55,7 @@ const CardControl: FC<IPropsCardControl> = memo(({ channelCategory }) => {
         onToggle={() => { toggleModal(), setIsEdited(false) }}
         content={
           <ChannelCategoryForm
-            channelCategory={channelCategory}
+            data={channelCategory}
             isEdited={isEdited}
             setIsEdited={setIsEdited}
             toggleModal={toggleModal}

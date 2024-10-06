@@ -24,7 +24,7 @@ const ChannelCategoriesCards: FC = () => {
                   </p>
                 }
                 childrenControl={
-                  <CardControl channelCategory={channelCategory} />
+                  <CardControl data={channelCategory} />
                 }
               />
             ))
