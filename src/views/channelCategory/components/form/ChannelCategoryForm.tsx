@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateChannelCategory, useUpdateChannelCategory } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
-import { IChannelCategoryFields, IPropsChannelCategoryForm } from './channelCategory.interface'
+import { IChannelCategory, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { TChannelCategoryData } from '../../../../types'
 import { validationSchema } from './channelCategory.validation'
 
-const ChannelCategoryForm: FC<IPropsChannelCategoryForm> = ({ channelCategory, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChannelCategoryFields>({
+const ChannelCategoryForm: FC<IPropsForm<IChannelCategory>> = ({ data: channelCategory, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TChannelCategoryData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const ChannelCategoryForm: FC<IPropsChannelCategoryForm> = ({ channelCategory, i
   })
   const { mutateAsync: createChannelCategory, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannelCategory()
   const { mutateAsync: updateChannelCategory, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannelCategory()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IChannelCategoryFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelCategoryData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IChannelCategoryFields> = data => handleMutation({ data, mutateFn: createChannelCategory })
-  const submitUpdate: SubmitHandler<IChannelCategoryFields> = data => {
+  const submitCreate: SubmitHandler<TChannelCategoryData> = data => handleMutation({ data, mutateFn: createChannelCategory })
+  const submitUpdate: SubmitHandler<TChannelCategoryData> = data => {
     if (!channelCategory?.id) return null
 
     handleMutation({ data, mutateFn: updateChannelCategory, id: channelCategory.id })
