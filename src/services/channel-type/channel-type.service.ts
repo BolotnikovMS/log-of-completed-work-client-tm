@@ -14,7 +14,7 @@ export const ChannelTypeService = {
     return data
   },
 
-  async create(data: TChannelTypeData ): Promise<AxiosResponse<IChannelType>> {
+  async create(data: TChannelTypeData): Promise<AxiosResponse<IChannelType>> {
     return instance.post<IChannelType>(`${url}/channel-types`, data)
   },
 
