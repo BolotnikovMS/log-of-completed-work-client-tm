@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group, Icon } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useChannelTypes, useSubstations } from '../../../../hooks'
+import { useChannelCategories, useChannelTypes, useSubstations } from '../../../../hooks'
 
 export interface IPropsChannelFilters {
   toggleModal: () => void
@@ -11,22 +11,27 @@ export interface IPropsChannelFilters {
 
 const ChannelFilter: FC<IPropsChannelFilters> = ({ toggleModal }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const substationParam = searchParams.get('substation')
-  const channelTypeParam = searchParams.get('channelType')
+  const substationParam = searchParams.get(EFilterParam.substation)
+  const channelTypeParam = searchParams.get(EFilterParam.channelType)
+  const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
   const [substation, setSubstation] = useState<string | null>()
   const [channelType, setChannelType] = useState<string | null>()
+  const [channelCategory, setChannelCategory] = useState<string | null>()
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
+  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
 
   useEffect(() => {
     setSubstation(substationParam)
     setChannelType(channelTypeParam)
+    setChannelCategory(channelCategoryParam)
 
-  }, [channelTypeParam, substationParam])
+  }, [channelCategoryParam, channelTypeParam, substationParam])
 
   const updateSearchParams = () => {
     substation && searchParams.set(EFilterParam.substation, substation)
     channelType && searchParams.set(EFilterParam.channelType, channelType)
+    channelCategory && searchParams.set(EFilterParam.channelCategory, channelCategory)
 
     setSearchParams(searchParams)
   }
@@ -35,7 +40,7 @@ const ChannelFilter: FC<IPropsChannelFilters> = ({ toggleModal }) => {
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const errorMessage = useMemo(() => (isErrorSubstations || isErrorChannelTypes) && <Error error={errorSubstations! || errorChannelTypes!} />, [errorSubstations, errorChannelTypes, isErrorSubstations, isErrorChannelTypes])
+  const errorMessage = useMemo(() => (isErrorSubstations || isErrorChannelTypes || isErrorChannelCategories) && <Error error={errorSubstations! || errorChannelTypes! || errorChannelCategories!} />, [isErrorSubstations, isErrorChannelTypes, isErrorChannelCategories, errorSubstations, errorChannelTypes, errorChannelCategories])
 
   return (
     <div className='filters'>
@@ -67,8 +72,21 @@ const ChannelFilter: FC<IPropsChannelFilters> = ({ toggleModal }) => {
             placeholder="Выберите тип канала..."
           />
         </Group>
+        <Group>
+          <AsyncSelect
+            classNamePrefix='form__custom-select'
+            options={channelCategories?.data}
+            value={channelCategory ? channelCategories?.data.find(s => s.id === +channelCategory) : null}
+            getOptionValue={option => option.id.toString()}
+            getOptionLabel={option => option.name}
+            onChange={option => setChannelCategory(option ? option.id.toString() : null)}
+            isLoading={isLoadingChannelCategories}
+            isDisabled={isErrorChannelCategories}
+            placeholder="Выберите категорию..."
+          />
+        </Group>
       </Group>
-      <Group>
+      <Group className='!flex-row justify-center'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
           <Icon id='filter-add' />
           Применить фильтры

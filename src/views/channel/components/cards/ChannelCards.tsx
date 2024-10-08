@@ -1,14 +1,16 @@
 import { type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Error, Icon, InfoMessage, Loader, LoadMore, SmallCard } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useInfiniteChannels } from '../../../../hooks/channels/useInfiniteChannels'
 import { ChannelControlMenu } from './cardParts'
 
 const ChannelCards: FC = () => {
   const [searchParams] = useSearchParams()
-  const substationParam = searchParams.get('substation')
-  const channelTypeParam = searchParams.get('channelType')
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannels({ limit: 20, substation: substationParam, channelType: channelTypeParam })
+  const substationParam = searchParams.get(EFilterParam.substation)
+  const channelTypeParam = searchParams.get(EFilterParam.channelType)
+  const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannels({ limit: 20, substation: substationParam, channelType: channelTypeParam, channelCategory: channelCategoryParam })
 
   if (isError && error) return <Error error={error} />
 
