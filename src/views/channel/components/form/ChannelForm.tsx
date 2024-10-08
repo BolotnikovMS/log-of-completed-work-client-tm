@@ -4,7 +4,7 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group, Input, SelectWrapper, Textarea } from '../../../../components'
-import { useChannelCategories, useChannelTypes, useCreateChannel, useSubstations, useUpdateChannel } from '../../../../hooks'
+import { useChannelCategories, useChannelingEquipment, useChannelTypes, useCreateChannel, useGsmOperators, useSubstations, useUpdateChannel } from '../../../../hooks'
 import { IChannel, IPropsForm, IPropsMutation } from '../../../../interfaces'
 import { TChannelData } from '../../../../types'
 import { validationSchema } from './channelForm.validation'
@@ -25,9 +25,14 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
   const { field: { value: substationValue, onChange: substationOnChange, ...restSubstationField } } = useController({ name: 'substationId', control })
   const { field: { value: channelCategoryValue, onChange: channelCategoryOnChange, ...restChannelCategoryField } } = useController({ name: 'channelCategoryId', control })
   const { field: { value: channelTypeValue, onChange: channelTypeOnChange, ...restChannelTypeField } } = useController({ name: 'channelTypeId', control })
+  const { field: { value: channelEquipmentValue, onChange: channelEquipmentOnChange, ...restChannelEquipmentField } } = useController({ name: 'channelEquipmentId', control })
+  const { field: { value: gsmValue, onChange: gsmOnChange, ...restGsmField } } = useController({ name: 'gsmId', control })
+
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
   const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
+  const { data: channelingEquipment, isError: isErrorChannelingEquipment, error: errorChannelingEquipment, isLoading: isLoadingChannelingEquipment } = useChannelingEquipment({})
+  const { data: gsmOperators, isError: isErrorGsmOperators, error: errorGsmOperators, isLoading: isLoadingGsmOperators } = useGsmOperators()
   const { mutateAsync: createChannel, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannel()
   const { mutateAsync: updateChannel, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannel()
   const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelData>) => {
@@ -95,8 +100,42 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
               isLoading={isLoadingChannelTypes}
               isDisabled={isErrorChannelTypes}
               isClearable
-              placeholder="Выберите категорию канала..."
+              placeholder="Выберите тип канала..."
               {...restChannelTypeField}
+            />
+          </SelectWrapper>
+        </Group>
+        <Group>
+          <SelectWrapper label='Выберите каналообразующее оборудование' errorMessage={errors.substationId?.message}>
+            <AsyncSelect
+              classNamePrefix='form__custom-select'
+              options={channelingEquipment?.data}
+              getOptionValue={option => option.id.toString()}
+              getOptionLabel={option => option.name}
+              value={channelEquipmentValue ? channelingEquipment?.data.find(d => d.id === channelEquipmentValue) : null}
+              onChange={option => channelEquipmentOnChange(option ? option.id : option)}
+              isLoading={isLoadingChannelingEquipment}
+              isDisabled={isErrorChannelingEquipment}
+              isClearable
+              placeholder="Выберите оборудование..."
+              {...restChannelEquipmentField}
+            />
+          </SelectWrapper>
+        </Group>
+        <Group>
+          <SelectWrapper label='Выберите GSM оператора' errorMessage={errors.substationId?.message}>
+            <AsyncSelect
+              classNamePrefix='form__custom-select'
+              options={gsmOperators}
+              getOptionValue={option => option.id.toString()}
+              getOptionLabel={option => option.name}
+              value={gsmValue ? gsmOperators?.find(d => d.id === gsmValue) : null}
+              onChange={option => gsmOnChange(option ? option.id : option)}
+              isLoading={isLoadingGsmOperators}
+              isDisabled={isErrorGsmOperators}
+              isClearable
+              placeholder="Выберите оператора..."
+              {...restGsmField}
             />
           </SelectWrapper>
         </Group>
