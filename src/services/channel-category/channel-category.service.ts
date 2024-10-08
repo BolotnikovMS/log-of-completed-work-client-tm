@@ -14,14 +14,14 @@ export const ChannelCategoryService = {
   },
 
   async create(data: TChannelCategoryData): Promise<AxiosResponse<IChannelCategory>> {
-    return instance.post<IChannelCategory>(`${url}/channel-categories`, data)
+    return await instance.post<IChannelCategory>(`${url}/channel-categories`, data)
   },
 
   async update(id: number, data: TChannelCategoryData): Promise<AxiosResponse<IChannelCategory>> {
-    return instance.patch<IChannelCategory>(`${url}/channel-categories/${id}`, data)
+    return await instance.patch<IChannelCategory>(`${url}/channel-categories/${id}`, data)
   },
 
   async delete(id: number): Promise<AxiosResponse<void>> {
-    return instance.delete<void>(`${url}/channel-categories/${id}`)
+    return await instance.delete<void>(`${url}/channel-categories/${id}`)
   }
 }
