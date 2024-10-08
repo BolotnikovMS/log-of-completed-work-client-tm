@@ -1,4 +1,4 @@
-import { IChannel, IChannelType, IDistrict, IFile, IGsmOperator, IHeadController, ITypeKp, IVoltageClass } from '.'
+import { IChannel, IDistrict, IFile, IHeadController, ITypeKp, IVoltageClass } from '.'
 
 export interface ISubstation {
   id: number
@@ -11,21 +11,11 @@ export interface ISubstation {
   voltageClassesId: number
   typeKpId: number
   headControllerId: number
-  mainChannelId: number
-  backupChannelId?: number | null
-  additionalChannelId?: number | null
-  gsmId?: number | null
-  mainChannelIp?: string | null
-  backupChannelIp?: string | null
 	numberCompletedWorks?: number
 	voltage_class?: Pick<IVoltageClass, 'id' | 'name'>
 	district?: Pick<IDistrict, 'id' | 'name' | 'shortName'>
 	type_kp?: Pick<ITypeKp, 'id' | 'name'>
 	head_controller?: Pick<IHeadController, 'id' | 'name'>
-	main_channel?: Pick<IChannelType, 'id' | 'name'>
-	backup_channel?: Pick<IChannelType, 'id' | 'name'>
-	additional_channel?: Pick<IChannelType, 'id' | 'name'>
-	gsm?: Pick<IGsmOperator, 'id' | 'name'>
 	channels?: IChannel[]
 	files_photos_ps?: IFile[]
 	files_backups?: IFile[]
