@@ -4,6 +4,7 @@ import { IChangePassword } from './change-password.interface'
 import { IChannelType } from './channel-type.interface'
 import { IChannel } from './channel.interface'
 import { IChannelCategory } from './channelCategory.interface'
+import { IChannelEquipment } from './channelEquipment.intarface'
 import { ICompletedWork } from './completed-work.interface'
 import { ICompletedWorkYear } from './dashboard.interface'
 import { IDistrict } from './district.interface'
@@ -22,4 +23,5 @@ import { IUser, IUserDataLogin } from './user'
 import { IUserRole } from './userRole.interface'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChangePassword, IChannelType, ICompletedWork, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IPropsMutation, IQueryParams, IRole, ISignInFields, IStatusAccount, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass, ICompletedWorkYear, IChannelCategory, IChannel, IPropsCardControl, IPropsForm }
+export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, IStatusAccount, ISubstation, ITypeKp, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass }
+
