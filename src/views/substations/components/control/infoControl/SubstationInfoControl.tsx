@@ -57,7 +57,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
           visible={isModalEdit}
           title='Редактирование записи'
           onToggle={() => { toggleModalEdit(), setIsEdited(false) }}
-          content={<SubstationForm substation={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalEdit} />}
+          content={<SubstationForm data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalEdit} />}
         />
         <Modal
           visible={isModalAddChannel}
