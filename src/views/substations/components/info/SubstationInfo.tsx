@@ -32,18 +32,6 @@ const SubstationInfo: FC = () => {
             <p className='substation-info__text'>Всего выполнено работ: </p>
             <span className="text-content">{substation?.numberCompletedWorks}</span>
             <YtmInfo substation={substation} />
-            <p className='substation-info__text'>Основной канал: </p>
-            <span className='text-content'>{substation?.main_channel?.name}</span>
-            <p className='substation-info__text'>Резервный канал: </p>
-            <span className='text-content'>{substation?.backup_channel ? substation?.backup_channel.name : '-'}</span>
-            <p className='substation-info__text'>Дополнительный канал: </p>
-            <span className='text-content'>{substation?.additional_channel ? substation?.additional_channel?.name : '-'}</span>
-            <p className='substation-info__text'>GSM оператор: </p>
-            <span className='text-content'>{substation?.gsm?.name}</span>
-            <p className='substation-info__text'>IP основного канала: </p>
-            <span className='text-content'>{substation?.mainChannelIp ? substation?.mainChannelIp : '-'}</span>
-            <p className='substation-info__text'>IP резервного канала: </p>
-            <span className='text-content'>{substation?.backupChannelIp ? substation?.backupChannelIp : '-'}</span>
           </div>
           <ChannelsInfo substation={substation} />
         </div>
