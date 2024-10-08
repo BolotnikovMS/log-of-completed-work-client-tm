@@ -5,7 +5,7 @@ import { ChannelControlMenu } from '../../../../../channel/components/cards/card
 import { IPropsPartsInfo } from '../partsInfo.interface'
 
 const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
-  if (!substation) return <p className='substation-info__section-text text-red-500'>Нету данных для отображения!</p>
+  if (!substation?.channels?.length) return <p className='substation-info__section-text text-red-500'>Нету данных по каналам для отображения!</p>
 
   return (
     <div className="flex flex-col gap-3">
