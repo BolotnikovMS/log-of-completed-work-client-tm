@@ -4,13 +4,13 @@ import { errorHandler } from '../../helpers'
 import { IQueryParams } from '../../interfaces'
 import { ChannelService } from '../../services/channel/channel.service'
 
-export const useDownloadExcelChannel = ({ page, limit, substation, channelType }: IQueryParams) => {
+export const useDownloadExcelChannel = ({ page, limit, substation, channelType, channelCategory }: IQueryParams) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const fetchData = async () => {
     setIsLoading(true)
 
     try {
-      await ChannelService.downloadExcel({ page, limit, substation, channelType })
+      await ChannelService.downloadExcel({ page, limit, substation, channelType, channelCategory })
     } catch (error) {
       const err = error as AxiosError
 

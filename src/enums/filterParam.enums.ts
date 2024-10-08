@@ -3,5 +3,6 @@ export enum EFilterParam {
   typeKp = 'typeKp',
   headController = 'headController',
   substation = 'substation',
-  channelType = 'channelType'
+  channelType = 'channelType',
+  channelCategory = 'channelCategory'
 }
