@@ -17,6 +17,7 @@ import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
+import { ChannelEquipmentCards, ChannelEquipmentControl } from '../../views/channelEquipment/components'
 
 export const Router: React.FC = () => {
   const { authUser } = useAuthStore()
@@ -162,6 +163,21 @@ export const Router: React.FC = () => {
                   <>
                     <ChannelTypeControl />
                     <ChannelTypeCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/channeling-equipments'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Каналообразующее оборудование'
+                children={
+                  <>
+                    <ChannelEquipmentControl />
+                    <ChannelEquipmentCards />
                   </>
                 }
               />
