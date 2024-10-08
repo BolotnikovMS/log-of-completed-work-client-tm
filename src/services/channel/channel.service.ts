@@ -9,9 +9,9 @@ import { TChannelData } from '../../types'
 import { TRespChannels } from '../../types/channel.types'
 
 export const ChannelService = {
-  async getChannels({ limit, page, substation, channelType }: IQueryParams): Promise<TRespChannels> {
+  async getChannels({ limit, page, substation, channelType, channelCategory }: IQueryParams): Promise<TRespChannels> {
     const { data } = await instance.get<TRespChannels>(`${url}/channels`, {
-      params: { page, limit, substation, channelType }
+      params: { page, limit, substation, channelType, channelCategory }
     })
 
     return data
@@ -29,9 +29,9 @@ export const ChannelService = {
     return instance.delete<void>(`${url}/channels/${id}`)
   },
 
-  async downloadExcel({ page, limit, substation, channelType }: IQueryParams): Promise<void> {
+  async downloadExcel({ page, limit, substation, channelType, channelCategory }: IQueryParams): Promise<void> {
     await instance.get(`${url}/channels/download-excel`, {
-      params: { page, limit, substation, channelType },
+      params: { page, limit, substation, channelType, channelCategory },
       responseType: 'blob'
     }).then(resp => {
       fileDownload(resp.data, 'channel-repport.xlsx')
