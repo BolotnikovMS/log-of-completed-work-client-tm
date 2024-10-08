@@ -22,19 +22,29 @@ export const menuItemData = [
     url: '/head-controllers',
   },
   {
-    title: 'Категории каналов',
-    url: '/channel-categories',
-  },
-  {
-    title: 'Типы каналов',
-    url: '/channel-types',
-  },
-  {
     title: 'Каналы',
-    url: '/channels',
-  },
-  {
-    title: 'GSM операторы',
-    url: '/gsm-operators',
-  },
+    url: '#',
+    submenu: [
+      {
+        title: 'Категории каналов',
+        url: '/channel-categories',
+      },
+      {
+        title: 'Типы каналов',
+        url: '/channel-types',
+      },
+      {
+        title: 'Каналообразующее оборудование',
+        url: '/channeling-equipments',
+      },
+      {
+        title: 'GSM операторы',
+        url: '/gsm-operators',
+      },
+      {
+        title: 'Каналы',
+        url: '/channels',
+      },
+    ]
+  }
 ]

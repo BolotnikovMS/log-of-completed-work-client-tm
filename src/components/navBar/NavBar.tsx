@@ -1,4 +1,4 @@
-import { type FC } from 'react'
+import React, { type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Icon } from '..'
 import { menuItemData } from '../../constants'
@@ -40,10 +40,27 @@ export const NavBar: FC = () => {
                 Справочники
               </summary>
               <ul className='flex flex-col gap-1'>
-                {menuItemData.map((menu, i) => (
-                  <li key={i}>
-                    <Link to={menu.url}>{menu.title}</Link>
-                  </li>
+                {menuItemData.map(menu => (
+                  <React.Fragment key={menu.url}>
+                    {menu?.submenu ? (
+                      <li>
+                        <details>
+                          <summary>{menu.title}</summary>
+                          <ul>
+                            {menu?.submenu.map(subMenu => (
+                              <li key={subMenu.url}>
+                                <Link to={subMenu.url}>{subMenu.title}</Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      </li>
+                    ) : (
+                      <li>
+                        <Link to={menu.url}>{menu.title}</Link>
+                      </li>
+                    )}
+                  </React.Fragment>
                 ))}
               </ul>
             </details>
