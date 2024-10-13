@@ -8,9 +8,9 @@ import { IQueryParams, ISubstation } from '../../interfaces'
 import { TRespSubstations, TSubstationData } from '../../types'
 
 export const SubstationService = {
-  async getSubstations({ limit, page, search, sort, order, typeKp, headController, mainChannel, backupChannel, district }: IQueryParams): Promise<TRespSubstations> {
+  async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType }: IQueryParams): Promise<TRespSubstations> {
     const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
-      params: { page, limit, search, sort, order, typeKp, headController, mainChannel, backupChannel, district }
+      params: { page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType }
     })
 
     return data
@@ -34,9 +34,9 @@ export const SubstationService = {
     return instance.delete(`${url}/substations/${id}`)
   },
 
-  async downloadExcel({ page, limit, typeKp, headController, mainChannel, backupChannel, district }: IQueryParams) {
+  async downloadExcel({ page, limit, typeKp, headController, district, channelCategory, channelType }: IQueryParams) {
     await instance.get(`${url}/substations/download-substations-excel`, {
-      params: { page, limit, typeKp, headController, mainChannel, backupChannel, district },
+      params: { page, limit, typeKp, headController, district, channelCategory, channelType },
       responseType: 'blob'
     }).then(resp => {
       fileDownload(resp.data, 'report.xlsx')
