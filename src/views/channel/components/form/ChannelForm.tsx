@@ -17,6 +17,8 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
       substationId: channel?.substationId || (id ? +id : undefined),
       channelCategoryId: channel?.channelCategoryId,
       channelTypeId: channel?.channelTypeId,
+      channelEquipmentId: channel?.channelEquipmentId,
+      gsmId: channel?.gsmId,
       ipAddress: channel?.ipAddress,
       note: channel?.note
     },
