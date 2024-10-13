@@ -8,7 +8,7 @@ import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
-import { EFilterSubstation } from '../filters/substationFilter.enum'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 
 const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
@@ -18,12 +18,12 @@ const SubstationsCards: FC = () => {
   const searchParam = searchParams.get('search')
   const sortParam = searchParams.get('sort')
   const orderParam = searchParams.get('order')
-  const districtParam = searchParams.get(EFilterSubstation.district)
-  const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
-  const headControllerParam = searchParams.get(EFilterSubstation.headController)
-  const mainChannelParam = searchParams.get(EFilterSubstation.mainChannel)
-  const buckupChannelParam = searchParams.get(EFilterSubstation.backupChannel)
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, mainChannel: mainChannelParam, backupChannel: buckupChannelParam, district: districtParam })
+  const districtParam = searchParams.get(EFilterParam.district)
+  const typeKpParam = searchParams.get(EFilterParam.typeKp)
+  const headControllerParam = searchParams.get(EFilterParam.headController)
+  const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
+  const channelTypeParam = searchParams.get(EFilterParam.channelType)
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)
