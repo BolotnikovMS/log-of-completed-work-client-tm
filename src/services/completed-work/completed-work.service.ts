@@ -33,7 +33,7 @@ export const CompletedWorkService = {
       params: { page, limit, substation, executor, dateStart, dateEnd },
       responseType: 'blob'
     }).then(resp => {
-      fileDownload(resp.data, 'repport.xlsx')
+      fileDownload(resp.data, 'completed-works-report.xlsx')
     }).catch(e => {
       toast.error(errorHandler(e))
     })

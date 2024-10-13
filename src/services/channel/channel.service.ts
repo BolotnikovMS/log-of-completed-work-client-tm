@@ -34,7 +34,7 @@ export const ChannelService = {
       params: { page, limit, substation, channelType, channelCategory },
       responseType: 'blob'
     }).then(resp => {
-      fileDownload(resp.data, 'channel-repport.xlsx')
+      fileDownload(resp.data, 'channels-report.xlsx')
     }).catch(e => {
       toast.error(errorHandler(e))
     })

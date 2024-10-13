@@ -39,7 +39,7 @@ export const SubstationService = {
       params: { page, limit, typeKp, headController, district, channelCategory, channelType },
       responseType: 'blob'
     }).then(resp => {
-      fileDownload(resp.data, 'report.xlsx')
+      fileDownload(resp.data, 'substations-report.xlsx')
     }).catch(e => {
       toast.error(errorHandler(e))
     })
