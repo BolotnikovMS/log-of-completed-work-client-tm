@@ -47,10 +47,6 @@ body {
 }
 
 .cards-work {
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
-  justify-items: center;
-  gap: 15px; */
   @apply flex flex-col gap-3;
 
   & + * {
@@ -113,6 +109,7 @@ body {
 
 .icon {
   @apply w-5 h-5;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.3));
 
   &__setting {
     @apply hover:animate-spin;
