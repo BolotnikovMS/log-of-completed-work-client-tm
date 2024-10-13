@@ -1,42 +1,43 @@
 import { useEffect, useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group, Icon, LoaderLine } from '../../../../components'
-import { useChannelTypes, useDistricts, useDownloadExcelSubstations, useHeadControllers, useTypesKp } from '../../../../hooks'
-import { EFilterSubstation } from './substationFilter.enum'
+import { Button, Error, Group, Icon } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
+import { useChannelCategories, useChannelTypes, useDistricts, useHeadControllers, useTypesKp } from '../../../../hooks'
 import { IPropsSubstationFlterParameters } from './substationFlterParameters.interface'
 
 const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggleModal }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const districtParam = searchParams.get(EFilterSubstation.district)
-  const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
-  const headControllerParam = searchParams.get(EFilterSubstation.headController)
-  const mainChannelParam = searchParams.get(EFilterSubstation.mainChannel)
-  const bacupChannelParam = searchParams.get(EFilterSubstation.backupChannel)
+  const districtParam = searchParams.get(EFilterParam.district)
+  const typeKpParam = searchParams.get(EFilterParam.typeKp)
+  const headControllerParam = searchParams.get(EFilterParam.headController)
+  const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
+  const channelTypeParam = searchParams.get(EFilterParam.channelType)
   const [district, setDistrict] = useState<string | null>()
   const [typeKp, setTypeKp] = useState<string | null>()
   const [headController, setHeadController] = useState<string | null>()
-  const [mainChannel, setMainChannel] = useState<string | null>()
-  const [backupChannel, setBuckupChannel] = useState<string | null>()
+  const [channelCategory, setChannelCategory] = useState<string | null>()
+  const [channelType, setChannelType] = useState<string | null>()
   const { districts, isError: isErrorDistricts, error: errorDistricts, isLoading: isLoadingDistricts } = useDistricts({})
   const { typesKp, isError: isErrorTypeKp, error: errorTypeKp, isLoading: isLoadingTypeKp } = useTypesKp({})
   const { headControllers, isError: isErrorHeadController, error: errorHeadController, isLoading: isLoadingHeadController } = useHeadControllers()
   const { data: typesChannel, isError: isErrorTypesChannel, error: errorTypesChannel, isLoading: isLoadingTypesChannel } = useChannelTypes()
+  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
 
   useEffect(() => {
     setDistrict(districtParam)
     setTypeKp(typeKpParam)
     setHeadController(headControllerParam)
-    setMainChannel(mainChannelParam)
-    setBuckupChannel(bacupChannelParam)
-  }, [typeKpParam, headControllerParam, mainChannelParam, bacupChannelParam, districtParam])
+    setChannelCategory(channelCategoryParam)
+    setChannelType(channelTypeParam)
+  }, [typeKpParam, headControllerParam, districtParam, channelCategoryParam, channelTypeParam])
 
   const updateSearchParams = () => {
-    district && searchParams.set(EFilterSubstation.district, district)
-    typeKp && searchParams.set(EFilterSubstation.typeKp, typeKp)
-    headController && searchParams.set(EFilterSubstation.headController, headController)
-    mainChannel && searchParams.set(EFilterSubstation.mainChannel, mainChannel)
-    backupChannel && searchParams.set(EFilterSubstation.backupChannel, backupChannel)
+    district && searchParams.set(EFilterParam.district, district)
+    typeKp && searchParams.set(EFilterParam.typeKp, typeKp)
+    headController && searchParams.set(EFilterParam.headController, headController)
+    channelCategory && searchParams.set(EFilterParam.channelCategory, channelCategory)
+    channelType && searchParams.set(EFilterParam.channelType, channelType)
     setSearchParams(searchParams)
   }
   const applyFilters = () => {
@@ -44,8 +45,7 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp, headController, mainChannel, backupChannel, district })
-  const errorMessage = useMemo(() => (isErrorTypeKp || isErrorHeadController || isErrorTypesChannel || isErrorDistricts) && <Error error={errorTypeKp! || errorHeadController! || errorTypesChannel! || errorDistricts!} />, [errorTypeKp, errorHeadController, errorTypesChannel, errorDistricts, isErrorHeadController, isErrorTypeKp, isErrorTypesChannel, isErrorDistricts])
+  const errorMessage = useMemo(() => (isErrorTypeKp || isErrorHeadController || isErrorTypesChannel || isErrorDistricts || isErrorChannelCategories) && <Error error={errorTypeKp! || errorHeadController! || errorTypesChannel! || errorDistricts! || errorChannelCategories!} />, [isErrorTypeKp, isErrorHeadController, isErrorTypesChannel, isErrorDistricts, isErrorChannelCategories, errorTypeKp, errorHeadController, errorTypesChannel, errorDistricts, errorChannelCategories])
 
   return (
     <div className='filters !h-[540px]'>
@@ -93,31 +93,31 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
         <Group>
           <AsyncSelect
             classNamePrefix='form__custom-select'
-            options={typesChannel?.data}
-            value={mainChannel ? typesChannel?.data.find(c => c.id === +mainChannel) : null}
+            options={channelCategories?.data}
+            value={channelCategory ? channelCategories?.data.find(c => c.id === +channelCategory) : null}
             getOptionValue={option => option.id.toString()}
             getOptionLabel={option => option.name}
-            onChange={option => setMainChannel(option ? option.id.toString() : null)}
-            isLoading={isLoadingTypesChannel}
-            isDisabled={isErrorTypesChannel}
-            placeholder="Выберите основной канал..."
+            onChange={option => setChannelCategory(option ? option.id.toString() : null)}
+            isLoading={isLoadingChannelCategories}
+            isDisabled={isErrorChannelCategories}
+            placeholder="Выберите категорию канал..."
           />
         </Group>
         <Group>
           <AsyncSelect
             classNamePrefix='form__custom-select'
             options={typesChannel?.data}
-            value={backupChannel ? typesChannel?.data.find(c => c.id === +backupChannel) : null}
+            value={channelType ? typesChannel?.data.find(c => c.id === +channelType) : null}
             getOptionValue={option => option.id.toString()}
             getOptionLabel={option => option.name}
-            onChange={option => setBuckupChannel(option ? option.id.toString() : null)}
+            onChange={option => setChannelType(option ? option.id.toString() : null)}
             isLoading={isLoadingTypesChannel}
             isDisabled={isErrorTypesChannel}
-            placeholder="Выберите резервный канал..."
+            placeholder="Выберите тип канал..."
           />
         </Group>
       </Group>
-      <div className='filters__btns'>
+      <Group className='!flex-row justify-center'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
           <Icon id='filter-add' />
           Применить фильтры
@@ -126,11 +126,7 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
           <Icon id='filter-remove' />
           Очистить фильтры
         </Button>
-        <Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
-          <Icon id='excel' />
-          {isLoadingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
-        </Button>
-      </div>
+      </Group>
     </div >
   )
 }

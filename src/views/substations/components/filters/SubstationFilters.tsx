@@ -1,10 +1,10 @@
 import { type FC } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { SubstationFlterParameters } from '..'
-import { Button, Group, Icon, Modal, Search, Sort } from '../../../../components'
-import { useModal } from '../../../../hooks'
+import { Button, Dropdown, Group, Icon, LoaderLine, Modal, Search, Sort } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
+import { useDownloadExcelSubstations, useModal } from '../../../../hooks'
 import { TOrderSort } from '../../../../types/order.types'
-import { EFilterSubstation } from './substationFilter.enum'
 
 const SubstationFilters: FC = () => {
   const [searchParams] = useSearchParams()
@@ -16,11 +16,12 @@ const SubstationFilters: FC = () => {
     { value: 'name', label: 'Я-А', icon: <Icon id='sort-desc' />, order: 'desc' as TOrderSort },
     { value: 'rdu', label: 'РДУ', icon: <Icon id='alert' />, order: 'desc' as TOrderSort },
   ]
-  const districtParam = searchParams.get(EFilterSubstation.district)
-  const typeKpParam = searchParams.get(EFilterSubstation.typeKp)
-  const headControllerParam = searchParams.get(EFilterSubstation.headController)
-  const mainChannelParam = searchParams.get(EFilterSubstation.mainChannel)
-  const bacupChannelParam = searchParams.get(EFilterSubstation.backupChannel)
+  const districtParam = searchParams.get(EFilterParam.district)
+  const typeKpParam = searchParams.get(EFilterParam.typeKp)
+  const headControllerParam = searchParams.get(EFilterParam.headController)
+  const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
+  const channelTypeParam = searchParams.get(EFilterParam.channelType)
+  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
   return (
@@ -29,13 +30,30 @@ const SubstationFilters: FC = () => {
         <Group className='!flex-row'>
           <Sort orderSort={orderSort as TOrderSort} sort={sort} sortOptions={sortOptions} />
           {location.pathname === '/substations' && (
-            <Button onClick={() => toggleModalFilters()}>
-              {districtParam || typeKpParam || headControllerParam || mainChannelParam || bacupChannelParam ?
-                <Icon id='filter-remove' /> :
-                <Icon id='filter' />
-              }
-              Фильтры
-            </Button>
+            <>
+              <Dropdown
+                classMenu='dropdown-bottom'
+                children={
+                  <>
+                    <Icon id='file-export' />
+                    Экспорт
+                  </>
+                }
+                menuItems={[
+                  <Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
+                    <Icon id='excel' />
+                    {isLoadingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
+                  </Button>
+                ]}
+              />
+              <Button onClick={() => toggleModalFilters()}>
+                {districtParam || typeKpParam || headControllerParam || channelCategoryParam || channelTypeParam ?
+                  <Icon id='filter-remove' /> :
+                  <Icon id='filter' />
+                }
+                Фильтры
+              </Button>
+            </>
           )}
         </Group>
         <div className="search-wrapper">
