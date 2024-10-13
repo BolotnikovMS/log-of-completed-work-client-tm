@@ -26,11 +26,11 @@ const SubstationInfo: FC = () => {
           <div className="substation-info__equipment-tm">
             <p className='substation-info__section-text'>Общая информация</p>
             <p className='substation-info__text'>РЭС/ГП: </p>
-            <span className='text-content'>{substation?.district?.name}</span>
+            <p className='text-content'>{substation?.district?.name}</p>
             <p className='substation-info__text'>РДУ: </p>
-            <span className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</span>
+            <p className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</p>
             <p className='substation-info__text'>Всего выполнено работ: </p>
-            <span className="text-content">{substation?.numberCompletedWorks}</span>
+            <p className="text-content">{substation?.numberCompletedWorks}</p>
             <YtmInfo substation={substation} />
           </div>
           <ChannelsInfo substation={substation} />

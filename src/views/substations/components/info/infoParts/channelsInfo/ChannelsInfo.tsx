@@ -13,32 +13,32 @@ const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
       {substation.channels?.map(channel => (
         <div key={channel.id} className='substation-info__channel'>
           <p className='substation-info__text'>{channel.channel_category?.name}: </p>
-          <span className='text-content flex items-center gap-2'>
+          <p className='text-content flex items-center gap-2'>
             {channel.channel_type?.name}
             <ChannelControlMenu channel={channel} />
-          </span>
+          </p>
           {channel.channel_equipment && (
             <>
               <p className='substation-info__text'>Оборудование: </p>
-              <span className='text-content'>{channel.channel_equipment.name}</span>
+              <p className='text-content'>{channel.channel_equipment.name}</p>
             </>
           )}
           {channel.gsm_operator && (
             <>
               <p className='substation-info__text'>GSM оператор: </p>
-              <span className='text-content'>{channel.gsm_operator.name}</span>
+              <p className='text-content'>{channel.gsm_operator.name}</p>
             </>
           )}
           {channel.ipAddress && (
             <>
               <p className='substation-info__text'>IP адрес канала: </p>
-              <span className='text-content'>{channel.ipAddress}</span>
+              <p className='text-content'>{channel.ipAddress}</p>
             </>
           )}
           {channel.note && (
             <>
               <p className='substation-info__text'>Примечание: </p>
-              <span className='text-content'>{channel.note}</span>
+              <p className='text-content text-pretty'>{channel.note}</p>
             </>
           )}
         </div>

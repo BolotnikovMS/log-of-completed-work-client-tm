@@ -43,13 +43,13 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
         <div className='work-info__titles'>
           <h2 className="text-title font-bold">Описание выполненной работы</h2>
         </div>
-        <p className='text-content'>{completedWork.description}</p>
+        <p className='text-content text-pretty'>{completedWork.description}</p>
         {completedWork.note && (
           <>
             <div className='work-info__titles mt-5'>
               <h2 className="text-title font-bold">Примечание</h2>
             </div>
-            <p className='text-content'>{completedWork.note}</p>
+            <p className='text-content text-pretty'>{completedWork.note}</p>
           </>
         )}
       </div>
