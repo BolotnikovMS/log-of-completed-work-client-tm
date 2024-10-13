@@ -14,7 +14,7 @@ const ChannelControl: FC = () => {
   const channelTypeParam = searchParams.get(EFilterParam.channelType)
   const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
   const { authUser } = useAuthStore()
-  const isAdmin = checkRole(authUser, [ERoles.Admin])
+  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])  
   const { isModal, toggleModal } = useModal()
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
   const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelChannel({ page: 1, limit: -1, substation: substationParam, channelType: channelTypeParam, channelCategory: channelCategoryParam })
@@ -22,7 +22,7 @@ const ChannelControl: FC = () => {
   return (
     <div className="work-log__control">
       <div className="control__wrapper">
-        {isAdmin && (
+        {isAdminOrModerator && (
           <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
             <Icon id='add' />
             Добавить

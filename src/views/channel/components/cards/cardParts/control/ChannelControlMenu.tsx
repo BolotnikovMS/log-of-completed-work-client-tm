@@ -13,7 +13,6 @@ interface IPropsChannelControlMenu {
 
 const ChannelControlMenu: FC<IPropsChannelControlMenu> = memo(({ channel }) => {
   const { authUser } = useAuthStore()
-  const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
@@ -38,16 +37,16 @@ const ChannelControlMenu: FC<IPropsChannelControlMenu> = memo(({ channel }) => {
             children={<Icon id='setting' />}
             menuItems={[
               isAdminOrModerator && (
-                <Button className='!justify-start' onClick={handleEdit}>
-                  <Icon id='edit' />
-                  Редактировать
-                </Button>
-              ),
-              isAdmin && (
-                <Button className='btn-error !justify-start' onClick={() => handleDelete(channel.id)}>
-                  <Icon id='delete' />
-                  Удалить
-                </Button>
+                <>
+                  <Button className='!justify-start' onClick={handleEdit}>
+                    <Icon id='edit' />
+                    Редактировать
+                  </Button>
+                  <Button className='btn-error !justify-start' onClick={() => handleDelete(channel.id)}>
+                    <Icon id='delete' />
+                    Удалить
+                  </Button>
+                </>
               )
             ]}
           />
