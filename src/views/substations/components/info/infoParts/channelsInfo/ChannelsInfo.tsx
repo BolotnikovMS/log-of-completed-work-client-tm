@@ -17,6 +17,18 @@ const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
             {channel.channel_type?.name}
             <ChannelControlMenu channel={channel} />
           </span>
+          {channel.channel_equipment && (
+            <>
+              <p className='substation-info__text'>Оборудование: </p>
+              <span className='text-content'>{channel.channel_equipment.name}</span>
+            </>
+          )}
+          {channel.gsm_operator && (
+            <>
+              <p className='substation-info__text'>GSM оператор: </p>
+              <span className='text-content'>{channel.gsm_operator.name}</span>
+            </>
+          )}
           {channel.ipAddress && (
             <>
               <p className='substation-info__text'>IP адрес канала: </p>
