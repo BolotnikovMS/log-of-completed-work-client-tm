@@ -46,7 +46,7 @@ export const NavBar: FC = () => {
                       <li>
                         <details>
                           <summary>{menu.title}</summary>
-                          <ul>
+                          <ul className='flex flex-col gap-1'>
                             {menu?.submenu.map(subMenu => (
                               <li key={subMenu.url}>
                                 <Link to={subMenu.url}>{subMenu.title}</Link>
