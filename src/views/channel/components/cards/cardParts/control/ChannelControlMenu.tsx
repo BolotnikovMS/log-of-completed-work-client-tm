@@ -31,23 +31,19 @@ const ChannelControlMenu: FC<IPropsChannelControlMenu> = memo(({ channel }) => {
 
   return (
     <>
-      {checkRole(authUser, [ERoles.Admin, ERoles.Moderator]) && (
+      {isAdminOrModerator && (
         <>
           <Dropdown
             children={<Icon id='setting' />}
             menuItems={[
-              isAdminOrModerator && (
-                <>
-                  <Button className='!justify-start' onClick={handleEdit}>
-                    <Icon id='edit' />
-                    Редактировать
-                  </Button>
-                  <Button className='btn-error !justify-start' onClick={() => handleDelete(channel.id)}>
-                    <Icon id='delete' />
-                    Удалить
-                  </Button>
-                </>
-              )
+              <Button className='!justify-start' onClick={handleEdit}>
+                <Icon id='edit' />
+                Редактировать
+              </Button>,
+              <Button className='btn-error !justify-start' onClick={() => handleDelete(channel.id)}>
+                <Icon id='delete' />
+                Удалить
+              </Button>
             ]}
           />
           <Modal
