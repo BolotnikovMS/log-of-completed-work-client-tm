@@ -7,6 +7,7 @@ import { useAuthStore } from '../../store/auth'
 import { Profile, ProfileControl, SignIn } from '../../views/auth'
 import { ChannelCards, ChannelControl } from '../../views/channel/components'
 import { ChannelCategoriesCards, ChannelCategoryControl } from '../../views/channelCategory/components'
+import { ChannelEquipmentCards, ChannelEquipmentControl } from '../../views/channelEquipment/components'
 import { ChannelTypeCards, ChannelTypeControl } from '../../views/channelType/components'
 import { CompletedWorkControl, CompletedWorksCards } from '../../views/completedWork/components'
 import Dashboard from '../../views/dashboard/Dashboard'
@@ -17,7 +18,7 @@ import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
-import { ChannelEquipmentCards, ChannelEquipmentControl } from '../../views/channelEquipment/components'
+import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 
 export const Router: React.FC = () => {
   const { authUser } = useAuthStore()
@@ -208,6 +209,21 @@ export const Router: React.FC = () => {
                   <>
                     <GsmOperatorControl />
                     <GsmOperatorsCards />
+                  </>
+                }
+              />
+            </ProtectedRoute>
+          }
+        />
+        <Route path='/types-work'
+          element={
+            <ProtectedRoute isAllowed={!!authUser}>
+              <Page
+                title='Категории работ'
+                children={
+                  <>
+                    <TypeWorkControl />
+                    <TypesWorkCards />
                   </>
                 }
               />

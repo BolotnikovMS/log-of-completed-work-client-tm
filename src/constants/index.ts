@@ -46,5 +46,9 @@ export const menuItemData = [
         url: '/channels',
       },
     ]
-  }
+  },
+  {
+    title: 'Категории работ',
+    url: '/types-work',
+  },
 ]
