@@ -23,6 +23,13 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
           </p>
         </Group>
         <Group>
+          <p className='work-info__text'>Категория работ:
+            <span className='text-content'>
+              {completedWork.type_work.name}
+            </span>
+          </p>
+        </Group>
+        <Group>
           <p className='work-info__text'>
             Производитель работ:
             <span className='text-content'>
