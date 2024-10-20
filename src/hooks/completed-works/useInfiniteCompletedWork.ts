@@ -2,7 +2,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'
 import { IQueryParams } from '../../interfaces'
 import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
 
-export const useInfiniteCompletedWork = ({ limit, substation, executor, dateStart, dateEnd }: IQueryParams) => {
+export const useInfiniteCompletedWork = ({ limit, substation, executor, dateStart, dateEnd, typeWork }: IQueryParams) => {
   const {
     data,
     error,
@@ -12,8 +12,8 @@ export const useInfiniteCompletedWork = ({ limit, substation, executor, dateStar
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['completedWork', 'infinity', substation, executor, dateStart, dateEnd],
-    queryFn: ({ pageParam = 1 }) => CompletedWorkService.getAll({ page: pageParam, limit, substation, executor, dateStart, dateEnd }),
+    queryKey: ['completedWork', 'infinity', substation, executor, dateStart, dateEnd, typeWork],
+    queryFn: ({ pageParam = 1 }) => CompletedWorkService.getAll({ page: pageParam, limit, substation, executor, dateStart, dateEnd, typeWork }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1
