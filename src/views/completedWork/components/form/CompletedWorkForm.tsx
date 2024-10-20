@@ -7,20 +7,21 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
 import { Button, CustomDatePicker, Error, Group, Icon, Loader, SelectWrapper, Textarea } from '../../../../components'
-import { useCreateCompletedWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
+import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
-import { IPropsMutation } from '../../../../interfaces'
-import { ICompletedWorkFields, IPropsCompletedWorkForm } from './completedForm.interface'
+import { ICompletedWork, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { TCompletedWorkData } from '../../../../types'
 import { validationSchema } from './completedWork.validation'
 
-const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdited, setIsEdited, toggleModal }) => {
+const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork, isEdited, setIsEdited, toggleModal }) => {
   const [searchParams] = useSearchParams()
   const substationId = searchParams.get('substation')
-  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<ICompletedWorkFields>({
+  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TCompletedWorkData>({
     mode: 'onBlur',
     defaultValues: {
-      substationId: completedWork?.substation?.id || (substationId ? +substationId : undefined),
-      workProducerId: completedWork?.work_producer?.id,
+      substationId: completedWork?.substationId || (substationId ? +substationId : undefined),
+      workProducerId: completedWork?.workProducerId,
+      typeWorkId: completedWork?.typeWorkId,
       description: completedWork?.description,
       note: completedWork?.note,
       dateCompletion: completedWork ? new Date(completedWork?.dateCompletion) : undefined
@@ -30,11 +31,13 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
   const { field: { value: substationValue, onChange: substationOnChange, ...restSubstationField } } = useController({ name: 'substationId', control })
   const { field: { value: userValue, onChange: userOnChange, ...restUserField } } = useController({ name: 'workProducerId', control })
   const { field: { value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion } } = useController({ name: 'dateCompletion', control })
+  const { field: { value: dateTypeWorkValue, onChange: dateTypeWorkOnChange, ...restTypeWorkField } } = useController({ name: 'typeWorkId', control })
   const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
+  const { data: typesWork, isError: isErrorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork()
   const { mutateAsync: createCompletedWork, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateCompletedWork()
   const { mutateAsync: updateCompletedWork, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateCompletedWork()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<ICompletedWorkFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TCompletedWorkData>) => {
     const transformDate = { ...data, dateCompletion: moment(data.dateCompletion).format('YYYY-MM-DD') }
 
     await mutateFn(id ? { id, data: transformDate } : { ...data, dateCompletion: moment(data.dateCompletion).format('YYYY-MM-DD') })
@@ -43,8 +46,8 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<ICompletedWorkFields> = data => handleMutation({ data, mutateFn: createCompletedWork })
-  const submitUpdate: SubmitHandler<ICompletedWorkFields> = data => {
+  const submitCreate: SubmitHandler<TCompletedWorkData> = data => handleMutation({ data, mutateFn: createCompletedWork })
+  const submitUpdate: SubmitHandler<TCompletedWorkData> = data => {
     if (!completedWork?.id) return null
 
     handleMutation({ data, mutateFn: updateCompletedWork, id: completedWork.id })
@@ -88,6 +91,23 @@ const CompletedWorkForm: FC<IPropsCompletedWorkForm> = ({ completedWork, isEdite
               isClearable
               placeholder="Выберите исполнителя..."
               {...restUserField}
+            />
+          </SelectWrapper>
+        </Group>
+        <Group>
+          <SelectWrapper label='Категория работ' errorMessage={errors.typeWorkId?.message} mandatory>
+            <AsyncSelect
+              classNamePrefix='form__custom-select'
+              options={typesWork?.data}
+              getOptionValue={option => option.id.toString()}
+              getOptionLabel={option => option.name}
+              value={userValue || completedWork ? typesWork?.data?.find(d => d.id === dateTypeWorkValue) : null}
+              onChange={option => dateTypeWorkOnChange(option ? option.id : option)}
+              isLoading={isLoadingTypesWork}
+              isDisabled={isErrorTypesWork}
+              isClearable
+              placeholder="Выберите категорию..."
+              {...restTypeWorkField}
             />
           </SelectWrapper>
         </Group>
