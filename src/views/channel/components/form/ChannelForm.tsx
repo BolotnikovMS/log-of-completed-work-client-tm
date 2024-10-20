@@ -111,7 +111,7 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
           <SelectWrapper label='Выберите каналообразующее оборудование' errorMessage={errors.substationId?.message}>
             <AsyncSelect
               classNamePrefix='form__custom-select'
-              options={channelingEquipment?.data}
+              options={channelTypeValue ? channelingEquipment?.data.filter(item => channelTypeValue === item.channelTypeId) : channelingEquipment?.data}
               getOptionValue={option => option.id.toString()}
               getOptionLabel={option => option.name}
               value={channelEquipmentValue ? channelingEquipment?.data.find(d => d.id === channelEquipmentValue) : null}
@@ -147,6 +147,7 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
             name='ipAddress'
             register={register}
             errorMessage={errors.ipAddress?.message}
+            autoComplete='off'
             placeholder='Введите ip адрес...'
           />
         </Group>
