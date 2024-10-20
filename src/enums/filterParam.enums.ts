@@ -4,5 +4,9 @@ export enum EFilterParam {
   headController = 'headController',
   substation = 'substation',
   channelType = 'channelType',
-  channelCategory = 'channelCategory'
+  channelCategory = 'channelCategory',
+  typeWork = 'typeWork',
+  executor = 'executor',
+  dateStart = 'dateStart',
+  dateEnd = 'dateEnd',
 }
