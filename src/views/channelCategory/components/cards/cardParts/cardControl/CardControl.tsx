@@ -28,7 +28,7 @@ const CardControl: FC<IPropsCardControl<IChannelCategory>> = memo(({ data: chann
 
   return (
     <>
-      {checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, channelCategory) && (
+      {isAdminOrModerator && (
         <Dropdown
           children={
             <Icon id='setting' className='icon__setting' />
