@@ -21,4 +21,5 @@ export interface IQueryParams {
   district?: string | null
   channelType?: string | null
   channelCategory?: string | null
+  typeWork?: string | null
 }
