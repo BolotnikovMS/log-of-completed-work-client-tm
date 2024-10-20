@@ -2,18 +2,20 @@ import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkFilters, CompletedWorkForm } from '..'
 import { Button, Dropdown, Icon, LoaderLine, Modal } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useDownloadExcelCompletedWork, useModal } from '../../../../hooks'
 
 const CompletedWorkControl: FC = () => {
   const [searchParams] = useSearchParams()
-  const substationParam = searchParams.get('substation')
-  const executorParam = searchParams.get('executor')
-  const dateStartParam = searchParams.get('dateStart')
-  const dateEndParam = searchParams.get('dateEnd')
+  const substationParam = searchParams.get(EFilterParam.substation)
+  const executorParam = searchParams.get(EFilterParam.executor)
+  const dateStartParam = searchParams.get(EFilterParam.dateStart)
+  const dateEndParam = searchParams.get(EFilterParam.dateEnd)
+  const typeWorkParam = searchParams.get(EFilterParam.typeWork)
   const { isModal, toggleModal } = useModal()
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
-  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam })
+  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
 
   return (
     <div className="work-log__control control">
@@ -55,7 +57,6 @@ const CompletedWorkControl: FC = () => {
         <Modal
           visible={isModalFilters}
           title='Фильтры'
-          classDialog=''
           content={<CompletedWorkFilters toggleModal={toggleModalFilters} />}
           onToggle={toggleModalFilters}
         />

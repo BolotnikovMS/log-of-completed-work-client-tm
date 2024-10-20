@@ -56,7 +56,7 @@ const CardControl: FC<IPropsCardControl> = memo(({ completedWork }) => {
         onToggle={(e) => { e.stopPropagation(), toggleModal(), setIsEdited(false) }}
         content={
           <CompletedWorkForm
-            completedWork={completedWork}
+            data={completedWork}
             isEdited={isEdited}
             setIsEdited={setIsEdited} toggleModal={toggleModal}
           />
