@@ -5,37 +5,42 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, CustomDatePicker, Error, Group, Icon } from '../../../../components'
-import { useSubstations, useUsers } from '../../../../hooks'
-import { EFilterType } from './compleated-filter.enum'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
+import { useSubstations, useTypesWork, useUsers } from '../../../../hooks'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 
 const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) => {
   const [searchParams, setSearchParams] = useSearchParams()
-  const substationParam = searchParams.get('substation')
-  const executorParam = searchParams.get('executor')
-  const dateStartParam = searchParams.get('dateStart')
-  const dateEndParam = searchParams.get('dateEnd')
-  const [substation, setSubstation] = useState<string | null>()
-  const [executor, setExecutor] = useState<string | null>()
-  const [dateStart, setDateStart] = useState<Date | null>()
-  const [dateEnd, setDateEnd] = useState<Date | null>()
+  const substationParam = searchParams.get(EFilterParam.substation)
+  const executorParam = searchParams.get(EFilterParam.executor)
+  const dateStartParam = searchParams.get(EFilterParam.dateStart)
+  const dateEndParam = searchParams.get(EFilterParam.dateEnd)
+  const typeWorkParams = searchParams.get(EFilterParam.typeWork)
+  const [substation, setSubstation] = useState<string | null>(null)
+  const [executor, setExecutor] = useState<string | null>(null)
+  const [dateStart, setDateStart] = useState<Date | null>(null)
+  const [dateEnd, setDateEnd] = useState<Date | null>(null)
+  const [typeWork, setTypeWork] = useState<string[] | null | undefined>(null)
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: executors, isError: isErrorExecutors, error: errorExecutors, isLoading: isLoadingExecutors } = useUsers({})
+  const { data: typesWork, isError: isErrorTypesWork, error: errorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork()
 
   useEffect(() => {
     setSubstation(substationParam)
     setExecutor(executorParam)
     setDateStart(dateStartParam ? new Date(dateStartParam) : null)
     setDateEnd(dateEndParam ? new Date(dateEndParam) : null)
-  }, [substationParam, executorParam, dateStartParam, dateEndParam])
+    setTypeWork(typeWorkParams?.split(','))
+  }, [dateEndParam, dateStartParam, executorParam, substationParam, typeWorkParams])
 
   const updateSearchParams = () => {
-    substation && searchParams.set(EFilterType.substation, substation)
-    executor && searchParams.set(EFilterType.executor, executor)
+    substation && searchParams.set(EFilterParam.substation, substation)
+    executor && searchParams.set(EFilterParam.executor, executor)
     if (dateStart && dateEnd) {
-      searchParams.set(EFilterType.dateStart, moment(dateStart).format('YYYY-MM-DD'))
-      searchParams.set(EFilterType.dateEnd, moment(dateEnd).format('YYYY-MM-DD'))
+      searchParams.set(EFilterParam.dateStart, moment(dateStart).format('YYYY-MM-DD'))
+      searchParams.set(EFilterParam.dateEnd, moment(dateEnd).format('YYYY-MM-DD'))
     }
+    typeWork && searchParams.set(EFilterParam.typeWork, typeWork.join(','))
     setSearchParams(searchParams)
   }
   const applyFilters = () => {
@@ -43,7 +48,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
     toggleModal()
   }
   const clearQueryParams = () => setSearchParams({})
-  const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors) && <Error error={errorSubstations! || errorExecutors!} />, [errorExecutors, errorSubstations, isErrorExecutors, isErrorSubstations])
+  const errorMessage = useMemo(() => (isErrorSubstations || isErrorExecutors || isErrorTypesWork) && <Error error={errorSubstations! || errorExecutors! || errorTypesWork!} />, [errorExecutors, errorSubstations, errorTypesWork, isErrorExecutors, isErrorSubstations, isErrorTypesWork])
 
   return (
     <div className='filters'>
@@ -73,6 +78,20 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             isLoading={isLoadingExecutors}
             isDisabled={isErrorExecutors}
             placeholder="Выберите производителя работ..."
+          />
+        </Group>
+        <Group>
+          <AsyncSelect
+            classNamePrefix='form__custom-select'
+            options={typesWork?.data}
+            value={typeWork ? typesWork?.data.filter(tw => typeWork.includes(tw.id.toString())) : []}
+            getOptionValue={option => option.id.toString()}
+            getOptionLabel={option => option.name}
+            onChange={options => setTypeWork(options ? options.map(opt => opt.id.toString()) : [])}
+            isLoading={isLoadingTypesWork}
+            isDisabled={isErrorTypesWork}
+            isMulti
+            placeholder="Выберите категорию работ..."
           />
         </Group>
       </Group>

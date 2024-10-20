@@ -2,6 +2,7 @@ import { useCallback, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkInfo } from '..'
 import { Card, Error, InfoMessage, LoadMore, Loader, Modal, NumberRecords } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useModal } from '../../../../hooks'
 import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
 import { ICompletedWork } from '../../../../interfaces'
@@ -9,11 +10,12 @@ import { CardContent, CardControl, CardFooter, CardHeader } from './cardParts'
 
 const CompletedWorksCards: FC = () => {
   const [searchParams] = useSearchParams()
-  const substationParam = searchParams.get('substation')
-  const executorParam = searchParams.get('executor')
-  const dateStartParam = searchParams.get('dateStart')
-  const dateEndParam = searchParams.get('dateEnd')
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam })
+  const substationParam = searchParams.get(EFilterParam.substation)
+  const executorParam = searchParams.get(EFilterParam.executor)
+  const dateStartParam = searchParams.get(EFilterParam.dateStart)
+  const dateEndParam = searchParams.get(EFilterParam.dateEnd)
+  const typeWorkParam = searchParams.get(EFilterParam.typeWork)
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
   const { isModal: isModalView, toggleModal: toggleModalView } = useModal()
   const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
   const handleOpenInfo = useCallback((work: ICompletedWork) => {
@@ -35,12 +37,18 @@ const CompletedWorksCards: FC = () => {
               <Card
                 key={completedWork.id}
                 classBody='!py-4'
-                childrenHeader={<CardHeader substationId={completedWork.substation.id} substationFullName={completedWork.substation.fullNameSubstation} />}
+                childrenHeader={
+                  <CardHeader
+                    substationId={completedWork.substationId}
+                    substationFullName={completedWork.substation?.fullNameSubstation}
+                    typeWork={completedWork.type_work?.name}
+                  />
+                }
                 childrenContent={<CardContent shortText={completedWork.shortText} />}
                 childrenFooter={
                   <CardFooter
                     dateCompletion={completedWork.dateCompletion}
-                    workProducerShortName={completedWork.work_producer.shortName}
+                    workProducerShortName={completedWork.work_producer?.shortName}
                   />
                 }
                 childrenControl={
