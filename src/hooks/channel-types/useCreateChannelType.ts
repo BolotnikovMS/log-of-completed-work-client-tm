@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 import { errorHandler } from '../../helpers'
 import { ChannelTypeService } from '../../services/channel-type/channel-type.service'
-import { TChannelTypeData } from '../../services/channel-type/channel-type.type'
+import { TChannelTypeData } from '../../types'
 
 export const useCreateChannelType = () => {
   const queryClient = useQueryClient()

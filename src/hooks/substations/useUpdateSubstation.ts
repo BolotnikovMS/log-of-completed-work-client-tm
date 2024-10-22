@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
-import { SubstationService } from "../../services/substations/substation.service"
-import { TSubstationData } from "../../services/substations/substation.type"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
+import { SubstationService } from '../../services/substations/substation.service'
+import { TSubstationData } from '../../types'
 
 export const useUpdateSubstation = () => {
   const queryClient = useQueryClient()

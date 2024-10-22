@@ -1,8 +1,8 @@
-import { useMutation } from "@tanstack/react-query"
-import { IChangePassword } from "../../interfaces"
-import { AuthService } from "../../services/auth/auth.service"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
+import { useMutation } from '@tanstack/react-query'
+import { IChangePassword } from '../../interfaces'
+import { AuthService } from '../../services/auth/auth.service'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
 
 export const useChangePassword = () => {
   return useMutation({

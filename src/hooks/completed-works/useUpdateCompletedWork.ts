@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
-import { CompletedWorkService } from "../../services/completed-work/completed-work.service"
-import { TCompletedWorkData } from "../../services/completed-work/completed-work.type"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
+import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
+import { TCompletedWorkData } from '../../types'
 
 export const useUpdateCompletedWork = () => {
   const queryClient = useQueryClient()

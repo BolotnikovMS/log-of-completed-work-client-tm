@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
-import { GsmOperatorService } from "../../services/gsm-operator/gsm-operator.service"
-import { TGsmOperatorData } from "../../services/gsm-operator/gsm-operator.type"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
+import { GsmOperatorService } from '../../services/gsm-operator/gsm-operator.service'
+import { TGsmOperatorData } from '../../types'
 
 export const useUpdateGsmOperator = () => {
   const queryClient = useQueryClient()

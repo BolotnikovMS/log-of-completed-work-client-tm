@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
-import { UserService } from "../../services/user/user.service"
-import { TUserData } from "../../services/user/user.type"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
+import { UserService } from '../../services/user/user.service'
+import { TUserData } from '../../types'
 
 export const useCreateAccount = () => {
   const queryClient = useQueryClient()

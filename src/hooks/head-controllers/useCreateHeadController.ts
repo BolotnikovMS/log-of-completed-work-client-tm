@@ -1,8 +1,8 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query"
-import { toast } from "react-toastify"
-import { errorHandler } from "../../helpers"
-import { HeadControllerService } from "../../services/head-controller/head-controller.service"
-import { THeadControllerData } from "../../services/head-controller/head-controller.type"
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { toast } from 'react-toastify'
+import { errorHandler } from '../../helpers'
+import { HeadControllerService } from '../../services/head-controller/head-controller.service'
+import { THeadControllerData } from '../../types'
 
 export const useCreateHeadController = () => {
   const queryClient = useQueryClient()
