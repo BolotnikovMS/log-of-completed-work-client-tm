@@ -43,7 +43,7 @@ const UsersTable: FC = () => {
     {
       header: 'Роль',
       cell: ({ row }) => (
-        isAdmin && (
+        (isAdmin && row.original.active) && (
           <div className='table-cell-row'>
             {row.original.role?.name}
             <Button title='Изменить роль пользователя' onClick={() => { toggleModalChangeRole(), setCurrentUser(row.original) }}>
@@ -58,7 +58,7 @@ const UsersTable: FC = () => {
       enableSorting: false,
       accessorKey: 'setting',
       cell: ({ row }) => (
-        isAdmin && (
+        (isAdmin && row.original.active) && (
           <div className='table-cell-row'>
             <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
               <Icon id='key' />
