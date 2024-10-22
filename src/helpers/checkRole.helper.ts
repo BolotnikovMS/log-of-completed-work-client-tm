@@ -10,12 +10,12 @@ import { IUser } from '../interfaces'
  * @returns {boolean}  Возвращает true или false
  */
 
-export const checkRole = <T extends { userId: number}>(user: IUser | null, allowedRoles: ERoles[], isAuthor: boolean = false, record?: T): boolean => {
-	if (!user) return false
+export const checkRole = <T extends { userId: number }>(user: IUser | null, allowedRoles: ERoles[], isAuthor: boolean = false, record?: T): boolean => {
+  if (!user) return false
 
-	if (isAuthor && record && user.id === record.userId) return true
+  if (isAuthor && record && user.id === record.userId) return true
 
-	if (allowedRoles.length === 0) return true
-	
-	return allowedRoles.some(role => role.includes(user.role.name))
+  if (allowedRoles.length === 0) return true
+
+  return allowedRoles.some(role => role.includes(user.role.name))
 }

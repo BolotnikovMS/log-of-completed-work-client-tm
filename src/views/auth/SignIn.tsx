@@ -78,10 +78,10 @@ export const SignIn: FC = () => {
 					/>
 				</Group>
 				<div className="form__btns">
-					<Button disabled={!isValid} className='mBtn_primary'>
-				    <Icon id='login' />
-						Войти
-					</Button>
+  				<Button disabled={!isValid} className='mBtn_primary'>
+  				  <Icon id='login' />
+              Войти
+          </Button>
 				</div>
 			</form>
 		</div>
