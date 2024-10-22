@@ -108,7 +108,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             placeholderText='От'
-            popperPlacement="left"
+            popperPlacement="auto"
           />
         </Group>
         <Group>
@@ -120,7 +120,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
             iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             placeholderText='До'
-            popperPlacement="left"
+            popperPlacement="auto"
           />
         </Group>
       </Group>
