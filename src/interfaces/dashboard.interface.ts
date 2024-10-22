@@ -1,4 +1,4 @@
 export interface ICompletedWorkYear {
-  year: number,
+  year: number
   workCount: number
 }
