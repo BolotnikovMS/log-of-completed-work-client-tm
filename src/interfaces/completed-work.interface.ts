@@ -7,7 +7,6 @@ export interface ICompletedWork {
   workProducerId: number
   typeWorkId: number
   description: string
-  shortText: string
   note?: string | null
   dateCompletion: Date
   createdAt: Date
