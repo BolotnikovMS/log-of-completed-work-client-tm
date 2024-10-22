@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateHeadController, useUpdateHeadController } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
+import { IHeadController, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { THeadControllerData } from '../../../../types'
 import { validationSchema } from './headController.validation'
-import { IHeadControllerFields, IPropsHeaderControllerForm } from './headControllerForm.interface'
 
-const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IHeadControllerFields>({
+const HeadControllerForm: FC<IPropsForm<IHeadController>> = ({ data: headController, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<THeadControllerData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const HeadControllerForm: FC<IPropsHeaderControllerForm> = ({ headController, is
   })
   const { mutateAsync: createHeadController, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateHeadController()
   const { mutateAsync: updateHeadController, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateHeadController()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IHeadControllerFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<THeadControllerData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IHeadControllerFields> = data => handleMutation({ data, mutateFn: createHeadController })
-  const submitUpdate: SubmitHandler<IHeadControllerFields> = data => {
+  const submitCreate: SubmitHandler<THeadControllerData> = data => handleMutation({ data, mutateFn: createHeadController })
+  const submitUpdate: SubmitHandler<THeadControllerData> = data => {
     if (!headController?.id) return null
 
     handleMutation({ data, mutateFn: updateHeadController, id: headController.id })

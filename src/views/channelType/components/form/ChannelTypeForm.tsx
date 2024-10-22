@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateChannelType, useUpdateChannelType } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
+import { IChannelType, IPropsForm, IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './channelType.validation'
-import { IChannelTypeFields, IPropsChannelTypeForm } from './channelTypeForm.interface'
+import { TChannelTypeData } from '../../../../types'
 
-const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChannelTypeFields>({
+const ChannelTypeForm: FC<IPropsForm<IChannelType>> = ({ data: channelType, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TChannelTypeData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const ChannelTypeForm: FC<IPropsChannelTypeForm> = ({ channelType, isEdited, set
   })
   const { mutateAsync: createChannelType, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannelType()
   const { mutateAsync: updateChannelType, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannelType()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IChannelTypeFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelTypeData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IChannelTypeFields> = data => handleMutation({ data, mutateFn: createChannelType })
-  const submitUpdate: SubmitHandler<IChannelTypeFields> = data => {
+  const submitCreate: SubmitHandler<TChannelTypeData> = data => handleMutation({ data, mutateFn: createChannelType })
+  const submitUpdate: SubmitHandler<TChannelTypeData> = data => {
     if (!channelType?.id) return null
 
     handleMutation({ data, mutateFn: updateChannelType, id: channelType.id })

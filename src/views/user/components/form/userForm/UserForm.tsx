@@ -1,15 +1,15 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { type FC } from "react"
+import { type FC } from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import AsyncSelect from 'react-select'
 import { Button, Error, Group, Input, Loader, SelectWrapper } from '../../../../../components'
 import { useCreateAccount, useRoles } from '../../../../../hooks'
-import { IPropsMutation } from '../../../../../interfaces'
+import { IPropsForm, IPropsMutation, IUser } from '../../../../../interfaces'
+import { TUserData } from '../../../../../types'
 import { validationSchema } from './user.validation'
-import { IPropsUserForm, IUserFields } from './userForm.interface'
 
-const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<IUserFields>({
+const UserForm: FC<IPropsForm<IUser>> = ({ data: user, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TUserData>({
     mode: 'onBlur',
     defaultValues: {
       username: user?.username,
@@ -25,14 +25,14 @@ const UserForm: FC<IPropsUserForm> = ({ user, isEdited, setIsEdited, toggleModal
   const { field: { value: roleValue, onChange: roleChange, ...restRoles } } = useController({ name: 'roleId', control })
   const { roles, error: errorRoles, isError: isErrorRoles, isLoading: isLoadingRoles } = useRoles()
   const { mutateAsync: createAccount, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateAccount()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IUserFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TUserData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IUserFields> = data => handleMutation({ data, mutateFn: createAccount })
+  const submitCreate: SubmitHandler<TUserData> = data => handleMutation({ data, mutateFn: createAccount })
   const errorMessage = (isErrorCreate && errorCreate !== null) && <Error error={errorCreate} />
 
   if (isPendingCreate) return <Loader />

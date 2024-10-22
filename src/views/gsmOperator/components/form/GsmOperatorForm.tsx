@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateGsmOperator, useUpdateGsmOperator } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
+import { IGsmOperator, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { TGsmOperatorData } from '../../../../types'
 import { validationSchema } from './gsmOperator.validation'
-import { IGsmOperatorFields, IPropsGsmOperatorForm } from './gsmOperatorForm.interface'
 
-const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IGsmOperatorFields>({
+const GsmOperatorForm: FC<IPropsForm<IGsmOperator>> = ({ data: gsmOperator, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TGsmOperatorData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const GsmOperatorForm: FC<IPropsGsmOperatorForm> = ({ gsmOperator, isEdited, set
   })
   const { mutateAsync: createGsmOperator, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateGsmOperator()
   const { mutateAsync: updateGsmOperator, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateGsmOperator()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IGsmOperatorFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TGsmOperatorData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IGsmOperatorFields> = data => handleMutation({ data, mutateFn: createGsmOperator })
-  const submitUpdate: SubmitHandler<IGsmOperatorFields> = data => {
+  const submitCreate: SubmitHandler<TGsmOperatorData> = data => handleMutation({ data, mutateFn: createGsmOperator })
+  const submitUpdate: SubmitHandler<TGsmOperatorData> = data => {
     if (!gsmOperator?.id) return null
 
     handleMutation({ data, mutateFn: updateGsmOperator, id: gsmOperator.id })

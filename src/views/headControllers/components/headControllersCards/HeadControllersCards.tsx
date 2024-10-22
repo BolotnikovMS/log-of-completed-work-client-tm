@@ -71,7 +71,15 @@ const HeadControllersCards: FC = () => {
       )}
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Головных контроллеров пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
-      <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<HeadControllerForm headController={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
+      <Modal
+        visible={isModal}
+        title='Редактирование записи'
+        onToggle={
+          () => { toggleModal(), setIsEdited(false) }} content={
+            <HeadControllerForm data={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal}
+            />
+          }
+      />
     </>
   )
 }

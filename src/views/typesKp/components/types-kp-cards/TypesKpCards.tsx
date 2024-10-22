@@ -71,7 +71,13 @@ const TypesKpCards: FC = () => {
       )}
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Типов КП пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
-      <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<TypeKpForm typeKp={typeKp} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />} />
+      <Modal
+        visible={isModal}
+        title='Редактирование записи'
+        onToggle={
+          () => { toggleModal(), setIsEdited(false) }} content={<TypeKpForm data={typeKp} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />
+          }
+      />
     </>
   )
 }

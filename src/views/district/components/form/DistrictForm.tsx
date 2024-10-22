@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateDistrict, useUpdateDistrict } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
+import { IDistrict, IPropsForm, IPropsMutation } from '../../../../interfaces'
 import { validationSchema } from './district.validation'
-import { IDistrictFields, IPropsDistrictForm } from './districtForm.interface'
+import { TDistrictData } from '../../../../types'
 
-const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited, toggleModal }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IDistrictFields>({
+const DistrictForm: FC<IPropsForm<IDistrict>> = ({ data: district, isEdited, setIsEdited, toggleModal }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TDistrictData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -18,15 +18,15 @@ const DistrictForm: FC<IPropsDistrictForm> = ({ district, isEdited, setIsEdited,
   })
   const { mutateAsync: createMutate, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateDistrict()
   const { mutateAsync: updateMutate, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateDistrict()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IDistrictFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TDistrictData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IDistrictFields> = data => handleMutation({ data, mutateFn: createMutate })
-  const submitUpdate: SubmitHandler<IDistrictFields> = data => {
+  const submitCreate: SubmitHandler<TDistrictData> = data => handleMutation({ data, mutateFn: createMutate })
+  const submitUpdate: SubmitHandler<TDistrictData> = data => {
     if (!district?.id) return null
 
     handleMutation({ data, mutateFn: updateMutate, id: district.id })

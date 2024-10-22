@@ -5,11 +5,12 @@ import AsyncSelect from 'react-select'
 import { Button, Error, Group, Loader, SelectWrapper } from '../../../../../components'
 import { useRoles } from '../../../../../hooks'
 import { useChangeRole } from '../../../../../hooks/users/useChangeRole'
-import { IChangeUserRoleFields, IPropsChangeUserRole } from './changeUserRole.interface'
+import { IPropsForm, IUser } from '../../../../../interfaces'
+import { TChangeUserRole } from '../../../../../types'
 import { validationSchema } from './changeUserRole.validation'
 
-const ChangeUserRole: FC<IPropsChangeUserRole> = ({ user, toggleModal }) => {
-  const { handleSubmit, formState: { errors, isValid }, control } = useForm<IChangeUserRoleFields>({
+const ChangeUserRole: FC<IPropsForm<IUser>> = ({ data: user, toggleModal }) => {
+  const { handleSubmit, formState: { errors, isValid }, control } = useForm<TChangeUserRole>({
     mode: 'onBlur',
     defaultValues: {
       roleId: user?.roleId
@@ -19,7 +20,7 @@ const ChangeUserRole: FC<IPropsChangeUserRole> = ({ user, toggleModal }) => {
   const { field: { value: roleValue, onChange: roleChange, ...restRoles } } = useController({ name: 'roleId', control })
   const { roles, error: errorRoles, isError: isErrorRoles, isLoading: isLoadingRoles } = useRoles()
   const { mutateAsync, isError: isErrorChangeRole, error: errorChangeRole, isPending: isPendingChangeRole } = useChangeRole(user!.id)
-  const submit: SubmitHandler<IChangeUserRoleFields> = data => {
+  const submit: SubmitHandler<TChangeUserRole> = data => {
     mutateAsync(data)
     toggleModal()
   }

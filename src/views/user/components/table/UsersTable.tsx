@@ -29,7 +29,7 @@ const UsersTable: FC = () => {
       header: 'УЗ активна',
       accessorKey: 'active',
       cell: ({ row }) => (
-        isAdmin && <ChangeStatusAccountForm active={row.original.active} userId={row.original.id} />
+        isAdmin && <ChangeStatusAccountForm active={row.original.active} id={row.original.id} />
       )
     },
     {
@@ -45,7 +45,7 @@ const UsersTable: FC = () => {
       cell: ({ row }) => (
         isAdmin && (
           <div className='table-cell-row'>
-            {row.original.role.name}
+            {row.original.role?.name}
             <Button title='Изменить роль пользователя' onClick={() => { toggleModalChangeRole(), setCurrentUser(row.original) }}>
               <Icon id='user-switch' />
             </Button>
@@ -88,7 +88,7 @@ const UsersTable: FC = () => {
         visible={isModalChangeRole}
         title='Форма изменения роли пользователя'
         classDialog='!h-[350px]'
-        content={<ChangeUserRole toggleModal={toggleModalChangeRole} user={currentUser} />}
+        content={<ChangeUserRole toggleModal={toggleModalChangeRole} data={currentUser} />}
         onToggle={toggleModalChangeRole}
       />
     </>

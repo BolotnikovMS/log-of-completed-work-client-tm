@@ -71,7 +71,11 @@ const VoltageClassesCards: FC = () => {
       )}
       {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
-      <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<VoltageClassForm voltageClass={voltageClass} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />} />
+      <Modal
+        visible={isModal}
+        title='Редактирование записи'
+        onToggle={() => { toggleModal(), setIsEdited(false) }} content={<VoltageClassForm data={voltageClass} isEdited={isEdited} toggleModal={toggleModal} setIsEdited={setIsEdited} />}
+      />
     </>
   )
 }

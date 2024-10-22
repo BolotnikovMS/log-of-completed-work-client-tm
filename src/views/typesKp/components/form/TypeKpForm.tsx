@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateTypeKp, useUpdateTypeKp } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
-import { IPropsTypeKpForm, ITypeKpFields } from './TypeKpForm.interface'
+import { IPropsForm, IPropsMutation, ITypeKp } from '../../../../interfaces'
+import { TTypeKpData } from '../../../../types'
 import { validationSchema } from './typesKp.validation'
 
-const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIsEdited }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ITypeKpFields>({
+const TypeKpForm: FC<IPropsForm<ITypeKp>> = ({ data: typeKp, isEdited, toggleModal, setIsEdited }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TTypeKpData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const TypeKpForm: FC<IPropsTypeKpForm> = ({ typeKp, isEdited, toggleModal, setIs
   })
   const { mutateAsync: createTypeKp, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateTypeKp()
   const { mutateAsync: updateTypeKp, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateTypeKp()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<ITypeKpFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TTypeKpData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<ITypeKpFields> = data => handleMutation({ data, mutateFn: createTypeKp })
-  const submitUpdate: SubmitHandler<ITypeKpFields> = data => {
+  const submitCreate: SubmitHandler<TTypeKpData> = data => handleMutation({ data, mutateFn: createTypeKp })
+  const submitUpdate: SubmitHandler<TTypeKpData> = data => {
     if (!typeKp?.id) return null
 
     handleMutation({ data, mutateFn: updateTypeKp, id: typeKp.id })

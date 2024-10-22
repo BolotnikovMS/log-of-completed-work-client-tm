@@ -4,19 +4,19 @@ import { useParams } from 'react-router-dom'
 import ReactSelect from 'react-select'
 import { Button, Error, FileUploader, Group, Icon, Loader, SelectWrapper } from '../../../../../components'
 import { useUploadSubstationFile } from '../../../../../hooks/substations/useUploadSubstationFile'
-import { IPropsMutation } from '../../../../../interfaces'
+import { IFile, IPropsForm, IPropsMutation } from '../../../../../interfaces'
+import { TFileUploadData } from '../../../../../types'
 import { typeFileOptions } from './typeFileOptions'
-import { IPropUploadSubstationFile, IUploadField } from './uploadedFileForm.interface'
 
-export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModal }) => {
+export const UploadSubstationFile: FC<IPropsForm<IFile>> = ({ toggleModal }) => {
   const { id } = useParams()
   const [files, setFiles] = useState<FileList | null>(null)
-  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<IUploadField>({
+  const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TFileUploadData>({
     mode: 'onBlur',
   })
   const { field: { value: typeFileValue, onChange: typeFileOnChange, ...restTypeFileField } } = useController({ name: 'typeFile', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
   const { mutateAsync, isError, error, isPending } = useUploadSubstationFile()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IUploadField>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TFileUploadData>) => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formData: any = new FormData()
     files && [...files]?.forEach(file => formData.append('file[]', file))
@@ -33,7 +33,7 @@ export const UploadSubstationFile: FC<IPropUploadSubstationFile> = ({ toggleModa
       setFiles(e.target.files)
     }
   }
-  const submit: SubmitHandler<IUploadField> = data => handleMutation({ data, mutateFn: mutateAsync, id: +id! })
+  const submit: SubmitHandler<TFileUploadData> = data => handleMutation({ data, mutateFn: mutateAsync, id: +id! })
 
   if (isPending) return <Loader />
 

@@ -8,9 +8,8 @@ import { useDeleteFile } from '../../../../../hooks'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
 import { useAuthStore } from '../../../../../store/auth'
-import { IPropsFileTable } from './fileTable.interface'
 
-const FileTable: FC <IPropsFileTable>= ({files}) => {
+const FileTable: FC <{files: IFile[]}> = ({ files }) => {
 	const { authUser } = useAuthStore()
 	const { deleteFile } = useDeleteFile()
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])

@@ -2,20 +2,20 @@ import { useEffect, useState, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { LoaderLine, Toggle } from '../../../../../components'
 import { useChangeStatusAccountMutation } from '../../../../../hooks'
-import { IPropChangeStatusAccountFields, IPropsChangeStatusAccountForm } from './changeStatus.interface'
+import { TChangeStatusAccount } from '../../../../../types'
 
-const ChangeStatusAccountForm: FC<IPropsChangeStatusAccountForm> = ({ active, userId }) => {
-  const { register, setValue, handleSubmit } = useForm<IPropChangeStatusAccountFields>({
+const ChangeStatusAccountForm: FC<TChangeStatusAccount> = ({ active, id }) => {
+  const { register, setValue, handleSubmit } = useForm<TChangeStatusAccount>({
     mode: 'onChange',
   })
-  const [isActive, setIsActive] = useState(active)
+  const [isActive, setIsActive] = useState<boolean>(active)
 
   useEffect(() => {
     setValue('active', active)
   }, [active, isActive, setValue])
 
-  const { mutateAsync, isPending } = useChangeStatusAccountMutation(userId)
-  const submit: SubmitHandler<IPropChangeStatusAccountFields> = data => {
+  const { mutateAsync, isPending } = useChangeStatusAccountMutation()
+  const submit: SubmitHandler<TChangeStatusAccount> = data => {
     const answer = confirm('Подтвердтие изменение статуса УЗ.')
 
     if (!answer) {
@@ -24,7 +24,7 @@ const ChangeStatusAccountForm: FC<IPropsChangeStatusAccountForm> = ({ active, us
       return
     }
 
-    mutateAsync(data)
+    mutateAsync({ id, active: data.active })
   }
 
   if (isPending) return <LoaderLine />
@@ -32,7 +32,7 @@ const ChangeStatusAccountForm: FC<IPropsChangeStatusAccountForm> = ({ active, us
   return (
     <form className='flex justify-center' onChange={handleSubmit(submit)}>
       <Toggle
-        idToggle={userId.toString()}
+        idToggle={id.toString()}
         className='toggle-success'
         defaultChecked={isActive}
         {...register('active')}

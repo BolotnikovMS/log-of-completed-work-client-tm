@@ -3,12 +3,12 @@ import { type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateVoltageClass, useUpdateVoltageClass } from '../../../../hooks'
-import { IPropsMutation } from '../../../../interfaces'
-import { IPropsVoltageClassForm, IVoltageClassFields } from './voltageClassForm.interface'
+import { IPropsForm, IPropsMutation, IVoltageClass } from '../../../../interfaces'
 import { validationSchema } from './voltageClasses.validation'
+import { TVoltageClassData } from '../../../../types'
 
-const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, toggleModal, setIsEdited }) => {
-  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IVoltageClassFields>({
+const VoltageClassForm: FC<IPropsForm<IVoltageClass>> = ({ data: voltageClass, isEdited, toggleModal, setIsEdited }) => {
+  const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TVoltageClassData>({
     mode: 'onBlur',
     resolver: yupResolver(validationSchema),
     defaultValues: {
@@ -17,15 +17,15 @@ const VoltageClassForm: FC<IPropsVoltageClassForm> = ({ voltageClass, isEdited, 
   })
   const { mutateAsync: createVoltageClass, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateVoltageClass()
   const { mutateAsync: updateVoltageClass, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateVoltageClass()
-  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<IVoltageClassFields>) => {
+  const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TVoltageClassData>) => {
     await mutateFn(id ? { id, data } : data)
 
     reset()
     toggleModal()
     if (isEdited && setIsEdited) setIsEdited(false)
   }
-  const submitCreate: SubmitHandler<IVoltageClassFields> = data => handleMutation({ data, mutateFn: createVoltageClass })
-  const submitUpdate: SubmitHandler<IVoltageClassFields> = data => {
+  const submitCreate: SubmitHandler<TVoltageClassData> = data => handleMutation({ data, mutateFn: createVoltageClass })
+  const submitUpdate: SubmitHandler<TVoltageClassData> = data => {
     if (!voltageClass?.id) return null
 
     handleMutation({ data, mutateFn: updateVoltageClass, id: voltageClass.id })
