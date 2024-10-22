@@ -23,7 +23,7 @@ const Profile: FC = () => {
         <p className='profile__text'>
           Роль в системе:
           <span className="text-content">
-            {authUser?.role.name}
+            {authUser?.role?.name ?? <span className='text-red-600'>Ошибка при получений роли</span>}
           </span>
         </p>
         <p className='profile__text'>
