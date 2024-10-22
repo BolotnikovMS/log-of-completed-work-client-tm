@@ -3,5 +3,4 @@ export interface IDistrict {
   userId: number
   name: string
   shortName: string
-  slug: string
 }
