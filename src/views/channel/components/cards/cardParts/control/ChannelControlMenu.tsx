@@ -7,11 +7,7 @@ import { IChannel } from '../../../../../../interfaces'
 import { useAuthStore } from '../../../../../../store/auth'
 import { ChannelForm } from '../../../../../channel/components'
 
-interface IPropsChannelControlMenu {
-  channel: IChannel
-}
-
-const ChannelControlMenu: FC<IPropsChannelControlMenu> = memo(({ channel }) => {
+const ChannelControlMenu: FC<{ channel: IChannel }> = memo(({ channel }) => {
   const { authUser } = useAuthStore()
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { isModal, toggleModal } = useModal()
