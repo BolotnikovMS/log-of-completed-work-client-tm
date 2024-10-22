@@ -1,9 +1,8 @@
-import { IHeadController, IQueryParams } from '../../interfaces'
-import { THeadControllerData, TRespHeadController } from './head-controller.type'
-
 import { type AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
+import { IHeadController, IQueryParams } from '../../interfaces'
+import { THeadControllerData, TRespHeadController } from '../../types'
 
 export const HeadControllerService = {
   async getHeadControllers({ limit, page }: IQueryParams): Promise<TRespHeadController> {
@@ -19,7 +18,7 @@ export const HeadControllerService = {
   },
 
   async updateHeadController(id: number, data: THeadControllerData): Promise<AxiosResponse<IHeadController>> {
-    return await instance.patch<IHeadController>(`${url}/head-controllers/${id}`, data)
+    return instance.patch<IHeadController>(`${url}/head-controllers/${id}`, data)
   },
 
   async deleteHeadController(id: number): Promise<AxiosResponse<void>> {

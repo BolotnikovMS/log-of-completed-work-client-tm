@@ -1,8 +1,16 @@
+import { TChannelTypeData, TRespChannelTypes } from './channel-type.types'
 import { TChannelData } from './channel.types'
 import { TChannelEquipmentData, TRespChannelingEquipment } from './channelingEquipment.types'
 import { TChannelCategoryData, TRespChannelCategories } from './channelСategory.types'
 import { TCompletedWorkData, TRespCompletedWork } from './completed-work.types'
-import { TSubstationData, TRespSubstations } from './substation.types'
-import { TTypeWorkData, TRespTypesWork } from './typeWork.types'
+import { TDistrictData, TRespDistricts } from './district.types'
+import { TFileUploadData } from './file.types'
+import { TGsmOperatorData } from './gsm-operator.type'
+import { THeadControllerData, TRespHeadController } from './head-controller.types'
+import { TRespSubstations, TSubstationData } from './substation.types'
+import { TRespTypesKp, TTypeKpData } from './type-kp.types'
+import { TRespTypesWork, TTypeWorkData } from './typeWork.types'
+import { TChangeStatusAccount, TChangeUserRole, TRespUsers, TUserData } from './user.types'
+import { TResponseVoltageClass, TVoltageClassData } from './voltage-class.types'
 
-export type { TChannelData, TChannelCategoryData, TRespChannelCategories, TSubstationData, TRespSubstations, TChannelEquipmentData, TRespChannelingEquipment, TCompletedWorkData, TRespCompletedWork, TTypeWorkData, TRespTypesWork }
+export type { TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelTypeData, TCompletedWorkData, TDistrictData, TGsmOperatorData, THeadControllerData, TRespChannelCategories, TRespChannelingEquipment, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TResponseVoltageClass, TRespSubstations, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TTypeKpData, TTypeWorkData, TUserData, TVoltageClassData, TChangeStatusAccount, TFileUploadData }

@@ -1,9 +1,8 @@
 import { IChannelType, IQueryParams } from '../../interfaces'
-import { TChannelTypeData, TRespChannelTypes } from './channel-type.type'
-
 import { type AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
+import { TRespChannelTypes, TChannelTypeData } from '../../types'
 
 export const ChannelTypeService = {
   async getChannelTypes({ limit, page }: IQueryParams): Promise<TRespChannelTypes> {

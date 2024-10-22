@@ -2,7 +2,7 @@ import { type AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { IGsmOperator } from '../../interfaces'
-import { TGsmOperatorData } from './gsm-operator.type'
+import { TGsmOperatorData } from '../../types'
 
 export const GsmOperatorService = {
   async getGsmOperators(): Promise<IGsmOperator[]> {
@@ -16,7 +16,7 @@ export const GsmOperatorService = {
   },
 
   async updateGsmOperator(id: number, data: TGsmOperatorData): Promise<AxiosResponse<IGsmOperator>> {
-    return await instance.patch<IGsmOperator>(`${url}/gsm-operators/${id}`, data)
+    return instance.patch<IGsmOperator>(`${url}/gsm-operators/${id}`, data)
   },
 
   async deleteGsmOperator(id: number): Promise<AxiosResponse<void>> {

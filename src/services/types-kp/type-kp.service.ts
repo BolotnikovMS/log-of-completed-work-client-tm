@@ -1,9 +1,8 @@
-import { IQueryParams, ITypeKp } from '../../interfaces'
-import { TRespTypesKp, TTypeKpData } from './type-kp.type'
-
 import { type AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
+import { IQueryParams, ITypeKp } from '../../interfaces'
+import { TRespTypesKp, TTypeKpData } from '../../types'
 
 export const TypeKpService = {
   async getTypesKp({ limit, page }: IQueryParams): Promise<TRespTypesKp> {
@@ -19,7 +18,7 @@ export const TypeKpService = {
   },
 
   async updateTypeKp(id: number, data: TTypeKpData): Promise<AxiosResponse<ITypeKp>> {
-    return await instance.patch<ITypeKp>(`${url}/types-kp/${id}`, data)
+    return instance.patch<ITypeKp>(`${url}/types-kp/${id}`, data)
   },
 
   async deleteTypeKp(id: number): Promise<AxiosResponse<void>> {

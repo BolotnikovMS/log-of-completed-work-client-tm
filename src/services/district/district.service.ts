@@ -1,10 +1,8 @@
-import { IDistrict, IQueryParams } from '../../interfaces'
-import { TDistrictData, TRespDistricts } from './district.type'
-
 import { type AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
-import { TRespSubstations } from '../substations/substation.type'
+import { IDistrict, IQueryParams } from '../../interfaces'
+import { TDistrictData, TRespDistricts, TRespSubstations } from '../../types'
 
 export const DistrictService = {
   async getDistricts({ limit, page, sort, order }: IQueryParams): Promise<TRespDistricts> {

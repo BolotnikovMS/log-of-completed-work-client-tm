@@ -5,10 +5,10 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IFile } from '../../interfaces/file.interface'
-import { TNewFileUpload } from './file.type'
+import { TFileUploadData } from '../../types'
 
 export const FileService = {
-	async upload(data: TNewFileUpload): Promise<AxiosResponse<string>> {
+	async upload(data: TFileUploadData): Promise<AxiosResponse<string>> {
 		return instance.post(`${url}/files/upload`, data, {
 			headers: {
 				'Content-Type': 'multipart/form-data'
