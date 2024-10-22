@@ -44,7 +44,7 @@ const CompletedWorksCards: FC = () => {
                     typeWork={completedWork.type_work?.name}
                   />
                 }
-                childrenContent={<CardContent shortText={completedWork.shortText} />}
+                childrenContent={<CardContent description={completedWork.description} />}
                 childrenFooter={
                   <CardFooter
                     dateCompletion={completedWork.dateCompletion}

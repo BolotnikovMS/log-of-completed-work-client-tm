@@ -1,3 +1,3 @@
 export interface IPropsCardContent {
-  shortText: string
+  description: string
 }
