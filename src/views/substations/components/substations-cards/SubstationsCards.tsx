@@ -1,14 +1,14 @@
-import { useMemo, useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
-import { Badge, Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, Group, Icon, InfoMessage, Loader, Modal, SmallCard } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
-import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
+import { useDeleteSubstation, useModal, useSubstationsList } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
-import { EFilterParam } from '../../../../enums/filterParam.enums'
 
 const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
@@ -23,10 +23,13 @@ const SubstationsCards: FC = () => {
   const headControllerParam = searchParams.get(EFilterParam.headController)
   const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
   const channelTypeParam = searchParams.get(EFilterParam.channelType)
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
+  const [offset, setOffset] = useState<number>(0)
+  const limit: number = 20
+  const { substations, isError, error, isLoading } = useSubstationsList({ offset, limit, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
-  const [substation, setSubstation] = useState<ISubstation | null>(null)
+  const [substation, setSubstation] = useState<ISubstation>()
+  const [substationsList, setSubstationsList] = useState<ISubstation[] | null>(null)
   const { deleteSubstation } = useDeleteSubstation()
   const handleDelete = (id: number) => {
     const answer = confirm('Подтвердите удаление записи.')
@@ -35,61 +38,74 @@ const SubstationsCards: FC = () => {
 
     return deleteSubstation.mutate(id)
   }
-  const memoizedSubstations = useMemo(() => data, [data])
+  const handleLoadMore = () => {
+    setOffset(offset + limit)
+  }
+
+  useEffect(() => {
+    if (substations?.length && substations !== substationsList) {
+      setSubstationsList((prevSubstations) => [...(prevSubstations || []), ...substations])
+    }
+  }, [substations])
 
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
+
+  console.log(substationsList)
 
   return (
     <>
-      <NumberRecords text='Всего объектов:' numberRecords={data?.pages[0].meta.total} />
-      {!!memoizedSubstations?.pages[0].data.length && (
+      {/* <NumberRecords text='Всего объектов:' numberRecords={data?.pages[0].meta.total} /> */}
+      {!!substationsList?.length && (
         <div className="cards">
-          {memoizedSubstations.pages.map(substations => (
-            substations.data.map(substation => (
-              <SmallCard
-                key={substation.id}
-                childrenContent={
-                  <>
-                    {substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
-                    <p className='text-content flex items-center gap-1'>
-                      <Icon id='link' />
-                      {substation.fullNameSubstation}
-                    </p>
-                  </>
-                }
-                path={`/substations/${substation.id}`}
-                childrenControl={
-                  isAdminOrModerator && (
-                    <Dropdown
-                      children={
-                        <Icon id='setting' />
-                      }
-                      menuItems={[
-                        isAdminOrModerator && (
-                          <Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
-                            <Icon id='edit' />
-                            Редактировать
-                          </Button>
-                        ),
-                        isAdmin && (
-                          <Button className='btn-error !justify-start' onClick={() => handleDelete(substation.id)}>
-                            <Icon id='delete' />
-                            Удалить
-                          </Button>
-                        )
-                      ]}
-                    />
-                  )
-                }
-              />
-            ))
-          ))}
+          {substationsList.map(substation => (
+            <SmallCard
+              key={substation.id}
+              childrenContent={
+                <>
+                  {substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
+                  <p className='text-content flex items-center gap-1'>
+                    <Icon id='link' />
+                    {substation.fullNameSubstation}
+                  </p>
+                </>
+              }
+              path={`/substations/${substation.id}`}
+              childrenControl={
+                isAdminOrModerator && (
+                  <Dropdown
+                    children={
+                      <Icon id='setting' />
+                    }
+                    menuItems={[
+                      isAdminOrModerator && (
+                        <Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>
+                          <Icon id='edit' />
+                          Редактировать
+                        </Button>
+                      ),
+                      isAdmin && (
+                        <Button className='btn-error !justify-start' onClick={() => handleDelete(substation.id)}>
+                          <Icon id='delete' />
+                          Удалить
+                        </Button>
+                      )
+                    ]}
+                  />
+                )
+              }
+            />
+          ))
+          }
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      {!isLoading && (
+        <Group className='items-center'>
+          <Button className='mBtn_primary' onClick={() => handleLoadMore()} disabled={isLoading}>Показать еще</Button>
+        </Group>
+      )}
+      {(!substations?.length && !isLoading && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<SubstationForm data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
     </>
   )

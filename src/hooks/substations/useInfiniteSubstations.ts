@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 import { IQueryParams } from '../../interfaces'
 import { SubstationService } from '../../services/substations/substation.service'
 
@@ -20,7 +20,8 @@ export const useInfiniteSubstations = ({ limit = 15, search, sort, order, typeKp
       const totalPages = Math.ceil(allPages[0].meta.total / limit)
 
       return totalPages >= nextPage && lastPage.data.length !== 0 ? nextPage : undefined
-    }
+    },
+    placeholderData: keepPreviousData,
   })
 
   return { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage }

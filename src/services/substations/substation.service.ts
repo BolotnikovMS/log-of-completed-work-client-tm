@@ -5,12 +5,12 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IQueryParams, ISubstation } from '../../interfaces'
-import { TRespSubstations, TSubstationData } from '../../types'
+import { TSubstationData } from '../../types'
 
 export const SubstationService = {
-  async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType }: IQueryParams): Promise<TRespSubstations> {
-    const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
-      params: { page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType }
+  async getSubstations({ limit, offset, page, search, sort, order, typeKp, headController, district, channelCategory, channelType }: IQueryParams): Promise<ISubstation[]> {
+    const { data } = await instance.get<ISubstation[]>(`${url}/substations`, {
+      params: { page, offset, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType }
     })
 
     return data
