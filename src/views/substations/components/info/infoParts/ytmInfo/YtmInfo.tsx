@@ -8,9 +8,9 @@ const YtmInfo: FC<IPropsPartsInfo> = ({ substation }) => {
     <>
       <p className='substation-info__section-text'>Информация по УТМ</p>
       <p className='substation-info__text'>Тип КП: </p>
-      <span className='text-content'>{substation?.type_kp?.name}</span>
+      <span className='text-content'>{substation?.type_kp ?? 'Нет даннных'}</span>
       <p className='substation-info__text'>Головной контроллер: </p>
-      <span className='text-content'>{substation?.head_controller?.name}</span>
+      <span className='text-content'>{substation?.head_controller ?? 'Нет даннных'}</span>
     </>
   )
 }

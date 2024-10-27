@@ -1,17 +1,17 @@
 import moment from 'moment'
 import { type FC } from 'react'
 import { Group } from '../../../../components'
-import { IPropsCompletedWorkInfo } from './CompletedWorkInfo.interface'
+import { ICompletedWork } from '../../../../interfaces'
 import './completedWork.scss'
 
-const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
+const CompletedWorkInfo: FC<{ completedWork: ICompletedWork }> = ({ completedWork }) => {
   return (
     <div className='work-info'>
       <div className='work-info__content'>
         <Group>
           <p className='work-info__text'>Объект:
             <span className='text-content'>
-              {completedWork?.substation?.fullNameSubstation}
+              {completedWork?.substation ?? 'Нет данных'}
             </span>
           </p>
         </Group>
@@ -25,7 +25,7 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
         <Group>
           <p className='work-info__text'>Категория работ:
             <span className='text-content'>
-              {completedWork.type_work.name}
+              {completedWork.type_work ?? 'Нет данных'}
             </span>
           </p>
         </Group>
@@ -33,7 +33,7 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
           <p className='work-info__text'>
             Производитель работ:
             <span className='text-content'>
-              {completedWork?.work_producer?.shortName}
+              {completedWork?.work_producer ?? 'Нет данных'}
             </span>
           </p>
         </Group>
@@ -41,7 +41,7 @@ const CompletedWorkInfo: FC<IPropsCompletedWorkInfo> = ({ completedWork }) => {
           <p className='work-info__text'>
             Автор записи:
             <span className='text-content'>
-              {completedWork?.author?.shortName}
+              {completedWork?.author ?? 'Нет данных'}
             </span>
           </p>
         </Group>

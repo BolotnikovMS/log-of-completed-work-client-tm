@@ -26,7 +26,7 @@ const SubstationInfo: FC = () => {
           <div className="substation-info__equipment-tm">
             <p className='substation-info__section-text'>Общая информация</p>
             <p className='substation-info__text'>РЭС/ГП: </p>
-            <p className='text-content'>{substation?.district?.name}</p>
+            <p className='text-content'>{substation?.district}</p>
             <p className='substation-info__text'>РДУ: </p>
             <p className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</p>
             <p className='substation-info__text'>Всего выполнено работ: </p>

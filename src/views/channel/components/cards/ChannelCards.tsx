@@ -26,12 +26,12 @@ const ChannelCards: FC = () => {
                 key={channel.id}
                 childrenContent={
                   <p className='text-content'>
-                    {channel.channel_category?.name}
+                    {channel?.channel_category ?? 'Нет данных'}
                     {' - '}
-                    {channel.channel_type?.name}
+                    {channel?.channel_type}
                     <Link to={`/substations/${channel.substationId}`} className='flex items-center gap-1 font-bold'>
                       <Icon id='link' />
-                      {channel.substation?.fullNameSubstation}
+                      {channel?.substation ?? 'Нет данных'}
                     </Link>
                   </p>
                 }

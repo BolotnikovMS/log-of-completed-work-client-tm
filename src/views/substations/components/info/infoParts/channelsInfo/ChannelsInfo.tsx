@@ -12,21 +12,21 @@ const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
       <p className='text-xl text-center font-bold'>Информация по каналам</p>
       {substation.channels?.map(channel => (
         <div key={channel.id} className='substation-info__channel'>
-          <p className='substation-info__text'>{channel.channel_category?.name}: </p>
+          <p className='substation-info__text'>{channel.channel_category}: </p>
           <p className='text-content flex items-center gap-2'>
-            {channel.channel_type?.name}
+            {channel.channel_type}
             <ChannelControlMenu channel={channel} />
           </p>
           {channel.channel_equipment && (
             <>
               <p className='substation-info__text'>Оборудование: </p>
-              <p className='text-content'>{channel.channel_equipment.name}</p>
+              <p className='text-content'>{channel.channel_equipment}</p>
             </>
           )}
           {channel.gsm_operator && (
             <>
               <p className='substation-info__text'>GSM оператор: </p>
-              <p className='text-content'>{channel.gsm_operator.name}</p>
+              <p className='text-content'>{channel.gsm_operator}</p>
             </>
           )}
           {channel.ipAddress && (

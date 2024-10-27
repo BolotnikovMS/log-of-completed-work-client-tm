@@ -40,15 +40,15 @@ const CompletedWorksCards: FC = () => {
                 childrenHeader={
                   <CardHeader
                     substationId={completedWork.substationId}
-                    substationFullName={completedWork.substation?.fullNameSubstation}
-                    typeWork={completedWork.type_work?.name}
+                    substationFullName={completedWork.substation}
+                    typeWork={completedWork.type_work}
                   />
                 }
                 childrenContent={<CardContent description={completedWork.description} />}
                 childrenFooter={
                   <CardFooter
                     dateCompletion={completedWork.dateCompletion}
-                    workProducerShortName={completedWork.work_producer?.shortName}
+                    workProducerShortName={completedWork.work_producer}
                   />
                 }
                 childrenControl={
