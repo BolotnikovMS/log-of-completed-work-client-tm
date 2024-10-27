@@ -17,7 +17,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
   const [searchParams] = useSearchParams()
   const substationId = searchParams.get('substation')
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TCompletedWorkData>({
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: {
       substationId: completedWork?.substationId || (substationId ? +substationId : undefined),
       workProducerId: completedWork?.workProducerId,

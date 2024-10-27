@@ -9,7 +9,7 @@ import { validationSchema } from './gsmOperator.validation'
 
 const GsmOperatorForm: FC<IPropsForm<IGsmOperator>> = ({ data: gsmOperator, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TGsmOperatorData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: gsmOperator?.name

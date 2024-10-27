@@ -4,12 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateChannelType, useUpdateChannelType } from '../../../../hooks'
 import { IChannelType, IPropsForm, IPropsMutation } from '../../../../interfaces'
-import { validationSchema } from './channelType.validation'
 import { TChannelTypeData } from '../../../../types'
+import { validationSchema } from './channelType.validation'
 
 const ChannelTypeForm: FC<IPropsForm<IChannelType>> = ({ data: channelType, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TChannelTypeData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: channelType?.name

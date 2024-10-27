@@ -9,7 +9,7 @@ import { validationSchema } from './validationSchema.validation'
 
 const TypeWorkForm: FC<IPropsForm<ITypeWork>> = ({ data: typeWork, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TTypeWorkData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: typeWork?.name

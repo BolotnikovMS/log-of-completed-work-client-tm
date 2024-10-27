@@ -21,7 +21,7 @@ export const SignIn: FC = () => {
 	}, [])
 
 	const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<ISignInFields>({
-		mode: 'onBlur'
+		mode: 'all'
 	})
 	const { mutateAsync } = useMutation({
 		mutationFn: (data: IUserDataLogin) => {

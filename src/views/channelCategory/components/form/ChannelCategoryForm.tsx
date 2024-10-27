@@ -9,7 +9,7 @@ import { validationSchema } from './channelCategory.validation'
 
 const ChannelCategoryForm: FC<IPropsForm<IChannelCategory>> = ({ data: channelCategory, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TChannelCategoryData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: channelCategory?.name

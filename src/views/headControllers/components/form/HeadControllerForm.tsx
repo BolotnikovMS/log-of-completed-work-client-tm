@@ -9,7 +9,7 @@ import { validationSchema } from './headController.validation'
 
 const HeadControllerForm: FC<IPropsForm<IHeadController>> = ({ data: headController, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<THeadControllerData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: headController?.name

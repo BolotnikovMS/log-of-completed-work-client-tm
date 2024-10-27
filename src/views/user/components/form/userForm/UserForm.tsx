@@ -10,7 +10,7 @@ import { validationSchema } from './user.validation'
 
 const UserForm: FC<IPropsForm<IUser>> = ({ data: user, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TUserData>({
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: {
       username: user?.username,
       surname: user?.surname,

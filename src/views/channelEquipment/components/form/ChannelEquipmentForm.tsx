@@ -10,7 +10,7 @@ import { validationSchema } from './channelEquipment.validation'
 
 const ChannelEquipmentForm: FC<IPropsForm<IChannelEquipment>> = ({ data: channelEquipment, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TChannelEquipmentData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       channelTypeId: channelEquipment?.channelTypeId,

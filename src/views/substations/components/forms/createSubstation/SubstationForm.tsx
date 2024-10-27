@@ -12,7 +12,7 @@ import { validationSchema } from './substation.validation'
 const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdited, setIsEdited, toggleModal }) => {
   const { id } = useParams()
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TSubstationData>({
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: {
       districtId: substation?.districtId || (id ? +id : undefined),
       voltageClassesId: substation?.voltageClassesId,

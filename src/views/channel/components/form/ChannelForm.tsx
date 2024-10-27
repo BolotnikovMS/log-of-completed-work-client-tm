@@ -12,7 +12,7 @@ import { validationSchema } from './channelForm.validation'
 const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsEdited, toggleModal }) => {
   const { id } = useParams()
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TChannelData>({
-    mode: 'onBlur',
+    mode: 'all',
     defaultValues: {
       substationId: channel?.substationId || (id ? +id : undefined),
       channelCategoryId: channel?.channelCategoryId,

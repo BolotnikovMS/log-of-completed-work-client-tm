@@ -9,7 +9,7 @@ import { validationSchema } from './typesKp.validation'
 
 const TypeKpForm: FC<IPropsForm<ITypeKp>> = ({ data: typeKp, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TTypeKpData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: typeKp?.name

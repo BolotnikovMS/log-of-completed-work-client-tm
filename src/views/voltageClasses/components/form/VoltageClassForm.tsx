@@ -4,12 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateVoltageClass, useUpdateVoltageClass } from '../../../../hooks'
 import { IPropsForm, IPropsMutation, IVoltageClass } from '../../../../interfaces'
-import { validationSchema } from './voltageClasses.validation'
 import { TVoltageClassData } from '../../../../types'
+import { validationSchema } from './voltageClasses.validation'
 
 const VoltageClassForm: FC<IPropsForm<IVoltageClass>> = ({ data: voltageClass, isEdited, toggleModal, setIsEdited }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TVoltageClassData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: voltageClass?.name

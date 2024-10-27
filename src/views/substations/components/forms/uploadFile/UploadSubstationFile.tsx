@@ -12,7 +12,7 @@ export const UploadSubstationFile: FC<IPropsForm<IFile>> = ({ toggleModal }) => 
   const { id } = useParams()
   const [files, setFiles] = useState<FileList | null>(null)
   const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TFileUploadData>({
-    mode: 'onBlur',
+    mode: 'all',
   })
   const { field: { value: typeFileValue, onChange: typeFileOnChange, ...restTypeFileField } } = useController({ name: 'typeFile', control, rules: { required: { value: true, message: 'Поле является обязательным!' } } })
   const { mutateAsync, isError, error, isPending } = useUploadSubstationFile()

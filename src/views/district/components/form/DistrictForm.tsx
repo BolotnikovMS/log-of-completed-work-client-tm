@@ -4,12 +4,12 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Button, Error, Group, Input, Loader } from '../../../../components'
 import { useCreateDistrict, useUpdateDistrict } from '../../../../hooks'
 import { IDistrict, IPropsForm, IPropsMutation } from '../../../../interfaces'
-import { validationSchema } from './district.validation'
 import { TDistrictData } from '../../../../types'
+import { validationSchema } from './district.validation'
 
 const DistrictForm: FC<IPropsForm<IDistrict>> = ({ data: district, isEdited, setIsEdited, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<TDistrictData>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
       name: district?.name,
