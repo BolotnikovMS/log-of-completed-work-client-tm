@@ -1,5 +1,5 @@
 export interface IPropsCardHeader {
   substationId: number
-  substationFullName: string
-  typeWork: string
+  substationFullName?: string | null
+  typeWork: string | null
 }

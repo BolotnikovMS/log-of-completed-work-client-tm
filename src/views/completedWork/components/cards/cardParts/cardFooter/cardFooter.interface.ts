@@ -1,4 +1,4 @@
 export interface IPropsCardFooter {
   dateCompletion: Date
-  workProducerShortName: string
+  workProducerShortName?: string | null
 }
