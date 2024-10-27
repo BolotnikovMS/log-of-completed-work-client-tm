@@ -1,3 +1,3 @@
 import { IGsmOperator } from '../interfaces'
 
-export type TGsmOperatorData = Omit<IGsmOperator, 'id' | 'userId'>
+export type TGsmOperatorData = Omit<IGsmOperator, 'id'>
