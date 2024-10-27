@@ -8,8 +8,7 @@ export const useDeleteChannelEquipment = () => {
   const deleteChannelEquipment = useMutation({
     mutationFn: (id: number) => ChannelEquipmentService.delete(id),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['channelingEquipment'] })
       toast.success('Запись успешно удалена!')
     },
     onError: (error) => {
