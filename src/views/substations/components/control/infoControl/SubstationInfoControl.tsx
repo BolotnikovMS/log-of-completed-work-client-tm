@@ -1,30 +1,26 @@
 import { useState, type FC } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Button, Icon, Modal } from '../../../../../components'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useModal } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 import { ChannelForm } from '../../../../channel/components'
-import { SubstationForm, UploadSubstationFile } from '../../index'
+import { SubstationForm, SubstationNote, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 
 const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) => {
-  const navigate = useNavigate()
   const { authUser } = useAuthStore()
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const { isModal, toggleModal } = useModal()
   const { isModal: isModalEdit, toggleModal: toggleModalEdit } = useModal()
   const { isModal: isModalAddChannel, toggleModal: toggleModalAddChannel } = useModal()
+  const { isModal: isModalAddNote, toggleModal: toggleModalAddNote } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
 
   return (
     <div className="work-log__control">
       <div className="control__wrapper !justify-start">
-        <Button onClick={() => navigate(-1)}>
-          <Icon id='arrow-left' />
-          Обратно
-        </Button>
         <Link to={`/completed-works?substation=${substation?.id}`} className='mBtn btn-sm'>
           <Icon id='note' />
           Работы
@@ -43,6 +39,10 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
             <Button onClick={() => { toggleModalAddChannel() }}>
               <Icon id='network' />
               Добавить канал
+            </Button>
+            <Button onClick={() => { toggleModalAddNote(), setIsEdited(!isEdited) }}>
+              <Icon id='note-add' />
+              Примечание
             </Button>
           </>
         )}
@@ -64,6 +64,12 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
           title='Добавление канала'
           onToggle={toggleModalAddChannel}
           content={<ChannelForm toggleModal={toggleModalAddChannel} />}
+        />
+        <Modal
+          visible={isModalAddNote}
+          title='Добавление примечание'
+          onToggle={toggleModalAddNote}
+          content={<SubstationNote data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalAddNote} />}
         />
       </div>
     </div>

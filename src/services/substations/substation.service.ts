@@ -5,7 +5,7 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IQueryParams, ISubstation } from '../../interfaces'
-import { TRespSubstations, TSubstationData } from '../../types'
+import { TRespSubstations, TSubstationData, TSubstationNoteData } from '../../types'
 
 export const SubstationService = {
   async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType }: IQueryParams): Promise<TRespSubstations> {
@@ -27,7 +27,11 @@ export const SubstationService = {
   },
 
   async update(id: number, data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
-    return await instance.patch<ISubstation>(`${url}/substations/${id}`, data)
+    return instance.patch<ISubstation>(`${url}/substations/${id}`, data)
+  },
+
+  async updateNote(id: number, data: TSubstationNoteData): Promise<AxiosResponse<ISubstation>> {
+    return instance.patch<ISubstation>(`${url}/substations/${id}/note`, data)
   },
 
   async deleteSubstation(id: number): Promise<AxiosResponse<void>> {

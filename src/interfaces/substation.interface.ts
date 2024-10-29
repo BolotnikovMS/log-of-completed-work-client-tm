@@ -11,6 +11,7 @@ export interface ISubstation {
   typeKpId: number
   headControllerId: number
   numberCompletedWorks?: number
+  note?: string | null
   voltage_class?: string | null
   district?: string | null
   type_kp?: string | null
