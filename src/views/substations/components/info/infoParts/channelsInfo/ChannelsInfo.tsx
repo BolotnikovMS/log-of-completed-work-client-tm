@@ -1,14 +1,11 @@
 import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
-import { Button, Icon, Modal } from '../../../../../../components'
-import { useModal } from '../../../../../../hooks'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
 import { IPropsChannelsInfo } from '../partsInfo.interfaces'
+import ChannelInfoNote from './ChannelInfoNote'
 
 const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
-  const { isModal, toggleModal } = useModal()
-
   if (!channels?.length) return <p className='substation-info__section-text text-red-500'>Нету данных по каналам для отображения!</p>
 
   return (
@@ -40,20 +37,7 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
               </>
             )}
             {channel.note && (
-              <>
-                <Button className='col-span-2' onClick={() => toggleModal()}>
-                  <Icon id='view' />
-                  Показать примечание
-                </Button>
-                <Modal
-                  visible={isModal}
-                  title='Примечания к записи'
-                  onToggle={() => toggleModal()}
-                  content={
-                    <p className='text-content text-balance'>{channel.note}</p>
-                  }
-                />
-              </>
+              <ChannelInfoNote channel={channel} />
             )}
           </div>
           <div className="w-none">
