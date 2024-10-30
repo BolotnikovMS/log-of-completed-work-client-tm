@@ -14,7 +14,7 @@
 	}
 
 	&__channel-wrapper {
-	 @apply p-1 pr-3 grid grid-flow-col items-center gap-3 border-2 border-dashed border-gray-300 rounded-xl;
+	 @apply p-1 pr-3 grid grid-flow-col items-center justify-between gap-3 border-2 border-dashed border-gray-300 rounded-xl;
 	}
 
 	&__channel {
