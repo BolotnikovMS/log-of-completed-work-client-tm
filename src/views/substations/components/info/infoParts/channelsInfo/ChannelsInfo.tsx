@@ -11,39 +11,42 @@ const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
     <div className="flex flex-col gap-3">
       <p className='text-xl text-center font-bold'>Информация по каналам</p>
       {substation.channels?.map(channel => (
-        <div key={channel.id} className='substation-info__channel'>
-          <p className='substation-info__text'>{channel.channel_category}: </p>
-          <p className='text-content flex items-center gap-2'>
-            {channel.channel_type}
-            <ChannelControlMenu channel={channel} />
-          </p>
-          {channel.channel_equipment && (
-            <>
-              <p className='substation-info__text'>Оборудование: </p>
-              <p className='text-content'>{channel.channel_equipment}</p>
-            </>
-          )}
-          {channel.gsm_operator && (
-            <>
-              <p className='substation-info__text'>GSM оператор: </p>
-              <p className='text-content'>{channel.gsm_operator}</p>
-            </>
-          )}
-          {channel.ipAddress && (
-            <>
-              <p className='substation-info__text'>IP адрес канала: </p>
-              <p className='text-content'>{channel.ipAddress}</p>
-            </>
-          )}
-          {channel.note && (
-            <>
-              <p className='substation-info__text'>Примечание: </p>
-              <p className='text-content text-pretty'>{channel.note}</p>
-            </>
-          )}
+        <div key={channel.id} className='substation-info__channel-wrapper'>
+          <div className='substation-info__channel'>
+            <p className='substation-info__text'>{channel.channel_category}: </p>
+            <p className='text-content flex items-center gap-2'>
+              {channel.channel_type}
+            </p>
+            {channel.channel_equipment && (
+              <>
+                <p className='substation-info__text'>Оборудование: </p>
+                <p className='text-content'>{channel.channel_equipment}</p>
+              </>
+            )}
+            {channel.gsm_operator && (
+              <>
+                <p className='substation-info__text'>GSM оператор: </p>
+                <p className='text-content'>{channel.gsm_operator}</p>
+              </>
+            )}
+            {channel.ipAddress && (
+              <>
+                <p className='substation-info__text'>IP адрес канала: </p>
+                <p className='text-content'>{channel.ipAddress}</p>
+              </>
+            )}
+            {channel.note && (
+              <>
+                <p className='substation-info__text'>Примечание: </p>
+                <p className='text-content text-pretty'>{channel.note}</p>
+              </>
+            )}
+          </div>
+          <ChannelControlMenu channel={channel} />
         </div>
-      ))}
-    </div>
+      ))
+      }
+    </div >
   )
 }
 

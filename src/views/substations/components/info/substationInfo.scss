@@ -13,8 +13,12 @@
 		@apply grid grid-cols-2 items-center gap-3;
 	}
 
+	&__channel-wrapper {
+	 @apply p-1 pr-3 flex gap-1 items-center justify-between border-2 border-dashed border-gray-300 rounded-xl;
+	}
+
 	&__channel {
-	 @apply  p-1 grid grid-cols-2 items-center gap-3 border-2 border-dashed border-gray-300 rounded-xl;
+	 @apply grid grid-cols-2 items-center gap-3;
 	}
 
 	&__text {
