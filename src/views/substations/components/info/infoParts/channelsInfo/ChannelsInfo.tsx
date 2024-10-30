@@ -38,11 +38,13 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
             {channel.note && (
               <>
                 <p className='substation-info__text'>Примечание: </p>
-                <p className='text-content text-pretty'>{channel.note}</p>
+                <p className='text-content text-balance'>{channel.note}</p>
               </>
             )}
           </div>
-          <ChannelControlMenu channel={channel} />
+          <div className="w-none">
+            <ChannelControlMenu channel={channel} />
+          </div>
         </div>
       ))
       }
