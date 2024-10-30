@@ -39,7 +39,7 @@ const FileTable: FC <{files: IFile[]}> = ({ files }) => {
 			header: 'Автор',
 			accessorKey: 'author',
 			cell: ({row}) => (
-				row.original.author?.shortName
+				row.original.author
 			)
 		},
 		{
