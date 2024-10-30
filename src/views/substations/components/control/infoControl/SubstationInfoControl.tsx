@@ -1,6 +1,6 @@
 import { useState, type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Icon, Modal } from '../../../../../components'
+import { Button, Dropdown, Icon, Modal } from '../../../../../components'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useModal } from '../../../../../hooks'
@@ -26,26 +26,36 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
           Работы
           ({substation?.numberCompletedWorks})
         </Link>
-        <Button onClick={toggleModal}>
-          <Icon id='file-add' />
-          Добавить файл
-        </Button>
-        {isAdminOrModerator && (
-          <>
-            <Button onClick={() => { toggleModalEdit(), setIsEdited(!isEdited) }}>
-              <Icon id='edit' />
-              Редактировать
-            </Button>
-            <Button onClick={() => { toggleModalAddChannel() }}>
-              <Icon id='network' />
-              Добавить канал
-            </Button>
-            <Button onClick={() => { toggleModalAddNote(), setIsEdited(!isEdited) }}>
-              <Icon id='note-add' />
-              Примечание
-            </Button>
-          </>
-        )}
+        <Dropdown
+          classMenu='dropdown-bottom dropdown-start'
+          children={
+            <>
+              <Icon id='setting' />
+              Действие
+            </>
+          }
+          menuItems={[
+            <Button onClick={toggleModal}>
+              <Icon id='file-add' />
+              Добавить файл
+            </Button>,
+            isAdminOrModerator && (
+              <Button onClick={() => { toggleModalEdit(), setIsEdited(!isEdited) }}>
+                <Icon id='edit' />
+                Редактировать
+              </Button>),
+            isAdminOrModerator && (
+              <Button onClick={() => { toggleModalAddChannel() }}>
+                <Icon id='network' />
+                Добавить канал
+              </Button>),
+            isAdminOrModerator && (
+              <Button onClick={() => { toggleModalAddNote(), setIsEdited(!isEdited) }}>
+                <Icon id='note-add' />
+                Примечание
+              </Button>)
+          ]}
+        />
 
         <Modal
           visible={isModal}
