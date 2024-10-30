@@ -2,15 +2,15 @@ import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
-import { IPropsPartsInfo } from '../partsInfo.interface'
+import { IPropsChannelsInfo } from '../partsInfo.interfaces'
 
-const ChannelsInfo: FC<IPropsPartsInfo> = ({ substation }) => {
-  if (!substation?.channels?.length) return <p className='substation-info__section-text text-red-500'>Нету данных по каналам для отображения!</p>
+const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
+  if (!channels?.length) return <p className='substation-info__section-text text-red-500'>Нету данных по каналам для отображения!</p>
 
   return (
     <div className="flex flex-col gap-3">
       <p className='text-xl text-center font-bold'>Информация по каналам</p>
-      {substation.channels?.map(channel => (
+      {channels.map(channel => (
         <div key={channel.id} className='substation-info__channel-wrapper'>
           <div className='substation-info__channel'>
             <p className='substation-info__text'>{channel.channel_category}: </p>

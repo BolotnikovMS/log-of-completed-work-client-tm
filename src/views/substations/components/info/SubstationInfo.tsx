@@ -33,7 +33,7 @@ const SubstationInfo: FC = () => {
             <p className="text-content">{substation?.numberCompletedWorks}</p>
             <YtmInfo substation={substation} />
           </div>
-          <ChannelsInfo substation={substation} />
+          <ChannelsInfo channels={substation?.channels} />
           {substation?.note && (
             <div>
               <p className="substation-info__section-text">Примечание</p>
