@@ -1,11 +1,12 @@
 import { type FC } from 'react'
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, Loader } from '../../../../../components'
+import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, InfoMessage, Loader } from '../../../../../components'
 import { useCompletedWorksYear } from '../../../../../hooks'
 
 const CompletedWorksYearChart: FC = () => {
   const { data, error, isError, isLoading } = useCompletedWorksYear()
 
+  if (!data?.length) return <InfoMessage text='Статистики для отображения нет...' />
   if (isLoading) return <Loader />
   if (isError && error) return <Error error={error} />
 

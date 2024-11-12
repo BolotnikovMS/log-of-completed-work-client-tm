@@ -1,10 +1,13 @@
 import { type FC } from 'react'
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
-import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, Loader } from '../../../../../components'
+import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, InfoMessage, Loader } from '../../../../../components'
 import { useSubstationsTypeKp } from '../../../../../hooks'
 
 const SubstationsTypeKpChart: FC = () => {
   const { data, error, isError, isLoading } = useSubstationsTypeKp()
+
+  if (!data?.length) return <InfoMessage text='Статистики для отображения нет...' />
+
   const transformedData = data?.map(item => ({
     ...item,
     combinedKey: `${item.id}:${item.name}`
