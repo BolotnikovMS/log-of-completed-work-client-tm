@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Error, Icon, InfoMessage, Loader, LoadMore, SmallCard } from '../../../../components'
+import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useInfiniteChannels } from '../../../../hooks/channels/useInfiniteChannels'
 import { ChannelControlMenu } from './cardParts'
@@ -29,7 +30,7 @@ const ChannelCards: FC = () => {
                     {channel?.channel_category ?? 'Нет данных'}
                     {' - '}
                     {channel?.channel_type}
-                    <Link to={`/substations/${channel.substationId}`} className='flex items-center gap-1 font-bold'>
+                    <Link to={pageConfig.getDynamicUrl(pageConfig.substation, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
                       <Icon id='link' />
                       {channel?.substation ?? 'Нет данных'}
                     </Link>

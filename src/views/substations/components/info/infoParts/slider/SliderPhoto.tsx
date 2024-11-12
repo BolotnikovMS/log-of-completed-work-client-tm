@@ -1,7 +1,7 @@
 import { MouseEvent, type FC } from 'react'
 import { CustomSlider, Icon } from '../../../../../../components'
 import { urlFile } from '../../../../../../constants'
-import { IPropsPartsInfo } from '../partsInfo.interface'
+import { IPropsPartsInfo } from '../partsInfo.interfaces'
 
 const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
   if (!substation) return <p className='substation-info__section-text text-red-500'>Нету данных для отображения!</p>

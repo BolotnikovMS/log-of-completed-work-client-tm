@@ -2,13 +2,14 @@ import { useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
 import { Badge, Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
+import { pageConfig } from '../../../../config/pages.config'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
-import { EFilterParam } from '../../../../enums/filterParam.enums'
 
 const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
@@ -59,7 +60,7 @@ const SubstationsCards: FC = () => {
                     </p>
                   </>
                 }
-                path={`/substations/${substation.id}`}
+                path={pageConfig.getDynamicUrl(pageConfig.substation, { id: substation.id })}
                 childrenControl={
                   isAdminOrModerator && (
                     <Dropdown

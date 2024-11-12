@@ -2,6 +2,7 @@ import { isAxiosError } from 'axios'
 import { useMemo, useState, type FC } from 'react'
 import { useParams, useSearchParams } from 'react-router-dom'
 import { Badge, Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
+import { pageConfig } from '../../../../config/pages.config'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useDeleteSubstation, useDistrictSubstations, useModal } from '../../../../hooks'
@@ -54,7 +55,7 @@ const DistrictSubstationCards: FC = () => {
                   </p>
                 </>
               }
-              path={`/substations/${substation.id}`}
+              path={pageConfig.getDynamicUrl(pageConfig.substation, { id: substation.id })}
               childrenControl={
                 isAdminOrModerator && (
                   <Dropdown

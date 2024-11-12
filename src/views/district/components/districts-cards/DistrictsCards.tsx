@@ -2,6 +2,7 @@ import { useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { DistrictForm } from '..'
 import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { pageConfig } from '../../../../config/pages.config'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
 import { useDeleteDistrict, useInfiniteDistricts, useModal } from '../../../../hooks'
@@ -47,7 +48,7 @@ const DistrictsCards: FC = () => {
                     {district.name}
                   </p>
                 }
-                path={`/districts/${district.id}/substations`}
+                path={pageConfig.getDynamicUrl(pageConfig.districtSubstations, { id: district.id })}
                 childrenControl={
                   isAdminOrModerator &&
                   <Dropdown

@@ -1,6 +1,7 @@
 import { useState, type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Dropdown, Icon, Modal } from '../../../../../components'
+import { pageConfig } from '../../../../../config/pages.config'
 import { ERoles } from '../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../helpers'
 import { useModal } from '../../../../../hooks'
@@ -21,7 +22,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
   return (
     <div className="work-log__control">
       <div className="control__wrapper !justify-start">
-        <Link to={`/completed-works?substation=${substation?.id}`} className='mBtn btn-sm'>
+        <Link to={`${pageConfig.completedWorks}?substation=${substation?.id}`} className='mBtn btn-sm'>
           <Icon id='note' />
           Работы
           ({substation?.numberCompletedWorks})

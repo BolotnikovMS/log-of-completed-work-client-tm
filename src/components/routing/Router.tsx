@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AuthLayout, Layout, Page, ProtectedRoute } from '..'
+import { pageConfig } from '../../config/pages.config'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers/checkRole.helper'
 import { useAuthStore } from '../../store/auth'
@@ -16,16 +17,16 @@ import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/c
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
+import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
-import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 
 export const Router: React.FC = () => {
   const { authUser } = useAuthStore()
 
   return (
     <Routes>
-      <Route path='/' element={authUser ? <Layout /> : <AuthLayout />}>
+      <Route path={pageConfig.statistics} element={authUser ? <Layout /> : <AuthLayout />}>
         <Route index element={
           <ProtectedRoute isAllowed={!!authUser}>
             <Page
@@ -36,7 +37,7 @@ export const Router: React.FC = () => {
             />
           </ProtectedRoute>
         } />
-        <Route path='/districts'
+        <Route path={pageConfig.districts}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -51,7 +52,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/districts/:id/substations'
+        <Route path={pageConfig.districtSubstations}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -67,7 +68,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/substations'
+        <Route path={pageConfig.substations}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -82,7 +83,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/substations/:id'
+        <Route path={pageConfig.substation}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -95,7 +96,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/voltage-classes'
+        <Route path={pageConfig.voltageClasses}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -110,7 +111,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/types-kp'
+        <Route path={pageConfig.typesKp}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -125,7 +126,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/head-controllers'
+        <Route path={pageConfig.headControllers}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -140,7 +141,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/channel-categories'
+        <Route path={pageConfig.channelCategories}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -155,7 +156,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/channel-types'
+        <Route path={pageConfig.channelTypes}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -170,7 +171,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/channeling-equipments'
+        <Route path={pageConfig.channelingEquipments}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -185,7 +186,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/channels'
+        <Route path={pageConfig.channels}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -200,7 +201,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/gsm-operators'
+        <Route path={pageConfig.gsmOperators}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -215,7 +216,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/types-work'
+        <Route path={pageConfig.typesWork}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -230,7 +231,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/completed-works'
+        <Route path={pageConfig.completedWorks}
           element={
             <ProtectedRoute isAllowed={!!authUser}>
               <Page
@@ -245,7 +246,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/users'
+        <Route path={pageConfig.users}
           element={
             <ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
               <Page
@@ -260,7 +261,7 @@ export const Router: React.FC = () => {
             </ProtectedRoute>
           }
         />
-        <Route path='/profile'
+        <Route path={pageConfig.profile}
           element={
             <Page
               title='Профиль'
@@ -273,7 +274,7 @@ export const Router: React.FC = () => {
             />
           }
         />
-        <Route path='/sign-in'
+        <Route path={pageConfig.signIn}
           element={
             <Page
               title='Вход'
@@ -286,7 +287,7 @@ export const Router: React.FC = () => {
             />
           }
         />
-        <Route path='*' element={<div>Not Found</div>} />
+        <Route path={pageConfig.notFound} element={<div>Not Found</div>} />
       </Route>
     </Routes>
   )

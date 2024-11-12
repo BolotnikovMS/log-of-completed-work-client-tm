@@ -1,6 +1,7 @@
 import React, { type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { Button, Icon } from '..'
+import { pageConfig } from '../../config/pages.config'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
 import { checkRole } from '../../helpers'
@@ -28,7 +29,7 @@ export const NavBar: FC = () => {
         </div>
         <ul className='mNavBar__menu'>
           <li>
-            <Link to={'/'}>
+            <Link to={pageConfig.statistics}>
               <Icon id='pie-chart' />
               Статистика
             </Link>
@@ -66,14 +67,14 @@ export const NavBar: FC = () => {
             </details>
           </li>
           <li>
-            <Link to={'/completed-works'}>
+            <Link to={pageConfig.completedWorks}>
               <Icon id='note-done' />
               Выполненные работы
             </Link>
           </li>
           {checkRole(user, [ERoles.Admin]) && (
             <li>
-              <Link to={'/users'}>
+              <Link to={pageConfig.users}>
                 <Icon id='users' />
                 Пользователи
               </Link>
@@ -101,8 +102,8 @@ export const NavBar: FC = () => {
                 </span>
               </div>
             </div>
-            <li className=''>
-              <Link to={'/profile'}>
+            <li>
+              <Link to={pageConfig.profile}>
                 <Icon id='profile' />
                 Профиль
               </Link>

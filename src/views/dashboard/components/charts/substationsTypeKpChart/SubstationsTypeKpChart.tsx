@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, InfoMessage, Loader } from '../../../../../components'
+import { pageConfig } from '../../../../../config/pages.config'
 import { useSubstationsTypeKp } from '../../../../../hooks'
 
 const SubstationsTypeKpChart: FC = () => {
@@ -23,7 +24,7 @@ const SubstationsTypeKpChart: FC = () => {
           dataKey='combinedKey'
           tickFormatter={(value) => value.substring(0, 5)}
           tick={
-            <CustomAxisTickChart x={0} y={0} payload={undefined} linkTemplate={(typeKpId) => `/substations?typeKp=${typeKpId}`} renderValue={(_, textLabel) => textLabel} valueSeparator=':' />
+            <CustomAxisTickChart x={0} y={0} payload={undefined} linkTemplate={(typeKpId) => `${pageConfig.substations}?typeKp=${typeKpId}`} renderValue={(_, textLabel) => textLabel} valueSeparator=':' />
           }
         />
         <YAxis />

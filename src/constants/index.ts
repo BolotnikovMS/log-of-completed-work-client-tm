@@ -1,25 +1,27 @@
+import { pageConfig } from '../config/pages.config'
+
 export const url = import.meta.env.VITE_API_URL
 export const urlFile = import.meta.env.VITE_FILE_URL
 export const menuItemData = [
   {
     title: 'Районы, ГП, УС',
-    url: '/districts',
+    url: pageConfig.districts,
   },
   {
     title: 'ПС',
-    url: '/substations',
+    url: pageConfig.substations,
   },
   {
     title: 'Классы U',
-    url: '/voltage-classes',
+    url: pageConfig.voltageClasses,
   },
   {
     title: 'Типы КП',
-    url: '/types-kp',
+    url: pageConfig.typesKp,
   },
   {
     title: 'Контроллеры',
-    url: '/head-controllers',
+    url: pageConfig.headControllers,
   },
   {
     title: 'Каналы',
@@ -27,28 +29,28 @@ export const menuItemData = [
     submenu: [
       {
         title: 'Категории каналов',
-        url: '/channel-categories',
+        url: pageConfig.channelCategories,
       },
       {
         title: 'Типы каналов',
-        url: '/channel-types',
+        url: pageConfig.channelTypes,
       },
       {
         title: 'Каналообразующее оборудование',
-        url: '/channeling-equipments',
+        url: pageConfig.channelingEquipments,
       },
       {
         title: 'GSM операторы',
-        url: '/gsm-operators',
+        url: pageConfig.gsmOperators,
       },
       {
         title: 'Каналы',
-        url: '/channels',
+        url: pageConfig.channels,
       },
     ]
   },
   {
     title: 'Категории работ',
-    url: '/types-work',
+    url: pageConfig.typesWork,
   },
 ]

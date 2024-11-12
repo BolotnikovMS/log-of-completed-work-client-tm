@@ -2,6 +2,7 @@ import { type FC } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { SubstationFlterParameters } from '..'
 import { Button, Dropdown, Group, Icon, LoaderLine, Modal, Search, Sort } from '../../../../components'
+import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useDownloadExcelSubstations, useModal } from '../../../../hooks'
 import { TOrderSort } from '../../../../types/order.types'
@@ -29,7 +30,7 @@ const SubstationFilters: FC = () => {
       <div className='w-full flex gap-1 items-center justify-between'>
         <Group className='!flex-row'>
           <Sort orderSort={orderSort as TOrderSort} sort={sort} sortOptions={sortOptions} />
-          {location.pathname === '/substations' && (
+          {location.pathname === pageConfig.substations && (
             <>
               <Dropdown
                 classMenu='dropdown-bottom'
