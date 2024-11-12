@@ -44,7 +44,7 @@ const ChannelCards: FC = () => {
         </div>
       )}
       {(!data?.pages[0].data.length && !isFetching && !isError) && (
-        <InfoMessage text='Пока не добавлено каналов...' />
+        <InfoMessage text='Пока добавленных каналов нет...' />
       )}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
