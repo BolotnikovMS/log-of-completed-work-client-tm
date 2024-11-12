@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { toast } from 'react-toastify'
 import { errorHandler } from '../../helpers'
 import { DistrictService } from '../../services/district/district.service'
 import { TDistrictData } from '../../types'
@@ -10,11 +9,15 @@ export const useCreateDistrict = () => {
   return useMutation({
     mutationFn: (data: TDistrictData) => DistrictService.create(data),
     onSuccess: async () => {
+      const { toast } = await import('react-toastify')
+
       await queryClient.invalidateQueries({ queryKey: ['districts', 'infinity'] })
 
       toast.success('Запись успешно добавлена!')
     },
-    onError: (errors) => {
+    onError: async (errors) => {
+      const { toast } = await import('react-toastify')
+
       toast.error(errorHandler(errors))
     }
   })
