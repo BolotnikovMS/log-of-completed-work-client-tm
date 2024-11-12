@@ -62,7 +62,7 @@ const CompletedWorksCards: FC = () => {
           ))}
         </div >
       )}
-      {(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока нет выполненных работ по ПС...' />}
+      {(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока выполненных работ не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal
         visible={isModalView}
