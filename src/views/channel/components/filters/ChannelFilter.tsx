@@ -56,7 +56,7 @@ const ChannelFilter: FC<IPropsChannelFilters> = ({ toggleModal }) => {
             onChange={option => setSubstation(option ? option.id.toString() : null)}
             isLoading={isLoadingSubstations}
             isDisabled={isErrorSubstations}
-            placeholder="Выберите ПС..."
+            placeholder="Выберите объект..."
           />
         </Group>
         <Group>

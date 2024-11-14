@@ -61,7 +61,7 @@ const SubstationFilters: FC = () => {
           <Search
             name='substation'
             classSearch='!input-sm'
-            placeholderText='Поиск ПС...'
+            placeholderText='Поиск объекта...'
           />
         </div>
       </div>

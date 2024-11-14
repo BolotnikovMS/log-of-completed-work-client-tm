@@ -61,7 +61,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
       {errorMessage}
       <form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
         <Group>
-          <SelectWrapper label='Выберите ПС' errorMessage={errors.substationId?.message} mandatory>
+          <SelectWrapper label='Выберите объект' errorMessage={errors.substationId?.message} mandatory>
             <AsyncSelect
               classNamePrefix='form__custom-select'
               options={substations?.data}
@@ -72,7 +72,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
               isLoading={isLoadingSubstations}
               isDisabled={isErrorSubstations}
               isClearable
-              placeholder="Выберите ПС..."
+              placeholder="Выберите объект..."
               {...restSubstationField}
             />
           </SelectWrapper>

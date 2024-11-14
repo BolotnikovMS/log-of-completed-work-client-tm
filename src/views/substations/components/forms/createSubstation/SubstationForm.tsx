@@ -74,12 +74,12 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
         </Group>
         <Group>
           <Input
-            label='Название ПС'
+            label='Название объекта'
             name='name'
             register={register}
             errorMessage={errors.name?.message}
             mandatory
-            placeholder='Введите название ПС...'
+            placeholder='Введите название объекта...'
           />
         </Group>
         <Group>

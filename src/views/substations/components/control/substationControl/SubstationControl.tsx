@@ -22,7 +22,7 @@ const SubstationControl: FC = () => {
         )}
         <Modal
           visible={isModal}
-          title='Форма добавления подстанций'
+          title='Форма добавления объекта'
           content={<SubstationForm toggleModal={toggleModal} />}
           onToggle={toggleModal}
         />

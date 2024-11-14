@@ -8,7 +8,7 @@ export const menuItemData = [
     url: pageConfig.districts,
   },
   {
-    title: 'ПС',
+    title: 'Объекты',
     url: pageConfig.substations,
   },
   {
