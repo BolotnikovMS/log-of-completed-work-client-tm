@@ -19,13 +19,29 @@ class PageConfig {
   signIn = '/sign-in'
   notFound = '*'
 
-  getDynamicUrl(template: string, params: Record<string, string | number>): string {
-    let url = template
+  getDynamicUrl(template: string, params: Record<string, string | number>, queryParams?: Record<string, string | number>): string {
+    let url: string = template
 
+    params = params ?? {}
     for (const key in params) {
       if (Object.prototype.hasOwnProperty.call(params, key)) {
         url = url.replace(`:${key}`, String(params[key]))
       }
+    }
+
+    queryParams = queryParams ?? {}
+    const searchParams = new URLSearchParams()
+
+    for (const key in queryParams) {
+      if (Object.prototype.hasOwnProperty.call(queryParams, key)) {
+        searchParams.append(String(key), String(queryParams[key]))
+      }
+    }
+
+    const queryString = searchParams.toString()
+
+    if (queryString) {
+      url += `?${queryString}`
     }
 
     return url
