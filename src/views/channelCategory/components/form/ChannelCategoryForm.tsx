@@ -12,7 +12,8 @@ const ChannelCategoryForm: FC<IPropsForm<IChannelCategory>> = ({ data: channelCa
     mode: 'all',
     resolver: yupResolver(validationSchema),
     defaultValues: {
-      name: channelCategory?.name
+      name: channelCategory?.name,
+      shortName: channelCategory?.shortName,
     }
   })
   const { mutateAsync: createChannelCategory, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannelCategory()
@@ -48,11 +49,21 @@ const ChannelCategoryForm: FC<IPropsForm<IChannelCategory>> = ({ data: channelCa
             placeholder='Введите наименование...'
           />
         </Group>
-        <div className="form__btns">
+        <Group>
+          <Input
+            label='Краткое наименование категорий каналов'
+            name='shortName'
+            register={register}
+            errorMessage={errors.shortName?.message}
+            mandatory
+            placeholder='Введите наименование...'
+          />
+        </Group>
+        <Group className='items-center mt-5'>
           <Button disabled={!isValid} className='mBtn_outline-green'>
             {isEdited ? 'Сохранить' : 'Добавить'}
           </Button>
-        </div>
+        </Group>
       </form>
     </div>
   )
