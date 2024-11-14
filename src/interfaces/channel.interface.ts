@@ -8,6 +8,7 @@ export interface IChannel {
   ipAddress?: string | null
   note?: string | null
   channel_category?: string | null
+  channel_category_short?: string | null
   channel_type?: string | null
   substation?: string | null
   channel_equipment?: string | null

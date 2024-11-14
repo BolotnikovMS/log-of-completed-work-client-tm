@@ -27,7 +27,7 @@ const ChannelCards: FC = () => {
                 key={channel.id}
                 childrenContent={
                   <p className='text-content'>
-                    {channel?.channel_category ?? 'Нет данных'}
+                    {channel?.channel_category_short ?? 'Нет данных'}
                     {' - '}
                     {channel?.channel_type}
                     <Link to={pageConfig.getDynamicUrl(pageConfig.substation, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
