@@ -24,7 +24,13 @@ const SubstationsTypeKpChart: FC = () => {
           dataKey='combinedKey'
           tickFormatter={(value) => value.substring(0, 5)}
           tick={
-            <CustomAxisTickChart x={0} y={0} payload={undefined} linkTemplate={(typeKpId) => `${pageConfig.substations}?typeKp=${typeKpId}`} renderValue={(_, textLabel) => textLabel} valueSeparator=':' />
+            <CustomAxisTickChart x={0} y={0}
+              payload={undefined}
+              linkTemplate={
+                (typeKpId) => pageConfig.getDynamicUrl(pageConfig.substations, {}, { typeKp: typeKpId })}
+              renderValue={(_, textLabel) => textLabel}
+              valueSeparator=':'
+            />
           }
         />
         <YAxis />

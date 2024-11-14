@@ -1,8 +1,8 @@
 import { type FC } from 'react'
 import { Bar, BarChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 import { CustomAxisTickChart, CustomBarChartLabel, CustomTooltipChart, Error, InfoMessage, Loader } from '../../../../../components'
-import { useCompletedWorksYear } from '../../../../../hooks'
 import { pageConfig } from '../../../../../config/pages.config'
+import { useCompletedWorksYear } from '../../../../../hooks'
 
 const CompletedWorksYearChart: FC = () => {
   const { data, error, isError, isLoading } = useCompletedWorksYear()
@@ -17,7 +17,11 @@ const CompletedWorksYearChart: FC = () => {
         <XAxis
           dataKey='year'
           tick={
-            <CustomAxisTickChart x={0} y={0} payload={undefined} linkTemplate={(year) => `${pageConfig.completedWorks}?dateStart=${year}-01-01&dateEnd=${+year + 1}-01-01`} />
+            <CustomAxisTickChart x={0} y={0}
+              payload={undefined}
+              linkTemplate={
+                (year) => pageConfig.getDynamicUrl(pageConfig.completedWorks, {}, { dateStart: `${year}-01-01`, dateEnd: `${+year + 1}-01-01` })}
+            />
           }
         />
         <YAxis />
