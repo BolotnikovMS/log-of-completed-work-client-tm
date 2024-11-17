@@ -1,7 +1,7 @@
 import { useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { DistrictForm } from '..'
-import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, Loader, LoadMore, Modal, SmallCard } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
@@ -38,40 +38,39 @@ const DistrictsCards: FC = () => {
     <>
       {!!data?.length && (
         <div className="cards">
-          {data.map(districts => (
-            districts.data.map(district => (
-              <SmallCard
-                key={district.id}
-                childrenContent={
-                  <p className='text-content flex items-center gap-1'>
-                    <Icon id='link' />
-                    {district.name}
-                  </p>
-                }
-                path={pageConfig.getDynamicUrl(pageConfig.districtSubstations, { id: district.id })}
-                childrenControl={
-                  isAdminOrModerator &&
-                  <Dropdown
-                    children={
-                      <Icon id='setting' />
-                    }
-                    menuItems={[
-                      isAdminOrModerator && (
-                        <Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
-                          <Icon id='edit' />
-                          Редактировать
-                        </Button>
-                      ),
-                      isAdmin && (
-                        <Button className='btn-error !justify-start' onClick={() => handleDelete(district.id)}>
-                          <Icon id='delete' />
-                          Удалить
-                        </Button>
-                      )
-                    ]}
-                  />}
-              />
-            ))
+          {data.map(district => (
+            <SmallCard
+              key={district.id}
+              childrenContent={
+                <p className='text-content flex items-center gap-1'>
+                  <Icon id='link' />
+                  {district.name}
+                </p>
+              }
+              path={pageConfig.getDynamicUrl(pageConfig.districtSubstations, { id: district.id })}
+              childrenControl={
+                isAdminOrModerator &&
+                <Dropdown
+                  children={
+                    <Icon id='setting' />
+                  }
+                  menuItems={[
+                    isAdminOrModerator && (
+                      <Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
+                        <Icon id='edit' />
+                        Редактировать
+                      </Button>
+                    ),
+                    isAdmin && (
+                      <Button className='btn-error !justify-start' onClick={() => handleDelete(district.id)}>
+                        <Icon id='delete' />
+                        Удалить
+                      </Button>
+                    )
+                  ]}
+                />
+              }
+            />
           ))}
         </div>
       )}
@@ -83,3 +82,24 @@ const DistrictsCards: FC = () => {
 }
 
 export default DistrictsCards
+
+// export function useIntersection(onIntersect: () => void) {
+//   const unsubscribe = useRef(() => {})
+
+//   return useCallback((el: HTMLDivElement | null) => {
+//     const observer = new IntersectionObserver((entries) => {
+//       entries.forEach(intersection => {
+//         if (intersection.isIntersecting) {
+//           onIntersect()
+//         }
+//       })
+//     })
+
+//     if (el) {
+//       observer.observe(el)
+//       unsubscribe.current = () => observer.disconnect()
+//     } else {
+//       unsubscribe.current()
+//     }
+//   }, [])
+// }

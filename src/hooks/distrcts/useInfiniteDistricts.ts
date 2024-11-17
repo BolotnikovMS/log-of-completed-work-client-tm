@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query'
+import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query'
 import { IQueryParams } from '../../interfaces'
 import { DistrictService } from '../../services/district/district.service'
 
@@ -21,7 +21,8 @@ export const useInfiniteDistricts = ({ limit = 15, sort, order }: IQueryParams) 
 
       return totalPages >= nextPage && lastPage.data.length !== 0 ? nextPage : undefined
     },
-    select: (data) => data.pages
+    select: (data) => data.pages.flatMap(page => page.data),
+    placeholderData: keepPreviousData
   })
 
   return { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage }
