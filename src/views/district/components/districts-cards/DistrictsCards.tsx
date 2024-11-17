@@ -17,7 +17,7 @@ const DistrictsCards: FC = () => {
   const [searchParams] = useSearchParams()
   const sortParam = searchParams.get('sort') || 'name'
   const orderParam = searchParams.get('order') || 'asc'
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 20, sort: sortParam, order: orderParam as TOrderSort })
+  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteDistricts({ limit: 10, sort: sortParam, order: orderParam as TOrderSort })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [district, setDistrict] = useState<IDistrict | null>(null)
@@ -36,9 +36,9 @@ const DistrictsCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className="cards">
-          {data.pages.map(districts => (
+          {data.map(districts => (
             districts.data.map(district => (
               <SmallCard
                 key={district.id}
@@ -75,7 +75,7 @@ const DistrictsCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
+      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<DistrictForm data={district} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
     </>

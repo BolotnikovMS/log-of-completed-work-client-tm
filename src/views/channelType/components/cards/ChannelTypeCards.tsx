@@ -31,9 +31,9 @@ const ChannelTypeCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className="cards">
-          {data.pages.map(channelTypes => (
+          {data.map(channelTypes => (
             channelTypes.data.map(channelType => (
               <SmallCard
                 key={channelType.id}
@@ -70,7 +70,7 @@ const ChannelTypeCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Пока добавленных типов каналов нет...' />}
+      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Пока добавленных типов каналов нет...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<ChannelTypeForm data={channelType} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
     </>

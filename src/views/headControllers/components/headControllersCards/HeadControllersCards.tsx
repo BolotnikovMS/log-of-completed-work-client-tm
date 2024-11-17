@@ -30,9 +30,9 @@ const HeadControllersCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className="cards">
-          {data.pages.map(headControllers => (
+          {data.map(headControllers => (
             headControllers.data.map(headController => (
               <SmallCard
                 key={headController.id}
@@ -69,7 +69,7 @@ const HeadControllersCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Головных контроллеров пока не добавлено...' />}
+      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Головных контроллеров пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal
         visible={isModal}

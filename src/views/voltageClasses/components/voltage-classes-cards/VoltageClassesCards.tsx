@@ -30,9 +30,9 @@ const VoltageClassesCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className="cards">
-          {data.pages.map(voltageClasses => (
+          {data.map(voltageClasses => (
             voltageClasses.data.map(voltageClass => (
               <SmallCard
                 key={voltageClass.id}
@@ -69,7 +69,7 @@ const VoltageClassesCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
+      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal
         visible={isModal}

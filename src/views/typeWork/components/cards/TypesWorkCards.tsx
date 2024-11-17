@@ -12,9 +12,9 @@ const TypesWorkCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className='cards'>
-          {data.pages.map(typesWork => (
+          {data.map(typesWork => (
             typesWork.data.map(typeWork => (
               <SmallCard
                 key={typeWork.id}
@@ -31,7 +31,7 @@ const TypesWorkCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && (
+      {(!data?.length && !isFetching && !isError) && (
         <InfoMessage text='Пока добавленных категорий работ нет...' />
       )}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}

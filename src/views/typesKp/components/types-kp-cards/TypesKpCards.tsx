@@ -30,9 +30,9 @@ const TypesKpCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className="cards">
-          {data.pages.map(typesKp => (
+          {data.map(typesKp => (
             typesKp.data.map(typeKp => (
               <SmallCard
                 key={typeKp.id}
@@ -69,7 +69,7 @@ const TypesKpCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Типов КП пока не добавлено...' />}
+      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Типов КП пока не добавлено...' />}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
       <Modal
         visible={isModal}

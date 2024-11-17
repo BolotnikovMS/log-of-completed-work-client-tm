@@ -12,9 +12,9 @@ const ChannelEquipmentCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className='cards'>
-          {data.pages.map(channelingEquipment => (
+          {data.map(channelingEquipment => (
             channelingEquipment.data.map(channelEquipment => (
               <SmallCard
                 key={channelEquipment.id}
@@ -31,7 +31,7 @@ const ChannelEquipmentCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && (
+      {(!data?.length && !isFetching && !isError) && (
         <InfoMessage text='Пока добавленного оборудования нет...' />
       )}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}

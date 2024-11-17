@@ -1,5 +1,5 @@
-import { ChannelTypeService } from '../../services/channel-type/channel-type.service'
 import { useInfiniteQuery } from '@tanstack/react-query'
+import { ChannelTypeService } from '../../services/channel-type/channel-type.service'
 
 export const useInfiniteChannelTypes = ({ limit }: { limit: number }) => {
   const {
@@ -12,14 +12,15 @@ export const useInfiniteChannelTypes = ({ limit }: { limit: number }) => {
     isFetchingNextPage,
   } = useInfiniteQuery({
     queryKey: ['channelTypes', 'infinity'],
-    queryFn: ({ pageParam = 1}) => ChannelTypeService.getChannelTypes({ page: pageParam, limit }),
+    queryFn: ({ pageParam = 1 }) => ChannelTypeService.getChannelTypes({ page: pageParam, limit }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1
       const totalPages = Math.ceil(allPages[0].meta.total / limit)
 
       return totalPages >= nextPage && lastPage.data.length !== 0 ? nextPage : undefined
-    }
+    },
+    select: (data) => data.pages
   })
 
   return { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage }

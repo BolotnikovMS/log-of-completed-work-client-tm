@@ -12,7 +12,8 @@ export const useInfiniteChannels = ({ limit = 15, substation, channelType, chann
       const totalPages = Math.ceil(allPages[0].meta.total / limit)
 
       return totalPages >= nextPage && lastPage.data.length !== 0 ? nextPage : undefined
-    }
+    },
+    select: (data) => data.pages
   })
 
   return { data, error, isError, fetchNextPage, hasNextPage, isFetching, isFetchingNextPage }

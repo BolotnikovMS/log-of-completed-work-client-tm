@@ -19,9 +19,9 @@ const ChannelCards: FC = () => {
 
   return (
     <>
-      {!!data?.pages[0].data.length && (
+      {!!data?.length && (
         <div className='cards'>
-          {data.pages.map(channelsData => (
+          {data.map(channelsData => (
             channelsData.data.map(channel => (
               <SmallCard
                 key={channel.id}
@@ -44,7 +44,7 @@ const ChannelCards: FC = () => {
           ))}
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && (
+      {(!data?.length && !isFetching && !isError) && (
         <InfoMessage text='Пока добавленных каналов нет...' />
       )}
       {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
