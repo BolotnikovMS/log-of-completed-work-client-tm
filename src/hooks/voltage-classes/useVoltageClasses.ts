@@ -1,11 +1,13 @@
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { IQueryParams } from '../../interfaces'
 import { VoltageClassService } from '../../services/voltage-class/voltage-class.service'
-import { useQuery } from '@tanstack/react-query'
 
-export const useVoltageClasses = () => {
+export const useVoltageClasses = ({ page, limit }: IQueryParams) => {
   const { data: voltageClasses, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['voltageClasses', 'all'],
-    queryFn: () => VoltageClassService.getVoltageClasses({}),
+    queryKey: ['voltageClasses', 'all', page, limit],
+    queryFn: () => VoltageClassService.getVoltageClasses({ page, limit }),
     staleTime: 1000 * 10,
+    placeholderData: keepPreviousData,
   })
 
   return { voltageClasses, error, isError, isLoading, isFetching }

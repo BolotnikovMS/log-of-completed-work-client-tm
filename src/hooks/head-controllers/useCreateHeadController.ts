@@ -10,7 +10,7 @@ export const useCreateHeadController = () => {
   return useMutation({
     mutationFn: (data: THeadControllerData) => HeadControllerService.create(data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['headControllers', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['headControllers'] })
 
       toast.success('Запись успешно добавлена!')
     },

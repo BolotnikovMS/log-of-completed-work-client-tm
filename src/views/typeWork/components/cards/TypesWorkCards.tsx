@@ -1,21 +1,28 @@
-import { type FC } from 'react'
-import { Error, InfoMessage, Loader, LoadMore, SmallCard } from '../../../../components'
-import { useInfiniteTypesWork } from '../../../../hooks'
+import { useEffect, useState, type FC } from 'react'
+import { Error, InfoMessage, Loader, Pagination, SmallCard } from '../../../../components'
+import { useTypesWork } from '../../../../hooks'
 import { CardControl } from './cardParts'
 
 const TypesWorkCards: FC = () => {
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteTypesWork({ limit: 20 })
+  const [page, setPage] = useState<number>(1)
+  const { data, error, isError, isLoading } = useTypesWork({ limit: 20, page })
+
+  useEffect(() => {
+    if (data?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [data?.data.length, page])
 
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      {!!data?.length && (
-        <div className='cards'>
-          {data.map(typesWork => (
-            typesWork.data.map(typeWork => (
+      {!!data?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className='cards'>
+            {data.data.map(typeWork => (
               <SmallCard
                 key={typeWork.id}
                 childrenContent={
@@ -27,14 +34,14 @@ const TypesWorkCards: FC = () => {
                   <CardControl data={typeWork} />
                 }
               />
-            ))
-          ))}
+            ))}
+          </div>
+          <Pagination page={page} meta={data.meta} setPage={setPage} />
         </div>
       )}
-      {(!data?.length && !isFetching && !isError) && (
+      {(!data?.data.length && !isLoading && !isError) && (
         <InfoMessage text='Пока добавленных категорий работ нет...' />
       )}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
   )
 }

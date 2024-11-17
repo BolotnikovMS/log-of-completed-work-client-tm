@@ -18,7 +18,7 @@ const ChannelEquipmentForm: FC<IPropsForm<IChannelEquipment>> = ({ data: channel
     }
   })
   const { field: { value: channelTypeValue, onChange: channelTypeOnChange, ...restChannelTypeField } } = useController({ name: 'channelTypeId', control })
-  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
+  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes({})
   const { mutateAsync: createChannelEquipment, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannelEquipment()
   const { mutateAsync: updateChannelEquipment, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannelEquipment()
   const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelEquipmentData>) => {

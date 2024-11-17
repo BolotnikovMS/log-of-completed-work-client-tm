@@ -1,12 +1,12 @@
-import { useMemo, useState, type FC } from 'react'
+import { useEffect, useMemo, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { SubstationForm } from '..'
-import { Badge, Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, NumberRecords, SmallCard } from '../../../../components'
+import { Badge, Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, NumberRecords, Pagination, SmallCard } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
-import { useDeleteSubstation, useInfiniteSubstations, useModal } from '../../../../hooks'
+import { useDeleteSubstation, useModal, useSubstations } from '../../../../hooks'
 import { ISubstation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 import { TOrderSort } from '../../../../types/order.types'
@@ -15,6 +15,7 @@ const SubstationsCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
+  const [page, setPage] = useState<number>(1)
   const [searchParams] = useSearchParams()
   const searchParam = searchParams.get('search')
   const sortParam = searchParams.get('sort')
@@ -24,7 +25,7 @@ const SubstationsCards: FC = () => {
   const headControllerParam = searchParams.get(EFilterParam.headController)
   const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
   const channelTypeParam = searchParams.get(EFilterParam.channelType)
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteSubstations({ limit: 20, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
+  const { substations: data, error, isError, isLoading } = useSubstations({ limit: 20, page, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [substation, setSubstation] = useState<ISubstation | null>(null)
@@ -38,17 +39,23 @@ const SubstationsCards: FC = () => {
   }
   const memoizedSubstations = useMemo(() => data, [data])
 
+  useEffect(() => {
+    if (memoizedSubstations?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [memoizedSubstations?.data.length, page])
+
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      <NumberRecords text='Всего объектов:' numberRecords={data?.pages[0].meta.total} />
-      {!!memoizedSubstations?.pages[0].data.length && (
-        <div className="cards">
-          {memoizedSubstations.pages.map(substations => (
-            substations.data.map(substation => (
+      <NumberRecords text='Всего объектов:' numberRecords={data?.meta.total} />
+      {!!memoizedSubstations?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className="cards">
+            {memoizedSubstations.data.map(substation => (
               <SmallCard
                 key={substation.id}
                 childrenContent={
@@ -85,12 +92,12 @@ const SubstationsCards: FC = () => {
                   )
                 }
               />
-            ))
-          ))}
+            ))}
+          </div>
+          <Pagination page={page} meta={memoizedSubstations.meta} setPage={setPage} />
         </div>
       )}
-      {(!data?.pages[0].data.length && !isFetching && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      {(!data?.data.length && !isLoading && !isError) && <InfoMessage text='Подстанций пока не добавлено...' />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<SubstationForm data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
     </>
   )

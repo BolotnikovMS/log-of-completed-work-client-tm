@@ -34,7 +34,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
   const { field: { value: dateTypeWorkValue, onChange: dateTypeWorkOnChange, ...restTypeWorkField } } = useController({ name: 'typeWorkId', control })
   const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
-  const { data: typesWork, isError: isErrorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork()
+  const { data: typesWork, isError: isErrorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
   const { mutateAsync: createCompletedWork, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateCompletedWork()
   const { mutateAsync: updateCompletedWork, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateCompletedWork()
   const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TCompletedWorkData>) => {

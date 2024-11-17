@@ -20,9 +20,9 @@ const SubstationFlterParameters: FC<IPropsSubstationFlterParameters> = ({ toggle
   const [channelType, setChannelType] = useState<string | null>()
   const { districts, isError: isErrorDistricts, error: errorDistricts, isLoading: isLoadingDistricts } = useDistricts({})
   const { typesKp, isError: isErrorTypeKp, error: errorTypeKp, isLoading: isLoadingTypeKp } = useTypesKp({})
-  const { headControllers, isError: isErrorHeadController, error: errorHeadController, isLoading: isLoadingHeadController } = useHeadControllers()
-  const { data: typesChannel, isError: isErrorTypesChannel, error: errorTypesChannel, isLoading: isLoadingTypesChannel } = useChannelTypes()
-  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
+  const { headControllers, isError: isErrorHeadController, error: errorHeadController, isLoading: isLoadingHeadController } = useHeadControllers({})
+  const { data: typesChannel, isError: isErrorTypesChannel, error: errorTypesChannel, isLoading: isLoadingTypesChannel } = useChannelTypes({})
+  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories({})
 
   useEffect(() => {
     setDistrict(districtParam)

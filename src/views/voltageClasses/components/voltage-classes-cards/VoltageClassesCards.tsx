@@ -1,9 +1,9 @@
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { VoltageClassForm } from '..'
-import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, Pagination, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
-import { useDeleteVoltageClass, useInfiniteVoltageClasses, useModal } from '../../../../hooks'
+import { useDeleteVoltageClass, useModal, useVoltageClasses } from '../../../../hooks'
 import { IVoltageClass } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -11,7 +11,8 @@ const VoltageClassesCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteVoltageClasses({ limit: 20 })
+  const [page, setPage] = useState<number>(1)
+  const { voltageClasses: data, error, isError, isLoading } = useVoltageClasses({ limit: 15, page })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [voltageClass, setVoltageClass] = useState<IVoltageClass | null>(null)
@@ -24,16 +25,22 @@ const VoltageClassesCards: FC = () => {
     return deleteVoltageClass.mutate(id)
   }
 
+  useEffect(() => {
+    if (data?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [data?.data.length, page])
+
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      {!!data?.length && (
-        <div className="cards">
-          {data.map(voltageClasses => (
-            voltageClasses.data.map(voltageClass => (
+      {!!data?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className="cards">
+            {data.data.map(voltageClass => (
               <SmallCard
                 key={voltageClass.id}
                 childrenContent={
@@ -65,12 +72,12 @@ const VoltageClassesCards: FC = () => {
                   )
                 }
               />
-            ))
-          ))}
+            ))}
+          </div>
+          <Pagination page={page} meta={data.meta} setPage={setPage} />
         </div>
       )}
-      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      {(!data?.data.length && !isLoading && !isError) && <InfoMessage text='Классов напряжения пока не добавлено...' />}
       <Modal
         visible={isModal}
         title='Редактирование записи'

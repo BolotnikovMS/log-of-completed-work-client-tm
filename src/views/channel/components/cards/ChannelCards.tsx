@@ -1,28 +1,35 @@
-import { type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Error, Icon, InfoMessage, Loader, LoadMore, SmallCard } from '../../../../components'
+import { Error, Icon, InfoMessage, Loader, Pagination, SmallCard } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useInfiniteChannels } from '../../../../hooks/channels/useInfiniteChannels'
+import { useChannels } from '../../../../hooks'
 import { ChannelControlMenu } from './cardParts'
 
 const ChannelCards: FC = () => {
+  const [page, setPage] = useState<number>(1)
   const [searchParams] = useSearchParams()
   const substationParam = searchParams.get(EFilterParam.substation)
   const channelTypeParam = searchParams.get(EFilterParam.channelType)
   const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannels({ limit: 20, substation: substationParam, channelType: channelTypeParam, channelCategory: channelCategoryParam })
+  const { data, error, isError, isLoading } = useChannels({ limit: 20, page, substation: substationParam, channelType: channelTypeParam, channelCategory: channelCategoryParam })
+
+  useEffect(() => {
+    if (data?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [data?.data.length, page])
 
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      {!!data?.length && (
-        <div className='cards'>
-          {data.map(channelsData => (
-            channelsData.data.map(channel => (
+      {!!data?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className='cards'>
+            {data.data.map(channel => (
               <SmallCard
                 key={channel.id}
                 childrenContent={
@@ -40,14 +47,14 @@ const ChannelCards: FC = () => {
                   <ChannelControlMenu channel={channel} />
                 }
               />
-            ))
-          ))}
+            ))}
+          </div>
+          <Pagination page={page} meta={data.meta} setPage={setPage} />
         </div>
       )}
-      {(!data?.length && !isFetching && !isError) && (
+      {(!data?.data.length && !isLoading && !isError) && (
         <InfoMessage text='Пока добавленных каналов нет...' />
       )}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
     </>
   )
 }

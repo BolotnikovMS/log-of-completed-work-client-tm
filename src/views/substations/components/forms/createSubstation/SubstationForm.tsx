@@ -29,9 +29,9 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
   const { field: { value: typeKpValue, onChange: typeKpOnChange, ...restTypeKp } } = useController({ name: 'typeKpId', control })
   const { field: { value: headControllerValue, onChange: headControllerOnChange, ...restHeadController } } = useController({ name: 'headControllerId', control })
   const { districts, isLoading: isLoadingDistricts, isError: isErrorDistricts } = useDistricts({})
-  const { voltageClasses, isError: isErrorVoltageClasses, isLoading: isLoadingVoltageClasses } = useVoltageClasses()
+  const { voltageClasses, isError: isErrorVoltageClasses, isLoading: isLoadingVoltageClasses } = useVoltageClasses({})
   const { typesKp, isError: isErrorTypesKp, isLoading: isLoadingTypesKp } = useTypesKp({})
-  const { headControllers, isError: isErrorHeadControllers, isLoading: isLoadingHeadControllers } = useHeadControllers()
+  const { headControllers, isError: isErrorHeadControllers, isLoading: isLoadingHeadControllers } = useHeadControllers({})
   const { mutateAsync: createSubstation, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateSubstation()
   const { mutateAsync: updateSubstation, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateSubstation()
   const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TSubstationData>) => {

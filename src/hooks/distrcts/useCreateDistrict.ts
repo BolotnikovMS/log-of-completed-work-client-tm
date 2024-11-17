@@ -11,7 +11,7 @@ export const useCreateDistrict = () => {
     onSuccess: async () => {
       const { toast } = await import('react-toastify')
 
-      await queryClient.invalidateQueries({ queryKey: ['districts', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['districts'] })
 
       toast.success('Запись успешно добавлена!')
     },

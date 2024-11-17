@@ -12,7 +12,7 @@ export const useUpdateCompletedWork = () => {
       return CompletedWorkService.update(id, data)
     },
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['completedWork', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['completedWork'] })
 
       toast.success('Запись успешно обновлена!')
     },

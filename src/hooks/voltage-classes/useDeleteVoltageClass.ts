@@ -8,7 +8,8 @@ export const useDeleteVoltageClass = () => {
   const deleteVoltageClass = useMutation({
     mutationFn: (id: number) => VoltageClassService.deleteVoltageClass(id),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['voltageClasses', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['voltageClasses'] })
+
       toast.success('Запись успешно удалена!')
     },
     onError: (error) => {

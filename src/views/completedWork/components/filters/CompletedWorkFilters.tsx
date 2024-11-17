@@ -23,7 +23,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   const [typeWork, setTypeWork] = useState<string[] | null | undefined>(null)
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: executors, isError: isErrorExecutors, error: errorExecutors, isLoading: isLoadingExecutors } = useUsers({})
-  const { data: typesWork, isError: isErrorTypesWork, error: errorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork()
+  const { data: typesWork, isError: isErrorTypesWork, error: errorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
 
   useEffect(() => {
     setSubstation(substationParam)

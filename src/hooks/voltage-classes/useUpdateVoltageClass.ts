@@ -10,7 +10,7 @@ export const useUpdateVoltageClass = () => {
   return useMutation({
     mutationFn: ({ id, data }: { id: number, data: TVoltageClassData }) => VoltageClassService.updateVoltageClass(id, data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['voltageClasses', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['voltageClasses'] })
 
       toast.success('Запись успешно обновлена!')
     },

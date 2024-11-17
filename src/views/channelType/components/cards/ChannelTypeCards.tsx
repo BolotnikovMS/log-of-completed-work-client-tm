@@ -1,9 +1,9 @@
-import { useState, type FC } from 'react'
+import { useEffect, useState, type FC } from 'react'
 import { ChannelTypeForm } from '..'
-import { Button, Dropdown, Error, Icon, InfoMessage, LoadMore, Loader, Modal, SmallCard } from '../../../../components'
+import { Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, Pagination, SmallCard } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers/checkRole.helper'
-import { useDeleteChannelType, useInfiniteChannelTypes, useModal } from '../../../../hooks'
+import { useChannelTypes, useDeleteChannelType, useModal } from '../../../../hooks'
 import { IChannelType } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
 
@@ -11,7 +11,8 @@ const ChannelTypeCards: FC = () => {
   const { authUser } = useAuthStore()
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteChannelTypes({ limit: 20 })
+  const [page, setPage] = useState<number>(1)
+  const { data, error, isError, isLoading } = useChannelTypes({ limit: 20, page })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [channelType, setChannelType] = useState<IChannelType | null>(null)
@@ -24,17 +25,22 @@ const ChannelTypeCards: FC = () => {
     return deleteChannelType.mutate(id)
   }
 
+  useEffect(() => {
+    if (data?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [data?.data.length, page])
+
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
-
+  if (isLoading) return <Loader />
 
   return (
     <>
-      {!!data?.length && (
-        <div className="cards">
-          {data.map(channelTypes => (
-            channelTypes.data.map(channelType => (
+      {!!data?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className="cards">
+            {data.data.map(channelType => (
               <SmallCard
                 key={channelType.id}
                 childrenContent={
@@ -66,12 +72,12 @@ const ChannelTypeCards: FC = () => {
                   )
                 }
               />
-            ))
-          ))}
+            ))}
+          </div>
+          <Pagination page={page} meta={data.meta} setPage={setPage} />
         </div>
       )}
-      {(!data?.length && !isFetching && !isError) && <InfoMessage text='Пока добавленных типов каналов нет...' />}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      {(!data?.data.length && !isLoading && !isError) && <InfoMessage text='Пока добавленных типов каналов нет...' />}
       <Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<ChannelTypeForm data={channelType} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
     </>
   )

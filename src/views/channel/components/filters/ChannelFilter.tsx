@@ -18,8 +18,8 @@ const ChannelFilter: FC<IPropsChannelFilters> = ({ toggleModal }) => {
   const [channelType, setChannelType] = useState<string | null>()
   const [channelCategory, setChannelCategory] = useState<string | null>()
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
-  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
-  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
+  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes({})
+  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories({})
 
   useEffect(() => {
     setSubstation(substationParam)

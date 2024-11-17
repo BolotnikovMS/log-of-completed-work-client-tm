@@ -10,7 +10,7 @@ export const useCreateCompletedWork = () => {
   return useMutation({
     mutationFn: (data: TCompletedWorkData) => CompletedWorkService.create(data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['completedWork', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['completedWork'] })
 
       toast.success('Запись успешно добавлена!')
     },

@@ -10,7 +10,7 @@ export const useUpdateTypeKp = () => {
   return useMutation({
     mutationFn: ({ id, data }: { id: number, data: TTypeKpData }) => TypeKpService.updateTypeKp(id, data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['typesKp', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['typesKp'] })
 
       toast.success('Запись успешно обновлена!')
     },

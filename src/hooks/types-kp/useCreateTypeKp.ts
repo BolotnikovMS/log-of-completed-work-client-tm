@@ -10,7 +10,7 @@ export const useCreateTypeKp = () => {
   return useMutation({
     mutationFn: (data: TTypeKpData) => TypeKpService.create(data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['typesKp', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['typesKp'] })
 
       toast.success('Запись успешно добавлена!')
     },

@@ -10,7 +10,7 @@ export const useUpdateHeadController = () => {
   return useMutation({
     mutationFn: ({ id, data }: { id: number, data: THeadControllerData }) => HeadControllerService.updateHeadController(id, data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['headControllers', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['headControllers'] })
 
       toast.success('Запись успешно обновлена!')
     },

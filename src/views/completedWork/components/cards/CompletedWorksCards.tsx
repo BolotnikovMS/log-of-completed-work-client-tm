@@ -1,21 +1,21 @@
-import { useCallback, useState, type FC } from 'react'
+import { useCallback, useEffect, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkInfo } from '..'
-import { Card, Error, InfoMessage, LoadMore, Loader, Modal, NumberRecords } from '../../../../components'
+import { Card, Error, InfoMessage, Loader, Modal, NumberRecords, Pagination } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useModal } from '../../../../hooks'
-import { useInfiniteCompletedWork } from '../../../../hooks/completed-works/useInfiniteCompletedWork'
+import { useCompletedWork, useModal } from '../../../../hooks'
 import { ICompletedWork } from '../../../../interfaces'
 import { CardContent, CardControl, CardFooter, CardHeader } from './cardParts'
 
 const CompletedWorksCards: FC = () => {
+  const [page, setPage] = useState<number>(1)
   const [searchParams] = useSearchParams()
   const substationParam = searchParams.get(EFilterParam.substation)
   const executorParam = searchParams.get(EFilterParam.executor)
   const dateStartParam = searchParams.get(EFilterParam.dateStart)
   const dateEndParam = searchParams.get(EFilterParam.dateEnd)
   const typeWorkParam = searchParams.get(EFilterParam.typeWork)
-  const { data, error, fetchNextPage, hasNextPage, isError, isFetching, isFetchingNextPage } = useInfiniteCompletedWork({ limit: 15, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
+  const { data, error, isError, isLoading } = useCompletedWork({ limit: 15, page, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
   const { isModal: isModalView, toggleModal: toggleModalView } = useModal()
   const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
   const handleOpenInfo = useCallback((work: ICompletedWork) => {
@@ -23,17 +23,23 @@ const CompletedWorksCards: FC = () => {
     setCompetedWork(work)
   }, [toggleModalView])
 
+  useEffect(() => {
+    if (data?.data.length === 0 && page !== 1) {
+      setPage(page - 1)
+    }
+  }, [data?.data.length, page])
+
   if (isError && error) return <Error error={error} />
 
-  if (isFetching) return <Loader />
+  if (isLoading) return <Loader />
 
   return (
     <>
-      <NumberRecords text='Всего записей:' numberRecords={data?.pages[0].meta.total} />
-      {!!data?.pages[0].data.length && (
-        <div className="cards-work">
-          {data.pages.map(completedWorks => (
-            completedWorks.data.map(completedWork => (
+      <NumberRecords text='Всего записей:' numberRecords={data?.meta.total} />
+      {!!data?.data.length && (
+        <div className='flex flex-col gap-2'>
+          <div className="cards-work">
+            {data.data.map(completedWork => (
               <Card
                 key={completedWork.id}
                 classBody='!py-4'
@@ -58,12 +64,12 @@ const CompletedWorksCards: FC = () => {
                 }
                 onClick={() => handleOpenInfo(completedWork)}
               />
-            ))
-          ))}
-        </div >
+            ))}
+          </div>
+          <Pagination page={page} meta={data.meta} setPage={setPage} />
+        </div>
       )}
-      {(!data?.pages[0].meta.total && !isFetching && !isError) && <InfoMessage text='Пока выполненных работ не добавлено...' />}
-      {hasNextPage && <LoadMore hasNextPage={hasNextPage} isFetching={isFetching} isFetchingNextPage={isFetchingNextPage} fetchNextPage={fetchNextPage} />}
+      {(!data?.meta.total && !isLoading && !isError) && <InfoMessage text='Пока выполненных работ не добавлено...' />}
       <Modal
         visible={isModalView}
         title='Подробный просмотр выполненной работы'

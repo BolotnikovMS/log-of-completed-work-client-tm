@@ -11,6 +11,7 @@ export const useUpdateDistrict = () => {
     mutationFn: ({ id, data }: { id: number, data: IDistrict }) => DistrictService.updateDistrict(id, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['districts', 'infinity'] })
+      await queryClient.invalidateQueries({ queryKey: ['districts'] })
 
       toast.success('Запись успешно обновлена!')
     },

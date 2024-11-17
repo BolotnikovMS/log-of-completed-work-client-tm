@@ -31,8 +31,8 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
   const { field: { value: gsmValue, onChange: gsmOnChange, ...restGsmField } } = useController({ name: 'gsmId', control })
 
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
-  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories()
-  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes()
+  const { data: channelCategories, isError: isErrorChannelCategories, error: errorChannelCategories, isLoading: isLoadingChannelCategories } = useChannelCategories({})
+  const { data: channelTypes, isError: isErrorChannelTypes, error: errorChannelTypes, isLoading: isLoadingChannelTypes } = useChannelTypes({})
   const { data: channelingEquipment, isError: isErrorChannelingEquipment, error: errorChannelingEquipment, isLoading: isLoadingChannelingEquipment } = useChannelingEquipment({})
   const { data: gsmOperators, isError: isErrorGsmOperators, error: errorGsmOperators, isLoading: isLoadingGsmOperators } = useGsmOperators()
   const { mutateAsync: createChannel, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannel()
