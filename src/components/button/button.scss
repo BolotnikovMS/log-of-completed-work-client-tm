@@ -1,5 +1,5 @@
 .mBtn {
-  @apply btn btn-sm flex items-center justify-center content-center gap-1 transition-colors duration-500 ease-in-out;
+  @apply btn btn-sm flex items-center justify-center content-center flex-nowrap gap-1 transition-colors duration-500 ease-in-out;
 }
 
 .mBtn_primary {
