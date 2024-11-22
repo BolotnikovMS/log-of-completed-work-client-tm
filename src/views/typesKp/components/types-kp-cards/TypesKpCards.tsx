@@ -12,7 +12,7 @@ const TypesKpCards: FC = () => {
   const isAdmin = checkRole(authUser, [ERoles.Admin])
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
   const [page, setPage] = useState<number>(1)
-  const { typesKp: data, error, isError, isLoading } = useTypesKp({ limit: 2, page })
+  const { typesKp: data, error, isError, isLoading } = useTypesKp({ limit: 20, page })
   const { isModal, toggleModal } = useModal()
   const [isEdited, setIsEdited] = useState<boolean>(false)
   const [typeKp, setDistrict] = useState<ITypeKp | null>(null)
