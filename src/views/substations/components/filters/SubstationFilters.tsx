@@ -27,7 +27,7 @@ const SubstationFilters: FC = () => {
 
   return (
     <>
-      <div className='w-full flex gap-1 items-center justify-between'>
+      <div className='w-full flex gap-2 items-center justify-between'>
         <Group className='!flex-row'>
           <Sort orderSort={orderSort as TOrderSort} sort={sort} sortOptions={sortOptions} />
           {location.pathname === pageConfig.substations && (
