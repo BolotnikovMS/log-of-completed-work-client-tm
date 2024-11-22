@@ -21,7 +21,7 @@ const ChannelEquipmentControl: FC = () => {
       )}
       <Modal
         visible={isModal}
-        title='Форма добавления новой категорий каналов'
+        title='Форма добавления новой оборудования'
         content={<ChannelEquipmentForm toggleModal={toggleModal} />}
         onToggle={toggleModal}
       />

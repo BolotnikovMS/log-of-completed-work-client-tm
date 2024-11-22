@@ -21,7 +21,7 @@ const ChannelTypeControl: FC = () => {
       )}
       <Modal
         visible={isModal}
-        title='Форма добавления нового канала'
+        title='Форма добавления нового типа канала'
         content={<ChannelTypeForm toggleModal={toggleModal} />}
         onToggle={toggleModal}
       />
