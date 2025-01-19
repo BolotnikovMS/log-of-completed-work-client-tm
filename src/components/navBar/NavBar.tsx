@@ -1,6 +1,7 @@
+import { Button } from '@/components/ui/button'
 import React, { type FC } from 'react'
 import { Link } from 'react-router-dom'
-import { Button, Icon } from '..'
+import { Icon } from '..'
 import { pageConfig } from '../../config/pages.config'
 import { menuItemData } from '../../constants'
 import { ERoles } from '../../enums/roles.enum'
@@ -108,7 +109,7 @@ export const NavBar: FC = () => {
                 Профиль
               </Link>
             </li>
-            <Button className='btn-error mt-5' onClick={logoutHandel}>
+            <Button variant={'default'} className='btn btn-exit mt-5' onClick={logoutHandel}>
               <Icon id='logout' />
               Выход
             </Button>
