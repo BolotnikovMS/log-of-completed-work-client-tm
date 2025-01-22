@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Icon, Loader, SelectWrapper, Textarea } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Icon, Input, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { ICompletedWork, IPropsForm, IPropsMutation } from '../../../../interfaces'
@@ -24,7 +24,8 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
       typeWorkId: completedWork?.typeWorkId,
       description: completedWork?.description,
       note: completedWork?.note,
-      dateCompletion: completedWork ? new Date(completedWork?.dateCompletion) : undefined
+      dateCompletion: completedWork ? new Date(completedWork?.dateCompletion) : undefined,
+			inControl: completedWork?.inControl,
     },
     resolver: yupResolver(validationSchema),
   })
@@ -143,6 +144,15 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
             iconLeft={<Icon id='calendar' className='!w-6 !h-6' />}
             autoComplete='off'
             {...restDateCompletion}
+          />
+        </Group>
+				<Group className='!items-center !justify-center'>
+          <Input
+            classWrapper='!flex-row !items-center'
+            label='Контроль'
+            name='inControl'
+            type='checkbox'
+            register={register}
           />
         </Group>
         <div className="form__btns">
