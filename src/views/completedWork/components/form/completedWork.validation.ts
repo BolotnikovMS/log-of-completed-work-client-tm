@@ -7,5 +7,8 @@ export const validationSchema = yup.object().shape({
   workProducerId: numberCheck,
   description: text1000,
   note: text700Optional,
-  dateCompletion: date
+  dateCompletion: date,
+	inControl: yup
+		.boolean()
+		.default(false),
 })

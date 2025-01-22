@@ -7,6 +7,7 @@ export interface ICompletedWork {
   description: string
   note?: string | null
   dateCompletion: Date
+	inControl: boolean
   substation?: string | null
   work_producer?: string | null
   author?: string | null
