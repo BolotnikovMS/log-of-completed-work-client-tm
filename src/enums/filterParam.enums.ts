@@ -9,4 +9,5 @@ export enum EFilterParam {
   executor = 'executor',
   dateStart = 'dateStart',
   dateEnd = 'dateEnd',
+	inControl = 'inControl',
 }
