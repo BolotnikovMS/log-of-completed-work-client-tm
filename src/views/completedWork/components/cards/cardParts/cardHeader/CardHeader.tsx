@@ -4,7 +4,7 @@ import { Badge, Icon } from '../../../../../../components'
 import { pageConfig } from '../../../../../../config/pages.config'
 import { IPropsCardHeader } from './cardHeader.interface'
 
-const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullName, typeWork }) => {
+const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullName, typeWork, inControl }) => {
   if (!substationId || !substationFullName || !typeWork) {
     return <p className='text-title text-red-500'>Заголовок не доступен</p>
   }
@@ -17,6 +17,9 @@ const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullNam
           {substationFullName}
         </Link>
       </p>
+			{
+				inControl && <Badge text='Контроль' className='mBadge_orange' />
+			}
       <Badge text={typeWork} className='mBadge_blue' />
     </div>
   )
