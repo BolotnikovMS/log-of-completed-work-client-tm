@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type FC } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Icon } from '../../../../components'
+import { Button, CustomDatePicker, Error, Group, Icon, Input } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useSubstations, useTypesWork, useUsers } from '../../../../hooks'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
@@ -16,11 +16,13 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
   const dateStartParam = searchParams.get(EFilterParam.dateStart)
   const dateEndParam = searchParams.get(EFilterParam.dateEnd)
   const typeWorkParams = searchParams.get(EFilterParam.typeWork)
+	const inControlParam = searchParams.get(EFilterParam.inControl)
   const [substation, setSubstation] = useState<string | null>(null)
   const [executor, setExecutor] = useState<string | null>(null)
   const [dateStart, setDateStart] = useState<Date | null>(null)
   const [dateEnd, setDateEnd] = useState<Date | null>(null)
   const [typeWork, setTypeWork] = useState<string[] | null | undefined>(null)
+	const [inControl, setInControl] = useState<boolean>(false)
   const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: executors, isError: isErrorExecutors, error: errorExecutors, isLoading: isLoadingExecutors } = useUsers({})
   const { data: typesWork, isError: isErrorTypesWork, error: errorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
@@ -31,7 +33,13 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
     setDateStart(dateStartParam ? new Date(dateStartParam) : null)
     setDateEnd(dateEndParam ? new Date(dateEndParam) : null)
     setTypeWork(typeWorkParams?.split(','))
-  }, [dateEndParam, dateStartParam, executorParam, substationParam, typeWorkParams])
+		setInControl(!!inControlParam)
+  }, [dateEndParam, dateStartParam, executorParam, inControlParam, substationParam, typeWorkParams])
+
+	const changeFilterControl = () => {
+		setInControl(!inControl)
+		searchParams.delete('inControl')
+	}
 
   const updateSearchParams = () => {
     substation && searchParams.set(EFilterParam.substation, substation)
@@ -41,6 +49,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
       searchParams.set(EFilterParam.dateEnd, moment(dateEnd).format('YYYY-MM-DD'))
     }
     typeWork && searchParams.set(EFilterParam.typeWork, typeWork.join(','))
+		inControl && searchParams.set(EFilterParam.inControl, String(inControl))
     setSearchParams(searchParams)
   }
   const applyFilters = () => {
@@ -124,6 +133,21 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           />
         </Group>
       </Group>
+			<Group>
+				<div className='text-center'>
+          <p className='text-title font-bold'>Прочие фильтры</p>
+        </div>
+				<Group className='!items-start'>
+					<Input
+            classWrapper='!flex-row !items-center'
+            label='Контроль'
+            name='inControl'
+            type='checkbox'
+						checked={inControl}
+						onChange={changeFilterControl}
+          />
+				</Group>
+			</Group>
       <div className='filters__btns'>
         <Button className='mBtn_outline-green' onClick={applyFilters}>
           <Icon id='filter-add' />
