@@ -48,6 +48,7 @@ const CompletedWorksCards: FC = () => {
                     substationId={completedWork.substationId}
                     substationFullName={completedWork.substation}
                     typeWork={completedWork.type_work}
+										inControl={completedWork.inControl}
                   />
                 }
                 childrenContent={<CardContent description={completedWork.description} />}
