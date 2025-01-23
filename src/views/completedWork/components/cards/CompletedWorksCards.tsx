@@ -15,7 +15,8 @@ const CompletedWorksCards: FC = () => {
   const dateStartParam = searchParams.get(EFilterParam.dateStart)
   const dateEndParam = searchParams.get(EFilterParam.dateEnd)
   const typeWorkParam = searchParams.get(EFilterParam.typeWork)
-  const { data, error, isError, isLoading } = useCompletedWork({ limit: 15, page, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
+	const inControlParam = searchParams.get(EFilterParam.inControl)
+  const { data, error, isError, isLoading } = useCompletedWork({ limit: 15, page, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam, inControl: inControlParam })
   const { isModal: isModalView, toggleModal: toggleModalView } = useModal()
   const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
   const handleOpenInfo = useCallback((work: ICompletedWork) => {

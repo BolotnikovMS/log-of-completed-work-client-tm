@@ -12,10 +12,11 @@ const CompletedWorkControl: FC = () => {
   const dateStartParam = searchParams.get(EFilterParam.dateStart)
   const dateEndParam = searchParams.get(EFilterParam.dateEnd)
   const typeWorkParam = searchParams.get(EFilterParam.typeWork)
+	const inControlParam = searchParams.get(EFilterParam.inControl)
   const { isModal, toggleModal } = useModal()
   const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
-  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam })
+  const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelCompletedWork({ page: 1, limit: -1, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam, inControl: inControlParam })
 
   return (
     <div className="work-log__control control">
