@@ -3,7 +3,7 @@ import { type FC } from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group, Input, Loader, SelectWrapper } from '../../../../../components'
+import { Button, Checkbox, Error, Group, Input, Loader, SelectWrapper } from '../../../../../components'
 import { useCreateSubstation, useDistricts, useHeadControllers, useTypesKp, useUpdateSubstation, useVoltageClasses } from '../../../../../hooks'
 import { IPropsForm, IPropsMutation, ISubstation } from '../../../../../interfaces'
 import { TSubstationData } from '../../../../../types'
@@ -134,22 +134,22 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
           </SelectWrapper>
         </Group>
         <Group className='!items-center !justify-center'>
-          <Input
-            classWrapper='!flex-row !items-center'
-            label='РДУ'
-            name='rdu'
-            type='checkbox'
+					<Checkbox 
+						name='rdu'
+						textLabel='РДУ'
+						classLabel='!flex-row'
+						aria-label='РДУ'
             register={register}
-          />
+					/>
         </Group>
         <Group className='!items-center !justify-center'>
-          <Input
-            classWrapper='!flex-row !items-center'
-            label='Используется?'
-            name='active'
-            type='checkbox'
+					<Checkbox 
+						name='active'
+						textLabel='Используется?'
+						classLabel='!flex-row'
+						aria-label='РДУ'
             register={register}
-          />
+					/>
         </Group>
         <div className="form__btns">
           <Button disabled={!isValid} className='mBtn_outline-green'>
