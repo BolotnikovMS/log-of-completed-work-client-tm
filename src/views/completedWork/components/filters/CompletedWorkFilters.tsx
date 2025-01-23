@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type FC } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Icon, Input } from '../../../../components'
+import { Button, Checkbox, CustomDatePicker, Error, Group, Icon } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useSubstations, useTypesWork, useUsers } from '../../../../hooks'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
@@ -138,14 +138,15 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
           <p className='text-title font-bold'>Прочие фильтры</p>
         </div>
 				<Group className='!items-start'>
-					<Input
-            classWrapper='!flex-row !items-center'
-            label='Контроль'
-            name='inControl'
-            type='checkbox'
+					<Checkbox
+						textLabel='Контроль'
+						classLabel='!flex-row'
+						classLabelText='text-lg'
+						classInput='checkbox-sm'
+						aria-label='Контроль'
 						checked={inControl}
 						onChange={changeFilterControl}
-          />
+					/>
 				</Group>
 			</Group>
       <div className='filters__btns'>
