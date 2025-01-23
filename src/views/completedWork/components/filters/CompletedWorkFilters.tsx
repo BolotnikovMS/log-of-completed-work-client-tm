@@ -141,8 +141,6 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
 					<Checkbox
 						textLabel='Контроль'
 						classLabel='!flex-row'
-						classLabelText='text-lg'
-						classInput='checkbox-sm'
 						aria-label='Контроль'
 						checked={inControl}
 						onChange={changeFilterControl}
