@@ -4,13 +4,13 @@ import { errorHandler } from '../../helpers'
 import { IQueryParams } from '../../interfaces'
 import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
 
-export const useDownloadExcelCompletedWork = ({ page, limit, substation, executor, dateStart, dateEnd, typeWork }: IQueryParams) => {
+export const useDownloadExcelCompletedWork = ({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const fetchData = async () => {
     setIsLoading(true)
 
     try {
-      await CompletedWorkService.downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork })
+      await CompletedWorkService.downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl })
     } catch (error) {
       const err = error as AxiosError
 

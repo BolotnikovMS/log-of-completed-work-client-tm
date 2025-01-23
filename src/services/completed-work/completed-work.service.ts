@@ -8,9 +8,9 @@ import { ICompletedWork, IQueryParams } from '../../interfaces'
 import { TCompletedWorkData, TRespCompletedWork } from '../../types'
 
 export const CompletedWorkService = {
-  async getAll({ limit, page, substation, executor, dateStart, dateEnd, typeWork }: IQueryParams): Promise<TRespCompletedWork> {
+  async getAll({ limit, page, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<TRespCompletedWork> {
     const { data } = await instance.get<TRespCompletedWork>(`${url}/completed-works`, {
-      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork }
+      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }
     })
 
     return data
@@ -28,9 +28,9 @@ export const CompletedWorkService = {
     return instance.delete(`${url}/completed-works/${id}`)
   },
 
-  async downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork }: IQueryParams): Promise<void> {
+  async downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<void> {
     await instance.get(`${url}/completed-works/download-excel`, {
-      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork },
+      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl },
       responseType: 'blob'
     }).then(resp => {
       fileDownload(resp.data, 'completed-works-report.xlsx')
