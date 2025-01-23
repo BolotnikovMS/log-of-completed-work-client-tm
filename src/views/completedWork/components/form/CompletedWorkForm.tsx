@@ -6,7 +6,7 @@ import 'react-datepicker/dist/react-datepicker.css'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
-import { Button, CustomDatePicker, Error, Group, Icon, Input, Loader, SelectWrapper, Textarea } from '../../../../components'
+import { Button, Checkbox, CustomDatePicker, Error, Group, Icon, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { ICompletedWork, IPropsForm, IPropsMutation } from '../../../../interfaces'
@@ -147,13 +147,13 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
           />
         </Group>
 				<Group className='!items-center !justify-center'>
-          <Input
-            classWrapper='!flex-row !items-center'
-            label='Контроль'
+					<Checkbox
             name='inControl'
-            type='checkbox'
+						textLabel='Контроль'
+						classLabel='!flex-row'
+						aria-label='Контроль'
             register={register}
-          />
+					/>
         </Group>
         <div className="form__btns">
           <Button disabled={!isValid} className='mBtn_outline-green'>
