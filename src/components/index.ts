@@ -37,5 +37,6 @@ const LoaderLine = lazy(() => import('./loaders/loaderLine/LoaderLine'))
 const Dropdown = lazy(() => import('./dropdown/Dropdown'))
 const Sort = lazy(() => import('./filters/sort/Sort'))
 const Search = lazy(() => import('./filters/search/Search'))
+const Checkbox = lazy(() => import('./checkbox/Checkbox'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ValidationMessage }
