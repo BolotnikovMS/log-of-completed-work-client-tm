@@ -137,14 +137,16 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
 				<div className='text-center'>
           <p className='text-title font-bold'>Прочие фильтры</p>
         </div>
-				<Group className='!items-start'>
-					<Checkbox
-						textLabel='Контроль'
-						classLabel='!flex-row'
-						aria-label='Контроль'
-						checked={inControl}
-						onChange={changeFilterControl}
-					/>
+				<Group className='!flex-row'>
+					<Group className='checkbox-wrapper'>
+						<Checkbox
+							textLabel='Контроль'
+							classLabel='!flex-row'
+							aria-label='Контроль'
+							checked={inControl}
+							onChange={changeFilterControl}
+						/>
+					</Group>
 				</Group>
 			</Group>
       <div className='filters__btns'>

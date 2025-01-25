@@ -133,24 +133,26 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
             />
           </SelectWrapper>
         </Group>
-        <Group className='!items-center !justify-center'>
-					<Checkbox 
-						name='rdu'
-						textLabel='РДУ'
-						classLabel='!flex-row'
-						aria-label='РДУ'
-            register={register}
-					/>
-        </Group>
-        <Group className='!items-center !justify-center'>
-					<Checkbox 
-						name='active'
-						textLabel='Используется?'
-						classLabel='!flex-row'
-						aria-label='РДУ'
-            register={register}
-					/>
-        </Group>
+				<Group className='!flex-row justify-center mt-3'>
+					<Group className='checkbox-wrapper'>
+						<Checkbox 
+							name='rdu'
+							textLabel='РДУ'
+							classLabel='!flex-row'
+							aria-label='РДУ'
+							register={register}
+						/>
+					</Group>
+					<Group className='checkbox-wrapper'>
+						<Checkbox 
+							name='active'
+							textLabel='Используется?'
+							classLabel='!flex-row'
+							aria-label='РДУ'
+							register={register}
+						/>
+					</Group>
+				</Group>
         <div className="form__btns">
           <Button disabled={!isValid} className='mBtn_outline-green'>
             {isEdited ? 'Сохранить' : 'Добавить'}
