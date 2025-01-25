@@ -233,6 +233,11 @@ body {
   object-fit: contain !important;
 }
 
+// checkbox wrapper
+.checkbox-wrapper {
+	@apply border rounded-xl px-1 py-1;
+}
+
 // Table
 .table-cell-row {
 	display: flex;
