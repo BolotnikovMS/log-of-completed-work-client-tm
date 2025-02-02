@@ -1,0 +1,32 @@
+import { type FC } from 'react'
+import { Button, Icon, Modal } from '../../../components'
+import { ERoles } from '../../../enums/roles.enum'
+import { checkRole } from '../../../helpers'
+import { useModal } from '../../../hooks'
+import { useAuthStore } from '../../../store/auth'
+import ObjectTypeForm from '../form/ObjectTypeForm'
+
+const ObjectTypeControl: FC = () => {
+	const { authUser } = useAuthStore()
+	const isAdmin = checkRole(authUser, [ERoles.Admin])
+	const { isModal, toggleModal } = useModal()
+
+	return (
+		<div className="work-log__control">
+			{isAdmin && (
+				<Button className='mBtn_outline-green' onClick={() => toggleModal()}>
+					<Icon id='add' />
+					Добавить
+				</Button>
+			)}
+			<Modal
+				visible={isModal}
+				title='Форма добавления нового типа объекта'
+				content={<ObjectTypeForm toggleModal={toggleModal} />}
+				onToggle={toggleModal}
+			/>
+		</div>
+	)
+}
+
+export default ObjectTypeControl
