@@ -2,6 +2,7 @@ class PageConfig {
   statistics = '/'
   districts = '/districts'
   districtSubstations = '/districts/:id/substations'
+  objectTypes = '/object-types'
   substations = '/substations'
   substation = '/substations/:id'
   voltageClasses = '/voltage-classes'

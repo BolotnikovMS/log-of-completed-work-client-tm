@@ -8,6 +8,10 @@ export const menuItemData = [
     url: pageConfig.districts,
   },
   {
+    title: 'Типы объектов',
+    url: pageConfig.objectTypes,
+  },
+  {
     title: 'Объекты',
     url: pageConfig.substations,
   },
