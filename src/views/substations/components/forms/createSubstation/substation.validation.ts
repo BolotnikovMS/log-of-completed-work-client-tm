@@ -7,6 +7,7 @@ export const validationSchema = yup.object().shape({
   headControllerId: numberCheck,
   name: text240,
   voltageClassesId: numberCheck,
+  objectTypeId: numberCheck,
   rdu: yup
     .boolean()
     .default(false),
