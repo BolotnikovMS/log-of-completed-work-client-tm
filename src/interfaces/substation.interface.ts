@@ -10,6 +10,7 @@ export interface ISubstation {
   voltageClassesId: number
   typeKpId: number
   headControllerId: number
+  objectTypeId: number
   numberCompletedWorks?: number
   note?: string | null
   voltage_class?: string | null
@@ -20,4 +21,5 @@ export interface ISubstation {
   files_photos_ps?: IFile[]
   files_backups?: IFile[]
   other_files?: IFile[]
+  object_type?: string | null
 }
