@@ -4,14 +4,14 @@ import { errorHandler } from '../../helpers'
 import { IQueryParams } from '../../interfaces'
 import { SubstationService } from '../../services/substations/substation.service'
 
-export const useDownloadExcelSubstations = ({ page, limit, typeKp, headController, district, channelCategory, channelType }: IQueryParams) => {
+export const useDownloadExcelSubstations = ({ page, limit, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams) => {
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const fetchData = async () => {
     setIsLoading(true)
 
     try {
-      await SubstationService.downloadExcel({ page, limit, typeKp, headController, district, channelCategory, channelType })
+      await SubstationService.downloadExcel({ page, limit, typeKp, headController, district, channelCategory, channelType, objectType })
     } catch (error) {
       const err = error as AxiosError
 
