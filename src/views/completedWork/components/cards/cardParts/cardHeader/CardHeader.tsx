@@ -13,7 +13,7 @@ const CardHeader: FC<IPropsCardHeader> = memo(({ substationId, substationFullNam
 		<div className='flex items-center justify-between gap-2'>
 			<p className='flex text-title font-bold' >
 				<Link to={pageConfig.getDynamicUrl(pageConfig.substation, { id: substationId })} className='flex items-center gap-1'>
-					<Icon id='link' />
+					<Icon id='link' aria-label='Подробный просмотр объекта' />
 					{substationFullName}
 				</Link>
 			</p>
