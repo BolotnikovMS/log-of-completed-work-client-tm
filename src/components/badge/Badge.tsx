@@ -1,15 +1,12 @@
 import cx from 'classnames'
-import { HTMLAttributes, type FC } from 'react'
+import { type FC } from 'react'
+import { IPropsBadge } from './badge.interface'
 import './bage.scss'
 
-interface IPropsBadge extends HTMLAttributes<HTMLDivElement> {
-  text: string | number
-}
-
 const Badge: FC<IPropsBadge> = ({ text, className }) => {
-  return (
-    <div className={cx('badge', className)}>{text}</div>
-  )
+	return (
+		<div className={cx('badge', className)}>{text}</div>
+	)
 }
 
 export default Badge
