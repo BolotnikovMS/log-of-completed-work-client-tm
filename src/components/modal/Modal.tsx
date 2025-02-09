@@ -1,7 +1,7 @@
 import cx from 'classnames'
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
-import { Icon } from '..'
+import Icon from '../icon/Icon'
 import { IPropsModal } from './modal.interface'
 import './modal.scss'
 
@@ -9,13 +9,13 @@ export const Modal: FC<IPropsModal> = ({ visible, title, content, footer, classD
 	if (!visible) return null
 
 	return createPortal(
-		<div className='mModal'>
-			<div className={cx('mModal__dialog min-w-[650px]', classDialog)} onClick={e => e.stopPropagation()}>
+		<dialog className="mModal" open={visible} onClick={e => e.stopPropagation()}>
+			<div className={cx('mModal__dialog')}>
+				<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onToggle}>
+					<Icon id='close' />
+				</button>
 				<div className="mModal__header">
 					<h3 className="mModal__title">{title}</h3>
-					<span className="mModal__close" onClick={onToggle}>
-						<Icon id='close' />
-					</span>
 				</div>
 				<div className="overflow-y-auto p-4 h-full">
 					{content}
@@ -24,7 +24,7 @@ export const Modal: FC<IPropsModal> = ({ visible, title, content, footer, classD
 					<div className="mModal__footer">{footer}</div>
 				)}
 			</div>
-		</div>,
+		</dialog>,
 		document.body
 	)
 }
