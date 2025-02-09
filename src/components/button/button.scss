@@ -3,9 +3,13 @@
 }
 
 .mBtn_primary {
-  @apply bg-blue-300 border-blue-300 hover:bg-transparent hover:border-blue-300;
+  @apply bg-blue-600/40 border-blue-600 hover:bg-transparent hover:border-blue-600;
 }
 
 .mBtn_outline-green {
-  @apply bg-transparent border-green-700 text-green-700 hover:bg-green-700 hover:border-green-700 hover:text-black
+  @apply bg-transparent border-green-700 text-green-700 hover:bg-green-700 hover:border-green-700 hover:text-black;
+}
+
+.mBtn_error {
+	@apply bg-red-600/50 border-red-600 hover:bg-transparent hover:border-red-600;
 }
