@@ -6,22 +6,22 @@ import { IPropsCustomDatePicker } from './customDatePicker.interface'
 import './customDatePicker.scss'
 
 const CustomDatePicker: FC<IPropsCustomDatePicker> = forwardRef<unknown, IPropsCustomDatePicker>(({ className, errorMessage, iconLeft, iconRight, ...props }, ref) => {
-  return (
-    <div className={cx('date-picker-wrapper',
-      className,
-      errorMessage && '!border-red-500')}
-    >
-      {iconLeft}
-      <DatePicker
-        className='w-full placeholder:text-gray-400'
+	return (
+		<div className={cx('date-picker-wrapper',
+			className,
+			errorMessage && '!border-red-500')}
+		>
+			{iconLeft}
+			<DatePicker
+				className='w-full bg-transparent placeholder:text-gray-400'
 				wrapperClassName='w-full'
-        ref={ref}
-        {...props}
-      />
-      {iconRight}
-      {errorMessage && <ValidationMessage className='bottom-[-32px]' children={errorMessage} />}
-    </div>
-  )
+				ref={ref}
+				{...props}
+			/>
+			{iconRight}
+			{errorMessage && <ValidationMessage className='bottom-[-32px]' children={errorMessage} />}
+		</div>
+	)
 })
 
 export default CustomDatePicker
