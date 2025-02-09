@@ -1,3 +1,5 @@
+import { TTheme } from '../types'
+
 interface IToken {
 	type: string
 	token: string
@@ -17,4 +19,14 @@ export const setTokenToLocalStorage = (key: string, token: { token: string, type
 
 export const removeTokenFromLocalStorage = (key: string): void => {
 	localStorage.removeItem(key)
+}
+
+export const getCurrentTheme = (key: string): TTheme  => {
+	const currentTheme = localStorage.getItem(key) || 'light'
+
+	return currentTheme as TTheme
+}
+
+export const setCurrentTheme = (key: string, value: TTheme): void => {
+	localStorage.setItem(key, value)
 }
