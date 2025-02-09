@@ -141,6 +141,15 @@ body {
   &__custom-select {
     transition: all 0.3 ease-out;
 
+    &__single-value {
+    	color: inherit !important;
+    }
+
+    &__multi-value {
+   		color: inherit !important;
+     	/* background-color: transparent !important; */
+    }
+
     &__value-container {
       font-size: clamp(17px, 2.5vw, 19px) !important;
     }
@@ -148,6 +157,7 @@ body {
 		&__control {
       border: 1px solid #d1d5db !important;
       border-radius: 12px !important;
+      background-color: transparent !important;
 
 			&:hover {
 				border: 1px solid #bfdbfe !important;
@@ -168,7 +178,7 @@ body {
 
     &__indicator {
       cursor: pointer;
-      color: black !important;
+      color: inherit !important;
 
       &:hover {
         color: #636363 !important;
@@ -181,6 +191,8 @@ body {
       border-radius: 7px !important;
       animation: scaleIn 0.35s ease-in-out;
 			z-index: 2 !important;
+			background-color: transparent !important;
+			backdrop-filter: blur(45px);
     }
 
     &__option {
