@@ -44,7 +44,7 @@ const CardControl: FC<IPropsCardControl> = memo(({ completedWork }) => {
 							</Button>
 						),
 						isAdmin && (
-							<Button className='!justify-start btn-error' onClick={(e) => { handleDelete(completedWork.id, e) }} aria-label='Удалить'>
+							<Button className='!justify-start mBtn_error' onClick={(e) => { handleDelete(completedWork.id, e) }} aria-label='Удалить'>
 								<Icon id='delete' aria-label='Иконка удалить' />
 								Удалить
 							</Button>

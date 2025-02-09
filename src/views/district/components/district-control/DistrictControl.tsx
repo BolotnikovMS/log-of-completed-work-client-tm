@@ -8,29 +8,29 @@ import { useAuthStore } from '../../../../store/auth'
 import DistrictFilters from '../filters/DistrictFilters'
 
 const DistrictControl: FC = () => {
-  const { authUser } = useAuthStore()
-  const isAdmin = checkRole(authUser, [ERoles.Admin])
-  const { isModal, toggleModal } = useModal()
+	const { authUser } = useAuthStore()
+	const isAdmin = checkRole(authUser, [ERoles.Admin])
+	const { isModal, toggleModal } = useModal()
 
-  return (
-    <div className="work-log__control">
-      <div className="control__wrapper !justify-start">
-        {isAdmin && (
-          <Button className='mBtn_outline-green' onClick={toggleModal}>
-            <Icon id='add' />
-            Добавить
-          </Button>
-        )}
-        <Modal
-          visible={isModal}
-          title='Форма добавления нового района или ГП'
-          content={<DistrictForm toggleModal={toggleModal} />}
-          onToggle={toggleModal}
-        />
-        <DistrictFilters />
-      </div>
-    </div>
-  )
+	return (
+		<div className="work-log__control">
+			<div className="control__wrapper !justify-start">
+				{isAdmin && (
+					<Button className='mBtn_outline-green' onClick={toggleModal}>
+						<Icon id='add' />
+						Добавить
+					</Button>
+				)}
+				<Modal
+					visible={isModal}
+					title='Форма добавления нового района или ГП'
+					content={<DistrictForm toggleModal={toggleModal} />}
+					onToggle={toggleModal}
+				/>
+				<DistrictFilters />
+			</div>
+		</div>
+	)
 }
 
 export default DistrictControl

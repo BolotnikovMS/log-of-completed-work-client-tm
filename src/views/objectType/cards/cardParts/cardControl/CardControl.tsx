@@ -41,7 +41,7 @@ const CardControl: FC<IPropsCardControl<IObjectType>> = ({ data: objectType }) =
 							</Button>
 						),
 						isAdmin && (
-							<Button className='!justify-start btn-error' onClick={() => { handleDelete(objectType.id) }}>
+							<Button className='!justify-start mBtn_error' onClick={() => { handleDelete(objectType.id) }}>
 								<Icon id='delete' />
 								Удалить
 							</Button>

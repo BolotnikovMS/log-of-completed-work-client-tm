@@ -87,7 +87,7 @@ const SubstationsCards: FC = () => {
 													</Button>
 												),
 												isAdmin && (
-													<Button className='btn-error !justify-start' onClick={() => handleDelete(substation.id)}>
+													<Button className='mBtn_error !justify-start' onClick={() => handleDelete(substation.id)}>
 														<Icon id='delete' />
 														Удалить
 													</Button>
