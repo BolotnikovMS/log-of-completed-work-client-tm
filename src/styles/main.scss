@@ -115,6 +115,16 @@ body {
   &__setting {
     @apply hover:animate-spin;
   }
+
+  &-theme {
+	  &__light {
+	  	@apply text-yellow-400 stroke-2;
+	  }
+
+	  &__dark {
+	  	@apply text-yellow-200 stroke-2;
+	  }
+  }
 }
 
 .label {
