@@ -7,7 +7,7 @@ const ToggleTheme: FC = memo(() => {
 
 	return (
 		<label className="flex items-center cursor-pointer gap-2">
-			<Icon id='sun' />
+			<Icon id='sun' className={`!w-6 !h-6 ${theme === 'light' ? 'icon-theme__light' : ''}`} />
 			<Toggle
 				idToggle='theme-controller'
 				className='theme-controller'
@@ -15,7 +15,7 @@ const ToggleTheme: FC = memo(() => {
 				checked={theme === 'dark'}
 				onChange={toggleTheme}
 			/>
-			<Icon id='moon' />
+			<Icon id='moon' className={`!w-6 !h-6 ${theme === 'dark' ? 'icon-theme__dark' : ''}`} />
 		</label>
 	)
 })
