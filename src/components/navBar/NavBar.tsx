@@ -26,9 +26,7 @@ export const NavBar: FC = () => {
 					<span className='text-content text-center'>
 						Журнал выполненных работ по ТМ
 					</span>
-					<div className="">
-						<ToggleTheme />
-					</div>
+					<ToggleTheme />
 				</div>
 				<ul className='mNavBar__menu'>
 					<li>
