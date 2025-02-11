@@ -32,7 +32,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
   const { field: { value: substationValue, onChange: substationOnChange, ...restSubstationField } } = useController({ name: 'substationId', control })
   const { field: { value: userValue, onChange: userOnChange, ...restUserField } } = useController({ name: 'workProducerId', control })
   const { field: { value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion } } = useController({ name: 'dateCompletion', control })
-  const { field: { value: dateTypeWorkValue, onChange: dateTypeWorkOnChange, ...restTypeWorkField } } = useController({ name: 'typeWorkId', control })
+  const { field: { value: typeWorkValue, onChange: typeWorkOnChange, ...restTypeWorkField } } = useController({ name: 'typeWorkId', control })
   const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
   const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
   const { data: typesWork, isError: isErrorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
@@ -102,8 +102,8 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
               options={typesWork?.data}
               getOptionValue={option => option.id.toString()}
               getOptionLabel={option => option.name}
-              value={userValue || completedWork ? typesWork?.data?.find(d => d.id === dateTypeWorkValue) : null}
-              onChange={option => dateTypeWorkOnChange(option ? option.id : option)}
+              value={typeWorkValue || completedWork ? typesWork?.data?.find(tW => tW.id === typeWorkValue) : null}
+              onChange={option => typeWorkOnChange(option ? option.id : option)}
               isLoading={isLoadingTypesWork}
               isDisabled={isErrorTypesWork}
               isClearable
