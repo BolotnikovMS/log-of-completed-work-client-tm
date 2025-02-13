@@ -146,7 +146,7 @@ body {
 }
 
 .form {
-  @apply flex flex-col gap-4 h-full;
+  @apply flex flex-col gap-5 h-full;
 
   &__custom-select {
     transition: all 0.3 ease-out;
@@ -210,12 +210,14 @@ body {
 
       &--is-selected {
         color: #000 !important;
+        font-weight: bold !important;
         background-color: #93c5fd !important;
         border-radius: 12px !important;
       }
 
       &--is-focused {
-        background-color: #bfdbfe !important;
+      	color: black !important;
+        background-color: #79b7fd !important;
         border-radius: 12px !important;
       }
     }
@@ -271,11 +273,16 @@ body {
 /* Rechart */
 .recharts {
   &-text {
+ 		fill: #6f6f6f;
     font-size: clamp(15px, 2.5vw, 17px) !important;
   }
 
   &-legend-item-text, &-tooltip-item-list, &-tooltip-label {
     font-size: clamp(16px, 2.5vw, 19px) !important;
+  }
+
+  &-tooltip-wrapper > * {
+  	background-color: #7f7f7f;
   }
 }
 
