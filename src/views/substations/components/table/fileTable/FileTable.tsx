@@ -53,7 +53,7 @@ const FileTable: FC <{files: IFile[]}> = ({ files }) => {
 							<Icon id='download'/>
 						</Button>
 						{isAdminOrModerator && (
-							<Button className='btn-error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
+							<Button className='mBtn_error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
 								<Icon id='delete' />
 							</Button>
 						)}
