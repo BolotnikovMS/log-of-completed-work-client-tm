@@ -4,20 +4,22 @@ import { Loader, NavBar } from '..'
 import { useAuthStore } from '../../store/auth'
 
 export const Layout: FC = () => {
-  const userAuthStore = useAuthStore()
+	const userAuthStore = useAuthStore()
 
-  if (userAuthStore.requestLoading) return <Loader />
+	if (userAuthStore.requestLoading) return <Loader />
 
-  return (
-    <div className='flex h-screen'>
-      <NavBar />
-      <main className='flex-1'>
-        <div className="container mx-auto max-w-[100%] overflow-y-auto h-[100%]">
-          <Suspense fallback={<Loader />}>
-            <Outlet />
-          </Suspense>
-        </div>
-      </main>
-    </div>
-  )
+	return (
+		<div className='flex h-screen'>
+			<Suspense fallback={<Loader />}>
+				<NavBar />
+			</Suspense>
+			<main className='flex-1'>
+				<div className="container mx-auto max-w-[100%] overflow-y-auto h-[100%]">
+					<Suspense fallback={<Loader />}>
+						<Outlet />
+					</Suspense>
+				</div>
+			</main>
+		</div>
+	)
 }
