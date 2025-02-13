@@ -15,8 +15,8 @@ const SubstationsCards: FC = () => {
 	const { authUser } = useAuthStore()
 	const isAdmin = checkRole(authUser, [ERoles.Admin])
 	const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
-	const [page, setPage] = useState<number>(1)
-	const [searchParams] = useSearchParams()
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [page, setPage] = useState<number>(Number(searchParams.get(EFilterParam.page)) || 1)
 	const searchParam = searchParams.get('search')
 	const sortParam = searchParams.get('sort')
 	const orderParam = searchParams.get('order')
@@ -44,7 +44,10 @@ const SubstationsCards: FC = () => {
 		if (memoizedSubstations?.data.length === 0 && page !== 1) {
 			setPage(page - 1)
 		}
-	}, [memoizedSubstations?.data.length, page])
+
+		searchParams.set(EFilterParam.page, page.toString())
+		setSearchParams(searchParams)
+	}, [memoizedSubstations?.data.length, page, searchParams, setSearchParams])
 
 	if (isError && error) return <Error error={error} />
 
