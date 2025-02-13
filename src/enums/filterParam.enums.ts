@@ -11,4 +11,6 @@ export enum EFilterParam {
   dateEnd = 'dateEnd',
 	inControl = 'inControl',
 	objectType = 'objectType',
+	page = 'page',
+	limit = 'limit',
 }
