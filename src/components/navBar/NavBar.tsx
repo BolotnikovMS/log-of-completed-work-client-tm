@@ -20,9 +20,9 @@ export const NavBar: FC = () => {
 			<nav className='mNavBar__nav'>
 				<div className='mNavBar__logo '>
 					{/*<Group className='!flex-row !items-center'>
-            <Icon id='logo-be' className='!w-12 !h-12 !z-30' />
-            <span className='text-2xl font-bold text-sky-500'>ПО "ИТиС"</span>
-          </Group>*/}
+          <Icon id='logo-be' className='!w-12 !h-12 !z-30' />
+          <span className='text-2xl font-bold text-sky-500'>ПО "ИТиС"</span>
+        </Group>*/}
 					<span className='text-content text-center'>
 						Журнал выполненных работ по ТМ
 					</span>
