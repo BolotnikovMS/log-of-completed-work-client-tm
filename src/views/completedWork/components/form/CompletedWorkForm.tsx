@@ -10,17 +10,19 @@ import { Button, Checkbox, CustomDatePicker, Error, Group, Icon, Loader, SelectW
 import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { ICompletedWork, IPropsForm, IPropsMutation } from '../../../../interfaces'
+import { useAuthStore } from '../../../../store/auth'
 import { TCompletedWorkData } from '../../../../types'
 import { validationSchema } from './completedWork.validation'
 
 const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork, isEdited, setIsEdited, toggleModal }) => {
 	const [searchParams] = useSearchParams()
+	const { authUser } = useAuthStore()
 	const substationId = searchParams.get('substation')
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TCompletedWorkData>({
 		mode: 'all',
 		defaultValues: {
 			substationId: completedWork?.substationId || (substationId ? +substationId : undefined),
-			workProducerId: completedWork?.workProducerId,
+			workProducerId: completedWork?.workProducerId || authUser?.id,
 			typeWorkId: completedWork?.typeWorkId,
 			description: completedWork?.description,
 			note: completedWork?.note,
