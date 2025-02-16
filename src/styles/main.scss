@@ -275,6 +275,10 @@ body {
   &-text {
  		fill: #6f6f6f;
     font-size: clamp(15px, 2.5vw, 17px) !important;
+
+    & > a, a:visited, a:link {
+      fill: #6f6f6f;
+    }
   }
 
   &-legend-item-text, &-tooltip-item-list, &-tooltip-label {
