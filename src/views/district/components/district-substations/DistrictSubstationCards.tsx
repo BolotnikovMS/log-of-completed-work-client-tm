@@ -66,6 +66,7 @@ const DistrictSubstationCards: FC = () => {
 										children={
 											<Icon id='setting' />
 										}
+										classBtnTrigger='btn-circle'
 										menuItems={[
 											isAdminOrModerator && (
 												<Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>

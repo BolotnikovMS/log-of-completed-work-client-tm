@@ -31,6 +31,7 @@ const ChannelControlMenu: FC<{ channel: IChannel }> = memo(({ channel }) => {
 				<>
 					<Dropdown
 						children={<Icon id='setting' />}
+						classBtnTrigger='btn-circle'
 						menuItems={[
 							<Button className='!justify-start' onClick={handleEdit}>
 								<Icon id='edit' />

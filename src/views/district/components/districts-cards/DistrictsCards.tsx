@@ -62,6 +62,7 @@ const DistrictsCards: FC = () => {
 										children={
 											<Icon id='setting' />
 										}
+										classBtnTrigger='btn-circle'
 										menuItems={[
 											isAdminOrModerator && (
 												<Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>

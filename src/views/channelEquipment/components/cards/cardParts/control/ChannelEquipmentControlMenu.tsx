@@ -36,6 +36,7 @@ const ChannelEquipmentControlMenu: FC<IPropsChannelEquipmentControlMenu> = memo(
 				<>
 					<Dropdown
 						children={<Icon id='setting' />}
+						classBtnTrigger='btn-circle'
 						menuItems={[
 							isAdminOrModerator && (
 								<Button className='!justify-start' onClick={handleEdit}>

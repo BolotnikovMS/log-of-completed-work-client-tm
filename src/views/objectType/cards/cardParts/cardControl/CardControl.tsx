@@ -30,9 +30,8 @@ const CardControl: FC<IPropsCardControl<IObjectType>> = ({ data: objectType }) =
 		<>
 			{isAdminOrModerator && (
 				<Dropdown
-					children={
-						<Icon id='setting' className='icon__setting' />
-					}
+					children={<Icon id='setting' className='icon__setting' />}
+					classBtnTrigger='btn-circle'
 					menuItems={[
 						isAdminOrModerator && (
 							<Button className='!justify-start' onClick={() => { handleEdit() }}>

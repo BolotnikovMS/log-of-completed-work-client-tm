@@ -79,9 +79,8 @@ const SubstationsCards: FC = () => {
 								childrenControl={
 									isAdminOrModerator && (
 										<Dropdown
-											children={
-												<Icon id='setting' />
-											}
+											children={<Icon id='setting' />}
+											classBtnTrigger='btn-circle'
 											menuItems={[
 												isAdminOrModerator && (
 													<Button className='!justify-start' onClick={() => { toggleModal(), setSubstation(substation), setIsEdited(!isEdited) }}>

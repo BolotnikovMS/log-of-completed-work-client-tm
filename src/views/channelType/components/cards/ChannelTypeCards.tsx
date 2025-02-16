@@ -51,9 +51,8 @@ const ChannelTypeCards: FC = () => {
 								childrenControl={
 									isAdminOrModerator && (
 										<Dropdown
-											children={
-												<Icon id='setting' />
-											}
+											children={<Icon id='setting' />}
+											classBtnTrigger='btn-circle'
 											menuItems={[
 												isAdminOrModerator && (
 													<Button className='!justify-start' onClick={() => { toggleModal(), setChannelType(channelType), setIsEdited(!isEdited) }}>

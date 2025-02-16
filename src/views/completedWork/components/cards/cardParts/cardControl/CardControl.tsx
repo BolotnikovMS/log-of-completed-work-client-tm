@@ -36,6 +36,7 @@ const CardControl: FC<IPropsCardControl> = memo(({ completedWork }) => {
 							<Icon id='setting' className='icon__setting' aria-label='Иконка меню' />
 						</Tooltip>
 					}
+					classBtnTrigger='btn-circle'
 					menuItems={[
 						checkRole(authUser, [ERoles.Admin, ERoles.Moderator], true, completedWork) && (
 							<Button className='!justify-start' onClick={(e) => { handleEdit(e) }} aria-label='Редактировать'>
