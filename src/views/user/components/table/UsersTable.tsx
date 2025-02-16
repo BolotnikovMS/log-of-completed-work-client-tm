@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo, useState, type FC } from 'react'
 import { ChangeStatusAccountForm } from '..'
-import { BasicTable, Button, ChangePasswordForm, Error, Icon, InfoMessage, Loader, Modal } from '../../../../components'
+import { BasicTable, Button, ChangePasswordForm, Error, Icon, InfoMessage, Loader, Modal, Tooltip } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useModal, useUsers } from '../../../../hooks'
@@ -46,9 +46,11 @@ const UsersTable: FC = () => {
         (isAdmin && row.original.active) && (
           <div className='table-cell-row'>
             {row.original.role?.name}
-            <Button title='Изменить роль пользователя' onClick={() => { toggleModalChangeRole(), setCurrentUser(row.original) }}>
-              <Icon id='user-switch' />
-            </Button>
+            <Tooltip text='Изменить роль пользователя'>
+              <Button className='btn-circle' onClick={() => { toggleModalChangeRole(), setCurrentUser(row.original) }}>
+                <Icon id='user-switch' />
+              </Button>
+            </Tooltip>
           </div>
         )
       )
@@ -60,9 +62,11 @@ const UsersTable: FC = () => {
       cell: ({ row }) => (
         (isAdmin && row.original.active) && (
           <div className='table-cell-row'>
-            <Button title='Изменить пароль' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
-              <Icon id='key' />
+          <Tooltip text='Изменить пароль' className='!tooltip-left'>
+            <Button className='btn-circle' onClick={() => { toggleModal(), setCurrentUser(row.original) }}>
+              <Icon id='reset-password' />
             </Button>
+          </Tooltip>
           </div>
         )
       )
