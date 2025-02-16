@@ -17,6 +17,9 @@
   <symbol id="icon-arrow-right" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 12H4m11 5s5-3.682 5-5-5-5-5-5" color="currentColor"/>
   </symbol>
+  <symbol id="icon-arrow-right-line" viewBox="0 0 24 24">
+  	<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 18V6m-4 6H4m8-4s4 2.946 4 4s-4 4-4 4" color="currentColor"/>
+  </symbol>
   <symbol id="icon-books" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
       <path d="M2 15h13c.932 0 1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C18 16.602 18 17.068 18 18s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C16.398 21 15.932 21 15 21H2M2 3h13c.932 0 1.398 0 1.765.152a2 2 0 0 1 1.083 1.083C18 4.602 18 5.068 18 6s0 1.398-.152 1.765a2 2 0 0 1-1.083 1.083C16.398 9 15.932 9 15 9H2m20 0H9c-.932 0-1.398 0-1.765.152a2 2 0 0 0-1.083 1.083C6 10.602 6 11.068 6 12s0 1.398.152 1.765a2 2 0 0 0 1.083 1.083C7.602 15 8.068 15 9 15h13"/>
@@ -98,6 +101,12 @@
   <symbol id="icon-key" viewBox="0 0 16 16">
     <path d="M11 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2"/>
     <path d="M7.5 12v-.5h1A.5.5 0 0 0 9 11v-1h1a4 4 0 1 0-3.838-2.87L2.292 11a1 1 0 0 0-.292.707V13a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.5h1a.5.5 0 0 0 .5-.5M7 6a3 3 0 1 1 3 3H8.5a.5.5 0 0 0-.5.5v1H7a.5.5 0 0 0-.5.5v.5h-1a.5.5 0 0 0-.5.5v1H3v-1.293l4.089-4.089a.5.5 0 0 0 .113-.534C7.072 6.748 7 6.384 7 6"/>
+  </symbol>
+  <symbol id="icon-reset-password" viewBox="0 0 24 24">
+  	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
+   		<path d="M21.5 12A9.5 9.5 0 1 1 12 2.5a9.5 9.5 0 0 1 8.71 5.7m.79-2.7l-.475 3.175L18 8"/>
+	    <path d="M10 11V9.5a2 2 0 1 1 4 0V11m-2.75 5.5h1.5c1.173 0 1.76 0 2.163-.31a1.5 1.5 0 0 0 .277-.277c.31-.404.31-.99.31-2.163s0-1.76-.31-2.163a1.5 1.5 0 0 0-.277-.277c-.404-.31-.99-.31-2.163-.31h-1.5c-1.173 0-1.76 0-2.163.31a1.5 1.5 0 0 0-.277.277c-.31.404-.31.99-.31 2.163s0 1.76.31 2.163a1.5 1.5 0 0 0 .277.277c.404.31.99.31 2.163.31"/>
+    </g>
   </symbol>
   <symbol id="icon-link" viewBox="0 0 24 24">
     <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor">
