@@ -20,6 +20,7 @@ const Profile: FC<IPropsProfile> = memo(({ user }) => {
 			</div>
 			<Dropdown
 				children={<Icon id='profile' />}
+				classBtnTrigger='btn-circle'
 				classMenu='dropdown-top dropdown-end'
 				menuItems={[
 					<div className='flex justify-center'>
