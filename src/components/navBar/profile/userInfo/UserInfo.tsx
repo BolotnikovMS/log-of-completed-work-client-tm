@@ -6,14 +6,14 @@ import { IPropsUserInfo } from './userInfo.interface'
 
 const UserInfo: FC<IPropsUserInfo> = memo(({ shortName, position }) => {
 	return (
-		<div className='leading-3'>
-			<p className='text-sm font-bold' aria-label="Имя пользователя">
-				<Tooltip text='Перейти в профиль'>
+		<div className='leading-3 flex flex-col'>
+			<Tooltip text='Перейти в профиль'>
+				<p className='text-sm font-bold' aria-label="Имя пользователя">
 					<Link to={pageConfig.profile}>
 						{shortName}
 					</Link>
-				</Tooltip>
-			</p>
+				</p>
+			</Tooltip>
 			<span className='text-[12px]' aria-label="Должность пользователя">
 				{position}
 			</span>
