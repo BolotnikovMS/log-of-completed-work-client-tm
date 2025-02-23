@@ -47,7 +47,7 @@ const ChannelCards: FC = () => {
 									</p>
 								}
 								childrenControl={
-									<ChannelControlMenu channel={channel} />
+									<ChannelControlMenu channelId={channel.id} />
 								}
 							/>
 						))}
