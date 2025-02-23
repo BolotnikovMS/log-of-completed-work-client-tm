@@ -12,6 +12,7 @@ export const useUpdateChannel = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channels'] })
       await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['channel'] })
 
       toast.success('Запись успешно обновлена!')
     },
