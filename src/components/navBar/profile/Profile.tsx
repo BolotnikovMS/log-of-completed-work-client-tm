@@ -13,7 +13,7 @@ const Profile: FC<IPropsProfile> = memo(({ user }) => {
 	return (
 		<div className='flex flex-col items-center gap-4'>
 			<ToggleTheme />
-			<div className="w-full flex gap-3 justify-between">
+			<div className="w-full flex gap-3 justify-between items-center">
 				<div className="flex items-center gap-2">
 					<Avatar />
 					<UserInfo shortName={user.shortName} position={user.position} />
