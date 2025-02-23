@@ -1,5 +1,5 @@
 .mCard {
-  @apply card border border-solid bg-base-100 w-96 shadow-xl transition-colors duration-300 ease-in-out hover:cursor-pointer hover:border hover:border-blue-200;
+  @apply card border border-solid bg-base-100 w-96 shadow-xl transition-colors duration-300 ease-in-out hover:border hover:border-blue-200;
 }
 
 .mCard__body {
@@ -20,86 +20,3 @@
   width: 100%;
   height: 100%;
 }
-
-/* .card {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  padding: 10px 15px;
-  font-size: 20px;
-  border: 1px solid #b1b1b1;
-  border-radius: 10px;
-  background-color: rgba(239, 238, 239, 0.8);
-  box-shadow: 5px 15px 15px 0px rgba(34, 60, 80, 0.15);
-  transition: all 0.3s ease-in;
-
-  &:hover {
-    cursor: pointer;
-    /* transform: scale(1.01); */
-/* border: 1px solid #72afff; */
-/* } */
-
-/* &:not(&__control) {
-    .card__link {
-      width: 99%;
-    }
-  }
-
-  &:has(&__control) {
-    .card__link {
-      width: clamp(50%, 93% - 31px, 95%);
-    }
-  }
-
-  &__link {
-    position: absolute;
-    content: '';
-    height: 100%;
-  }
-
-  &__content {
-		width: 80%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 10px;
-  }
-
-	&__body {
-		padding: 3px 0;
-		display: flex;
-		align-items: center;
-		gap: 11px;
-	}
-
-	&__footer {
-		padding: 3px 0;
-		border-top: 1px solid #b1b1b1;
-
-		& > p {
-			color: #b1b1b1;
-		}
-	}
-
-  &__control {
-		/* z-index: 1; */
-
-/* &-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-  }
-
-	&__text {
-		&-bold {
-			font-weight: bold;
-		}
-	}
-
-  &.inActive {
-    background-color: rgba(165, 163, 165, 0.8);
-  }
-}  */
