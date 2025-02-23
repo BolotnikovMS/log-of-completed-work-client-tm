@@ -14,3 +14,11 @@ export interface IChannel {
   channel_equipment?: string | null
   gsm_operator?: string | null
 }
+
+export interface IChannelList {
+	id: number
+	substationId: number
+	substation?: string | null
+	channel_category_short?: string | null
+	channel_type?: string | null
+}

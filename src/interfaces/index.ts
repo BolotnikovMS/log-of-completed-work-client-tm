@@ -2,7 +2,7 @@ import { IGenericResponseLogout, ISignInFields, IUserLogin } from './auth.interf
 import { IPropsCardControl } from './cardControl.interface'
 import { IChangePassword } from './change-password.interface'
 import { IChannelType } from './channel-type.interface'
-import { IChannel } from './channel.interface'
+import { IChannel } from './channel.interfaces'
 import { IChannelCategory } from './channelCategory.interface'
 import { IChannelEquipment } from './channelEquipment.intarface'
 import { ICompletedWork } from './completed-work.interface'
