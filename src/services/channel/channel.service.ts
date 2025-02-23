@@ -17,6 +17,12 @@ export const ChannelService = {
     return data
   },
 
+  async getChannelById(id: number): Promise<IChannel> {
+    const { data } = await instance.get<IChannel>(`${url}/channels/${id}`)
+
+    return data
+  },
+
   async create(data: TChannelData): Promise<AxiosResponse<IChannel>> {
     return instance.post<IChannel>(`${url}/channels`, data)
   },
