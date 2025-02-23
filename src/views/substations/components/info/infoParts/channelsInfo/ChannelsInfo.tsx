@@ -1,6 +1,7 @@
 import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
+import { Link } from 'react-router-dom'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
 import { IPropsChannelsInfo } from '../partsInfo.interfaces'
 import ChannelInfoNote from './ChannelInfoNote'
@@ -33,7 +34,11 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 						{channel.ipAddress && (
 							<>
 								<p className='substation-info__text'>IP адрес канала: </p>
-								<p className='text-content'>{channel.ipAddress}</p>
+								<p className='text-content'>
+									<Link to={`http://${channel.ipAddress}`} target='_blank' rel="noopener noreferrer">
+										{channel.ipAddress}
+									</Link>
+								</p>
 							</>
 						)}
 						{channel.note && (
