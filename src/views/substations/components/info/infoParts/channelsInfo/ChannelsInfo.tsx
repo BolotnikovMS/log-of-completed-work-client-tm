@@ -46,7 +46,7 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 						)}
 					</div>
 					<div className="w-none">
-						<ChannelControlMenu channel={channel} />
+						<ChannelControlMenu channelId={channel.id} />
 					</div>
 				</div>
 			))
