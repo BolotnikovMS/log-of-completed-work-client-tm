@@ -1,13 +1,13 @@
-import { useQuery } from '@tanstack/react-query'
+import { keepPreviousData, useQuery, UseQueryOptions } from '@tanstack/react-query'
+import { ISubstation } from '../../interfaces'
 import { SubstationService } from '../../services/substations/substation.service'
 
-export const useSubstation = (id: string | undefined) => {
-	const { data: substation, error, isError, isLoading } = useQuery({
+export const useSubstation = (id: number, options?: Omit<UseQueryOptions<ISubstation, Error>, 'queryKey'>) => {
+	return useQuery({
 		queryKey: ['substation', id],
-		queryFn: () => SubstationService.getSubstation(id || ''),
-		staleTime: 1000 * 7,
-		enabled: !!id,
+		queryFn: () => SubstationService.getSubstationById(id),
+		staleTime: 4 * 60 * 1000,
+		placeholderData: keepPreviousData,
+		...options
 	})
-
-	return { substation, error, isError, isLoading }
 }
