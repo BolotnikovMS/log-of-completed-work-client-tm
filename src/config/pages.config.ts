@@ -4,7 +4,7 @@ class PageConfig {
   districtSubstations = '/districts/:id/substations'
   objectTypes = '/object-types'
   substations = '/substations'
-  substation = '/substations/:id'
+  substationInfo = '/substations/:id/info'
   voltageClasses = '/voltage-classes'
   typesKp = '/types-kp'
   headControllers = '/head-controllers'
