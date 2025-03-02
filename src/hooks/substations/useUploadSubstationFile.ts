@@ -10,7 +10,7 @@ export const useUploadSubstationFile = () => {
   return useMutation({
     mutationFn: (data: TFileUploadData) => FileService.upload(data),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 
       toast.success('Файл успешно загружен!')
     },
