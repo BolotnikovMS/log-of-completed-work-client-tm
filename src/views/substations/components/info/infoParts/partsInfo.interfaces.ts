@@ -1,7 +1,7 @@
-import { IChannel, ISubstation } from '../../../../../interfaces'
+import { IChannel, ISubstationInfo } from '../../../../../interfaces'
 
 export interface IPropsPartsInfo {
-  substation: ISubstation | undefined
+  substation: ISubstationInfo | undefined
 }
 
 export interface IPropsChannelsInfo {
