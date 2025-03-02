@@ -20,7 +20,11 @@ export interface ISubstation {
   note?: string | null
 }
 
-export interface ISubstationInfo extends ISubstation {
+export interface ISubstationInfo {
+	id: number
+	active: boolean
+	rdu: boolean
+  note?: string | null
   fullNameSubstation: string
   numberCompletedWorks?: number
   voltage_class?: string | null
