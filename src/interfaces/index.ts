@@ -17,11 +17,11 @@ import { IPropsMutation } from './mutation-data.interface'
 import { IObjectType } from './objectType.interface'
 import { IQueryParams } from './qparams.interface'
 import { IRole } from './role.interface'
-import { ISubstation } from './substation.interface'
+import { ISubstationInfo, ISubstation, ISubstationList } from './substation.interfaces'
 import { ITypeKp } from './type-kp'
 import { ITypeWork } from './typeWork.interface'
 import { IUser, IUserDataLogin } from './user.interface'
 import { IUserRole } from './userRole.interface'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstation, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass }
+export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstationInfo, ISubstation, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass, ISubstationList }
