@@ -27,7 +27,17 @@ const ChannelControlMenu: FC<{ channelId: number }> = memo(({ channelId }) => {
 		setIsEdited(!isEdited)
 		toggleModal()
 	}, [isEdited, toggleModal])
-	const modalContent = isLoading ? (<Loader />) : isError ? (<Error error={error} />) : <ChannelForm data={data} toggleModal={toggleModal} isEdited={isEdited} setIsEdited={setIsEdited} />
+	const modalContent =
+		isLoading ?
+			(<Loader />) :
+			isError ?
+				(<Error error={error} />) :
+				<ChannelForm
+					data={data}
+					toggleModal={toggleModal}
+					isEdited={isEdited}
+					setIsEdited={setIsEdited}
+				/>
 
 	if (!isAdminOrModerator) return null
 
