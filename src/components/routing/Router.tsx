@@ -99,7 +99,7 @@ export const Router: React.FC = () => {
 						</ProtectedRoute>
 					}
 				/>
-				<Route path={pageConfig.substation}
+				<Route path={pageConfig.substationInfo}
 					element={
 						<ProtectedRoute isAllowed={!!authUser}>
 							<Page
