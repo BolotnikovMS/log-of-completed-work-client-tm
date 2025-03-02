@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
-import { IQueryParams, ISubstation } from '../../interfaces'
+import { IQueryParams, ISubstation, ISubstationInfo } from '../../interfaces'
 import { TRespSubstations, TSubstationData, TSubstationNoteData } from '../../types'
 
 export const SubstationService = {
@@ -16,8 +16,14 @@ export const SubstationService = {
     return data
   },
 
-  async getSubstation(id: string): Promise<ISubstation> {
+  async getSubstationById(id: number): Promise<ISubstation> {
     const { data } = await instance.get<ISubstation>(`${url}/substations/${id}`)
+
+    return data
+  },
+
+  async getSubstationInfo(id: string): Promise<ISubstationInfo> {
+    const { data } = await instance.get<ISubstationInfo>(`${url}/substations/${id}/info`)
 
     return data
   },
