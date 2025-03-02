@@ -1,5 +1,5 @@
-import { ISubstation } from '../../../../../interfaces'
+import { ISubstationInfo } from '../../../../../interfaces'
 
 export interface IPropsSubstationInfoControl {
-  substation?: ISubstation | null
+  substation: ISubstationInfo
 }
