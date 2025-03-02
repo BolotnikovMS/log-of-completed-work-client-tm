@@ -2,13 +2,13 @@ import { type FC } from 'react'
 import { useParams } from 'react-router-dom'
 import { FileTable, SubstationInfoControl } from '..'
 import { Error, Icon, Loader, Tab } from '../../../../components'
-import { useSubstation } from '../../../../hooks'
+import { useSubstationInfo } from '../../../../hooks'
 import { ChannelsInfo, SliderPhoto, YtmInfo } from './infoParts'
 import './substationInfo.scss'
 
 const SubstationInfo: FC = () => {
 	const { id } = useParams()
-	const { substation, error, isError, isLoading } = useSubstation(id)
+	const { substation, error, isError, isLoading } = useSubstationInfo(id)
 	const backupsContent = substation?.files_backups?.length ? <FileTable files={substation.files_backups} /> : <p className='text-content text-center'>Пока бэкапов не добавлено!</p>
 	const photosContent = substation?.files_photos_ps?.length ? <FileTable files={substation.files_photos_ps} /> : <p className='text-content text-center'>Пока фото не добавлено!</p>
 	const otherContent = substation?.other_files?.length ? <FileTable files={substation.other_files} /> : <p className='text-content text-center'>Пока других файлов не добавлено!</p>

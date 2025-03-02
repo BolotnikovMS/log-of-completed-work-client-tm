@@ -40,15 +40,13 @@ const ChannelCards: FC = () => {
 										{channel?.channel_category_short ?? 'Нет данных'}
 										{' - '}
 										{channel?.channel_type}
-										<Link to={pageConfig.getDynamicUrl(pageConfig.substation, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
+										<Link to={pageConfig.getDynamicUrl(pageConfig.substationInfo, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
 											<Icon id='link' />
 											{channel?.substation ?? 'Нет данных'}
 										</Link>
 									</p>
 								}
-								childrenControl={
-									<ChannelControlMenu channelId={channel.id} />
-								}
+								childrenControl={<ChannelControlMenu channelId={channel.id} />}
 							/>
 						))}
 					</div>
