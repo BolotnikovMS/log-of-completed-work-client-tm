@@ -8,8 +8,9 @@ import { useDeleteFile } from '../../../../../hooks'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
 import { useAuthStore } from '../../../../../store/auth'
+import { TFileList } from '../../../../../types'
 
-const FileTable: FC <{files: IFile[]}> = ({ files }) => {
+const FileTable: FC <{files: TFileList[]}> = ({ files }) => {
 	const { authUser } = useAuthStore()
 	const { deleteFile } = useDeleteFile()
   const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
