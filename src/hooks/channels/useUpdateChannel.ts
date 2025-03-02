@@ -11,7 +11,7 @@ export const useUpdateChannel = () => {
     mutationFn: ({ id, data }: { id: number, data: TChannelData }) => ChannelService.update(id, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
       await queryClient.invalidateQueries({ queryKey: ['channel'] })
 
       toast.success('Запись успешно обновлена!')

@@ -9,7 +9,7 @@ export const useDeleteChannel = () => {
     mutationFn: (id: number) => ChannelService.delete(id),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
       toast.success('Запись успешно удалена!')
     },
     onError: (error) => {

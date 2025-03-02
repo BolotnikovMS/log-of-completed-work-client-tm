@@ -8,7 +8,7 @@ export const useDeleteFile = () => {
   const deleteFile = useMutation({
     mutationFn: (id: number) => FileService.delete(id),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
       toast.success('Файл успешно удален!')
     },
     onError: async (error) => {

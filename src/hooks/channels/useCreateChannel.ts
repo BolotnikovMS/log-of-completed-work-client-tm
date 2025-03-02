@@ -11,7 +11,7 @@ export const useCreateChannel = () => {
     mutationFn: (data: TChannelData) => ChannelService.create(data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
+      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 
       toast.success('Запись успешно добавлена!')
     },
