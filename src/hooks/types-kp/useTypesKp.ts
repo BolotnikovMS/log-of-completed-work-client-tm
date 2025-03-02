@@ -6,7 +6,7 @@ export const useTypesKp = ({ page, limit }: IQueryParams) => {
   const { data: typesKp, error, isError, isLoading, isFetching } = useQuery({
     queryKey: ['typesKp', 'all', page, limit],
     queryFn: () => TypeKpService.getTypesKp({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 5 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

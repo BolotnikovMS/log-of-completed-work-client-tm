@@ -5,7 +5,7 @@ export const useSubstationsTypeKp = () => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['dashboardSubstationsTypeKp'],
     queryFn: () => DashboardService.getSubstationsTypeKp(),
-    staleTime: 1000 * 10,
+    staleTime: 1 * 60 * 1000,
   })
 
   return { data, error, isError, isLoading }

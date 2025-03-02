@@ -6,7 +6,7 @@ export const useHeadControllers = ({ page, limit }: IQueryParams) => {
   const { data: headControllers, error, isError, isLoading } = useQuery({
     queryKey: ['headControllers', 'all', page, limit],
     queryFn: () => HeadControllerService.getHeadControllers({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 5 * 60 * 1000,
   })
 
   return { headControllers, error, isError, isLoading }

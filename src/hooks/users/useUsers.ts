@@ -7,7 +7,7 @@ export const useUsers = ({ active, cleanUser }: IQueryParams) => {
   const { data, error, isError, isLoading, isFetching } = useQuery({
     queryKey: ['users', isParams],
     queryFn: () => UserService.getUsers({ active, cleanUser }),
-    staleTime: 1000 * 10,
+    staleTime: 4 * 60 * 1000,
   })
 
   return { data, error, isError, isLoading, isFetching }

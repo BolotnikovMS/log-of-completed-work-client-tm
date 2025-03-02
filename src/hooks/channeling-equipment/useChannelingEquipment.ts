@@ -6,7 +6,7 @@ export const useChannelingEquipment = ({ page, limit }: IQueryParams) => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['channelingEquipment', 'all', page, limit],
     queryFn: () => ChannelEquipmentService.getChannelingEquipment({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 5 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

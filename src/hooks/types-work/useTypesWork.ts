@@ -6,7 +6,7 @@ export const useTypesWork = ({ page, limit }: IQueryParams) => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['typesWork', 'all', page, limit],
     queryFn: () => TypeWorkService.getTypesWork({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 10 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

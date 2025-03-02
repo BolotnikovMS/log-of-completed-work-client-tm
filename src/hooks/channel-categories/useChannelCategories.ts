@@ -6,7 +6,7 @@ export const useChannelCategories = ({ page, limit }: IQueryParams) => {
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['channelCategories', 'all', page, limit],
     queryFn: () => ChannelCategoryService.getChannelCategories({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 10 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

@@ -6,7 +6,7 @@ export const useCompletedWork = ({ page, limit, substation, executor, dateStart,
   const { data, error, isError, isLoading } = useQuery({
     queryKey: ['completedWork', 'all', page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl],
     queryFn: () => CompletedWorkService.getAll({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }),
-    staleTime: 1000 * 10,
+    staleTime: 1 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

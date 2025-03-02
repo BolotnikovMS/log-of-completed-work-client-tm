@@ -6,7 +6,7 @@ export const useChannelTypes = ({ page, limit }: IQueryParams) => {
   const { data, error, isError, isLoading, isFetching } = useQuery({
     queryKey: ['channelTypes', 'all', page, limit],
     queryFn: () => ChannelTypeService.getChannelTypes({ page, limit }),
-    staleTime: 1000 * 10,
+    staleTime: 7 * 60 * 1000,
     placeholderData: keepPreviousData,
   })
 

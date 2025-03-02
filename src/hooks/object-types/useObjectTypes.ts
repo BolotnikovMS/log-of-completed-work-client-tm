@@ -6,7 +6,7 @@ export const useObjectTypes = ({ page, limit }: IQueryParams) => {
 	const { data, error, isError, isLoading } = useQuery({
 		queryKey: ['objectTypes', 'all', page, limit],
 		queryFn: () => ObjectTypeService.getObjectTypes({ page, limit }),
-		staleTime: 1000 * 10,
+		staleTime:  10 * 60 * 1000,
 		placeholderData: keepPreviousData,
 	})
 
