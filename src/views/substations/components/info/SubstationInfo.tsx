@@ -14,8 +14,8 @@ const SubstationInfo: FC = () => {
 	const otherContent = substation?.other_files?.length ? <FileTable files={substation.other_files} /> : <p className='text-content text-center'>Пока других файлов не добавлено!</p>
 
 	if (isError && error) return <Error error={error} />
-
 	if (isLoading) return <Loader />
+	if (!substation) return null
 
 	return (
 		<div className="substation-info">
