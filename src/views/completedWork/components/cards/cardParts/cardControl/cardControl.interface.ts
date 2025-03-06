@@ -1,5 +1,5 @@
-import { ICompletedWork } from '../../../../../../interfaces'
+import { ICompletedWorkList } from '../../../../../../interfaces'
 
 export interface IPropsCardControl {
-  completedWork: ICompletedWork
+  completedWork: ICompletedWorkList
 }
