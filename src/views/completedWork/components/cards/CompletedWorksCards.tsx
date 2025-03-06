@@ -3,8 +3,8 @@ import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkInfo } from '..'
 import { Card, Error, InfoMessage, Loader, Modal, NumberRecords, Pagination } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useCompletedWork, useModal } from '../../../../hooks'
-import { ICompletedWork } from '../../../../interfaces'
+import { useCompletedWorks, useModal } from '../../../../hooks'
+import { ICompletedWorkList } from '../../../../interfaces'
 import { CardContent, CardControl, CardFooter, CardHeader } from './cardParts'
 
 const CompletedWorksCards: FC = () => {
@@ -16,10 +16,10 @@ const CompletedWorksCards: FC = () => {
 	const dateEndParam = searchParams.get(EFilterParam.dateEnd)
 	const typeWorkParam = searchParams.get(EFilterParam.typeWork)
 	const inControlParam = searchParams.get(EFilterParam.inControl)
-	const { data, error, isError, isLoading } = useCompletedWork({ limit: 15, page, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam, inControl: inControlParam })
+	const { data, error, isError, isLoading } = useCompletedWorks({ limit: 15, page, substation: substationParam, executor: executorParam, dateStart: dateStartParam, dateEnd: dateEndParam, typeWork: typeWorkParam, inControl: inControlParam })
 	const { isModal: isModalView, toggleModal: toggleModalView } = useModal()
-	const [completedWork, setCompetedWork] = useState<ICompletedWork | null>(null)
-	const handleOpenInfo = useCallback((work: ICompletedWork) => {
+	const [completedWork, setCompetedWork] = useState<ICompletedWorkList | null>(null)
+	const handleOpenInfo = useCallback((work: ICompletedWorkList) => {
 		toggleModalView()
 		setCompetedWork(work)
 	}, [toggleModalView])
@@ -34,7 +34,6 @@ const CompletedWorksCards: FC = () => {
 	}, [data?.data.length, page, searchParams, setSearchParams])
 
 	if (isError && error) return <Error error={error} />
-
 	if (isLoading) return <Loader />
 
 	return (
@@ -75,15 +74,15 @@ const CompletedWorksCards: FC = () => {
 				</div>
 			)}
 			{(!data?.meta.total && !isLoading && !isError) && <InfoMessage text='Пока выполненных работ не добавлено...' />}
-			<Modal
-				visible={isModalView}
-				title='Подробный просмотр выполненной работы'
-				classDialog='!min-w-[850px]'
-				onToggle={() => { toggleModalView() }}
-				content={
-					<CompletedWorkInfo completedWork={completedWork!} />
-				}
-			/>
+			{completedWork && (
+				<Modal
+					visible={isModalView}
+					title='Подробный просмотр выполненной работы'
+					classDialog='!min-w-[850px]'
+					onToggle={() => { toggleModalView() }}
+					content={<CompletedWorkInfo completedWorkId={completedWork.id} isModal={isModalView} />}
+				/>
+			)}
 		</>
 	)
 }
