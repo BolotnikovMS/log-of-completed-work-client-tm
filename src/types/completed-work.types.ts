@@ -1,5 +1,5 @@
-import { ICompletedWork, IMeta } from '../interfaces'
+import { ICompletedWork, ICompletedWorkList, IMeta } from '../interfaces'
 
-export type TCompletedWorkData = Omit<ICompletedWork, 'id' | 'userId' | 'substation' | 'work_producer' | 'type_work' | 'author'>
+export type TCompletedWorkData = Omit<ICompletedWork, 'id'>
 
-export type TRespCompletedWork = { meta: IMeta, data: ICompletedWork[] }
+export type TRespCompletedWork = { meta: IMeta, data: ICompletedWorkList[] }
