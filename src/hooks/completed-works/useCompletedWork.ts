@@ -1,14 +1,12 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
-import { IQueryParams } from '../../interfaces'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
+import { ICompletedWork } from '../../interfaces'
 import { CompletedWorkService } from '../../services/completed-work/completed-work.service'
 
-export const useCompletedWork = ({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams) => {
-  const { data, error, isError, isLoading } = useQuery({
-    queryKey: ['completedWork', 'all', page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl],
-    queryFn: () => CompletedWorkService.getAll({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }),
-    staleTime: 1 * 60 * 1000,
-    placeholderData: keepPreviousData,
-  })
-
-  return { data, error, isError, isLoading }
+export const useCompletedWork = (id: number, options?: Omit<UseQueryOptions<ICompletedWork, Error>, 'queryKey'>) => {
+	return useQuery({
+		queryKey: ['completedWork', id],
+		queryFn: () => CompletedWorkService.getCompletedWorkById(id),
+		staleTime: 4 * 60 * 1000,
+		...options
+	})
 }
