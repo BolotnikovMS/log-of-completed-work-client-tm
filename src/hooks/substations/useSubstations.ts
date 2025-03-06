@@ -6,7 +6,7 @@ export const useSubstations = ({ page, limit, search, sort, order, typeKp, headC
   const { data: substations, error, isError, isLoading } = useQuery({
     queryKey: ['substations', 'all', page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType],
     queryFn: () => SubstationService.getSubstations({ page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }),
-    staleTime: 1000 * 10,
+    staleTime: 1 * 60 * 1000,
   })
 
   return { substations, error, isError, isLoading }
