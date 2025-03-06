@@ -8,7 +8,8 @@ export const useDeleteCompletedWork = () => {
   const deleteCompletedWork = useMutation({
     mutationFn: (id: number) => CompletedWorkService.delete(id),
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['completedWork'] })
+      await queryClient.invalidateQueries({ queryKey: ['completedWorks'] })
+
       toast.success('Запись успешно удалена!')
     },
     onError: (error) => {

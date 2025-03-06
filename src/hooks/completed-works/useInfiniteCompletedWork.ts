@@ -12,7 +12,7 @@ export const useInfiniteCompletedWork = ({ limit, substation, executor, dateStar
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: ['completedWork', 'infinity', substation, executor, dateStart, dateEnd, typeWork],
+    queryKey: ['completedWorks', 'infinity', substation, executor, dateStart, dateEnd, typeWork],
     queryFn: ({ pageParam = 1 }) => CompletedWorkService.getAll({ page: pageParam, limit, substation, executor, dateStart, dateEnd, typeWork }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
