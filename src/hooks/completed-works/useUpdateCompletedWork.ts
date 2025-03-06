@@ -5,19 +5,21 @@ import { CompletedWorkService } from '../../services/completed-work/completed-wo
 import { TCompletedWorkData } from '../../types'
 
 export const useUpdateCompletedWork = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: ({ id, data }: { id: number, data: TCompletedWorkData }) => {
-      return CompletedWorkService.update(id, data)
-    },
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['completedWork'] })
+	return useMutation({
+		mutationFn: ({ id, data }: { id: number, data: TCompletedWorkData }) => {
+			return CompletedWorkService.update(id, data)
+		},
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['completedWorks'] })
+			await queryClient.invalidateQueries({ queryKey: ['completedWork'] })
+			await queryClient.invalidateQueries({ queryKey: ['completedWorkInfo'] })
 
-      toast.success('Запись успешно обновлена!')
-    },
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
-  })
+			toast.success('Запись успешно обновлена!')
+		},
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
+	})
 }
