@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
-import { ICompletedWork, IQueryParams } from '../../interfaces'
+import { ICompletedWork, ICompletedWorkInfo, IQueryParams } from '../../interfaces'
 import { TCompletedWorkData, TRespCompletedWork } from '../../types'
 
 export const CompletedWorkService = {
@@ -12,6 +12,18 @@ export const CompletedWorkService = {
     const { data } = await instance.get<TRespCompletedWork>(`${url}/completed-works`, {
       params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }
     })
+
+    return data
+  },
+
+  async getCompletedWorkById(id: number): Promise<ICompletedWork> {
+    const { data } = await instance.get<ICompletedWork>(`${url}/completed-works/${id}`)
+
+    return data
+  },
+
+  async getCompletedWorkInfo(id: number): Promise<ICompletedWorkInfo> {
+    const { data } = await instance.get<ICompletedWorkInfo>(`${url}/completed-works/${id}/info`)
 
     return data
   },
