@@ -29,7 +29,6 @@ const CompletedWorksCards: FC = () => {
 			setPage(page - 1)
 		}
 
-
 		searchParams.set(EFilterParam.page, page.toString())
 		setSearchParams(searchParams)
 	}, [data?.data.length, page, searchParams, setSearchParams])
