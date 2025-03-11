@@ -7,7 +7,7 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useSearchParams } from 'react-router-dom'
 import { default as AsyncSelect } from 'react-select'
 import { Button, Checkbox, CustomDatePicker, Error, Group, Icon, Loader, SelectWrapper, Textarea } from '../../../../components'
-import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsers } from '../../../../hooks'
+import { useCreateCompletedWork, useTypesWork, useUpdateCompletedWork, useUsersShort } from '../../../../hooks'
 import { useSubstations } from '../../../../hooks/substations/useSubstations'
 import { ICompletedWork, IPropsForm, IPropsMutation } from '../../../../interfaces'
 import { useAuthStore } from '../../../../store/auth'
@@ -36,7 +36,7 @@ const CompletedWorkForm: FC<IPropsForm<ICompletedWork>> = ({ data: completedWork
 	const { field: { value: dateCompletionValue, onChange: dateCompletionOnChange, ...restDateCompletion } } = useController({ name: 'dateCompletion', control })
 	const { field: { value: typeWorkValue, onChange: typeWorkOnChange, ...restTypeWorkField } } = useController({ name: 'typeWorkId', control })
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
-	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsers({ cleanUser: true })
+	const { data: users, isError: isErrorUsers, isLoading: isLoadingUsers } = useUsersShort({ cleanUser: true })
 	const { data: typesWork, isError: isErrorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
 	const { mutateAsync: createCompletedWork, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateCompletedWork()
 	const { mutateAsync: updateCompletedWork, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateCompletedWork()
