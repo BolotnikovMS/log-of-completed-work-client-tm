@@ -11,7 +11,7 @@ export const useChangeRole = (userId: number) => {
     mutationFn: (data: IUserRole) => UserService.changeUserRole(userId, data),
     onSuccess: async (data) => {
       await queryClient.invalidateQueries({ queryKey: ['user', userId] })
-
+      await queryClient.invalidateQueries({ queryKey: ['users'] })
 
       toast.success(data.data)
     },
