@@ -9,7 +9,7 @@ import { validationSchema } from './changePassword.validation'
 
 const ChangePasswordForm: FC<IPropsChangePasswordForm> = ({ user, isResetPassword, toggleModal }) => {
   const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<IChangePasswordFields>({
-    mode: 'onBlur',
+    mode: 'all',
     resolver: yupResolver(validationSchema)
   })
   const { mutateAsync: resetPassword, isError: isErrorReset, error: errorReset, isPending: isPendingReset } = useResetPassword()
