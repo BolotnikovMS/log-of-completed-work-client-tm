@@ -20,7 +20,7 @@ import { IRole } from './role.interface'
 import { ISubstation, ISubstationInfo, ISubstationList } from './substation.interfaces'
 import { ITypeKp } from './type-kp'
 import { ITypeWork } from './typeWork.interface'
-import { IUser, IUserDataLogin } from './user.interface'
+import { IUser, IUserDataLogin } from './user.interfaces'
 import { IUserRole } from './userRole.interface'
 import { IVoltageClass } from './voltage-class.interface'
 
