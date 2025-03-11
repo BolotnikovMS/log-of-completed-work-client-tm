@@ -5,12 +5,13 @@ import { UserService } from '../../services/user/user.service'
 import { TChangeStatusAccount } from '../../types'
 
 export const useChangeStatusAccountMutation = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: (data: TChangeStatusAccount) => UserService.changeStatusAccount(data),
-    onSuccess: async (data) => {
-      await queryClient.invalidateQueries({ queryKey: ['users', 'all'] })
+	return useMutation({
+		mutationFn: (data: TChangeStatusAccount) => UserService.changeStatusAccount(data),
+		onSuccess: async (data) => {
+			queryClient.invalidateQueries({ queryKey: ['users', 'all'] })
+			queryClient.invalidateQueries({ queryKey: ['user'] })
 
       toast.success(data.data)
     },
