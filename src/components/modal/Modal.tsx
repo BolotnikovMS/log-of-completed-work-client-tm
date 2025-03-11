@@ -10,7 +10,7 @@ export const Modal: FC<IPropsModal> = ({ visible, title, content, footer, classD
 
 	return createPortal(
 		<dialog className="mModal" open={visible} onClick={e => e.stopPropagation()}>
-			<div className={cx('mModal__dialog')}>
+			<div className={cx('mModal__dialog', classDialog)}>
 				<button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={onToggle}>
 					<Icon id='close' />
 				</button>
