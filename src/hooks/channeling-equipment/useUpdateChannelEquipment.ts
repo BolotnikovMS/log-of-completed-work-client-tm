@@ -11,6 +11,7 @@ export const useUpdateChannelEquipment = () => {
     mutationFn: ({ id, data }: { id: number, data: TChannelEquipmentData }) => ChannelEquipmentService.update(id, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channelingEquipment'] })
+      await queryClient.invalidateQueries({ queryKey: ['channelEquipment'] })
 
       toast.success('Запись успешно обновлена!')
     },
