@@ -13,6 +13,12 @@ export const DistrictService = {
     return data
   },
 
+  async getDistrictById(id: number): Promise<IDistrict> {
+    const { data } = await instance.get<IDistrict>(`${url}/districts/${id}`)
+
+    return data
+  },
+
   async create(data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
     return instance.post<IDistrict>(`${url}/districts`, data)
   },
