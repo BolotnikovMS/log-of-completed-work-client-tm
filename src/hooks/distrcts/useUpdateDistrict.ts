@@ -12,6 +12,7 @@ export const useUpdateDistrict = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['districts', 'infinity'] })
       await queryClient.invalidateQueries({ queryKey: ['districts'] })
+      await queryClient.invalidateQueries({ queryKey: ['district'] })
 
       toast.success('Запись успешно обновлена!')
     },
