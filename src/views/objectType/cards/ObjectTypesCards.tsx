@@ -14,7 +14,6 @@ const ObjectTypesCards: FC = () => {
 	}, [data?.data.length, page])
 
 	if (isError && error) return <Error error={error} />
-
 	if (isLoading) return <Loader />
 
 	return (
@@ -29,7 +28,7 @@ const ObjectTypesCards: FC = () => {
 									<p className='text-content'>{objectType.name}</p>
 								}
 								childrenControl={
-									<CardControl data={objectType} />
+									<CardControl objectTypeId={objectType.id} />
 								}
 							/>
 						))}
