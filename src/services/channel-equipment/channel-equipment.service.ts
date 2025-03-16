@@ -13,14 +13,20 @@ export const ChannelEquipmentService = {
     return data
   },
 
+  async getChannelEquipmentById(id: number): Promise<IChannelEquipment> {
+    const {data} = await instance.get<IChannelEquipment>(`${url}/channeling-equipments/${id}`)
+
+    return data
+  },
+
   async create(data: TChannelEquipmentData): Promise<AxiosResponse<IChannelEquipment>> {
     return await instance.post<IChannelEquipment>(`${url}/channeling-equipments`, data)
   },
 
-  async update(id: number, data: TChannelEquipmentData): Promise<AxiosResponse<IChannelEquipment>> { 
+  async update(id: number, data: TChannelEquipmentData): Promise<AxiosResponse<IChannelEquipment>> {
     return await instance.patch(`${url}/channeling-equipments/${id}`, data)
   },
-  
+
   async delete(id: number): Promise<AxiosResponse<void>> {
     return await instance.delete(`${url}/channeling-equipments/${id}`)
   }
