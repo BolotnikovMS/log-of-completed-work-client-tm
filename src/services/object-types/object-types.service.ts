@@ -13,6 +13,12 @@ export const ObjectTypeService = {
 		return data
 	},
 
+	async getObjectTypeById(id: number): Promise<IObjectType> {
+		const { data } = await instance.get<IObjectType>(`${url}/object-types/${id}`)
+
+		return data
+	},
+
 	async create(data: TObjectTypeData): Promise<AxiosResponse<IObjectType>> {
 		return await instance.post<IObjectType>(`${url}/object-types`, data)
 	},
