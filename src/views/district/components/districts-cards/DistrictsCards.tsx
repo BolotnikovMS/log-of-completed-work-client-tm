@@ -1,35 +1,17 @@
 import { useEffect, useState, type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { DistrictForm } from '..'
-import { Button, Dropdown, Error, Icon, InfoMessage, Loader, Modal, Pagination, SmallCard } from '../../../../components'
+import { Error, Icon, InfoMessage, Loader, Pagination, SmallCard } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
-import { ERoles } from '../../../../enums/roles.enum'
-import { checkRole } from '../../../../helpers/checkRole.helper'
-import { useDeleteDistrict, useDistricts, useModal } from '../../../../hooks'
-import { IDistrict } from '../../../../interfaces'
-import { useAuthStore } from '../../../../store/auth'
+import { useDistricts } from '../../../../hooks'
 import { TOrderSort } from '../../../../types/order.types'
+import { CardControl } from './cardParts'
 
 const DistrictsCards: FC = () => {
-	const { authUser } = useAuthStore()
-	const isAdmin = checkRole(authUser, [ERoles.Admin])
-	const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
 	const [page, setPage] = useState<number>(1)
 	const [searchParams] = useSearchParams()
 	const sortParam = searchParams.get('sort') || 'name'
 	const orderParam = searchParams.get('order') || 'asc'
 	const { districts: data, error, isError, isLoading } = useDistricts({ limit: 15, page, sort: sortParam, order: orderParam as TOrderSort })
-	const { isModal, toggleModal } = useModal()
-	const [isEdited, setIsEdited] = useState<boolean>(false)
-	const [district, setDistrict] = useState<IDistrict | null>(null)
-	const { deleteDistrict } = useDeleteDistrict()
-	const handleDelete = (id: number) => {
-		const answer = confirm('Подтвердите удаление записи.')
-
-		if (!answer) return null
-
-		return deleteDistrict.mutate(id)
-	}
 
 	useEffect(() => {
 		if (data?.data.length === 0 && page !== 1) {
@@ -38,7 +20,6 @@ const DistrictsCards: FC = () => {
 	}, [data?.data.length, page])
 
 	if (isError && error) return <Error error={error} />
-
 	if (isLoading) return <Loader />
 
 	return (
@@ -57,26 +38,8 @@ const DistrictsCards: FC = () => {
 								}
 								path={pageConfig.getDynamicUrl(pageConfig.districtSubstations, { id: district.id })}
 								childrenControl={
-									isAdminOrModerator &&
-									<Dropdown
-										children={
-											<Icon id='setting' />
-										}
-										classBtnTrigger='btn-circle'
-										menuItems={[
-											isAdminOrModerator && (
-												<Button className='!justify-start' onClick={() => { toggleModal(), setDistrict(district), setIsEdited(!isEdited) }}>
-													<Icon id='edit' />
-													Редактировать
-												</Button>
-											),
-											isAdmin && (
-												<Button className='mBtn_error !justify-start' onClick={() => handleDelete(district.id)}>
-													<Icon id='delete' />
-													Удалить
-												</Button>
-											)
-										]}
+									<CardControl
+										districtId={district.id}
 									/>
 								}
 							/>
@@ -86,7 +49,6 @@ const DistrictsCards: FC = () => {
 				</div>
 			)}
 			{(!data?.data.length && !isLoading && !isError) && <InfoMessage text='Районов или ГП пока не добавлено...' />}
-			<Modal visible={isModal} title='Редактирование записи' onToggle={() => { toggleModal(), setIsEdited(false) }} content={<DistrictForm data={district} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />} />
 		</>
 	)
 }
