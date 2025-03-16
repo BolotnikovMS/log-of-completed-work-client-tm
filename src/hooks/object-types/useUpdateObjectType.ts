@@ -11,6 +11,7 @@ export const useUpdateObjectType = () => {
     mutationFn: ({ id, data }: { id: number, data: TObjectTypeData }) => ObjectTypeService.update(id, data),
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['objectTypes'] })
+      await queryClient.invalidateQueries({ queryKey: ['objectType'] })
 
       toast.success('Запись успешно обновлена!')
     },
