@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Error, Icon, InfoMessage, Loader, Pagination, SmallCard } from '../../../../components'
+import { Error, Icon, InfoMessage, Loader, NumberRecords, Pagination, SmallCard, Tooltip } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useChannels } from '../../../../hooks'
@@ -29,22 +29,30 @@ const ChannelCards: FC = () => {
 
 	return (
 		<>
+			<NumberRecords text='Всего каналов:' numberRecords={data?.meta.total} />
 			{!!data?.data.length && (
 				<div className='flex flex-col gap-2'>
 					<div className='cards'>
 						{data.data.map(channel => (
 							<SmallCard
 								key={channel.id}
+								classContent='flex-col !items-start !gap-1'
 								childrenContent={
-									<p className='text-content'>
-										{channel?.channel_category_short ?? 'Нет данных'}
-										{' - '}
-										{channel?.channel_type}
-										<Link to={pageConfig.getDynamicUrl(pageConfig.substationInfo, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
-											<Icon id='link' />
-											{channel?.substation ?? 'Нет данных'}
-										</Link>
-									</p>
+									<>
+										<p className='text-content'>
+											{channel?.channel_category_short ?? 'Нет данных'}
+											{' - '}
+											{channel?.channel_type}
+										</p>
+										<Tooltip text='Подробный просмотр объекта'>
+											<p className='text-content'>
+												<Link to={pageConfig.getDynamicUrl(pageConfig.substationInfo, { id: channel.substationId })} className='flex items-center gap-1 font-bold'>
+													<Icon id='link' />
+													{channel?.substation ?? 'Нет данных'}
+												</Link>
+											</p>
+										</Tooltip>
+									</>
 								}
 								childrenControl={<ChannelControlMenu channelId={channel.id} />}
 							/>
