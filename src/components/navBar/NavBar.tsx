@@ -78,6 +78,12 @@ export const NavBar: FC = () => {
 							</Link>
 						</li>
 					)}
+					<li>
+						<Link to={pageConfig.docsFiles}>
+							<Icon id='alert' />
+							Документы
+						</Link>
+					</li>
 				</ul>
 			</nav>
 			{user && (

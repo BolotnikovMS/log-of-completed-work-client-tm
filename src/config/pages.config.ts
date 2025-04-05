@@ -18,6 +18,7 @@ class PageConfig {
   users = '/users'
   profile = '/profile'
   signIn = '/sign-in'
+  docsFiles = '/docs-files'
   notFound = '*'
 
   getDynamicUrl(template: string, params: Record<string, string | number>, queryParams?: Record<string, string | number>): string {
