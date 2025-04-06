@@ -58,12 +58,18 @@ body {
   @apply btn btn-sm;
 }
 
+/* Text class */
+
 .text-title {
   @apply text-xl;
 }
 
 .text-content {
   @apply text-lg font-normal;
+}
+
+.text-content-1 {
+	@apply flex gap-1 items-center text-lg font-bold;
 }
 
 .text-mandatory {
