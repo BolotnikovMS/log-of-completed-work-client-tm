@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Error, Icon, InfoMessage, Loader, NumberRecords, Pagination, SmallCard, Tooltip } from '../../../../components'
+import { ChannelInfo, Error, Icon, InfoMessage, Loader, NumberRecords, Pagination, SmallCard, Tooltip } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useChannels } from '../../../../hooks'
@@ -54,7 +54,12 @@ const ChannelCards: FC = () => {
 										</Tooltip>
 									</>
 								}
-								childrenControl={<ChannelControlMenu channelId={channel.id} />}
+								childrenControl={
+									<>
+										<ChannelInfo channelId={channel.id} />
+										<ChannelControlMenu channelId={channel.id} />
+									</>
+								}
 							/>
 						))}
 					</div>
