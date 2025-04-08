@@ -46,11 +46,13 @@ const SubstationInfo: FC = () => {
 				<SliderPhoto substation={substation} />
 			</div>
 
-			<Tab tabs={[
-				{ id: 'backups', label: 'Backup', content: backupsContent, icon: <Icon id='database' /> },
-				{ id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Icon id='img' /> },
-				{ id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <Icon id='files-folder' /> }
-			]} />
+			<Tab
+				tabs={[
+					{ id: 'backups', label: 'Backup', content: backupsContent, icon: <Icon id='database' /> },
+					{ id: 'photos', label: 'Фото ПС', content: photosContent, icon: <Icon id='img' /> },
+					{ id: 'other_files', label: 'Прочие файлы', content: otherContent, icon: <Icon id='files-folder' /> }
+				]}
+			/>
 		</div >
 	)
 }

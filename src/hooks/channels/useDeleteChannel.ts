@@ -10,6 +10,8 @@ export const useDeleteChannel = () => {
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: ['channels'] })
       await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+      await queryClient.invalidateQueries({ queryKey: ['channelInfo'] })
+      
       toast.success('Запись успешно удалена!')
     },
     onError: (error) => {

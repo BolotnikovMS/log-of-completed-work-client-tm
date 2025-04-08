@@ -5,8 +5,7 @@ import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IChannel, IQueryParams } from '../../interfaces'
-import { TChannelData } from '../../types'
-import { TRespChannels } from '../../types/channel.types'
+import { TChannelData, TChannelInfo, TRespChannels } from '../../types'
 
 export const ChannelService = {
   async getChannels({ limit, page, substation, channelType, channelCategory }: IQueryParams): Promise<TRespChannels> {
@@ -19,6 +18,12 @@ export const ChannelService = {
 
   async getChannelById(id: number): Promise<IChannel> {
     const { data } = await instance.get<IChannel>(`${url}/channels/${id}`)
+
+    return data
+  },
+
+  async getChannelInfo(id: number): Promise<TChannelInfo> {
+    const { data } = await instance.get<TChannelInfo>(`${url}/channels/${id}/info`)
 
     return data
   },

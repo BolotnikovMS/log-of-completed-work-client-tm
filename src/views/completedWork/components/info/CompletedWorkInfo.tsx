@@ -16,28 +16,28 @@ const CompletedWorkInfo: FC<{ completedWorkId: number, isModal: boolean }> = ({ 
 		<div className='work-info'>
 			<div className='work-info__content'>
 				<Group>
-					<p className='work-info__text'>Объект:
+					<p className='text-content-1'>Объект:
 						<span className='text-content'>
 							{completedWork?.substation ?? 'Нет данных'}
 						</span>
 					</p>
 				</Group>
 				<Group>
-					<p className='work-info__text'>Дата проведения работ:
+					<p className='text-content-1'>Дата проведения работ:
 						<span className='text-content'>
 							{moment(completedWork?.dateCompletion, 'YYYY-MM-DD').format('DD.MM.yyyy')}
 						</span>
 					</p>
 				</Group>
 				<Group>
-					<p className='work-info__text'>Категория работ:
+					<p className='text-content-1'>Категория работ:
 						<span className='text-content'>
 							{completedWork?.type_work ?? 'Нет данных'}
 						</span>
 					</p>
 				</Group>
 				<Group>
-					<p className='work-info__text'>
+					<p className='text-content-1'>
 						Производитель работ:
 						<span className='text-content'>
 							{completedWork?.work_producer ?? 'Нет данных'}
@@ -45,7 +45,7 @@ const CompletedWorkInfo: FC<{ completedWorkId: number, isModal: boolean }> = ({ 
 					</p>
 				</Group>
 				<Group>
-					<p className='work-info__text'>
+					<p className='text-content-1'>
 						Автор записи:
 						<span className='text-content'>
 							{completedWork?.author ?? 'Нет данных'}

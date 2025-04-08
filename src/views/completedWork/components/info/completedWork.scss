@@ -8,8 +8,4 @@
   &__titles {
     @apply flex items-center justify-center;
   }
-
-  &__text {
-    @apply flex gap-1 items-center text-lg font-bold;
-  }
 }
