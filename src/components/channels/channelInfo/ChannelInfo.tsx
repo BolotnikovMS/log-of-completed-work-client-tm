@@ -1,6 +1,6 @@
 import { type FC } from 'react'
-import { useChannelInfo, useModal } from '../../../../../../../hooks'
-import { Button, Error, Icon, Loader, Modal } from '../../../../../../../components'
+import { useChannelInfo, useModal } from '../../../hooks'
+import { Button, Error, Icon, Loader, Modal } from '../..'
 import ChannelInfoContent from './ChannelInfoContent'
 
 const ChannelInfo: FC<{ channelId: number }> = ({ channelId }) => {
