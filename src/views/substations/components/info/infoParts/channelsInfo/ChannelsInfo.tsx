@@ -19,12 +19,6 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 						<p className='text-content flex items-center gap-2'>
 							{channel.channel_type}
 						</p>
-						{channel.channel_equipment && (
-							<>
-								<p className='substation-info__text'>Оборудование: </p>
-								<p className='text-content'>{channel.channel_equipment}</p>
-							</>
-						)}
 						{channel.ipAddress && (
 							<>
 								<p className='substation-info__text'>IP адрес канала: </p>
