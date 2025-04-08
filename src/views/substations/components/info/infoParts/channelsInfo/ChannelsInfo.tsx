@@ -4,7 +4,7 @@ import 'react-awesome-slider/dist/styles.css'
 import { Link } from 'react-router-dom'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
 import { IPropsChannelsInfo } from '../partsInfo.interfaces'
-import ChannelInfo from './channelInfo/ChannelInfo'
+import { ChannelInfo, Tooltip } from '../../../../../../components'
 
 const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 	if (!channels?.length) return <p className='substation-info__section-text text-red-500'>Нет данных по каналам для отображения!</p>
@@ -22,11 +22,13 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 						{channel.ipAddress && (
 							<>
 								<p className='substation-info__text'>IP адрес канала: </p>
-								<p className='text-content'>
-									<Link to={`http://${channel.ipAddress}`} target='_blank' rel="noopener noreferrer">
-										{channel.ipAddress}
-									</Link>
-								</p>
+								<Tooltip text='Открыть в новом окне'>
+									<p className='text-content'>
+										<Link to={`http://${channel.ipAddress}`} target='_blank' rel="noopener noreferrer">
+											{channel.ipAddress}
+										</Link>
+									</p>
+								</Tooltip>
 							</>
 						)}
 					</div>
