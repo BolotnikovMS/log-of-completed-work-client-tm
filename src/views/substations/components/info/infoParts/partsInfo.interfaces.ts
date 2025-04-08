@@ -1,9 +1,10 @@
-import { IChannel, ISubstationInfo } from '../../../../../interfaces'
+import { ISubstationInfo } from '../../../../../interfaces'
+import { TChannelSubstationInfo } from '../../../../../types'
 
 export interface IPropsPartsInfo {
   substation: ISubstationInfo | undefined
 }
 
 export interface IPropsChannelsInfo {
-  channels: IChannel[] | undefined
+  channels: TChannelSubstationInfo[] | undefined
 }
