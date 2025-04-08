@@ -37,10 +37,10 @@ const SubstationInfo: FC = () => {
 					</div>
 					<ChannelsInfo channels={substation?.channels} />
 					{substation?.note && (
-						<>
+						<div>
 							<p className="substation-info__section-text">Примечание</p>
 							<p className="text-content text-balance">{substation.note}</p>
-						</>
+						</div>
 					)}
 				</div>
 				<SliderPhoto substation={substation} />
