@@ -21,6 +21,7 @@ import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 import { UserControl, UsersTable } from '../../views/user/components'
 import { VoltageClassesCards, VoltageControl } from '../../views/voltageClasses/components'
+import { FolderCards } from '../../views/docsFiles/components'
 
 export const Router: React.FC = () => {
 	const { authUser } = useAuthStore()
@@ -298,6 +299,18 @@ export const Router: React.FC = () => {
 							children={
 								<>
 									<SignIn />
+								</>
+							}
+						/>
+					}
+				/>
+				<Route path={pageConfig.docsFiles}
+					element={
+						<Page
+							title='Документы'
+							children={
+								<>
+									<FolderCards />
 								</>
 							}
 						/>
