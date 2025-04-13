@@ -1,6 +1,6 @@
 import { memo, type FC } from 'react'
-import { TChannelInfo } from '../../../types'
 import { Group } from '../..'
+import { TChannelInfo } from '../../../types'
 
 const ChannelInfoContent: FC<{ channel: TChannelInfo | undefined }> = memo(({ channel }) => {
 	if (!channel) return <p className='text-content text-center !font-bold text-red-500'>Нет данных!</p>
@@ -25,6 +25,13 @@ const ChannelInfoContent: FC<{ channel: TChannelInfo | undefined }> = memo(({ ch
 				<p className='text-content-1'>Тип канала:
 					<span className='text-content'>
 						{channel?.channel_type ?? 'Нет данных'}
+					</span>
+				</p>
+			</Group>
+			<Group>
+				<p className='text-content-1'>GSM оператор:
+					<span className='text-content'>
+						{channel?.gsm_operator ?? 'Нет данных'}
 					</span>
 				</p>
 			</Group>
