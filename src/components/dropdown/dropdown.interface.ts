@@ -3,4 +3,5 @@ export interface IPropsDropdown {
   menuItems: React.ReactNode[]
   classBtnTrigger?: string
   classMenu?: string
+  tooltipText?: string
 }
