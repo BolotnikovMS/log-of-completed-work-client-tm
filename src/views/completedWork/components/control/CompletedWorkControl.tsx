@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CompletedWorkFilters, CompletedWorkForm } from '..'
-import { Button, Dropdown, Icon, LoaderLine, Modal } from '../../../../components'
+import { Button, Dropdown, Icon, LoaderLine, Modal, Tooltip } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useDownloadExcelCompletedWork, useModal } from '../../../../hooks'
 
@@ -28,12 +28,8 @@ const CompletedWorkControl: FC = () => {
 				<div className='flex items-center gap-2'>
 					<Dropdown
 						classMenu='dropdown-bottom dropdown-end'
-						children={
-							<>
-								<Icon id='file-export' />
-								Экспорт
-							</>
-						}
+						children={<Icon id='file-export' />}
+						tooltipText='Экспорт'
 						menuItems={[
 							<Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
 								<Icon id='excel' />
@@ -41,13 +37,14 @@ const CompletedWorkControl: FC = () => {
 							</Button>
 						]}
 					/>
-					<Button onClick={() => toggleModalFilters()}>
-						{searchParams.size ?
-							<Icon id='filter-remove' /> :
-							<Icon id='filter' />
-						}
-						Фильтры
-					</Button>
+					<Tooltip text='Фильтры'>
+						<Button onClick={() => toggleModalFilters()}>
+							{searchParams.size ?
+								<Icon id='filter-remove' /> :
+								<Icon id='filter' />
+							}
+						</Button>
+					</Tooltip>
 				</div>
 				<Modal
 					visible={isModal}
