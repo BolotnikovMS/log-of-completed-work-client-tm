@@ -44,7 +44,8 @@ const CardControl: FC<{ objectTypeId: number }> = memo(({ objectTypeId }) => {
 	return (
 		<>
 			<Dropdown
-				children={<Icon id='setting' className='icon__setting' />}
+				children={<Icon id='setting' className='icon__setting' aria-label='Иконка меню' />}
+				tooltipText='Меню'
 				classBtnTrigger='btn-circle'
 				menuItems={[
 					isAdminOrModerator && (

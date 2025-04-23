@@ -1,6 +1,6 @@
 import { MouseEvent, memo, useCallback, useState, type FC } from 'react'
 import { CompletedWorkForm } from '../../..'
-import { Button, Dropdown, Error, Icon, Loader, Modal, Tooltip } from '../../../../../../components'
+import { Button, Dropdown, Error, Icon, Loader, Modal } from '../../../../../../components'
 import { ERoles } from '../../../../../../enums/roles.enum'
 import { checkRole } from '../../../../../../helpers'
 import { useCompletedWork, useDeleteCompletedWork, useModal } from '../../../../../../hooks'
@@ -46,11 +46,8 @@ const CardControl: FC<IPropsCardControl> = memo(({ completedWork }) => {
 	return (
 		<>
 			<Dropdown
-				children={
-					<Tooltip text='Меню'>
-						<Icon id='setting' className='icon__setting' aria-label='Иконка меню' />
-					</Tooltip>
-				}
+				children={<Icon id='setting' className='icon__setting' aria-label='Иконка меню' />}
+				tooltipText='Меню'
 				classBtnTrigger='btn-circle'
 				menuItems={[
 					isAdminOrModeratorOrAuthor && (
