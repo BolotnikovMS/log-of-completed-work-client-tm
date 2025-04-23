@@ -20,7 +20,8 @@ const ControlMenu: FC<{ userId: number }> = ({ userId }) => {
 	return (
 		<>
 			<Dropdown
-				children={<Icon id="setting" />}
+				children={<Icon id="setting" className='icon__setting' aria-label='Иконка меню' />}
+				tooltipText='Меню'
 				classBtnTrigger='btn-circle'
 				menuItems={[
 					<Button className='!justify-start' onClick={toggleModalChangeRole}>
