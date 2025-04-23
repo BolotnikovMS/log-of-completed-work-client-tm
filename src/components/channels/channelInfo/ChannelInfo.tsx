@@ -1,6 +1,6 @@
 import { type FC } from 'react'
+import { Button, Error, Icon, Loader, Modal, Tooltip } from '../..'
 import { useChannelInfo, useModal } from '../../../hooks'
-import { Button, Error, Icon, Loader, Modal } from '../..'
 import ChannelInfoContent from './ChannelInfoContent'
 
 const ChannelInfo: FC<{ channelId: number }> = ({ channelId }) => {
@@ -11,9 +11,11 @@ const ChannelInfo: FC<{ channelId: number }> = ({ channelId }) => {
 
 	return (
 		<>
-			<Button className='btn-circle' onClick={toggleModal}>
-				<Icon id='view' />
-			</Button>
+			<Tooltip text='Информация о канале'>
+				<Button className='btn-circle' onClick={toggleModal}>
+					<Icon id='view' />
+				</Button>
+			</Tooltip>
 			<Modal
 				visible={isModal}
 				title='Информация о канале'
