@@ -49,12 +49,8 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 				</Link>
 				<Dropdown
 					classMenu='dropdown-bottom dropdown-start'
-					children={
-						<>
-							<Icon id='setting' aria-label='Иконка действий' />
-							Действие
-						</>
-					}
+					children={<Icon id='setting' aria-label='Иконка действий' />}
+					tooltipText='Действие'
 					menuItems={[
 						<Button onClick={toggleModal} aria-label='Кнопка вызова модального окна для добавления файла'>
 							<Icon id='file-add' aria-label='Иконка добавления файла' />

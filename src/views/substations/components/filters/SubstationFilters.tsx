@@ -1,7 +1,7 @@
 import { type FC } from 'react'
 import { useLocation, useSearchParams } from 'react-router-dom'
 import { SubstationFlterParameters } from '..'
-import { Button, Dropdown, Group, Icon, LoaderLine, Modal, Search, Sort } from '../../../../components'
+import { Button, Dropdown, Group, Icon, LoaderLine, Modal, Search, Sort, Tooltip } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { useDownloadExcelSubstations, useModal } from '../../../../hooks'
@@ -35,12 +35,8 @@ const SubstationFilters: FC = () => {
 						<>
 							<Dropdown
 								classMenu='dropdown-bottom'
-								children={
-									<>
-										<Icon id='file-export' />
-										Экспорт
-									</>
-								}
+								children={<Icon id='file-export' />}
+								tooltipText='Экспорт'
 								menuItems={[
 									<Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
 										<Icon id='excel' />
@@ -48,13 +44,14 @@ const SubstationFilters: FC = () => {
 									</Button>
 								]}
 							/>
-							<Button onClick={() => toggleModalFilters()}>
-								{districtParam || typeKpParam || headControllerParam || channelCategoryParam || channelTypeParam ?
-									<Icon id='filter-remove' /> :
-									<Icon id='filter' />
-								}
-								Фильтры
-							</Button>
+							<Tooltip text='Фильтры'>
+								<Button onClick={() => toggleModalFilters()}>
+									{districtParam || typeKpParam || headControllerParam || channelCategoryParam || channelTypeParam ?
+										<Icon id='filter-remove' /> :
+										<Icon id='filter' />
+									}
+								</Button>
+							</Tooltip>
 						</>
 					)}
 				</Group>
