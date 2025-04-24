@@ -1,10 +1,10 @@
 import { FC, memo, useCallback, useState } from 'react'
-import { SubstationForm } from '../../..'
-import { Button, Dropdown, Error, Icon, Loader, Modal } from '../../../../../../components'
-import { ERoles } from '../../../../../../enums/roles.enum'
-import { checkRole } from '../../../../../../helpers'
-import { useDeleteSubstation, useModal, useSubstation } from '../../../../../../hooks'
-import { useAuthStore } from '../../../../../../store/auth'
+import { Button, Dropdown, Error, Icon, Loader, Modal } from '../../../..'
+import { ERoles } from '../../../../../enums/roles.enum'
+import { checkRole } from '../../../../../helpers'
+import { useDeleteSubstation, useModal, useSubstation } from '../../../../../hooks'
+import { useAuthStore } from '../../../../../store/auth'
+import SubstationForm from '../../../../../views/substations/components/forms/createSubstation/SubstationForm'
 
 const ControlMenu: FC<{ substationId: number }> = memo(({ substationId }) => {
 	const { authUser } = useAuthStore()

@@ -1,7 +1,9 @@
 import { lazy } from 'react'
 import { Button } from './button/Button'
 import { Card } from './cards/card/Card'
+import CardsSubstations from './cards/cardsSubstations/CardsSubstations'
 import { SmallCard } from './cards/small-card/SmallCard'
+import ChannelInfo from './channels/channelInfo/ChannelInfo'
 import CustomAxisTickChart from './charts/customAxisTickChart/CustomAxisTickChart'
 import CustomBarChartLabel from './charts/customBarChartLabel/CustomBarChartLabel'
 import CustomTooltipChart from './charts/customTooltipChart/CustomTooltipChart'
@@ -20,7 +22,6 @@ import Pagination from './pagination/Pagination'
 import { ProtectedRoute } from './protectedRoute/ProtectedRoute'
 import { Router } from './routing/Router'
 import ToggleTheme from './toggleTheme/ToggleTheme'
-import ChannelInfo from './channels/channelInfo/ChannelInfo'
 
 const Badge = lazy(() => import('./badge/Badge'))
 const Error = lazy(() => import('./error/Error'))
@@ -42,4 +43,4 @@ const Search = lazy(() => import('./filters/search/Search'))
 const Checkbox = lazy(() => import('./checkbox/Checkbox'))
 const Tooltip = lazy(() => import('./tooltip/Tooltip'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, ChangePasswordForm, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage, ChannelInfo }
+export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }

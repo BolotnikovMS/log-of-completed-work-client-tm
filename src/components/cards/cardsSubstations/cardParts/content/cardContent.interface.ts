@@ -1,4 +1,4 @@
-import { ISubstationList } from '../../../../../../interfaces'
+import { ISubstationList } from '../../../../../interfaces'
 
 export interface ICardContent {
 	substation: ISubstationList

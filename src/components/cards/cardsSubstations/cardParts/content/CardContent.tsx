@@ -1,5 +1,5 @@
 import { memo, type FC } from 'react'
-import { Badge, Icon } from '../../../../../../components'
+import { Badge, Icon } from '../../../..'
 import { ICardContent } from './cardContent.interface'
 
 const CardContent: FC<ICardContent> = memo(({ substation }) => {
