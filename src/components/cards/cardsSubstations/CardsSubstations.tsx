@@ -12,20 +12,24 @@ const CardsSubstations: FC<IPropsCardsSubstations> = ({ substations, error, isEr
 
 	useEffect(() => {
 		if (!page || !setPage) return
-		if (memoizedSubstations?.data.length === 0 && page !== 1) {
-			setPage(page - 1)
+		if (!memoizedSubstations) return
+
+		const { meta } = memoizedSubstations
+
+		if (meta.current_page > meta.last_page) {
+			setPage(1)
 
 			return
 		}
 
-		if (memoizedSubstations?.meta.first_page !== memoizedSubstations?.meta.last_page && memoizedSubstations?.meta.current_page !== 1) {
+		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
 			searchParams.set(EFilterParam.page, page.toString())
 			setSearchParams(searchParams)
 		} else {
 			searchParams.delete(EFilterParam.page)
 			setSearchParams(searchParams)
 		}
-	}, [memoizedSubstations?.data.length, memoizedSubstations?.meta.current_page, memoizedSubstations?.meta.first_page, memoizedSubstations?.meta.last_page, page, searchParams, setPage, setSearchParams])
+	}, [memoizedSubstations, page, searchParams, setPage, setSearchParams])
 
 	if (isError && error) return <Error error={error} />
 	if (isLoading) return <Loader />
