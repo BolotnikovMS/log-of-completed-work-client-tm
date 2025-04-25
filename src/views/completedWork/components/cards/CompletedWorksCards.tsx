@@ -25,13 +25,24 @@ const CompletedWorksCards: FC = () => {
 	}, [toggleModalView])
 
 	useEffect(() => {
-		if (data?.data.length === 0 && page !== 1) {
-			setPage(page - 1)
+		if (!data) return
+
+		const { meta } = data
+
+		if (meta.current_page > meta.last_page) {
+			setPage(1)
+
+			return
 		}
 
-		searchParams.set(EFilterParam.page, page.toString())
-		setSearchParams(searchParams)
-	}, [data?.data.length, page, searchParams, setSearchParams])
+		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
+			searchParams.set(EFilterParam.page, page.toString())
+			setSearchParams(searchParams)
+		} else {
+			searchParams.delete(EFilterParam.page)
+			setSearchParams(searchParams)
+		}
+	}, [data, page, searchParams, setSearchParams])
 
 	if (isError && error) return <Error error={error} />
 	if (isLoading) return <Loader />
