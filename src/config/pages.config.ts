@@ -16,6 +16,7 @@ class PageConfig {
   typesWork = '/types-work'
   completedWorks = '/completed-works'
   users = '/users'
+  tmCoefficientCalculator = '/tm-coefficient-calculator'
   profile = '/profile'
   signIn = '/sign-in'
   notFound = '*'
