@@ -70,6 +70,21 @@ export const NavBar: FC = () => {
 							Выполненные работы
 						</Link>
 					</li>
+					<li>
+						<details>
+							<summary>
+								<Icon id='tools' />
+								Инструменты
+							</summary>
+							<ul className='flex flex-col gap-1'>
+								<li>
+									<Link to={pageConfig.tmCoefficientCalculator}>
+										Калькулятор коэффициентов
+									</Link>
+								</li>
+							</ul>
+						</details>
+					</li>
 					{checkRole(user, [ERoles.Admin]) && (
 						<li>
 							<Link to={pageConfig.users}>
