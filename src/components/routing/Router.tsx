@@ -17,6 +17,7 @@ import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/c
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { ObjectTypeControl, ObjectTypesCards } from '../../views/objectType'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
+import { TmCoefficientCalculator } from '../../views/tools/tmCoefficientCalculator'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 import { UserControl, UsersTable } from '../../views/user/components'
@@ -300,6 +301,14 @@ export const Router: React.FC = () => {
 									<SignIn />
 								</>
 							}
+						/>
+					}
+				/>
+				<Route path={pageConfig.tmCoefficientCalculator}
+					element={
+						<Page
+							title='Калькулятор расчета коэффициента измерения'
+							children={<TmCoefficientCalculator />}
 						/>
 					}
 				/>
