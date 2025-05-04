@@ -1,3 +1,6 @@
+import { TQuantity } from './calculators/quantity.type'
+import { TTypeCalculation } from './calculators/typeCalculation.type'
+import { TVoltage } from './calculators/voltage.type'
 import { TChannelTypeData, TRespChannelTypes } from './channel-type.types'
 import { TChannelData, TChannelInfo, TChannelSubstationInfo, TRespChannels } from './channel.types'
 import { TChannelEquipmentData, TRespChannelingEquipment } from './channelingEquipment.types'
@@ -15,4 +18,4 @@ import { TRespTypesWork, TTypeWorkData } from './typeWork.types'
 import { TChangeStatusAccount, TChangeUserRole, TRespUsers, TUserBase, TUserData, TUserShort } from './user.types'
 import { TResponseVoltageClass, TVoltageClassData } from './voltage-class.types'
 
-export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelTypeData, TCompletedWorkData, TDistrictData, TFileList, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TRespChannelCategories, TRespChannelingEquipment, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TTheme, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltageClassData, TChannelInfo, TRespChannels, TChannelSubstationInfo }
+export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelTypeData, TCompletedWorkData, TDistrictData, TFileList, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TRespChannelCategories, TRespChannelingEquipment, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TTheme, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltageClassData, TChannelInfo, TRespChannels, TChannelSubstationInfo, TQuantity, TTypeCalculation, TVoltage }
