@@ -1,4 +1,4 @@
-import { convertValue } from '../convertValue/convertValue'
+import { convertValue } from '..'
 import { TCalculate } from './tmCoefficientCalculator.type'
 
 export const tmCoefficientCalculator: TCalculate = (typeCalculation, quanta, voltage, currentCoefficient, quantity) => {
