@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { tmCoefficientCalculator } from '../../helpers/tmCoefficientCalculator/tmCoefficientCalculator'
+import { tmCoefficientCalculator } from '../../helpers'
 import { ITmCoefficientCalculatorStore } from './tmCoefficientCalculator.interface'
 
 export const useTmCoefficientCalculatorStore = create<ITmCoefficientCalculatorStore>((set, get) => ({
