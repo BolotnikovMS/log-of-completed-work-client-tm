@@ -42,5 +42,6 @@ const Sort = lazy(() => import('./filters/sort/Sort'))
 const Search = lazy(() => import('./filters/search/Search'))
 const Checkbox = lazy(() => import('./checkbox/Checkbox'))
 const Tooltip = lazy(() => import('./tooltip/Tooltip'))
+const Select = lazy(() => import('./select/Select'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, Select, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
