@@ -9,4 +9,6 @@ interface ITab {
 
 export interface IPropsTab {
   tabs: ITab[]
+  classContainer?: string
+  classTab?: string
 }
