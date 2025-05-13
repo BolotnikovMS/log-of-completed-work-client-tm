@@ -10,49 +10,49 @@ const ChannelInfoContent: FC<{ channel: TChannelInfo | undefined }> = memo(({ ch
 			<Group>
 				<p className='text-content-1'>Объект:
 					<span className='text-content'>
-						{channel?.substation ?? 'Нет данных'}
+						{channel.substation}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>Категория канала:
 					<span className='text-content'>
-						{channel?.channel_category ?? 'Нет данных'}
+						{channel.channel_category}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>Тип канала:
 					<span className='text-content'>
-						{channel?.channel_type ?? 'Нет данных'}
+						{channel.channel_type}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>GSM оператор:
 					<span className='text-content'>
-						{channel?.gsm_operator ?? 'Нет данных'}
+						{channel.gsm_operator ?? 'Не указан'}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>Каналообразующее оборудование:
 					<span className='text-content'>
-						{channel?.channel_equipment ?? 'Нет данных'}
+						{channel.channel_equipment ?? 'Не указан'}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>IP адрес канала:
 					<span className='text-content'>
-						{channel?.ipAddress ?? 'Нет данных'}
+						{channel.ipAddress ?? 'Не указан'}
 					</span>
 				</p>
 			</Group>
 			<Group>
 				<p className='text-content-1'>Примечания:
 					<span className='text-content'>
-						{channel?.note ?? 'Нет данных'}
+						{channel.note ?? 'Не указано'}
 					</span>
 				</p>
 			</Group>
