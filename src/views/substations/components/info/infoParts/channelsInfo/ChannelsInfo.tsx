@@ -2,9 +2,9 @@ import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import { Link } from 'react-router-dom'
+import { ChannelInfo, Icon, Tooltip } from '../../../../../../components'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
 import { IPropsChannelsInfo } from '../partsInfo.interfaces'
-import { ChannelInfo, Tooltip } from '../../../../../../components'
 
 const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 	if (!channels?.length) return <p className='substation-info__section-text text-red-500'>Нет данных по каналам для отображения!</p>
@@ -24,7 +24,8 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 								<p className='substation-info__text'>IP адрес канала: </p>
 								<Tooltip text='Открыть в новом окне'>
 									<p className='text-content'>
-										<Link to={`http://${channel.ipAddress}`} target='_blank' rel="noopener noreferrer">
+										<Link to={`http://${channel.ipAddress}`} className='flex items-center gap-1' target='_blank' rel="noopener noreferrer">
+											<Icon id='link' />
 											{channel.ipAddress}
 										</Link>
 									</p>
