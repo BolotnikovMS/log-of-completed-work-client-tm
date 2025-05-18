@@ -12,7 +12,7 @@ export interface IUser {
   fullName: string
   shortName: string
   roleId: number
-  role?: Pick<IRole, 'name'>
+  role: Pick<IRole, 'name'>
 }
 
 export interface IUserDataLogin {
