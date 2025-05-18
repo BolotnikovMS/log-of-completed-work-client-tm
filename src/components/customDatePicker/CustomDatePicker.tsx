@@ -5,7 +5,7 @@ import { ValidationMessage } from '..'
 import { IPropsCustomDatePicker } from './customDatePicker.interface'
 import './customDatePicker.scss'
 
-const CustomDatePicker: FC<IPropsCustomDatePicker> = forwardRef<unknown, IPropsCustomDatePicker>(({ className, errorMessage, iconLeft, iconRight, ...props }, ref) => {
+const CustomDatePicker: FC<IPropsCustomDatePicker> = forwardRef<null, IPropsCustomDatePicker>(({ className, errorMessage, iconLeft, iconRight, ...props }, ref) => {
 	return (
 		<div className={cx('date-picker-wrapper',
 			className,
