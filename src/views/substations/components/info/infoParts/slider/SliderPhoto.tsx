@@ -14,7 +14,7 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 
 	if (!substation) return null
 
-	const toggleFullscreen = (e: MouseEvent<HTMLDivElement, MouseEvent>) => {
+	const toggleFullscreen = (e: MouseEvent) => {
 		const target = e.currentTarget as HTMLDivElement
 
 		if (target.requestFullscreen) {
