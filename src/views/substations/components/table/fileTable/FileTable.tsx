@@ -1,27 +1,14 @@
 import { ColumnDef } from '@tanstack/react-table'
 import moment from 'moment'
 import { useMemo, type FC } from 'react'
-import { BasicTable, Button, Icon, Loader } from '../../../../../components'
-import { ERoles } from '../../../../../enums/roles.enum'
-import { checkRole } from '../../../../../helpers'
-import { useDeleteFile } from '../../../../../hooks'
+import { BasicTable, Button, Icon } from '../../../../../components'
 import { IFile } from '../../../../../interfaces'
 import { FileService } from '../../../../../services/file/file.service'
-import { useAuthStore } from '../../../../../store/auth'
 import { TFileList } from '../../../../../types'
+import FileDelete from '../../control/fileControl/FileDelete'
 
-const FileTable: FC <{files: TFileList[]}> = ({ files }) => {
-	const { authUser } = useAuthStore()
-	const { deleteFile } = useDeleteFile()
-  const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
+const FileTable: FC<{ files: TFileList[] }> = ({ files }) => {
 	const handleDownload = (file: IFile) => FileService.download(file)
-	const handleDelete = (id: number) => {
-		const answer = confirm('Подтвердите удаление записи.')
-
-		if (!answer) return null
-
-		return deleteFile.mutate(id)
-	}
 	const columns = useMemo<ColumnDef<IFile>[]>(() => [
 		{
 			header: 'Дата добавления',
@@ -39,7 +26,7 @@ const FileTable: FC <{files: TFileList[]}> = ({ files }) => {
 		{
 			header: 'Автор',
 			accessorKey: 'author',
-			cell: ({row}) => (
+			cell: ({ row }) => (
 				row.original.author
 			)
 		},
@@ -47,24 +34,18 @@ const FileTable: FC <{files: TFileList[]}> = ({ files }) => {
 			header: () => <Icon id='setting' />,
 			enableSorting: false,
 			accessorKey: 'setting',
-			cell: ({row}) =>  {
+			cell: ({ row }) => {
 				return (
 					<div className='table-cell-row'>
 						<Button onClick={() => handleDownload(row.original)} title='Скачать файл'>
-							<Icon id='download'/>
+							<Icon id='download' />
 						</Button>
-						{isAdminOrModerator && (
-							<Button className='mBtn_error' onClick={() => handleDelete(row.original.id)} title='Удалить файл'>
-								<Icon id='delete' />
-							</Button>
-						)}
+						<FileDelete file={row.original} />
 					</div>
 				)
 			}
 		}
 	], [])
-
-  if (deleteFile.isPending) return <Loader />
 
 	return (
 		<BasicTable data={files} columns={columns} />
