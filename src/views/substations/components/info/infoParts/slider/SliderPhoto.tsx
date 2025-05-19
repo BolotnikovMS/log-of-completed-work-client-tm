@@ -1,16 +1,18 @@
 import { MouseEvent, useEffect, useState, type FC } from 'react'
 import { CustomSlider, Icon } from '../../../../../../components'
 import { urlFile } from '../../../../../../constants'
+import { TFileList } from '../../../../../../types'
+import FileDelete from '../../../control/fileControl/FileDelete'
 import { IPropsPartsInfo } from '../partsInfo.interfaces'
 
 const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
-	const [currentImgName, setCurrentImgName] = useState<string>('')
+	const [currentImg, setCurrentImg] = useState<TFileList | null>(null)
 
 	useEffect(() => {
 		if (substation?.files_photos_ps?.length) {
-			setCurrentImgName(substation.files_photos_ps[0].clientName)
+			setCurrentImg(substation.files_photos_ps[0])
 		}
-	}, [])
+	}, [substation?.files_photos_ps])
 
 	if (!substation) return null
 
@@ -30,7 +32,7 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 	const handleSlideChange = (index: number) => {
 		if (!substation.files_photos_ps) return null
 
-		setCurrentImgName(substation.files_photos_ps[index].clientName)
+		setCurrentImg(substation.files_photos_ps[index])
 	}
 
 	return (
@@ -42,8 +44,9 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 							<div key={photo.id} data-src={`${urlFile}${photo.filePath}`} onClick={(e) => toggleFullscreen(e)} />
 						))}
 					</CustomSlider>
-					<div className='mt-4'>
-						<p className='text-content'>{currentImgName}</p>
+					<div className='flex items-center gap-3 mt-4'>
+						<p className='text-content'>{currentImg?.clientName}</p>
+						<FileDelete file={currentImg} />
 					</div>
 				</>
 			) : (
