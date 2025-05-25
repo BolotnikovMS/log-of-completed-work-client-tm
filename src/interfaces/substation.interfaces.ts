@@ -1,4 +1,4 @@
-import { TChannelSubstationInfo, TFileList } from '../types'
+import { TChannelSubstationInfo, TFile } from '../types'
 
 export interface ISubstationList {
 	id: number
@@ -32,8 +32,8 @@ export interface ISubstationInfo {
   type_kp?: string | null
   head_controller?: string | null
   channels?: TChannelSubstationInfo[]
-  files_photos_ps?: TFileList[]
-  files_backups?: TFileList[]
-  other_files?: TFileList[]
+  files_photos_ps?: TFile[]
+  files_backups?: TFile[]
+  other_files?: TFile[]
   object_type?: string | null
 }

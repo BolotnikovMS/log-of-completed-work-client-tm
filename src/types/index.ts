@@ -7,7 +7,7 @@ import { TChannelEquipmentData, TRespChannelingEquipment } from './channelingEqu
 import { TChannelCategoryData, TRespChannelCategories } from './channelСategory.types'
 import { TCompletedWorkData, TRespCompletedWork } from './completed-work.types'
 import { TDistrictData, TRespDistricts } from './district.types'
-import { TFileList, TFileUploadData } from './file.types'
+import { TFile, TFileUploadData } from './file.types'
 import { TGsmOperatorData } from './gsm-operator.type'
 import { THeadControllerData, TRespHeadController } from './head-controller.types'
 import { TObjectTypeData, TRespObjectTypes } from './objectType.types'
@@ -18,4 +18,4 @@ import { TRespTypesWork, TTypeWorkData } from './typeWork.types'
 import { TChangeStatusAccount, TChangeUserRole, TRespUsers, TUserBase, TUserData, TUserShort } from './user.types'
 import { TResponseVoltageClass, TVoltageClassData } from './voltage-class.types'
 
-export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelTypeData, TCompletedWorkData, TDistrictData, TFileList, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TRespChannelCategories, TRespChannelingEquipment, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TTheme, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltageClassData, TChannelInfo, TRespChannels, TChannelSubstationInfo, TQuantity, TTypeCalculation, TVoltage }
+export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelInfo, TChannelSubstationInfo, TChannelTypeData, TCompletedWorkData, TDistrictData, TFile, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TQuantity, TRespChannelCategories, TRespChannelingEquipment, TRespChannels, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TTheme, TTypeCalculation, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltage, TVoltageClassData }

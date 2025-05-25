@@ -4,8 +4,7 @@ import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
-import { IFile } from '../../interfaces/file.interface'
-import { TFileUploadData } from '../../types'
+import { TFile, TFileUploadData } from '../../types'
 
 export const FileService = {
 	async upload(data: TFileUploadData): Promise<AxiosResponse<string>> {
@@ -27,7 +26,7 @@ export const FileService = {
 	// 	})
 	// },
 
-	async download(file: IFile): Promise<void> {
+	async download(file: TFile): Promise<void> {
 		await instance.get(`${url}/files/download/${file.id}`, {
 			responseType: 'blob'
 		}).then(resp => {
