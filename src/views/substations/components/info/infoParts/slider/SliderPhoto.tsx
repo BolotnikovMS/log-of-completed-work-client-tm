@@ -1,12 +1,12 @@
 import { MouseEvent, useEffect, useState, type FC } from 'react'
 import { CustomSlider, Icon } from '../../../../../../components'
 import { urlFile } from '../../../../../../constants'
-import { TFileList } from '../../../../../../types'
-import FileDelete from '../../../control/fileControl/FileDelete'
+import { TFile } from '../../../../../../types'
+import FileControl from '../../../control/fileControl/FileControl'
 import { IPropsPartsInfo } from '../partsInfo.interfaces'
 
 const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
-	const [currentImg, setCurrentImg] = useState<TFileList | null>(null)
+	const [currentImg, setCurrentImg] = useState<TFile | null>(null)
 
 	useEffect(() => {
 		if (substation?.files_photos_ps?.length) {
@@ -44,9 +44,9 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 							<div key={photo.id} data-src={`${urlFile}${photo.filePath}`} onClick={(e) => toggleFullscreen(e)} />
 						))}
 					</CustomSlider>
-					<div className='flex items-center gap-3 mt-4'>
+					<div className='flex items-center gap-3 mt-7'>
 						<p className='text-content'>{currentImg?.clientName}</p>
-						<FileDelete file={currentImg} />
+						<FileControl file={currentImg} classDropDown='dropdown-end' />
 					</div>
 				</>
 			) : (
