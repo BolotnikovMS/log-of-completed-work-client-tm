@@ -10,7 +10,7 @@ import Results from '../result'
 
 const TmCoefficientCalculator: FC = () => {
 	return (
-		<div className='flex flex-wrap justify-center gap-6'>
+		<div className='flex flex-wrap justify-center gap-6 h-[80vh] items-center'>
 			<div className="flex flex-col gap-3 items-center">
 				<CurrentCoefficientInput />
 				<QuantaInput />

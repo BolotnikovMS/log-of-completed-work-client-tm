@@ -7,8 +7,8 @@ const Results: FC = () => {
 
 	return (
 		<div className="flex flex-col gap-1 items-center">
-			<p className='text-content'>Результат: <span className='font-bold'>{coefficient}</span></p>
-			<p className='text-content'>Смещение: <span className='font-bold'>{bias}</span></p>
+			<p className='text-content'>Результат: <span className='font-bold text-red-500'>{coefficient}</span></p>
+			<p className='text-content'>Смещение: <span className='font-bold text-red-500'>{bias}</span></p>
 		</div>
 	)
 }
