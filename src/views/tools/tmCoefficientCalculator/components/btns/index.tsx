@@ -13,6 +13,7 @@ const CalculationBtn: FC = () => {
 			onClick={calculateResult} disabled={!quanta}
 		>
 			<Icon id='calculator' />
+			Рассчитать
 		</Button>
 	)
 }
