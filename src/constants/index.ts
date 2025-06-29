@@ -2,6 +2,7 @@ import { pageConfig } from '../config/pages.config'
 
 export const url = import.meta.env.VITE_API_URL
 export const urlFile = import.meta.env.VITE_FILE_URL
+export const urlApiDefects = import.meta.env.VITE_API_DEFECTS_URL
 export const menuItemData = [
   {
     title: 'Районы, ГП, УС',
