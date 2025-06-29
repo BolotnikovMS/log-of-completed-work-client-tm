@@ -36,4 +36,5 @@ export interface ISubstationInfo {
   files_backups?: TFile[]
   other_files?: TFile[]
   object_type?: string | null
+  keyDefectSubstation: number | null
 }
