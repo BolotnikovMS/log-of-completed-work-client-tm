@@ -7,6 +7,7 @@ import { checkRole } from '../../../../../helpers'
 import { useModal, useSubstation } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 import { ChannelForm } from '../../../../channel/components'
+import DefectsNumber from '../../defectsNumber/DefectsNumber'
 import { SubstationForm, SubstationNote, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 
@@ -47,6 +48,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 					Работы
 					({substation?.numberCompletedWorks})
 				</Link>
+				<DefectsNumber keyDefectSubstation={substation.keyDefectSubstation} />
 				<Dropdown
 					classMenu='dropdown-bottom dropdown-start'
 					children={<Icon id='setting' aria-label='Иконка действий' />}
