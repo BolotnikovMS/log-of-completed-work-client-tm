@@ -5,9 +5,9 @@ import { DefectsTMService } from '../../services/defects/defectsTM.service'
 export const useDefectsTM = (id: number, { status }: IQueryParams, options?: Omit<UseQueryOptions<number, Error>, 'queryKey'>) => {
 	return useQuery({
 		queryKey: ['defectsTM', id, status],
-  	queryFn: () => DefectsTMService.getNumberDefectsByIdSubstation(id, { status }),
-   	staleTime: 5 * 60 * 1000,
-    placeholderData: keepPreviousData,
-    ...options
+		queryFn: () => DefectsTMService.getNumberDefectsByIdSubstation(id, { status }),
+		staleTime: 5 * 60 * 1000,
+	  placeholderData: keepPreviousData,
+	  ...options
   })
  }
