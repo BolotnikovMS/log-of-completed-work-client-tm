@@ -6,6 +6,7 @@ import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IQueryParams, ISubstation, ISubstationInfo } from '../../interfaces'
 import { TRespSubstations, TSubstationData, TSubstationNoteData } from '../../types'
+import { TSubstationKeyDefect } from '../../types/substation.types'
 
 export const SubstationService = {
   async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams): Promise<TRespSubstations> {
@@ -53,5 +54,9 @@ export const SubstationService = {
     }).catch(e => {
       toast.error(errorHandler(e))
     })
+  },
+
+  async updKeyDefect(id: number, data: TSubstationKeyDefect): Promise<AxiosResponse<ISubstation>> {
+  	return instance.patch<ISubstation>(`${url}/substations/${id}/add-key-defects`, data)
   }
 }
