@@ -77,7 +77,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 						isAdminOrModerator && (
 							<Button onClick={() => { toggleModalUpdKeyDefect() }} aria-label='Кнопка вызова модального окна для обнавления ключа связи с журналом дефектов'>
 								<Icon id='key' />
-								Добавить ключ
+								Обновить ключ
 							</Button>
 						)
 					]}
