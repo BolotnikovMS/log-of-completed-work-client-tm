@@ -8,6 +8,7 @@ import { useModal, useSubstation } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 import { ChannelForm } from '../../../../channel/components'
 import DefectsNumber from '../../defectsNumber/DefectsNumber'
+import SubstationKeyDefect from '../../forms/updKeyDefect/SubstationKeyDefect'
 import { SubstationForm, SubstationNote, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 
@@ -18,6 +19,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 	const { isModal: isModalEdit, toggleModal: toggleModalEdit } = useModal()
 	const { isModal: isModalAddChannel, toggleModal: toggleModalAddChannel } = useModal()
 	const { isModal: isModalAddNote, toggleModal: toggleModalAddNote } = useModal()
+	const { isModal: isModalUpdKeyDefect, toggleModal: toggleModalUpdKeyDefect } = useModal()
 	const [isEdited, setIsEdited] = useState<boolean>(false)
 	const { data, error, isLoading, isError } = useSubstation(substation.id, {
 		enabled: isModalEdit
@@ -48,7 +50,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 					Работы
 					({substation?.numberCompletedWorks})
 				</Link>
-				<DefectsNumber keyDefectSubstation={substation.keyDefectSubstation} />
+				{substation.keyDefectSubstation && <DefectsNumber keyDefectSubstation={substation.keyDefectSubstation} />}
 				<Dropdown
 					classMenu='dropdown-bottom dropdown-start'
 					children={<Icon id='setting' aria-label='Иконка действий' />}
@@ -72,7 +74,13 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 							<Button onClick={() => { toggleModalAddNote(), setIsEdited(!isEdited) }} aria-label='Кнопка вызова модального окна для добавления или удаления примечания'>
 								<Icon id='note-add' aria-label='Иконка добавления примечания' />
 								Примечание
-							</Button>)
+							</Button>),
+						isAdminOrModerator && (
+							<Button onClick={() => { toggleModalUpdKeyDefect() }} aria-label='Кнопка вызова модального окна для обнавления ключа связи с журналом дефектов'>
+								<Icon id='key' />
+								Добавить ключ
+							</Button>
+						)
 					]}
 				/>
 
@@ -99,6 +107,12 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 					title='Добавление примечание'
 					onToggle={toggleModalAddNote}
 					content={<SubstationNote data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalAddNote} />}
+				/>
+				<Modal
+					visible={isModalUpdKeyDefect}
+					title='Обновление ключа связи'
+					onToggle={toggleModalUpdKeyDefect}
+					content={<SubstationKeyDefect data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalUpdKeyDefect} />}
 				/>
 			</div>
 		</div>
