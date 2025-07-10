@@ -5,3 +5,5 @@ export type TSubstationData = Omit<ISubstation, 'id'>
 export type TSubstationNoteData = Pick<ISubstation, 'note'>
 
 export type TRespSubstations = { meta: IMeta, data: ISubstationList[] }
+
+export type TSubstationKeyDefect = { keyDefectSubstation?: number | null }
