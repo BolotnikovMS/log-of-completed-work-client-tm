@@ -8,8 +8,7 @@ import { useModal, useSubstation } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 import { ChannelForm } from '../../../../channel/components'
 import DefectsNumber from '../../defectsNumber/DefectsNumber'
-import SubstationKeyDefect from '../../forms/updKeyDefect/SubstationKeyDefect'
-import { SubstationForm, SubstationNote, UploadSubstationFile } from '../../index'
+import { SubstationForm, SubstationKeyDefectForm, SubstationNote, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 
 const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) => {
@@ -112,7 +111,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 					visible={isModalUpdKeyDefect}
 					title='Обновление ключа связи'
 					onToggle={toggleModalUpdKeyDefect}
-					content={<SubstationKeyDefect data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalUpdKeyDefect} />}
+					content={<SubstationKeyDefectForm data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalUpdKeyDefect} />}
 				/>
 			</div>
 		</div>
