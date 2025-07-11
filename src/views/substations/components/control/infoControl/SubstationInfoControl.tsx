@@ -14,6 +14,7 @@ import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
 const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) => {
 	const { authUser } = useAuthStore()
 	const isAdminOrModerator = checkRole(authUser, [ERoles.Moderator, ERoles.Admin])
+	const isAdmin = checkRole(authUser, [ERoles.Admin])
 	const { isModal, toggleModal } = useModal()
 	const { isModal: isModalEdit, toggleModal: toggleModalEdit } = useModal()
 	const { isModal: isModalAddChannel, toggleModal: toggleModalAddChannel } = useModal()
@@ -74,7 +75,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 								<Icon id='note-add' aria-label='Иконка добавления примечания' />
 								Примечание
 							</Button>),
-						isAdminOrModerator && (
+						isAdmin && (
 							<Button onClick={() => { toggleModalUpdKeyDefect() }} aria-label='Кнопка вызова модального окна для обнавления ключа связи с журналом дефектов'>
 								<Icon id='key' />
 								Обновить ключ
