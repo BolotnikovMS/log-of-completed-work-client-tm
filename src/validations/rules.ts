@@ -1,42 +1,54 @@
 import * as yup from 'yup'
+import { setLocale } from 'yup'
+
+setLocale({
+	number: {
+		positive: 'Число должно быть позитивным!',
+		integer: () => 'Число должно быть целое!'
+	},
+	string: {
+		min: 'Минимальная длина поля ${min} символа!',
+		max: 'Максимальная длина поля ${max} символов!',
+	}
+})
 
 export const text20 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(20, 'Максимальная длина поля 20 символов!')
+  .min(2)
+  .max(20)
 export const text30 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(30, 'Максимальная длина поля 30 символов!')
+  .min(2)
+  .max(30)
 export const text140 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(140, 'Максимальная длина поля 140 символов!')
+  .min(2)
+  .max(140)
 export const text180 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(180, 'Максимальная длина поля 180 символов!')
+  .min(2)
+  .max(180)
 export const text240 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(240, 'Максимальная длина поля 240 символов!')
+  .min(2)
+  .max(240)
 export const text700Optional = yup
   .lazy((value: string) =>
     value && value.length ? yup
       .string()
       .trim()
-      .min(3, 'Минимальная длина поля 3 символа!')
-      .max(700, 'Максимальная длина поля 700 символов!')
+      .min(3)
+      .max(700)
       : yup
         .string()
         .notRequired())
@@ -44,15 +56,15 @@ export const text1000 = yup
   .string()
   .trim()
   .required('Поле является обязательным!')
-  .min(2, 'Минимальная длина поля 2 символа!')
-  .max(1000, 'Максимальная длина поля 1000 символов!')
+  .min(2)
+  .max(1000)
 export const text1000Optional = yup
   .lazy((value: string) =>
     value && value.length ? yup
       .string()
       .trim()
-      .min(2, 'Минимальная длина поля 2 символа!')
-      .max(1000, 'Максимальная длина поля 1000 символов!')
+      .min(2)
+      .max(1000)
       : yup
         .string()
         .notRequired())
@@ -62,12 +74,21 @@ export const numberCheck = yup
   .integer()
   .required('Поле является обязательным!')
 export const numberOptional = yup
-  .lazy((value: number) =>
-    value ? yup
-      .number()
-      .positive()
-      .integer()
-      : yup.number().notRequired())
+	.number()
+	.nullable()
+	.transform((value, originalValue) => originalValue === "" ? null : value)
+	.integer()
+	.positive()
+	.typeError('Введите число!')
+  .notRequired()
+  // .lazy((value: number) =>
+  //   value ? yup
+  //     .number()
+  //     .nullable()
+  //     .positive()
+  //     .integer()
+  //     .typeError('message')
+  //     : yup.string().nullable().notRequired())
 export const date = yup
   .date()
   .required('Поле является обязательным!')
