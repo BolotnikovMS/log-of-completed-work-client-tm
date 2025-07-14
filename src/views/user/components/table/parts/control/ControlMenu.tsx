@@ -7,7 +7,7 @@ const ControlMenu: FC<{ userId: number }> = ({ userId }) => {
 	const { isModal: isModalChangeRole, toggleModal: toggleModalChangeRole } = useModal()
 	const { isModal: isModalChangePassword, toggleModal: toggleModalChangePassword } = useModal()
 	const { data: user, error, isError, isFetching } = useUser(userId, {
-		enabled: isModalChangeRole
+		enabled: isModalChangeRole || isModalChangePassword
 	})
 
 	const modalContent =
