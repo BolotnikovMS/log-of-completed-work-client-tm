@@ -10,8 +10,9 @@ module.exports = {
 	parser: "@typescript-eslint/parser",
 	plugins: ["react-refresh"],
 	rules: {
-		"indent": [4, "tab"],
+		"indent": [1, "tab"],
 		// "no-tabs": 0,
+		"react-hooks/exhaustive-deps": "warn",
 		"react-refresh/only-export-components": [
 			"warn",
 			{ allowConstantExport: true },
