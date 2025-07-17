@@ -3,14 +3,12 @@ import { useEffect, type FC } from 'react'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Icon, Loader, Tooltip } from '../../../../components'
+import { errorHandler } from '../../../../helpers'
 import { useDefectsTM } from '../../../../hooks'
 import { IPropsDefectsNumber } from './defectsNumber.interface'
 
 const DefectsNumber: FC<IPropsDefectsNumber> = ({ keyDefectSubstation }) => {
-	if (!keyDefectSubstation) return null
-
-	const { data: numberDefectsTM, isError: isErrorNDTM, isLoading: isLoadingNDTM } = useDefectsTM(keyDefectSubstation, { status: 'open' }, {
-		enabled: !!keyDefectSubstation,
+	const { data: numberDefectsTM, isError: isErrorNDTM, error, isLoading: isLoadingNDTM } = useDefectsTM(keyDefectSubstation, { status: 'open' }, {
 		retry: 2
 	})
 	const urlDefects = import.meta.env.VITE_DEFECTS_SHOW_URL
@@ -18,9 +16,9 @@ const DefectsNumber: FC<IPropsDefectsNumber> = ({ keyDefectSubstation }) => {
 
 	useEffect(() => {
 		if (isErrorNDTM) {
-			toast.error('Ошибка при попытке получения количества дефектов!')
+			toast.error(errorHandler(error))
 		}
-	}, [isErrorNDTM])
+	}, [error, isErrorNDTM])
 
 	if (isLoadingNDTM) return <Loader className='!p-0' />
 	if (isErrorNDTM) return null
