@@ -1,8 +1,7 @@
 import { type FC } from 'react'
 import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
-import { Link } from 'react-router-dom'
-import { ChannelInfo, Icon, Tooltip } from '../../../../../../components'
+import { ChannelInfo, CopyToClipboardButton } from '../../../../../../components'
 import { ChannelControlMenu } from '../../../../../channel/components/cards/cardParts'
 import { IPropsChannelsInfo } from '../partsInfo.interfaces'
 
@@ -22,14 +21,15 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 						{channel.ipAddress && (
 							<>
 								<p className='substation-info__text'>IP адрес канала: </p>
-								<Tooltip text='Открыть в новом окне'>
+								<div className='flex items-center gap-2'>
+									<CopyToClipboardButton
+										content={channel.ipAddress}
+										classNameBtn='btn-circle'
+									/>
 									<p className='text-content'>
-										<Link to={`http://${channel.ipAddress}`} className='flex items-center gap-1' target='_blank' rel="noopener noreferrer">
-											<Icon id='link' />
-											{channel.ipAddress}
-										</Link>
+										{channel.ipAddress}
 									</p>
-								</Tooltip>
+								</div>
 							</>
 						)}
 					</div>
