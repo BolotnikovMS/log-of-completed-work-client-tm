@@ -7,6 +7,7 @@ import ChannelInfo from './channels/channelInfo/ChannelInfo'
 import CustomAxisTickChart from './charts/customAxisTickChart/CustomAxisTickChart'
 import CustomBarChartLabel from './charts/customBarChartLabel/CustomBarChartLabel'
 import CustomTooltipChart from './charts/customTooltipChart/CustomTooltipChart'
+import CopyToClipboardButton from './copyToClipboardButton/CopyToClipboardButton'
 import { SelectWrapper } from './customSelect/SelectWrapper'
 import { CustomSlider } from './customSlider/CustomSlider'
 import { Group } from './group/Group'
@@ -44,4 +45,4 @@ const Checkbox = lazy(() => import('./checkbox/Checkbox'))
 const Tooltip = lazy(() => import('./tooltip/Tooltip'))
 const Select = lazy(() => import('./select/Select'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, Select, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CopyToClipboardButton, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, Select, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
