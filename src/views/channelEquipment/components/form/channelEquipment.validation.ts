@@ -1,7 +1,7 @@
 import * as yup from 'yup'
-import { numberCheck, text240 } from '../../../../validations/rules'
+import { numberCheck, text50 } from '../../../../validations/rules'
 
 export const validationSchema = yup.object().shape({
-  channelTypeId: numberCheck,
-  name: text240
+	channelTypeId: numberCheck,
+	name: text50
 })

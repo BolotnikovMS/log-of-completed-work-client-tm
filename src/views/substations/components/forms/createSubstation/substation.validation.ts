@@ -1,17 +1,17 @@
 import * as yup from 'yup'
-import { numberCheck, text240 } from '../../../../../validations/rules'
+import { numberCheck, text50 } from '../../../../../validations/rules'
 
 export const validationSchema = yup.object().shape({
-  districtId: numberCheck,
-  typeKpId: numberCheck,
-  headControllerId: numberCheck,
-  name: text240,
-  voltageClassesId: numberCheck,
-  objectTypeId: numberCheck,
-  rdu: yup
-    .boolean()
-    .default(false),
-  active: yup
-    .boolean()
-    .default(true)
+	districtId: numberCheck,
+	typeKpId: numberCheck,
+	headControllerId: numberCheck,
+	name: text50,
+	voltageClassesId: numberCheck,
+	objectTypeId: numberCheck,
+	rdu: yup
+		.boolean()
+		.default(false),
+	active: yup
+		.boolean()
+		.default(true)
 })

@@ -1,8 +1,7 @@
-import * as yup from "yup"
-
-import { text240 } from '../../../../validations/rules'
+import * as yup from 'yup'
+import { text50 } from '../../../../validations/rules'
 
 export const validationSchema = yup.object().shape({
-	name: text240,
-	shortName: text240,
+	name: text50,
+	shortName: text50,
 })
