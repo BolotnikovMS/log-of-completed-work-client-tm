@@ -41,7 +41,7 @@ export const text1000Optional = yup
 		value && value.length ? yup
 			.string()
 			.trim()
-			.min(3)
+			.min(2)
 			.max(1000)
 			: yup
 				.string()
