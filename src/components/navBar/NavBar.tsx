@@ -82,6 +82,13 @@ export const NavBar: FC = () => {
 										Калькулятор коэффициентов
 									</Link>
 								</li>
+								{checkRole(user, [ERoles.Admin]) && (
+									<li>
+										<Link to={pageConfig.uploadCSVFileSubstationsKey}>
+											Форма загрузки ключей объектов
+										</Link>
+									</li>
+								)}
 							</ul>
 						</details>
 					</li>

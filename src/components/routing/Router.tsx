@@ -18,6 +18,7 @@ import { HeadControllerControl, HeadControllersCards } from '../../views/headCon
 import { ObjectTypeControl, ObjectTypesCards } from '../../views/objectType'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
 import { TmCoefficientCalculator } from '../../views/tools/tmCoefficientCalculator/components'
+import PageUploadCSVFileSubstationKey from '../../views/tools/uploadCSVFileSubstationKey'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
 import { TypeWorkControl, TypesWorkCards } from '../../views/typeWork/components'
 import { UserControl, UsersTable } from '../../views/user/components'
@@ -310,6 +311,13 @@ export const Router: React.FC = () => {
 							title='Калькулятор расчета коэффициента измерения'
 							children={<TmCoefficientCalculator />}
 						/>
+					}
+				/>
+				<Route path={pageConfig.uploadCSVFileSubstationsKey}
+					element={
+						<ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
+							<PageUploadCSVFileSubstationKey />
+						</ProtectedRoute>
 					}
 				/>
 				<Route path={pageConfig.notFound} element={<div>Not Found</div>} />
