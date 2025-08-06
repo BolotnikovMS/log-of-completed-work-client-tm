@@ -38,5 +38,13 @@ export const FileService = {
 
 	async delete(id: number): Promise<void> {
 		return instance.delete(`${url}/files/${id}`)
+	},
+
+	async uploadCSVSubstationKey(file: File): Promise<AxiosResponse<{ message: string, proccesed: number }>> {
+		return instance.post(`${url}/files/upload-substation-key`, file, {
+			headers: {
+				'Content-Type': 'multipart/form-data'
+			}
+		})
 	}
 }
