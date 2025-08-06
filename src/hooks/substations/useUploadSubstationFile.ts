@@ -5,17 +5,17 @@ import { FileService } from '../../services/file/file.service'
 import { TFileUploadData } from '../../types'
 
 export const useUploadSubstationFile = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: (data: TFileUploadData) => FileService.upload(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+	return useMutation({
+		mutationFn: (data: TFileUploadData) => FileService.upload(data),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 
-      toast.success('Файл успешно загружен!')
-    },
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
-  })
+			toast.success('Файл успешно загружен!')
+		},
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
+	})
 }
