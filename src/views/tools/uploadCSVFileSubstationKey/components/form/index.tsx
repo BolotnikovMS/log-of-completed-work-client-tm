@@ -32,7 +32,6 @@ const UploadCSVSubstationKey: FC = () => {
 	return (
 		<div className="flex flex-col items-center justify-center p-4">
 			{(isError) && <Error error={error} />}
-			{/* Выбор только сsv файлов */}
 			<form className='form w-[30vw]' onSubmit={handleSubmit(submit)}>
 				<Group>
 					<FileUploader
@@ -40,7 +39,7 @@ const UploadCSVSubstationKey: FC = () => {
 						errorMessage={errors.csvFile?.message}
 						onChange={handleFileChange}
 						files={file}
-						accept='.csv, text/csv, application/csv'
+					// accept='.csv, text/csv, application/csv'
 					/>
 				</Group>
 				<Group className='items-center mt-5'>

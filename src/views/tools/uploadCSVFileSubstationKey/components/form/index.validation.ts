@@ -8,7 +8,7 @@
 // // 	.test('Файл должен быть в формате CSV!', 'csvFile', (value: File) => value)
 // // 	.test('Size', 'File size must be less than 20kb', (value: File) => value && value?.size <= 20000)
 // export const validationSchema = yup.object().shape({
-// 	csvFile: yup.mixed<File>()
+// 	file: yup.mixed<FileList>()
 // 		// .test(
 // 		// 	'fileSize',
 // 		// 	'Only documents up to 2MB are permitted.',
@@ -17,25 +17,26 @@
 // 		// 		!file || file.size <= 1024
 // 		// 	}
 // 		// )
-// 		.test('Файл должен быть формата CSV!',
-// 			(file) => {
-// 				console.log(file)
-// 				if (file) {
-// 					const supportedFormats = ['csv']
+// 		// .test('Файл должен быть формата CSV!',
+// 		// 	(file) => {
+// 		// 		console.log(file)
+// 		// 		if (file) {
+// 		// 			const supportedFormats = ['csv']
 
-// 					return supportedFormats.includes(file.name)
-// 				}
+// 		// 			return supportedFormats.includes(file[0].name)
+// 		// 		}
 
-// 				return true
+// 		// 		return true
+// 		// 	}
+// 		// )
+// 		.test(
+// 			'fileSize',
+// 			'Only documents up to 2MB are permitted.',
+// 			files => {
+// 				console.log(files)
+// 				!files || // Check if `files` is defined
+// 					files.length === 0 || // Check if `files` is not an empty list
+// 					Array.from(files).every(file => file.size <= 2_000_000)
 // 			}
-// 		)
-// 		.required('Поле является обязательным!')
-// 	// .test('fileSize', 'File size must be less than 3MB', (file) => {
-// 	// 	console.log(file)
-
-// 	// 	if (file) {
-// 	// 		return file.size <= 3145728
-// 	// 	}
-// 	// 	return true;
-// 	// }),
+// 		).required('Поле является обязательным!')
 // })
