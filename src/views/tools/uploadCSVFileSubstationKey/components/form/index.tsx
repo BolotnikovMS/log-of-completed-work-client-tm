@@ -6,7 +6,7 @@ import { IPropsMutation } from '../../../../../interfaces'
 
 const UploadCSVSubstationKey: FC = () => {
 	const [file, setFile] = useState<FileList | null>(null)
-	const { register, handleSubmit, formState: { errors }, reset } = useForm<{ csvFile: File }>({
+	const { register, handleSubmit, formState: { errors } } = useForm<{ csvFile: File }>({
 		mode: 'all'
 	})
 	const { mutateAsync, isError, error, isPending } = useUploadCSVSubstationKey()
@@ -18,7 +18,7 @@ const UploadCSVSubstationKey: FC = () => {
 
 		await mutateFn(formData)
 
-		reset()
+		setFile(null)
 	}
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
