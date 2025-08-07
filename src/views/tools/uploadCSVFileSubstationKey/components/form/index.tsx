@@ -1,12 +1,12 @@
 import { useState, type FC } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Button, Error, FileUpload, Group, Icon, Loader } from '../../../../../components'
+import { Button, Error, FileUploader, Group, Icon, Loader } from '../../../../../components'
 import { useUploadCSVSubstationKey } from '../../../../../hooks'
 import { IPropsMutation } from '../../../../../interfaces'
 
 const UploadCSVSubstationKey: FC = () => {
-	const [file, setFile] = useState<File | null>(null)
-	const { register, handleSubmit, formState: { errors, isValid }, reset } = useForm<{ csvFile: File }>({
+	const [file, setFile] = useState<FileList | null>(null)
+	const { register, handleSubmit, formState: { errors }, reset } = useForm<{ csvFile: File }>({
 		mode: 'all'
 	})
 	const { mutateAsync, isError, error, isPending } = useUploadCSVSubstationKey()
@@ -14,7 +14,7 @@ const UploadCSVSubstationKey: FC = () => {
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any
 		const formData: any = new FormData()
 
-		formData.append('csvFile', file)
+		file && [...file]?.forEach(file => formData.append('csvFile', file))
 
 		await mutateFn(formData)
 
@@ -22,7 +22,7 @@ const UploadCSVSubstationKey: FC = () => {
 	}
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (e.target.files) {
-			setFile(e.target.files[0])
+			setFile(e.target.files)
 		}
 	}
 	const submit: SubmitHandler<{ csvFile: File }> = data => handleMutation({ data, mutateFn: mutateAsync })
@@ -35,11 +35,11 @@ const UploadCSVSubstationKey: FC = () => {
 			{/* Выбор только сsv файлов */}
 			<form className='form w-[30vw]' onSubmit={handleSubmit(submit)}>
 				<Group>
-					<FileUpload
+					<FileUploader
 						register={register}
 						errorMessage={errors.csvFile?.message}
 						onChange={handleFileChange}
-						file={file}
+						files={file}
 						accept='.csv, text/csv, application/csv'
 					/>
 				</Group>
