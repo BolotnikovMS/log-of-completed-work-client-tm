@@ -39,7 +39,7 @@ const UploadCSVSubstationKey: FC = () => {
 						errorMessage={errors.csvFile?.message}
 						onChange={handleFileChange}
 						files={file}
-					// accept='.csv, text/csv, application/csv'
+						accept='.csv, text/csv, application/csv'
 					/>
 				</Group>
 				<Group className='items-center mt-5'>
