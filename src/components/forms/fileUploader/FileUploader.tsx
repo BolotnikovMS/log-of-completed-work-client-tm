@@ -28,7 +28,7 @@ const FileUploader: FC<IPropsFileUploader> = ({ register, errorMessage, validati
 								<Icon id='file' className='!w-10 !h-10' />
 							</div>
 							<div>
-								<span className='text-title'>Информация о {i + 1} файле:</span>
+								<span className='text-title'>Информация о {files.length > 1 && i + 1} файле:</span>
 								<p className='text-content !font-bold'>Название: <span className="text-content">{file.name}</span></p>
 								<p className='text-content !font-bold'>Размер: <span className="text-content">{(file.size / 1024 / 1024).toFixed(3)} Мб</span></p>
 							</div>
