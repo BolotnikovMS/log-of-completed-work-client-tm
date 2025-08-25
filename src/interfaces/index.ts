@@ -12,6 +12,7 @@ import { IFile } from './file.interface'
 import { IPropsForm } from './formProps.interface'
 import { IGsmOperator } from './gsm-operator.interface'
 import { IHeadController } from './head-controller.interface'
+import { Ilog } from './log.interface'
 import { IMeta } from './meta.interface'
 import { IPropsMutation } from './mutation-data.interface'
 import { IObjectType } from './objectType.interface'
@@ -24,4 +25,4 @@ import { IUser, IUserDataLogin } from './user.interfaces'
 import { IUserRole } from './userRole.interface'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkList, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstation, ISubstationInfo, ISubstationList, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass, ICompletedWorkInfo }
+export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkInfo, ICompletedWorkList, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, Ilog, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstation, ISubstationInfo, ISubstationList, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass }
