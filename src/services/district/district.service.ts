@@ -5,37 +5,37 @@ import { IDistrict, IQueryParams } from '../../interfaces'
 import { TDistrictData, TRespDistricts, TRespSubstations } from '../../types'
 
 export const DistrictService = {
-  async getDistricts({ limit, page, sort, order }: IQueryParams): Promise<TRespDistricts> {
-    const { data } = await instance.get<TRespDistricts>(`${url}/districts`, {
-      params: { page, limit, sort, order },
-    })
+	async getDistricts({ limit, page, sort, order }: IQueryParams): Promise<TRespDistricts> {
+		const { data } = await instance.get<TRespDistricts>(`${url}/districts`, {
+			params: { page, limit, sort, order },
+		})
 
-    return data
-  },
+		return data
+	},
 
-  async getDistrictById(id: number): Promise<IDistrict> {
-    const { data } = await instance.get<IDistrict>(`${url}/districts/${id}`)
+	async getDistrictById(id: number): Promise<IDistrict> {
+		const { data } = await instance.get<IDistrict>(`${url}/districts/${id}`)
 
-    return data
-  },
+		return data
+	},
 
-  async create(data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
-    return instance.post<IDistrict>(`${url}/districts`, data)
-  },
+	async create(data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
+		return instance.post<IDistrict>(`${url}/districts`, data)
+	},
 
-  async getSubstationsRelatedDistrict(id: string, { search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
-    const { data } = await instance.get<TRespSubstations>(`${url}/districts/${id}/substations`, {
-      params: { search, sort, order, typeKp, headController },
-    })
+	async getSubstationsRelatedDistrict(id: string, { search, sort, order, typeKp, headController }: IQueryParams): Promise<TRespSubstations> {
+		const { data } = await instance.get<TRespSubstations>(`${url}/districts/${id}/substations`, {
+			params: { search, sort, order, typeKp, headController },
+		})
 
-    return data
-  },
+		return data
+	},
 
-  async updateDistrict(id: number, data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
-    return await instance.patch<IDistrict>(`${url}/districts/${id}`, data)
-  },
+	async updateDistrict(id: number, data: TDistrictData): Promise<AxiosResponse<IDistrict>> {
+		return await instance.patch<IDistrict>(`${url}/districts/${id}`, data)
+	},
 
-  async deleteDistrict(id: number): Promise<AxiosResponse<void>> {
-    return instance.delete(`${url}/districts/${id}`)
-  }
+	async deleteDistrict(id: number): Promise<AxiosResponse<void>> {
+		return instance.delete(`${url}/districts/${id}`)
+	}
 }

@@ -3,12 +3,12 @@ import { IQueryParams } from '../../interfaces'
 import { DistrictService } from '../../services/district/district.service'
 
 export const useDistricts = ({ page, limit, sort, order }: IQueryParams) => {
-  const { data: districts, error, isError, isLoading, isFetching } = useQuery({
-    queryKey: ['districts', 'all', page, limit, sort, order],
-    queryFn: () => DistrictService.getDistricts({ page, limit, sort, order }),
-    staleTime: 5 * 60 * 1000,
-    placeholderData: keepPreviousData,
-  })
+	const { data: districts, error, isError, isLoading, isFetching } = useQuery({
+		queryKey: ['districts', 'all', page, limit, sort, order],
+		queryFn: () => DistrictService.getDistricts({ page, limit, sort, order }),
+		staleTime: 5 * 60 * 1000,
+		placeholderData: keepPreviousData,
+	})
 
-  return { districts, error, isError, isLoading, isFetching }
+	return { districts, error, isError, isLoading, isFetching }
 }
