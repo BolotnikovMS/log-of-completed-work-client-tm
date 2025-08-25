@@ -20,6 +20,7 @@ class PageConfig {
 	profile = '/profile'
 	signIn = '/sign-in'
 	uploadCSVFileSubstationsKey = '/files/upload-substation-key'
+	logs = '/logs'
 	notFound = '*'
 
 	getDynamicUrl(template: string, params: Record<string, string | number>, queryParams?: Record<string, string | number>): string {

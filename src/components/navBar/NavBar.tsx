@@ -83,11 +83,19 @@ export const NavBar: FC = () => {
 									</Link>
 								</li>
 								{checkRole(user, [ERoles.Admin]) && (
-									<li>
-										<Link to={pageConfig.uploadCSVFileSubstationsKey}>
-											Форма загрузки ключей объектов
-										</Link>
-									</li>
+									<>
+										<li>
+											<Link to={pageConfig.uploadCSVFileSubstationsKey}>
+												Форма загрузки ключей объектов
+											</Link>
+										</li>
+										<li>
+											<Link to={pageConfig.logs}>
+												<Icon id='history' />
+												Логи
+											</Link>
+										</li>
+									</>
 								)}
 							</ul>
 						</details>

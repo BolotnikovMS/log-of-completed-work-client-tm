@@ -17,6 +17,7 @@ import { GsmOperatorControl, GsmOperatorsCards } from '../../views/gsmOperator/c
 import { HeadControllerControl, HeadControllersCards } from '../../views/headControllers/components'
 import { ObjectTypeControl, ObjectTypesCards } from '../../views/objectType'
 import { SubstationControl, SubstationInfo, SubstationsCards } from '../../views/substations/components'
+import PageLogs from '../../views/tools/log'
 import { TmCoefficientCalculator } from '../../views/tools/tmCoefficientCalculator/components'
 import PageUploadCSVFileSubstationKey from '../../views/tools/uploadCSVFileSubstationKey'
 import { TypeKpControl, TypesKpCards } from '../../views/typesKp/components'
@@ -317,6 +318,13 @@ export const Router: React.FC = () => {
 					element={
 						<ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
 							<PageUploadCSVFileSubstationKey />
+						</ProtectedRoute>
+					}
+				/>
+				<Route path={pageConfig.logs}
+					element={
+						<ProtectedRoute isAllowed={!!authUser && checkRole(authUser, [ERoles.Admin])}>
+							<PageLogs />
 						</ProtectedRoute>
 					}
 				/>
