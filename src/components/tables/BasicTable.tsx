@@ -4,40 +4,64 @@ import { Button, Group, Icon, Input } from '..'
 import { IPropsBasicTable } from './basicTable.interface'
 import './table.scss'
 
-const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BasicTable: FC<IPropsBasicTable<any, any>> = ({ columns, data = [], search, size, title, query, serverSidePagination = false, onPageChange, currentPage = 1 }) => {
 	const [sorting, setSorting] = useState<SortingState>([])
 	const [pagination, setPagination] = useState<PaginationState>({
-		pageIndex: 0,
+		pageIndex: serverSidePagination ? currentPage - 1 : 0,
 		pageSize: size || 5,
 	})
 	const [filtering, setFiltering] = useState('')
+	const tableData = serverSidePagination ? query?.data || [] : data
+	const totalRecords = serverSidePagination ? query?.meta.total || 0 : data.length
 	const table = useReactTable({
-		data,
+		data: tableData,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getPaginationRowModel: getPaginationRowModel(),
 		getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
-		onPaginationChange: setPagination,
+		onPaginationChange: (updater) => {
+			if (serverSidePagination) {
+				const newPagination = typeof updater === 'function'
+					? updater(pagination)
+					: updater
+				setPagination(newPagination)
+				onPageChange?.(newPagination.pageIndex + 1)
+			} else {
+				setPagination(updater)
+			}
+		},
 		state: {
 			sorting,
 			globalFilter: filtering,
-			pagination,
+			pagination: serverSidePagination
+				? { ...pagination, pageIndex: currentPage - 1 } // Синхронизируем с внешним состоянием
+				: pagination,
 		},
 		onSortingChange: setSorting,
 		onGlobalFilterChange: setFiltering,
+		manualPagination: serverSidePagination,
+		pageCount: serverSidePagination
+			? Math.ceil(totalRecords / (size || 5))
+			: undefined,
 	})
 
 	return (
 		<>
 			<div className='table-wrapper'>
-				{title && (
-					<h3 className="title-1">{title}</h3>
-				)}
+				{title && <h3 className="title-1">{title}</h3>}
 				{search && (
 					<div className='table-controls'>
 						<Group>
-							<Input type='search' classInput='!input-sm' value={filtering} onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)} placeholder='Поиск по таблице...' iconLeft={<Icon id='search' />} />
+							<Input
+								type='search'
+								classInput='!input-sm'
+								value={filtering}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFiltering(e.target.value)}
+								placeholder='Поиск по таблице...'
+								iconLeft={<Icon id='search' />}
+							/>
 						</Group>
 					</div>
 				)}
@@ -45,13 +69,21 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
 					<thead>
 						{table.getHeaderGroups().map(headerGroup => (
 							<tr key={headerGroup.id}>
-								{headerGroup.headers.map(header =>
-									<th key={header.id} onClick={header.column.getToggleSortingHandler()} className='text-title text-center'>
+								{headerGroup.headers.map(header => (
+									<th
+										key={header.id}
+										onClick={header.column.getToggleSortingHandler()}
+										className='text-title text-center'
+									>
 										<Group className='!flex-row justify-center'>
 											{flexRender(header.column.columnDef.header, header.getContext())}
-											{{ asc: <Icon id='sort-asc' />, desc: <Icon id='sort-desc' /> }[header.column.getIsSorted() as string] ?? null}
+											{{
+												asc: <Icon id='sort-asc' />,
+												desc: <Icon id='sort-desc' />
+											}[header.column.getIsSorted() as string] ?? null}
 										</Group>
-									</th>)}
+									</th>
+								))}
 							</tr>
 						))}
 					</thead>
@@ -67,35 +99,40 @@ const BasicTable: FC<IPropsBasicTable> = ({ data, columns, search, size, title }
 						))}
 					</tbody>
 				</table>
-				<div className='table-pagination'>
-					{data.length > pagination.pageSize && (
-						<>
-							<Button disabled={!table.getCanPreviousPage()} onClick={() => table.firstPage()}>
-								<Icon id='arrow-left-line' />
-							</Button>
-							<Button disabled={!table.getCanPreviousPage()} onClick={() => table.previousPage()}>
-								<Icon id='arrow-left' />
-							</Button>
-							<Button disabled={!table.getCanNextPage()} onClick={() => table.nextPage()}>
-								<Icon id='arrow-right' />
-							</Button>
-							<Button disabled={!table.getCanNextPage()} onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-								<Icon id='arrow-right-line' />
-							</Button>
-						</>
-					)}
-					{/* <select
-						className={styles['pagination-show']}
-						value={table.getState().pagination.pageSize}
-						onChange={e => table.setPageSize(+e.target.value)}
-					>
-						{[5, 10, 30].map(pageSize => (
-							<option key={pageSize} value={pageSize}>
-								Показать: {pageSize}
-							</option>
-						))}
-					</select> */}
-				</div>
+				{totalRecords > pagination.pageSize && (
+					<div className='table-pagination'>
+						<Button
+							disabled={!table.getCanPreviousPage()}
+							onClick={() => {
+								if (serverSidePagination) {
+									onPageChange?.(currentPage - 1)
+								} else {
+									table.previousPage()
+								}
+							}}
+						>
+							<Icon id='arrow-left' />
+						</Button>
+
+						<span className='text-lg'>
+							Страница {table.getState().pagination.pageIndex + 1} из {table.getPageCount() || 1}
+							{serverSidePagination && totalRecords && ` (всего: ${totalRecords})`}
+						</span>
+
+						<Button
+							disabled={!table.getCanNextPage()}
+							onClick={() => {
+								if (serverSidePagination) {
+									onPageChange?.(currentPage + 1)
+								} else {
+									table.nextPage()
+								}
+							}}
+						>
+							<Icon id='arrow-right' />
+						</Button>
+					</div>
+				)}
 			</div>
 		</>
 	)

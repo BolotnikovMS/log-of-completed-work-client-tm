@@ -1,9 +1,14 @@
+import { ColumnDef } from '@tanstack/react-table'
+import { IMeta } from '../../interfaces'
 
-export interface IPropsBasicTable {
-	data: unknown[]
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	columns: any[]
+export interface IPropsBasicTable<TData, TValue> {
+	columns: ColumnDef<TData, TValue>[]
+	data?: unknown[]
 	search?: boolean
 	size?: number
 	title?: string
+	query?: { data: TData, meta: IMeta }
+	serverSidePagination?: boolean
+	onPageChange?: (page: number) => void
+	currentPage?: number
 }
