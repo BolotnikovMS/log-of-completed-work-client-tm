@@ -1,7 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table'
 import { useMemo, type FC } from 'react'
 import { ChangeStatusAccountForm } from '..'
-import { BasicTable, Error, Icon, InfoMessage, Loader } from '../../../../components'
+import { Badge, BasicTable, Error, Icon, InfoMessage, Loader } from '../../../../components'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useUsers } from '../../../../hooks'
@@ -25,6 +25,9 @@ const UsersTable: FC = () => {
 		{
 			header: 'Роль',
 			accessorKey: 'role',
+			cell: ({ row }) => (
+				<Badge text={String(row.original.role)} className='mBadge_blue' />
+			)
 		},
 		{
 			header: 'УЗ активна',
