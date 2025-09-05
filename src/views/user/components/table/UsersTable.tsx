@@ -1,7 +1,9 @@
 import { ColumnDef } from '@tanstack/react-table'
-import { useMemo, type FC } from 'react'
+import { useEffect, useMemo, useState, type FC } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { ChangeStatusAccountForm } from '..'
 import { Badge, BasicTable, Error, Icon, InfoMessage, Loader } from '../../../../components'
+import { EFilterParam } from '../../../../enums/filterParam.enums'
 import { ERoles } from '../../../../enums/roles.enum'
 import { checkRole } from '../../../../helpers'
 import { useUsers } from '../../../../hooks'
@@ -12,7 +14,31 @@ import ControlMenu from './parts/control/ControlMenu'
 const UsersTable: FC = () => {
 	const { authUser } = useAuthStore()
 	const isAdmin = checkRole(authUser, [ERoles.Admin])
-	const { data, error, isError, isLoading } = useUsers({})
+	const limit = 12
+	const [searchParams, setSearchParams] = useSearchParams()
+	const [page, setPage] = useState<number>(Number(searchParams.get(EFilterParam.page)) || 1)
+	const { data, error, isError, isLoading } = useUsers({ limit, page })
+
+	useEffect(() => {
+		if (!data) return
+
+		const { meta } = data
+
+		if (meta.current_page > meta.last_page) {
+			setPage(1)
+
+			return
+		}
+
+		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
+			searchParams.set(EFilterParam.page, page.toString())
+			setSearchParams(searchParams)
+		} else {
+			searchParams.delete(EFilterParam.page)
+			setSearchParams(searchParams)
+		}
+	}, [data, page, searchParams, setSearchParams])
+
 	const columns = useMemo<ColumnDef<IUser>[]>(() => [
 		{
 			header: 'Ф.И.О.',
@@ -57,7 +83,7 @@ const UsersTable: FC = () => {
 	if (!data?.data) return <InfoMessage text='Пока нет данных для отображения!' />
 
 	return (
-		<BasicTable data={data.data} columns={columns} size={15} search />
+		<BasicTable query={data} serverSidePagination={true} columns={columns} size={limit} currentPage={page} onPageChange={setPage} />
 	)
 }
 
