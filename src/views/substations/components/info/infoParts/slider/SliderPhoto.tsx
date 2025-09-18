@@ -43,7 +43,6 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 						onClose={() => setVisible(false)}
 						index={index}
 						onIndexChange={setIndex}
-						maskOpacity={0.9}
 					/>
 					<div className='flex items-center gap-3 mt-7'>
 						<p className='text-content'>{currentImg?.clientName}</p>
