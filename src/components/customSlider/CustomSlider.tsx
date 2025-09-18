@@ -4,7 +4,7 @@ import 'react-awesome-slider/dist/captioned.css'
 import 'react-awesome-slider/dist/styles.css'
 import './custom-slider.scss'
 
-export const CustomSlider: FC<AwesomeSliderProps> = ({children, ...props}) => {
+export const CustomSlider: FC<AwesomeSliderProps> = ({ children, ...props }) => {
 	return (
 		<AwesomeSlider className='aws-btn' {...props}>
 			{children}
