@@ -20,6 +20,7 @@ import { NavBar } from './navBar/NavBar'
 import NumberRecords from './numberRecords/NumberRecords'
 import { Page } from './page/Page'
 import Pagination from './pagination/Pagination'
+import CustomPhotoSlider from './photoSlider/CustomPhotoSlider'
 import { ProtectedRoute } from './protectedRoute/ProtectedRoute'
 import { Router } from './routing/Router'
 import ToggleTheme from './toggleTheme/ToggleTheme'
@@ -45,4 +46,4 @@ const Checkbox = lazy(() => import('./checkbox/Checkbox'))
 const Tooltip = lazy(() => import('./tooltip/Tooltip'))
 const Select = lazy(() => import('./select/Select'))
 
-export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CopyToClipboardButton, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, Select, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
+export { AuthLayout, Badge, BasicTable, Button, Card, CardsSubstations, ChangePasswordForm, ChannelInfo, Checkbox, CopyToClipboardButton, CustomAxisTickChart, CustomBarChartLabel, CustomDatePicker, CustomPhotoSlider, CustomSlider, CustomTooltipChart, Dropdown, Error, FileUploader, Group, Icon, InfoMessage, Input, Layout, Loader, LoaderLine, LoadMore, Modal, NavBar, NumberRecords, Page, Pagination, ProtectedRoute, Router, Search, Select, SelectWrapper, SmallCard, Sort, Tab, Textarea, Toggle, ToggleTheme, Tooltip, ValidationMessage }
