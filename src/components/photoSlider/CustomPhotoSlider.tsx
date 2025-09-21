@@ -1,17 +1,22 @@
 import { type FC } from 'react'
 import { PhotoSlider } from 'react-photo-view'
-import { IPhotoSliderProps } from 'react-photo-view/dist/PhotoSlider'
 import 'react-photo-view/dist/react-photo-view.css'
 import { Tooltip } from '..'
 import { Button } from '../button/Button'
 import Icon from '../icon/Icon'
+import { ICustomPhotoSliderProps } from './customPhotoSlider.interface'
 
-const CustomPhotoSlider: FC<IPhotoSliderProps> = (props) => {
+const CustomPhotoSlider: FC<ICustomPhotoSliderProps> = (props) => {
 	return (
 		<PhotoSlider
 			toolbarRender={({ rotate, onRotate, scale, onScale }) => {
 				return (
-					<div className='flex gap-2'>
+					<div className='flex items-center gap-3'>
+						{props.fileName ?? (
+							<div>
+								{props.fileName}
+							</div>
+						)}
 						<Tooltip text='Повернуть' className='!tooltip-bottom'>
 							<Button className='PhotoView-Slider__toolbarIcon' onClick={() => onRotate(rotate + 90)}><Icon id='reload' /></Button>
 						</Tooltip>
