@@ -4,7 +4,7 @@ import { toast } from 'react-toastify'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
-import { TFile, TFileUploadData } from '../../types'
+import { TFile, TFileUpdName, TFileUploadData } from '../../types'
 
 export const FileService = {
 	async upload(data: TFileUploadData): Promise<AxiosResponse<string>> {
@@ -46,5 +46,9 @@ export const FileService = {
 				'Content-Type': 'multipart/form-data'
 			}
 		})
+	},
+
+	async updateNameFile(id: number, data: TFileUpdName): Promise<AxiosResponse<{ message: string }>> {
+		return instance.patch(`${url}/files/update-file-name/${id}`, data)
 	}
 }
