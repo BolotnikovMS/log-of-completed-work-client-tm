@@ -9,54 +9,54 @@ import { TRespSubstations, TSubstationData, TSubstationNoteData } from '../../ty
 import { TSubstationKeyDefect } from '../../types/substation.types'
 
 export const SubstationService = {
-  async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams): Promise<TRespSubstations> {
-    const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
-      params: { page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }
-    })
+	async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams): Promise<TRespSubstations> {
+		const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
+			params: { page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }
+		})
 
-    return data
-  },
+		return data
+	},
 
-  async getSubstationById(id: number): Promise<ISubstation> {
-    const { data } = await instance.get<ISubstation>(`${url}/substations/${id}`)
+	async getSubstationById(id: number): Promise<ISubstation> {
+		const { data } = await instance.get<ISubstation>(`${url}/substations/${id}`)
 
-    return data
-  },
+		return data
+	},
 
-  async getSubstationInfo(id: string): Promise<ISubstationInfo> {
-    const { data } = await instance.get<ISubstationInfo>(`${url}/substations/${id}/info`)
+	async getSubstationInfo(id: string): Promise<ISubstationInfo> {
+		const { data } = await instance.get<ISubstationInfo>(`${url}/substations/${id}/info`)
 
-    return data
-  },
+		return data
+	},
 
-  async create(data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
-    return instance.post<ISubstation>(`${url}/substations`, data)
-  },
+	async create(data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
+		return instance.post<ISubstation>(`${url}/substations`, data)
+	},
 
-  async update(id: number, data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
-    return instance.patch<ISubstation>(`${url}/substations/${id}`, data)
-  },
+	async update(id: number, data: TSubstationData): Promise<AxiosResponse<ISubstation>> {
+		return instance.patch<ISubstation>(`${url}/substations/${id}`, data)
+	},
 
-  async updateNote(id: number, data: TSubstationNoteData): Promise<AxiosResponse<ISubstation>> {
-    return instance.patch<ISubstation>(`${url}/substations/${id}/note`, data)
-  },
+	async updateNote(id: number, data: TSubstationNoteData): Promise<AxiosResponse<ISubstation>> {
+		return instance.patch<ISubstation>(`${url}/substations/${id}/note`, data)
+	},
 
-  async deleteSubstation(id: number): Promise<AxiosResponse<void>> {
-    return instance.delete(`${url}/substations/${id}`)
-  },
+	async deleteSubstation(id: number): Promise<AxiosResponse<void>> {
+		return instance.delete(`${url}/substations/${id}`)
+	},
 
-  async downloadExcel({ page, limit, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams) {
-    await instance.get(`${url}/substations/download-substations-excel`, {
-      params: { page, limit, typeKp, headController, district, channelCategory, channelType, objectType },
-      responseType: 'blob'
-    }).then(resp => {
-      fileDownload(resp.data, 'substations-report.xlsx')
-    }).catch(e => {
-      toast.error(errorHandler(e))
-    })
-  },
+	async downloadExcel({ page, limit, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams) {
+		await instance.get(`${url}/substations/download-substations-excel`, {
+			params: { page, limit, typeKp, headController, district, channelCategory, channelType, objectType },
+			responseType: 'blob'
+		}).then(resp => {
+			fileDownload(resp.data, 'substations-report.xlsx')
+		}).catch(e => {
+			toast.error(errorHandler(e))
+		})
+	},
 
-  async updKeyDefect(id: number, data: TSubstationKeyDefect): Promise<AxiosResponse<ISubstation>> {
-  	return instance.patch<ISubstation>(`${url}/substations/${id}/add-key-defects`, data)
-  }
+	async updKeyDefect(id: number, data: TSubstationKeyDefect): Promise<AxiosResponse<ISubstation>> {
+		return instance.patch<ISubstation>(`${url}/substations/${id}/add-key-defects`, data)
+	}
 }

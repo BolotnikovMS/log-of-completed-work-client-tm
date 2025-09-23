@@ -5,20 +5,20 @@ import { SubstationService } from '../../services/substations/substation.service
 import { TSubstationData } from '../../types'
 
 export const useUpdateSubstation = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: ({ id, data }: { id: number, data: TSubstationData }) => SubstationService.update(id, data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
-      await queryClient.invalidateQueries({ queryKey: ['substations'] })
-      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
-      await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
+	return useMutation({
+		mutationFn: ({ id, data }: { id: number, data: TSubstationData }) => SubstationService.update(id, data),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['substation'] })
+			await queryClient.invalidateQueries({ queryKey: ['substations'] })
+			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
 
-      toast.success('Запись успешно обновлена!')
-    },
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
-  })
+			toast.success('Запись успешно обновлена!')
+		},
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
+	})
 }
