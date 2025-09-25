@@ -47,7 +47,9 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 					/>
 					<div className='flex items-center gap-3 mt-7'>
 						<p className='text-content'>{currentImg?.clientName}</p>
-						<FileControl file={currentImg} classDropDown='dropdown-end' />
+						{
+							currentImg && <FileControl file={currentImg} classDropDown='dropdown-end' />
+						}
 					</div>
 				</>
 			) : (
