@@ -6,15 +6,15 @@ import FileControl from '../../../control/fileControl/FileControl'
 import { IPropsPartsInfo } from '../partsInfo.interfaces'
 
 const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
-	const [index, setIndex] = useState<number>(0)
+	const [indexImg, setIndexImg] = useState<number>(0)
 	const [currentImg, setCurrentImg] = useState<TFile | null>(null)
 	const [visible, setVisible] = useState<boolean>(false)
 
 	useEffect(() => {
 		if (substation?.files_photos_ps?.length) {
-			setCurrentImg(substation.files_photos_ps[index])
+			setCurrentImg(substation.files_photos_ps[indexImg])
 		}
-	}, [index, substation?.files_photos_ps])
+	}, [indexImg, substation?.files_photos_ps])
 
 	if (!substation) return null
 
@@ -22,7 +22,7 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 		if (!substation.files_photos_ps) return null
 
 		setCurrentImg(substation.files_photos_ps[index])
-		setIndex(index)
+		setIndexImg(index)
 	}
 
 	return (
@@ -31,7 +31,7 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 				<>
 					<CustomSlider
 						onTransitionStart={(e) => handleSlideChange(e.nextIndex)}
-						selected={index}
+						selected={indexImg}
 					>
 						{substation.files_photos_ps.map(photo => (
 							<div key={photo.id} data-src={`${urlFile}${photo.filePath}`} onClick={() => setVisible(true)} />
@@ -41,8 +41,8 @@ const SliderPhoto: FC<IPropsPartsInfo> = ({ substation }) => {
 						images={substation.files_photos_ps.map((item) => ({ src: `${urlFile}${item.filePath}`, key: item.id }))}
 						visible={visible}
 						onClose={() => setVisible(false)}
-						index={index}
-						onIndexChange={setIndex}
+						index={indexImg}
+						onIndexChange={setIndexImg}
 						fileName={currentImg?.clientName}
 					/>
 					<div className='flex items-center gap-3 mt-7'>
