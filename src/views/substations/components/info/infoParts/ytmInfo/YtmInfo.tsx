@@ -23,11 +23,15 @@ const YtmInfo: FC<IPropsTelemechanicDevice> = ({ telemechanics_devices }) => {
 						)}
 						<div className='substation-info__equipment-wrapper'>
 							<div className='substation-info__equipment'>
-								<p className='substation-info__text'>Тип КП: </p>
+								<p className='substation-info__text'>
+									Тип КП:
+								</p>
 								<p className='text-content flex items-center gap-2'>
 									{device.type_kp}
 								</p>
-								<p className='substation-info__text'>Головной контроллер: </p>
+								<p className='substation-info__text'>
+									Головной контроллер:
+								</p>
 								<p className='text-content flex items-center gap-2'>
 									{device.head_controller}
 								</p>
