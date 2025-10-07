@@ -33,8 +33,8 @@ const SubstationInfo: FC = () => {
 						<p className='text-content'>{substation?.rdu ? 'Да' : 'Нет'}</p>
 						<p className='substation-info__text'>Всего выполнено работ: </p>
 						<p className="text-content">{substation?.numberCompletedWorks}</p>
-						<YtmInfo substation={substation} />
 					</div>
+					<YtmInfo telemechanics_devices={substation.telemechanics_devices} />
 					<ChannelsInfo channels={substation?.channels} />
 					{substation?.note && (
 						<div>
