@@ -7,6 +7,7 @@ import { checkRole } from '../../../../../helpers'
 import { useModal, useSubstation } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 import { ChannelForm } from '../../../../channel/components'
+import { TelemechanicDeviceForm } from '../../../../telemechanicDevice/components'
 import DefectsNumber from '../../defectsNumber/DefectsNumber'
 import { SubstationForm, SubstationKeyDefectForm, SubstationNote, UploadSubstationFile } from '../../index'
 import { IPropsSubstationInfoControl } from './substationInfoControl.interface'
@@ -20,6 +21,7 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 	const { isModal: isModalAddChannel, toggleModal: toggleModalAddChannel } = useModal()
 	const { isModal: isModalAddNote, toggleModal: toggleModalAddNote } = useModal()
 	const { isModal: isModalUpdKeyDefect, toggleModal: toggleModalUpdKeyDefect } = useModal()
+	const { isModal: isModalAddTelemechanicDevice, toggleModal: toggleModalTelemechanicDevice } = useModal()
 	const [isEdited, setIsEdited] = useState<boolean>(false)
 	const { data, error, isLoading, isError } = useSubstation(substation.id, {
 		enabled: isModalEdit
@@ -61,7 +63,12 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 							Добавить файл
 						</Button>,
 						isAdminOrModerator && (
-							<Button onClick={handleEdit} aria-label='Кнопка вызова модального окна для редактирования данных'>
+							<Button onClick={toggleModalTelemechanicDevice} aria-label='Кнопка вызова модального окна для добавления данных по УТМ'>
+								<Icon id='tools' aria-label='Иконка добавлени УТМ' />
+								Добавить УТМ
+							</Button>),
+						isAdminOrModerator && (
+							<Button onClick={handleEdit} aria-label='Кнопка вызова модального окна для редактирования данных УТМ'>
 								<Icon id='edit' aria-label='Иконка редактирования' />
 								Редактировать
 							</Button>),
@@ -113,6 +120,14 @@ const SubstationInfoControl: FC<IPropsSubstationInfoControl> = ({ substation }) 
 					title='Обновление ключа связи'
 					onToggle={toggleModalUpdKeyDefect}
 					content={<SubstationKeyDefectForm data={substation} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModalUpdKeyDefect} />}
+				/>
+				<Modal
+					visible={isModalAddTelemechanicDevice}
+					title='Добавление УТМ'
+					onToggle={toggleModalTelemechanicDevice}
+					content={
+						<TelemechanicDeviceForm toggleModal={toggleModalTelemechanicDevice} />
+					}
 				/>
 			</div>
 		</div>
