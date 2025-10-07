@@ -37,6 +37,7 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
 	const { data: gsmOperators, isError: isErrorGsmOperators, isLoading: isLoadingGsmOperators } = useGsmOperators()
 	const { mutateAsync: createChannel, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateChannel()
 	const { mutateAsync: updateChannel, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateChannel()
+
 	const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TChannelData>) => {
 		await mutateFn(id ? { id, data } : data)
 
