@@ -12,8 +12,8 @@ const ChannelsInfo: FC<IPropsChannelsInfo> = ({ channels }) => {
 		<div className="flex flex-col gap-3">
 			<p className='text-xl text-center font-bold'>Информация по каналам</p>
 			{channels.map(channel => (
-				<div key={channel.id} className='substation-info__channel-wrapper'>
-					<div className='substation-info__channel'>
+				<div key={channel.id} className='substation-info__equipment-wrapper'>
+					<div className='substation-info__equipment'>
 						<p className='substation-info__text'>{channel.channel_category_short}: </p>
 						<p className='text-content flex items-center gap-2'>
 							{channel.channel_type}

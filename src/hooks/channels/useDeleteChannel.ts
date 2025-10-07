@@ -4,20 +4,20 @@ import { errorHandler } from '../../helpers'
 import { ChannelService } from '../../services/channel/channel.service'
 
 export const useDeleteChannel = () => {
-  const queryClient = useQueryClient()
-  const deleteChannel = useMutation({
-    mutationFn: (id: number) => ChannelService.delete(id),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
-      await queryClient.invalidateQueries({ queryKey: ['channelInfo'] })
-      
-      toast.success('Запись успешно удалена!')
-    },
-    onError: (error) => {
-      toast.error(errorHandler(error))
-    }
-  })
+	const queryClient = useQueryClient()
+	const deleteChannel = useMutation({
+		mutationFn: (id: number) => ChannelService.delete(id),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['channels'] })
+			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['channelInfo'] })
 
-  return { deleteChannel }
+			toast.success('Запись успешно удалена!')
+		},
+		onError: (error) => {
+			toast.error(errorHandler(error))
+		}
+	})
+
+	return { deleteChannel }
 }

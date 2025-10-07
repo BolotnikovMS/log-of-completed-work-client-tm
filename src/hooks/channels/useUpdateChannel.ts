@@ -5,20 +5,20 @@ import { ChannelService } from '../../services/channel/channel.service'
 import { TChannelData } from '../../types'
 
 export const useUpdateChannel = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: ({ id, data }: { id: number, data: TChannelData }) => ChannelService.update(id, data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['channels'] })
-      await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
-      await queryClient.invalidateQueries({ queryKey: ['channel'] })
-      await queryClient.invalidateQueries({ queryKey: ['channelInfo'] })
+	return useMutation({
+		mutationFn: ({ id, data }: { id: number, data: TChannelData }) => ChannelService.update(id, data),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['channels'] })
+			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['channel'] })
+			await queryClient.invalidateQueries({ queryKey: ['channelInfo'] })
 
-      toast.success('Запись успешно обновлена!')
-    },
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
-  })
+			toast.success('Запись успешно обновлена!')
+		},
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
+	})
 }
