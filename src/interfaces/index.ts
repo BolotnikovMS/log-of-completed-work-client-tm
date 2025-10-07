@@ -19,10 +19,11 @@ import { IObjectType } from './objectType.interface'
 import { IQueryParams } from './qparams.interface'
 import { IRole } from './role.interface'
 import { ISubstation, ISubstationInfo, ISubstationList } from './substation.interfaces'
+import { ITelemechanicsDevices } from './telemechanicsDevice.interfaces'
 import { ITypeKp } from './type-kp'
 import { ITypeWork } from './typeWork.interface'
 import { IUser, IUserDataLogin } from './user.interfaces'
 import { IUserRole } from './userRole.interface'
 import { IVoltageClass } from './voltage-class.interface'
 
-export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkInfo, ICompletedWorkList, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, Ilog, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstation, ISubstationInfo, ISubstationList, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass }
+export type { IChangePassword, IChannel, IChannelCategory, IChannelEquipment, IChannelType, ICompletedWork, ICompletedWorkInfo, ICompletedWorkList, ICompletedWorkYear, IDistrict, IFile, IGenericResponseLogout, IGsmOperator, IHeadController, Ilog, IMeta, IObjectType, IPropsCardControl, IPropsForm, IPropsMutation, IQueryParams, IRole, ISignInFields, ISubstation, ISubstationInfo, ISubstationList, ITelemechanicsDevices, ITypeKp, ITypeWork, IUser, IUserDataLogin, IUserLogin, IUserRole, IVoltageClass }
