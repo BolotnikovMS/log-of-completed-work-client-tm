@@ -4,7 +4,7 @@ import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Checkbox, Error, Group, Input, Loader, SelectWrapper } from '../../../../../components'
-import { useCreateSubstation, useDistricts, useHeadControllers, useObjectTypes, useTypesKp, useUpdateSubstation, useVoltageClasses } from '../../../../../hooks'
+import { useCreateSubstation, useDistricts, useObjectTypes, useUpdateSubstation, useVoltageClasses } from '../../../../../hooks'
 import { IPropsForm, IPropsMutation, ISubstation } from '../../../../../interfaces'
 import { TSubstationData } from '../../../../../types'
 import { validationSchema } from './substation.validation'
@@ -18,22 +18,16 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
 			voltageClassesId: substation?.voltageClassesId,
 			active: substation?.active,
 			rdu: substation?.rdu,
-			headControllerId: substation?.headControllerId,
 			objectTypeId: substation?.objectTypeId,
 			name: substation?.name,
-			typeKpId: substation?.typeKpId,
 		},
 		resolver: yupResolver(validationSchema)
 	})
 	const { field: { value: districtValue, onChange: districtOnChange, ...restDistrictField } } = useController({ name: 'districtId', control })
 	const { field: { value: voltageClassValue, onChange: voltageClassOnChange, ...restVoltageClass } } = useController({ name: 'voltageClassesId', control })
-	const { field: { value: typeKpValue, onChange: typeKpOnChange, ...restTypeKp } } = useController({ name: 'typeKpId', control })
-	const { field: { value: headControllerValue, onChange: headControllerOnChange, ...restHeadController } } = useController({ name: 'headControllerId', control })
 	const { field: { value: objectTypeValue, onChange: objectTypeOnChange, ...restObjectType } } = useController({ name: 'objectTypeId', control })
 	const { districts, isLoading: isLoadingDistricts, isError: isErrorDistricts } = useDistricts({})
 	const { voltageClasses, isError: isErrorVoltageClasses, isLoading: isLoadingVoltageClasses } = useVoltageClasses({})
-	const { typesKp, isError: isErrorTypesKp, isLoading: isLoadingTypesKp } = useTypesKp({})
-	const { headControllers, isError: isErrorHeadControllers, isLoading: isLoadingHeadControllers } = useHeadControllers({})
 	const { data: objectTypes, isError: isErrorObjectTypes, isLoading: isLoadingObjectTypes } = useObjectTypes({})
 	const { mutateAsync: createSubstation, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateSubstation()
 	const { mutateAsync: updateSubstation, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateSubstation()
@@ -101,40 +95,6 @@ const SubstationForm: FC<IPropsForm<ISubstation>> = ({ data: substation, isEdite
 						mandatory
 						placeholder='Введите название объекта...'
 					/>
-				</Group>
-				<Group>
-					<SelectWrapper label='Выберите КП' errorMessage={errors.typeKpId?.message} mandatory>
-						<AsyncSelect
-							classNamePrefix='form__custom-select'
-							options={typesKp?.data}
-							getOptionValue={option => option.id.toString()}
-							getOptionLabel={option => option.name}
-							value={typeKpValue ? typesKp?.data.find(t => t.id === typeKpValue) : null}
-							onChange={option => typeKpOnChange(option ? option.id : option)}
-							isLoading={isLoadingTypesKp}
-							isDisabled={isErrorTypesKp}
-							isClearable
-							placeholder="Выберите КП..."
-							{...restTypeKp}
-						/>
-					</SelectWrapper>
-				</Group>
-				<Group>
-					<SelectWrapper label='Выберите головной контроллер' errorMessage={errors.headControllerId?.message} mandatory>
-						<AsyncSelect
-							classNamePrefix='form__custom-select'
-							options={headControllers?.data}
-							getOptionValue={option => option.id.toString()}
-							getOptionLabel={option => option.name}
-							value={headControllerValue ? headControllers?.data.find(h => h.id === headControllerValue) : null}
-							onChange={option => headControllerOnChange(option ? option.id : option)}
-							isLoading={isLoadingHeadControllers}
-							isDisabled={isErrorHeadControllers}
-							isClearable
-							placeholder="Выберите головной контроллер..."
-							{...restHeadController}
-						/>
-					</SelectWrapper>
 				</Group>
 				<Group>
 					<SelectWrapper label='Выберите класс U' errorMessage={errors.voltageClassesId?.message} mandatory>
