@@ -27,8 +27,6 @@ export interface ISubstationInfo {
 	numberCompletedWorks?: number
 	voltage_class?: string | null
 	district?: string | null
-	type_kp?: string | null
-	head_controller?: string | null
 	channels?: TChannelSubstationInfo[]
 	files_photos_ps?: TFile[]
 	files_backups?: TFile[]
