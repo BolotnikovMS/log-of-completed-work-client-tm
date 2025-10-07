@@ -1,18 +1,46 @@
 import { type FC } from 'react'
-import { IPropsPartsInfo } from '../partsInfo.interfaces'
+import { TelemechanicDeviceMenu } from '../../../../../telemechanicDevice/components/cards/cardParts'
+import { IPropsTelemechanicDevice } from '../partsInfo.interfaces'
 
-const YtmInfo: FC<IPropsPartsInfo> = ({ substation }) => {
-  if (!substation) return <p className='substation-info__section-text text-red-500'>Нету данных для отображения!</p>
+const YtmInfo: FC<IPropsTelemechanicDevice> = ({ telemechanics_devices }) => {
+	if (!telemechanics_devices.length)
+		return (
+			<p className='substation-info__section-text text-red-500'>
+				Нет данных по УТМ для отображения!
+			</p>
+		)
 
-  return (
-    <>
-      <p className='substation-info__section-text'>Информация по УТМ</p>
-      <p className='substation-info__text'>Тип КП: </p>
-      <span className='text-content'>{substation.type_kp ?? 'Нет даннных'}</span>
-      <p className='substation-info__text'>Головной контроллер: </p>
-      <span className='text-content'>{substation.head_controller ?? 'Нет даннных'}</span>
-    </>
-  )
-}
+	return (
+		<>
+			<div className='flex flex-col gap-3'>
+				<p className='substation-info__section-text'>Информация по УТМ</p>
+				{telemechanics_devices.map((device, i) => (
+					<div key={device.id}>
+						{telemechanics_devices.length > 1 && (
+							<p className='substation-info text-center text-lg'>
+								УТМ: {i + 1}
+							</p>
+						)}
+						<div className='substation-info__equipment-wrapper'>
+							<div className='substation-info__equipment'>
+								<p className='substation-info__text'>Тип КП: </p>
+								<p className='text-content flex items-center gap-2'>
+									{device.type_kp}
+								</p>
+								<p className='substation-info__text'>Головной контроллер: </p>
+								<p className='text-content flex items-center gap-2'>
+									{device.head_controller}
+								</p>
+							</div>
+							<div>
+								<TelemechanicDeviceMenu deviceId={device.id} />
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</>
+	);
+};
 
-export default YtmInfo
+export default YtmInfo;
