@@ -1,38 +1,56 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import { type FC } from 'react'
-import { useController, useForm } from 'react-hook-form'
+import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Error, Group, Loader, SelectWrapper } from '../../../../components'
-import { useHeadControllers, useSubstations, useTypesKp } from '../../../../hooks'
-import { IPropsForm, ITelemechanicsDevices } from '../../../../interfaces'
+import { Button, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
+import { useCreateTelemechanicsDevice, useHeadControllers, useSubstations, useTypesKp, useUpdateTelemechanicsDevice } from '../../../../hooks'
+import { IPropsForm, IPropsMutation, ITelemechanicsDevices } from '../../../../interfaces'
 import { TTelemechanicsDevice } from '../../../../types'
+import { validationSchema } from './telemechanicDevice.validation'
 
 const TelemechanicDeviceForm: FC<IPropsForm<ITelemechanicsDevices>> = ({ data: telemechanicDevce, isEdited, setIsEdited, toggleModal }) => {
 	const { id } = useParams()
 	const { register, handleSubmit, formState: { errors, isValid }, reset, control } = useForm<TTelemechanicsDevice>({
 		mode: 'all',
 		defaultValues: {
-			substationId: telemechanicDevce?.substationId,
+			substationId: telemechanicDevce?.substationId || (id ? +id : undefined),
 			typeKpId: telemechanicDevce?.typeKpId,
 			headControllerId: telemechanicDevce?.headControllerId,
 			note: telemechanicDevce?.note
-		}
+		},
+		resolver: yupResolver(validationSchema)
 	})
-	const { field: { value: substationValue, onChange: substationOnChange, ...restSubstationField } } = useController({ name: 'substationId', control })
-	const { field: { value: typeKpValue, onChange: typeKpOnChange, ...resetTypeKpField } } = useController({ name: 'typeKpId', control })
-	const { field: { value: headControllerValue, onChange: headControllerOnChange, ...resetheadControllerField } } = useController({ name: 'headControllerId', control })
-
+	const { field: { value: substationValue, onChange: substationOnChange, ...restSubstation } } = useController({ name: 'substationId', control })
+	const { field: { value: typeKpValue, onChange: typeKpOnChange, ...restTypeKp } } = useController({ name: 'typeKpId', control })
+	const { field: { value: headControllerValue, onChange: headControllerOnChange, ...restHeadController } } = useController({ name: 'headControllerId', control })
 	const { substations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
 	const { headControllers, isError: isErrorHeadControllers, isLoading: isLoadingHeadControllers } = useHeadControllers({})
 	const { typesKp, isError: isErrorTypesKp, isLoading: isLoadingTypesKp } = useTypesKp({})
+	const { mutateAsync: createTelemechanicsDevice, isError: isErrorCreate, error: errorCreate, isPending: isPendingCreate } = useCreateTelemechanicsDevice()
+	const { mutateAsync: updateTelemechanicsDevice, isError: isErrorUpdate, error: errorUpdate, isPending: isPendingUpdate } = useUpdateTelemechanicsDevice()
 
-	const errorMessage = (isErrorCreate || isErrorUpdate && errorChannelTypes && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
+	const handleMutation = async ({ data, mutateFn, id }: IPropsMutation<TTelemechanicsDevice>) => {
+		await mutateFn(id ? { id, data } : data)
+
+		reset()
+		toggleModal()
+		if (isEdited && setIsEdited) setIsEdited(false)
+	}
+	const submitCreate: SubmitHandler<TTelemechanicsDevice> = data => handleMutation({ data, mutateFn: createTelemechanicsDevice })
+	const submitUpdate: SubmitHandler<TTelemechanicsDevice> = data => {
+		if (!telemechanicDevce?.id) return null
+
+		handleMutation({ data, mutateFn: updateTelemechanicsDevice, id: telemechanicDevce.id })
+	}
+	const errorMessage = (isErrorCreate || isErrorUpdate && errorCreate && errorUpdate !== null) && <Error error={errorCreate || errorUpdate} />
 
 	if (isPendingCreate || isPendingUpdate) return <Loader />
 
 	return (
 		<>
-			<div className="form">
+			{errorMessage}
+			<form className="form" onSubmit={handleSubmit(isEdited ? submitUpdate : submitCreate)}>
 				<Group>
 					<SelectWrapper label='Выберите объект' errorMessage={errors.substationId?.message} mandatory>
 						<AsyncSelect
@@ -46,7 +64,7 @@ const TelemechanicDeviceForm: FC<IPropsForm<ITelemechanicsDevices>> = ({ data: t
 							isDisabled={isErrorSubstations}
 							isClearable
 							placeholder="Выберите объект..."
-							{...restSubstationField}
+							{...restSubstation}
 						/>
 					</SelectWrapper>
 				</Group>
@@ -60,13 +78,45 @@ const TelemechanicDeviceForm: FC<IPropsForm<ITelemechanicsDevices>> = ({ data: t
 							value={typeKpValue ? typesKp?.data.find(tk => tk.id === typeKpValue) : null}
 							onChange={option => typeKpOnChange(option ? option.id : option)}
 							isLoading={isLoadingTypesKp}
+							isDisabled={isErrorTypesKp}
 							isClearable
 							placeholder="Выберите тип кп..."
-							{...resetTypeKpField}
+							{...restTypeKp}
 						/>
 					</SelectWrapper>
 				</Group>
-			</div>
+				<Group>
+					<SelectWrapper label='Выберите головной контроллер' errorMessage={errors.headControllerId?.message} mandatory>
+						<AsyncSelect
+							classNamePrefix='form__custom-select'
+							options={headControllers?.data}
+							getOptionValue={option => option.id.toString()}
+							getOptionLabel={option => option.name}
+							value={headControllerValue ? headControllers?.data.find(h => h.id === headControllerValue) : null}
+							onChange={option => headControllerOnChange(option ? option.id : option)}
+							isLoading={isLoadingHeadControllers}
+							isDisabled={isErrorHeadControllers}
+							isClearable
+							placeholder="Выберите головной контроллер..."
+							{...restHeadController}
+						/>
+					</SelectWrapper>
+				</Group>
+				<Group>
+					<Textarea
+						label='Примечание'
+						name='note'
+						register={register}
+						error={errors.note?.message}
+						placeholder='Введите примечание...'
+					/>
+				</Group>
+				<Group className='items-center mt-5'>
+					<Button disabled={!isValid} className='mBtn_outline-green'>
+						{isEdited ? 'Сохранить' : 'Добавить'}
+					</Button>
+				</Group>
+			</form>
 		</>
 	)
 }
