@@ -66,9 +66,7 @@ const ChannelCards: FC = () => {
 					<Pagination page={page} meta={data.meta} setPage={setPage} />
 				</div>
 			)}
-			{(!data?.data.length && !isLoading && !isError) && (
-				<InfoMessage text='Пока добавленных каналов нет...' />
-			)}
+			{!data?.data.length && !isLoading && !isError && <InfoMessage text='Пока добавленных каналов нет...' />}
 		</>
 	)
 }

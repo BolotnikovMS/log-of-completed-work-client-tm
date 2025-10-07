@@ -13,31 +13,30 @@ const ChannelControlMenu: FC<{ channelId: number }> = memo(({ channelId }) => {
 	const [isEdited, setIsEdited] = useState<boolean>(false)
 	const { deleteChannel } = useDeleteChannel()
 	const { data, error, isLoading, isError } = useChannel(channelId, {
-		enabled: isModal,
+		enabled: isModal
 	})
 
-	const handleDelete = useCallback((id: number) => {
-		const answer = confirm('Подтвердите удаление записи.')
+	const handleDelete = useCallback(
+		(id: number) => {
+			const answer = confirm('Подтвердите удаление записи.')
 
-		if (!answer) return null
+			if (!answer) return null
 
-		return deleteChannel.mutate(id)
-	}, [deleteChannel])
+			return deleteChannel.mutate(id)
+		},
+		[deleteChannel]
+	)
 	const handleEdit = useCallback(() => {
 		setIsEdited(!isEdited)
 		toggleModal()
 	}, [isEdited, toggleModal])
-	const modalContent =
-		isLoading ?
-			(<Loader />) :
-			isError ?
-				(<Error error={error} />) :
-				<ChannelForm
-					data={data}
-					toggleModal={toggleModal}
-					isEdited={isEdited}
-					setIsEdited={setIsEdited}
-				/>
+	const modalContent = isLoading ? (
+		<Loader />
+	) : isError ? (
+		<Error error={error} />
+	) : (
+		<ChannelForm data={data} toggleModal={toggleModal} isEdited={isEdited} setIsEdited={setIsEdited} />
+	)
 
 	if (!isAdminOrModerator) return null
 
@@ -61,7 +60,9 @@ const ChannelControlMenu: FC<{ channelId: number }> = memo(({ channelId }) => {
 			<Modal
 				visible={isModal}
 				title='Редактирование записи'
-				onToggle={() => { toggleModal(), setIsEdited(false) }}
+				onToggle={() => {
+					(toggleModal(), setIsEdited(false))
+				}}
 				content={modalContent}
 			/>
 		</>
