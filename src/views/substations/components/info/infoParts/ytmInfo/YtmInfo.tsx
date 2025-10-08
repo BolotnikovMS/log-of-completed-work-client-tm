@@ -17,7 +17,7 @@ const YtmInfo: FC<IPropsTelemechanicDevice> = ({ telemechanics_devices }) => {
 				{telemechanics_devices.map((device, i) => (
 					<div key={device.id}>
 						{telemechanics_devices.length > 1 && (
-							<p className='substation-info text-center text-lg'>
+							<p className='substation-info mb-2 text-center font-bold text-lg'>
 								УТМ: {i + 1}
 							</p>
 						)}
@@ -36,7 +36,7 @@ const YtmInfo: FC<IPropsTelemechanicDevice> = ({ telemechanics_devices }) => {
 									{device.head_controller}
 								</p>
 							</div>
-							<div>
+							<div className='w-none flex flex-col gap-1'>
 								<TelemechanicDeviceMenu deviceId={device.id} />
 							</div>
 						</div>
