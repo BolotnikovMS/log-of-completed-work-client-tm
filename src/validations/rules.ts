@@ -30,6 +30,16 @@ export const text50 = yup
 	.required('Поле является обязательным!')
 	.min(2)
 	.max(50)
+export const text150Optional = yup
+	.lazy((value: string) =>
+		value && value.length ? yup
+			.string()
+			.trim()
+			.min(2)
+			.max(150)
+			: yup
+				.string()
+				.notRequired())
 export const text1000 = yup
 	.string()
 	.trim()
