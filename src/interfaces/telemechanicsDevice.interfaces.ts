@@ -3,5 +3,6 @@ export interface ITelemechanicsDevices {
 	substationId: number
 	typeKpId: number
 	headControllerId: number
+	controllerFirmwareVersion?: string | null
 	note?: string | null
 }
