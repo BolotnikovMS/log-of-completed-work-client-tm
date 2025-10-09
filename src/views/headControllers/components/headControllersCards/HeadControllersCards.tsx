@@ -44,9 +44,16 @@ const HeadControllersCards: FC = () => {
 							<SmallCard
 								key={headController.id}
 								childrenContent={
-									<p className='text-content'>
-										{headController.name}
-									</p>
+									<div className='flex flex-col gap-3'>
+										<p className='text-content'>
+											{headController.name}
+										</p>
+										{headController.actualFirmwareVersion && (
+											<p className='text-content !text-sm text-gray-400/70'>
+												Прошивка: {headController.actualFirmwareVersion}
+											</p>
+										)}
+									</div>
 								}
 								childrenControl={
 									isAdminOrModerator && (
@@ -82,10 +89,7 @@ const HeadControllersCards: FC = () => {
 				visible={isModal}
 				title='Редактирование записи'
 				onToggle={
-					() => { toggleModal(), setIsEdited(false) }} content={
-						<HeadControllerForm data={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal}
-						/>
-					}
+					() => { toggleModal(), setIsEdited(false) }} content={<HeadControllerForm data={headController} isEdited={isEdited} setIsEdited={setIsEdited} toggleModal={toggleModal} />}
 			/>
 		</>
 	)
