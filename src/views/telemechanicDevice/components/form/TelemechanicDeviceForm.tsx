@@ -3,7 +3,7 @@ import { type FC } from 'react'
 import { SubmitHandler, useController, useForm } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
-import { Button, Error, Group, Loader, SelectWrapper, Textarea } from '../../../../components'
+import { Button, Error, Group, Input, Loader, SelectWrapper, Textarea } from '../../../../components'
 import { useCreateTelemechanicsDevice, useHeadControllers, useSubstations, useTypesKp, useUpdateTelemechanicsDevice } from '../../../../hooks'
 import { IPropsForm, IPropsMutation, ITelemechanicsDevices } from '../../../../interfaces'
 import { TTelemechanicsDevice } from '../../../../types'
@@ -17,6 +17,7 @@ const TelemechanicDeviceForm: FC<IPropsForm<ITelemechanicsDevices>> = ({ data: t
 			substationId: telemechanicDevce?.substationId || (id ? +id : undefined),
 			typeKpId: telemechanicDevce?.typeKpId,
 			headControllerId: telemechanicDevce?.headControllerId,
+			controllerFirmwareVersion: telemechanicDevce?.controllerFirmwareVersion,
 			note: telemechanicDevce?.note
 		},
 		resolver: yupResolver(validationSchema)
@@ -101,6 +102,15 @@ const TelemechanicDeviceForm: FC<IPropsForm<ITelemechanicsDevices>> = ({ data: t
 							{...restHeadController}
 						/>
 					</SelectWrapper>
+				</Group>
+				<Group>
+					<Input
+						label='Версия прошивки контроллера'
+						name='controllerFirmwareVersion'
+						register={register}
+						errorMessage={errors.controllerFirmwareVersion?.message}
+						placeholder='Введите версию прошивки...'
+					/>
 				</Group>
 				<Group>
 					<Textarea
