@@ -10,7 +10,8 @@ export const useCreateTelemechanicsDevice = () => {
 	return useMutation({
 		mutationFn: (data: TTelemechanicsDevice) => TelemechanicDeviceService.create(data),
 		onSuccess: async () => {
-			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevices']})
+			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevices'] })
+			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDeviceInfo'] })
 			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 
 			toast.success('Запись успешно добавлена!')

@@ -10,6 +10,7 @@ export const useDeleteTelemechanicsDevice = () => {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevices'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevice'] })
+			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDeviceInfo'] })
 			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 
 			toast.success('Запись успешно удалена!')
