@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios'
 import { instance } from '../../api/axios.api'
 import { url } from '../../constants'
-import { IQueryParams, ITelemechanicsDevices } from '../../interfaces'
+import { IQueryParams, ITelemechanicsDeviceInfo, ITelemechanicsDevices } from '../../interfaces'
 import { TRespTelemechanicsDevices, TTelemechanicsDevice } from '../../types'
 
 export const TelemechanicDeviceService = {
@@ -15,6 +15,12 @@ export const TelemechanicDeviceService = {
 
 	async getDeviceById(id: number): Promise<ITelemechanicsDevices> {
 		const { data } = await instance.get<ITelemechanicsDevices>(`${url}/telemechanics-devices/${id}`)
+
+		return data
+	},
+
+	async getDeviceInfoById(id: number): Promise<ITelemechanicsDeviceInfo> {
+		const { data } = await instance.get<ITelemechanicsDeviceInfo>(`${url}/telemechanics-devices/${id}/info`)
 
 		return data
 	},
