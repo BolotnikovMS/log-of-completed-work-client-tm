@@ -6,3 +6,12 @@ export interface ITelemechanicsDevices {
 	controllerFirmwareVersion?: string | null
 	note?: string | null
 }
+
+export interface ITelemechanicsDeviceInfo {
+	id: number
+	substation: string
+	type_kp: string
+	head_controller: string
+	controllerFirmwareVersion: string | null
+	note: string | null
+}
