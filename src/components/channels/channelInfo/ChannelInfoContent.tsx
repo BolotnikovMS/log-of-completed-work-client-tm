@@ -50,7 +50,7 @@ const ChannelInfoContent: FC<{ channel: TChannelInfo | undefined }> = memo(({ ch
 				</p>
 			</Group>
 			<Group>
-				<p className='text-content-1'>Примечания:
+				<p className='text-content-1'>Примечание:
 					<span className='text-content'>
 						{channel.note ?? 'Не указано'}
 					</span>
