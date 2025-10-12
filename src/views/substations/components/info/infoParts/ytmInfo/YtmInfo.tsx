@@ -1,4 +1,5 @@
 import { type FC } from 'react'
+import { TelemechanicsDeviceInfo } from '../../../../../../components'
 import { TelemechanicDeviceMenu } from '../../../../../telemechanicDevice/components/cards/cardParts'
 import { IPropsTelemechanicDevice } from '../partsInfo.interfaces'
 
@@ -37,6 +38,7 @@ const YtmInfo: FC<IPropsTelemechanicDevice> = ({ telemechanics_devices }) => {
 								</p>
 							</div>
 							<div className='w-none flex flex-col gap-1'>
+								<TelemechanicsDeviceInfo id={device.id} />
 								<TelemechanicDeviceMenu deviceId={device.id} />
 							</div>
 						</div>
