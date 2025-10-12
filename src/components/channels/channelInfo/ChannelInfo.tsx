@@ -8,6 +8,9 @@ const ChannelInfo: FC<{ channelId: number }> = ({ channelId }) => {
 	const { data, error, isLoading, isError } = useChannelInfo(channelId, {
 		enabled: isModal
 	})
+	const content = isLoading ? <Loader /> :
+		isError ? <Error error={error} /> :
+			<ChannelInfoContent channel={data} />
 
 	return (
 		<>
@@ -20,11 +23,7 @@ const ChannelInfo: FC<{ channelId: number }> = ({ channelId }) => {
 				visible={isModal}
 				title='Информация о канале'
 				onToggle={toggleModal}
-				content={
-					isLoading ? <Loader /> :
-						isError ? <Error error={error} /> :
-							<ChannelInfoContent channel={data} />
-				}
+				content={content}
 			/>
 		</>
 	)
