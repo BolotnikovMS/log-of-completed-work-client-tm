@@ -1,10 +1,12 @@
-import { TChannelSubstationInfo, TFile } from '../types'
+import { TChannelSubstationInfo, TFile, TTelemechanicsDevicesSubstationInfo } from '../types'
+import { ITelemechanicsDeviceInfo } from './telemechanicsDevice.interfaces'
 
 export interface ISubstationList {
 	id: number
 	rdu: boolean
 	fullNameSubstation: string
 	object_type?: string | null
+	telemechanics_devices: Pick<ITelemechanicsDeviceInfo, 'id' | 'type_kp'>[] | []
 }
 
 export interface ISubstation {
@@ -33,12 +35,5 @@ export interface ISubstationInfo {
 	other_files?: TFile[]
 	object_type?: string | null
 	keyDefectSubstation: number | null
-	telemechanics_devices: ISubstationTelemechanicsDevices[] | []
-}
-
-export interface ISubstationTelemechanicsDevices {
-	id: number
-	note: string | null
-	type_kp: string
-	head_controller: string
+	telemechanics_devices: TTelemechanicsDevicesSubstationInfo[] | []
 }
