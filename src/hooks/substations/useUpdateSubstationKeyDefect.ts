@@ -14,8 +14,8 @@ export const useUpdateSubstationKeyDefect = () => {
 
 			toast.success('Ключ связи успешно обновлен!')
 		},
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
 	})
 }
