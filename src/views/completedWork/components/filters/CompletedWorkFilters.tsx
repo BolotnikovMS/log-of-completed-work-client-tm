@@ -6,7 +6,7 @@ import { useSearchParams } from 'react-router-dom'
 import AsyncSelect from 'react-select'
 import { Button, Checkbox, CustomDatePicker, Error, Group, Icon } from '../../../../components'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useSubstations, useTypesWork, useUsersShort } from '../../../../hooks'
+import { useSubstationsForSelect, useTypesWork, useUsersShort } from '../../../../hooks'
 import { IPropsCompletedWorkFilters } from './compleated-filter.interface'
 
 const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) => {
@@ -23,7 +23,7 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
 	const [dateEnd, setDateEnd] = useState<Date | null>(null)
 	const [typeWork, setTypeWork] = useState<string[] | null | undefined>(null)
 	const [inControl, setInControl] = useState<boolean>(false)
-	const { substations, isError: isErrorSubstations, error: errorSubstations, isLoading: isLoadingSubstations } = useSubstations({})
+	const { substationsForSelect: substations, error: errorSubstations, isError: isErrorSubstations, isLoading: isLoadingSubstations } = useSubstationsForSelect()
 	const { data: executors, isError: isErrorExecutors, error: errorExecutors, isLoading: isLoadingExecutors } = useUsersShort({})
 	const { data: typesWork, isError: isErrorTypesWork, error: errorTypesWork, isLoading: isLoadingTypesWork } = useTypesWork({})
 
@@ -66,10 +66,10 @@ const CompletedWorkFilters: FC<IPropsCompletedWorkFilters> = ({ toggleModal }) =
 				<Group>
 					<AsyncSelect
 						classNamePrefix='form__custom-select'
-						options={substations?.data}
-						value={substation ? substations?.data.find(s => s.id === +substation) : null}
+						options={substations}
+						value={substation ? substations?.find(s => s.id === +substation) : null}
 						getOptionValue={option => option.id.toString()}
-						getOptionLabel={option => option.fullNameSubstation}
+						getOptionLabel={option => option.name}
 						onChange={option => setSubstation(option ? option.id.toString() : null)}
 						isLoading={isLoadingSubstations}
 						isDisabled={isErrorSubstations}
