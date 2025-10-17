@@ -6,13 +6,19 @@ import { url } from '../../constants'
 import { errorHandler } from '../../helpers'
 import { IQueryParams, ISubstation, ISubstationInfo } from '../../interfaces'
 import { TRespSubstations, TSubstationData, TSubstationNoteData } from '../../types'
-import { TSubstationKeyDefect } from '../../types/substation.types'
+import { TSubstationKeyDefect, TSubstationsForSelect } from '../../types/substation.types'
 
 export const SubstationService = {
 	async getSubstations({ limit, page, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }: IQueryParams): Promise<TRespSubstations> {
 		const { data } = await instance.get<TRespSubstations>(`${url}/substations`, {
 			params: { page, limit, search, sort, order, typeKp, headController, district, channelCategory, channelType, objectType }
 		})
+
+		return data
+	},
+
+	async getSubstationsForSelect(): Promise<TSubstationsForSelect[]> {
+		const { data } = await instance.get<TSubstationsForSelect[]>(`${url}/substations/select-options`)
 
 		return data
 	},
