@@ -17,10 +17,10 @@ const SubstationsCards: FC = () => {
 	const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
 	const channelTypeParam = searchParams.get(EFilterParam.channelType)
 	const objectTypeParam = searchParams.get(EFilterParam.objectType)
-	const { substations: data, error, isError, isLoading } = useSubstations({ limit: 20, page, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam, objectType: objectTypeParam })
+	const { substations, error, isError, isLoading } = useSubstations({ limit: 20, page, search: searchParam, sort: sortParam, order: orderParam as TOrderSort, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam, objectType: objectTypeParam })
 
 	return (
-		<CardsSubstations substations={data} error={error} isError={isError} isLoading={isLoading} page={page} setPage={setPage} />
+		<CardsSubstations substations={substations} error={error} isError={isError} isLoading={isLoading} page={page} setPage={setPage} />
 	)
 }
 

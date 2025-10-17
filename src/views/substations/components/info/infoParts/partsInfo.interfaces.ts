@@ -1,6 +1,5 @@
 import { ISubstationInfo } from '../../../../../interfaces'
-import { ISubstationTelemechanicsDevices } from '../../../../../interfaces/substation.interfaces'
-import { TChannelSubstationInfo } from '../../../../../types'
+import { TChannelSubstationInfo, TTelemechanicsDevicesSubstationInfo } from '../../../../../types'
 
 export interface IPropsPartsInfo {
 	substation: ISubstationInfo | undefined
@@ -11,5 +10,5 @@ export interface IPropsChannelsInfo {
 }
 
 export interface IPropsTelemechanicDevice {
-	telemechanics_devices: ISubstationTelemechanicsDevices[]
+	telemechanics_devices: TTelemechanicsDevicesSubstationInfo[]
 }
