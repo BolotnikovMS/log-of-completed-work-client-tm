@@ -11,12 +11,12 @@ import { TFile, TFileUpdName, TFileUploadData } from './file.types'
 import { TGsmOperatorData } from './gsm-operator.type'
 import { THeadControllerData, TRespHeadController } from './head-controller.types'
 import { TObjectTypeData, TRespObjectTypes } from './objectType.types'
-import { TRespSubstations, TSubstationData, TSubstationNoteData } from './substation.types'
-import { TRespTelemechanicsDevices, TTelemechanicsDevice } from './telemechanicsDevice.types'
+import { TRespSubstations, TSubstationData, TSubstationNoteData, TSubstationsForSelect } from './substation.types'
+import { TRespTelemechanicsDevices, TTelemechanicsDevice, TTelemechanicsDevicesSubstationInfo } from './telemechanicsDevice.types'
 import { TTheme } from './theme.type'
 import { TRespTypesKp, TTypeKpData } from './type-kp.types'
 import { TRespTypesWork, TTypeWorkData } from './typeWork.types'
 import { TChangeStatusAccount, TChangeUserRole, TRespUsers, TUserBase, TUserData, TUserShort } from './user.types'
 import { TResponseVoltageClass, TVoltageClassData } from './voltage-class.types'
 
-export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelInfo, TChannelSubstationInfo, TChannelTypeData, TCompletedWorkData, TDistrictData, TFile, TFileUpdName, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TQuantity, TRespChannelCategories, TRespChannelingEquipment, TRespChannels, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTelemechanicsDevices, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TTelemechanicsDevice, TTheme, TTypeCalculation, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltage, TVoltageClassData }
+export type { TChangeStatusAccount, TChangeUserRole, TChannelCategoryData, TChannelData, TChannelEquipmentData, TChannelInfo, TChannelSubstationInfo, TChannelTypeData, TCompletedWorkData, TDistrictData, TFile, TFileUpdName, TFileUploadData, TGsmOperatorData, THeadControllerData, TObjectTypeData, TQuantity, TRespChannelCategories, TRespChannelingEquipment, TRespChannels, TRespChannelTypes, TRespCompletedWork, TRespDistricts, TRespHeadController, TRespObjectTypes, TResponseVoltageClass, TRespSubstations, TRespTelemechanicsDevices, TRespTypesKp, TRespTypesWork, TRespUsers, TSubstationData, TSubstationNoteData, TSubstationsForSelect, TTelemechanicsDevice, TTelemechanicsDevicesSubstationInfo, TTheme, TTypeCalculation, TTypeKpData, TTypeWorkData, TUserBase, TUserData, TUserShort, TVoltage, TVoltageClassData }
