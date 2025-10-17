@@ -5,19 +5,20 @@ import { SubstationService } from '../../services/substations/substation.service
 import { TSubstationData } from '../../types'
 
 export const useCreateSubstation = () => {
-  const queryClient = useQueryClient()
+	const queryClient = useQueryClient()
 
-  return useMutation({
-    mutationFn: (data: TSubstationData) => SubstationService.create(data),
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['substation'] })
-      await queryClient.invalidateQueries({ queryKey: ['substations'] })
-      await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
+	return useMutation({
+		mutationFn: (data: TSubstationData) => SubstationService.create(data),
+		onSuccess: async () => {
+			await queryClient.invalidateQueries({ queryKey: ['substation'] })
+			await queryClient.invalidateQueries({ queryKey: ['substations'] })
+			await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
+			await queryClient.invalidateQueries({ queryKey: ['substationsSelect'] })
 
-      toast.success('Запись успешно добавлена!')
-    },
-    onError: (errors) => {
-      toast.error(errorHandler(errors))
-    }
-  })
+			toast.success('Запись успешно добавлена!')
+		},
+		onError: (errors) => {
+			toast.error(errorHandler(errors))
+		}
+	})
 }

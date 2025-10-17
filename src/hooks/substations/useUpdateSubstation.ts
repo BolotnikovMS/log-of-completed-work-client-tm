@@ -14,6 +14,7 @@ export const useUpdateSubstation = () => {
 			await queryClient.invalidateQueries({ queryKey: ['substations'] })
 			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
 			await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
+			await queryClient.invalidateQueries({ queryKey: ['substationsSelect'] })
 
 			toast.success('Запись успешно обновлена!')
 		},
