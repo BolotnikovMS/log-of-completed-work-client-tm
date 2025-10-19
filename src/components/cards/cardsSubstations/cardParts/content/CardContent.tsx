@@ -9,7 +9,7 @@ const CardContent: FC<ICardContent> = memo(({ substation }) => {
 				<Badge text={substation.object_type!} className='mBadge_blue' />
 				{substation.rdu && <Badge text='РДУ' className='mBadge_red' />}
 				{substation.telemechanics_devices && substation.telemechanics_devices.map(typeKp => (
-					<Badge key={typeKp.id} text={typeKp.type_kp} className='mBadge_dark_blue' />
+					<Badge key={typeKp.id} text={typeKp.type_kp} className='mBadge_light_green' />
 				))}
 			</div>
 			<p className='text-content flex items-center gap-1'>
