@@ -15,5 +15,9 @@
 }
 
 .mBadge_dark_blue {
-	@apply bg-blue-950/10 border-blue-800/90 text-blue-800;
+	@apply bg-blue-700/10 border-blue-700/90 text-blue-700;
+}
+
+.mBadge_light_green {
+	@apply bg-green-500/10 border-green-500/90 text-green-500;
 }
