@@ -13,6 +13,7 @@ export const useCreateTelemechanicsDevice = () => {
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevices'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDeviceInfo'] })
 			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['substations'] })
 
 			toast.success('Запись успешно добавлена!')
 		},

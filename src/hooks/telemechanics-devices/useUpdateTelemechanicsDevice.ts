@@ -12,6 +12,7 @@ export const useUpdateTelemechanicsDevice = () => {
 		onSuccess: async () => {
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevices'] })
 			await queryClient.invalidateQueries({ queryKey: ['substationInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['substations'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevice'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDeviceInfo'] })
 
