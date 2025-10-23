@@ -62,6 +62,17 @@ export const SubstationService = {
 		})
 	},
 
+	async downloadTelemechanicsDevicesExcel({ page, limit, typeKp, headController, district, objectType }: IQueryParams) {
+		await instance.get(`${url}/substations/download-substations-telemechanics-devices-excel`, {
+			params: { page, limit, typeKp, headController, district, objectType },
+			responseType: 'blob'
+		}).then(resp => {
+			fileDownload(resp.data, 'substations-telemechanics-devices-report.xlsx')
+		}).catch(e => {
+			toast.error(errorHandler(e))
+		})
+	},
+
 	async updKeyDefect(id: number, data: TSubstationKeyDefect): Promise<AxiosResponse<ISubstation>> {
 		return instance.patch<ISubstation>(`${url}/substations/${id}/add-key-defects`, data)
 	}
