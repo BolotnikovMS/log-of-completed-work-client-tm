@@ -7,29 +7,29 @@ import { useModal } from '../../../../../hooks'
 import { useAuthStore } from '../../../../../store/auth'
 
 const SubstationControl: FC = () => {
-  const { authUser } = useAuthStore()
-  const isAdmin = checkRole(authUser, [ERoles.Admin])
-  const { isModal, toggleModal } = useModal()
+	const { authUser } = useAuthStore()
+	const isAdmin = checkRole(authUser, [ERoles.Admin])
+	const { isModal, toggleModal } = useModal()
 
-  return (
-    <div className="work-log__control">
-      <div className="control__wrapper">
-        {isAdmin && (
-          <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
-            <Icon id='add' />
-            Добавить
-          </Button>
-        )}
-        <Modal
-          visible={isModal}
-          title='Форма добавления объекта'
-          content={<SubstationForm toggleModal={toggleModal} />}
-          onToggle={toggleModal}
-        />
-        <SubstationFilters />
-      </div>
-    </div>
-  )
+	return (
+		<div className="work-log__control">
+			<div className="control__wrapper">
+				{isAdmin && (
+					<Button className='mBtn_outline-green' onClick={() => toggleModal()}>
+						<Icon id='add' />
+						Добавить
+					</Button>
+				)}
+				<Modal
+					visible={isModal}
+					title='Форма добавления объекта'
+					content={<SubstationForm toggleModal={toggleModal} />}
+					onToggle={toggleModal}
+				/>
+				<SubstationFilters />
+			</div>
+		</div>
+	)
 }
 
 export default SubstationControl
