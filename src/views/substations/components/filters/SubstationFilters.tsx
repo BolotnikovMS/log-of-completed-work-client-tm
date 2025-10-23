@@ -4,7 +4,7 @@ import { SubstationFlterParameters } from '..'
 import { Button, Dropdown, Group, Icon, LoaderLine, Modal, Search, Sort, Tooltip } from '../../../../components'
 import { pageConfig } from '../../../../config/pages.config'
 import { EFilterParam } from '../../../../enums/filterParam.enums'
-import { useDownloadExcelSubstations, useModal } from '../../../../hooks'
+import { useDownloadExcelYTMSubstations, useModal } from '../../../../hooks'
 import { TOrderSort } from '../../../../types/order.types'
 
 const SubstationFilters: FC = () => {
@@ -23,7 +23,8 @@ const SubstationFilters: FC = () => {
 	const channelCategoryParam = searchParams.get(EFilterParam.channelCategory)
 	const channelTypeParam = searchParams.get(EFilterParam.channelType)
 	const objectTypeParam = searchParams.get(EFilterParam.objectType)
-	const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam, objectType: objectTypeParam })
+	// const { isLoading: isLoadingDownloadExcel, fetchData: downloadExcel } = useDownloadExcelSubstations({ page: 1, limit: -1, typeKp: typeKpParam, headController: headControllerParam, channelCategory: channelCategoryParam, channelType: channelTypeParam, district: districtParam, objectType: objectTypeParam })
+	const { isLoading: isLoadingDownloadYTMExcel, fetchData: downloadYTMExcel } = useDownloadExcelYTMSubstations({ page: 1, limit: -1, typeKp: typeKpParam, headController: headControllerParam, district: districtParam, objectType: objectTypeParam })
 	const { isModal: isModalFilters, toggleModal: toggleModalFilters } = useModal()
 
 	return (
@@ -38,9 +39,9 @@ const SubstationFilters: FC = () => {
 								children={<Icon id='file-export' />}
 								tooltipText='Экспорт'
 								menuItems={[
-									<Button onClick={downloadExcel} disabled={isLoadingDownloadExcel}>
+									<Button onClick={downloadYTMExcel} disabled={isLoadingDownloadYTMExcel}>
 										<Icon id='excel' />
-										{isLoadingDownloadExcel ? <LoaderLine /> : 'Сохранить в Excel'}
+										{isLoadingDownloadYTMExcel ? <LoaderLine /> : 'Сохранить данные по УТМ в Excel'}
 									</Button>
 								]}
 							/>
