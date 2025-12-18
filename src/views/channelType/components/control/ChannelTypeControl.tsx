@@ -7,26 +7,26 @@ import { useModal } from '../../../../hooks'
 import { useAuthStore } from '../../../../store/auth'
 
 const ChannelTypeControl: FC = () => {
-  const { authUser } = useAuthStore()
-  const isAdmin = checkRole(authUser, [ERoles.Admin])
-  const { isModal, toggleModal } = useModal()
+	const { authUser } = useAuthStore()
+	const isAdmin = checkRole(authUser, [ERoles.Admin])
+	const { isModal, toggleModal } = useModal()
 
-  return (
-    <div className="work-log__control">
-      {isAdmin && (
-        <Button className='mBtn_outline-green' onClick={() => toggleModal()}>
-          <Icon id='add' />
-          Добавить
-        </Button>
-      )}
-      <Modal
-        visible={isModal}
-        title='Форма добавления нового типа канала'
-        content={<ChannelTypeForm toggleModal={toggleModal} />}
-        onToggle={toggleModal}
-      />
-    </div>
-  )
+	return (
+		<div className="work-log__control">
+			{isAdmin && (
+				<Button className='mBtn_outline-green' onClick={() => toggleModal()}>
+					<Icon id='add' />
+					Добавить
+				</Button>
+			)}
+			<Modal
+				visible={isModal}
+				title='Форма добавления нового типа канала'
+				content={<ChannelTypeForm toggleModal={toggleModal} />}
+				onToggle={toggleModal}
+			/>
+		</div>
+	)
 }
 
 export default ChannelTypeControl

@@ -8,46 +8,46 @@ import { ICompletedWork, ICompletedWorkInfo, IQueryParams } from '../../interfac
 import { TCompletedWorkData, TRespCompletedWork } from '../../types'
 
 export const CompletedWorkService = {
-  async getAll({ limit, page, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<TRespCompletedWork> {
-    const { data } = await instance.get<TRespCompletedWork>(`${url}/completed-works`, {
-      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }
-    })
+	async getAll({ limit, page, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<TRespCompletedWork> {
+		const { data } = await instance.get<TRespCompletedWork>(`${url}/completed-works`, {
+			params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }
+		})
 
-    return data
-  },
+		return data
+	},
 
-  async getCompletedWorkById(id: number): Promise<ICompletedWork> {
-    const { data } = await instance.get<ICompletedWork>(`${url}/completed-works/${id}`)
+	async getCompletedWorkById(id: number): Promise<ICompletedWork> {
+		const { data } = await instance.get<ICompletedWork>(`${url}/completed-works/${id}`)
 
-    return data
-  },
+		return data
+	},
 
-  async getCompletedWorkInfo(id: number): Promise<ICompletedWorkInfo> {
-    const { data } = await instance.get<ICompletedWorkInfo>(`${url}/completed-works/${id}/info`)
+	async getCompletedWorkInfo(id: number): Promise<ICompletedWorkInfo> {
+		const { data } = await instance.get<ICompletedWorkInfo>(`${url}/completed-works/${id}/info`)
 
-    return data
-  },
+		return data
+	},
 
-  async create(data: TCompletedWorkData): Promise<AxiosResponse<ICompletedWork>> {
-    return instance.post<ICompletedWork>(`${url}/completed-works`, data)
-  },
+	async create(data: TCompletedWorkData): Promise<AxiosResponse<ICompletedWork>> {
+		return instance.post<ICompletedWork>(`${url}/completed-works`, data)
+	},
 
-  async update(id: number, data: TCompletedWorkData): Promise<AxiosResponse<ICompletedWork>> {
-    return await instance.patch<ICompletedWork>(`${url}/completed-works/${id}`, data)
-  },
+	async update(id: number, data: TCompletedWorkData): Promise<AxiosResponse<ICompletedWork>> {
+		return await instance.patch<ICompletedWork>(`${url}/completed-works/${id}`, data)
+	},
 
-  async delete(id: number): Promise<AxiosResponse<void>> {
-    return instance.delete(`${url}/completed-works/${id}`)
-  },
+	async delete(id: number): Promise<AxiosResponse<void>> {
+		return instance.delete(`${url}/completed-works/${id}`)
+	},
 
-  async downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<void> {
-    await instance.get(`${url}/completed-works/download-excel`, {
-      params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl },
-      responseType: 'blob'
-    }).then(resp => {
-      fileDownload(resp.data, 'completed-works-report.xlsx')
-    }).catch(e => {
-      toast.error(errorHandler(e))
-    })
-  }
+	async downloadExcel({ page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl }: IQueryParams): Promise<void> {
+		await instance.get(`${url}/completed-works/download-excel`, {
+			params: { page, limit, substation, executor, dateStart, dateEnd, typeWork, inControl },
+			responseType: 'blob'
+		}).then(resp => {
+			fileDownload(resp.data, 'completed-works-report.xlsx')
+		}).catch(e => {
+			toast.error(errorHandler(e))
+		})
+	}
 }

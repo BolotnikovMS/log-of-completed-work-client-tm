@@ -6,5 +6,4 @@ const CompletedWorkForm = lazy(() => import('./form/CompletedWorkForm'))
 const CompletedWorkFilters = lazy(() => import('./filters/CompletedWorkFilters'))
 const CompletedWorkInfo = lazy(() => import('./info/CompletedWorkInfo'))
 
-export { CompletedWorkControl, CompletedWorkFilters, CompletedWorkForm, CompletedWorksCards, CompletedWorkInfo }
-
+export { CompletedWorkControl, CompletedWorkFilters, CompletedWorkForm, CompletedWorkInfo, CompletedWorksCards }
