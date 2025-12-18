@@ -27,15 +27,15 @@ const CompletedWorksCards: FC = () => {
 	useEffect(() => {
 		if (!data) return
 
-		const { meta } = data
+		const { currentPage, lastPage, firstPage } = data.meta
 
-		if (meta.current_page > meta.last_page) {
+		if (currentPage > lastPage) {
 			setPage(1)
 
 			return
 		}
 
-		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
+		if (firstPage !== lastPage && currentPage !== 1) {
 			searchParams.set(EFilterParam.page, page.toString())
 			setSearchParams(searchParams)
 		} else {
