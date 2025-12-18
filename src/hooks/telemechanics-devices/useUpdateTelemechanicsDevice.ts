@@ -15,6 +15,7 @@ export const useUpdateTelemechanicsDevice = () => {
 			await queryClient.invalidateQueries({ queryKey: ['substations'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDevice'] })
 			await queryClient.invalidateQueries({ queryKey: ['telemechanicsDeviceInfo'] })
+			await queryClient.invalidateQueries({ queryKey: ['district-substations'] })
 
 			toast.success('Запись успешно обновлена!')
 		},
