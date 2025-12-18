@@ -14,15 +14,15 @@ const CardsSubstations: FC<IPropsCardsSubstations> = ({ substations, error, isEr
 		if (!page || !setPage) return
 		if (!memoizedSubstations) return
 
-		const { meta } = memoizedSubstations
+		const { currentPage, lastPage, firstPage } = memoizedSubstations.meta
 
-		if (meta.current_page > meta.last_page) {
+		if (currentPage > lastPage) {
 			setPage(1)
 
 			return
 		}
 
-		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
+		if (firstPage !== lastPage && currentPage !== 1) {
 			searchParams.set(EFilterParam.page, page.toString())
 			setSearchParams(searchParams)
 		} else {
