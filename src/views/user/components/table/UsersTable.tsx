@@ -24,13 +24,13 @@ const UsersTable: FC = () => {
 
 		const { meta } = data
 
-		if (meta.current_page > meta.last_page) {
+		if (meta.currentPage > meta.lastPage) {
 			setPage(1)
 
 			return
 		}
 
-		if (meta.first_page !== meta.last_page && meta.current_page !== 1) {
+		if (meta.firstPage !== meta.lastPage && meta.currentPage !== 1) {
 			searchParams.set(EFilterParam.page, page.toString())
 			setSearchParams(searchParams)
 		} else {
