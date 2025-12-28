@@ -220,11 +220,11 @@ export const Router: React.FC = () => {
 						</ProtectedRoute>
 					}
 				/>
-				<Route path={pageConfig.gsmOperators}
+				<Route path={pageConfig.operators}
 					element={
 						<ProtectedRoute isAllowed={!!authUser}>
 							<Page
-								title='GSM операторы'
+								title='Операторы связи'
 								children={
 									<>
 										<GsmOperatorControl />

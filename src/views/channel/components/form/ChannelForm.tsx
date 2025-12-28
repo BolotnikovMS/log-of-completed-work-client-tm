@@ -128,7 +128,7 @@ const ChannelForm: FC<IPropsForm<IChannel>> = ({ data: channel, isEdited, setIsE
 					</SelectWrapper>
 				</Group>
 				<Group>
-					<SelectWrapper label='Выберите GSM оператора' errorMessage={errors.substationId?.message}>
+					<SelectWrapper label='Выберите оператора' errorMessage={errors.substationId?.message}>
 						<AsyncSelect
 							classNamePrefix='form__custom-select'
 							options={gsmOperators}

@@ -12,7 +12,7 @@ class PageConfig {
 	channelTypes = '/channel-types'
 	channelingEquipments = '/channeling-equipments'
 	channels = '/channels'
-	gsmOperators = '/gsm-operators'
+	operators = '/gsm-operators'
 	typesWork = '/types-work'
 	completedWorks = '/completed-works'
 	users = '/users'

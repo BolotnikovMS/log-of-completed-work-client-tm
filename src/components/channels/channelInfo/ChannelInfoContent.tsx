@@ -29,7 +29,7 @@ const ChannelInfoContent: FC<{ channel: TChannelInfo | undefined }> = memo(({ ch
 				</p>
 			</Group>
 			<Group>
-				<p className='text-content-1'>GSM оператор:
+				<p className='text-content-1'>Оператор:
 					<span className='text-content'>
 						{channel.gsm_operator ?? 'Не указан'}
 					</span>

@@ -51,8 +51,8 @@ export const menuItemData = [
 				url: pageConfig.channelingEquipments,
 			},
 			{
-				title: 'GSM операторы',
-				url: pageConfig.gsmOperators,
+				title: 'Операторы',
+				url: pageConfig.operators,
 			},
 			{
 				title: 'Каналы',
